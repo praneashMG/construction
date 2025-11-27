@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiteWorks Builders - General Contracting & Construction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /*
+        * ----------------------------------------------------
+        * SiteWorks Builders CSS - Themed for Construction
+        * Primary Colors: Deep Blue (#1A374D), Safety Yellow (#FFC107), Light Gray (#F8F9FA), Dark Text (#343A40)
+        * ----------------------------------------------------
+        */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1A374D; 		/* Deep Blue */
+            --primary-yellow: #FFC107; 	/* Safety Yellow */
+            --text-dark: #343A40;
+            --text-body: #555;
+            --bg-white: #ffffff;
+            --bg-light: #F8F9FA; 		/* Light Gray/Beige */
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother animation curve */
+        }
+
+        body {
+            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-body);
+            overflow-x: hidden;
+            background-color: var(--bg-white);
+        }
+
+        /* UTILITIES */
+        .section {
+            padding: 5rem 2rem;
+            opacity: 0; /* Hidden by default for animation */
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-alt { background: var(--bg-light); }
+        .section-title {
+            text-align: center; font-size: 3rem; margin-bottom: 1rem;
+            color: var(--primary-blue); font-weight: 900;
+        }
+        .section-subtitle {
+            text-align: center; color: var(--text-body); font-size: 1.2rem;
+            margin-bottom: 3.5rem; max-width: 700px; margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* CSS Animation Keyframes */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translate3d(0, 100px, 0); }
+            to { opacity: 1; transform: translate3d(0, 0, 0); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translate3d(-100px, 0, 0); }
+            to { opacity: 1; transform: translate3d(0, 0, 0); }
+        }
+
+        /* ----------------------------------------------------
+        * NAVIGATION
+        * ----------------------------------------------------
+        */
+        nav {
+            background: var(--primary-blue); padding: 0; position: sticky;
+            top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: background 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(26, 55, 77, 0.95);
+        }
+        .navbar-container {
+            max-width: 1400px; margin: 0 auto; display: flex;
+            justify-content: space-between; align-items: center; padding: 0 3rem;
+            min-height: 80px;
+        }
+        .logo {
+            color: var(--primary-yellow); font-size: 1.8rem; font-weight: 900;
+            display: flex; align-items: center; gap: 0.5rem; text-decoration: none;
+            transition: var(--transition);
+        }
+        .logo i { font-size: 2rem; }
+
+        .nav-menu {
+            list-style: none; display: flex; align-items: center; gap: 2rem; margin: 0;
+        }
+        .nav-link {
+            color: white; text-decoration: none; padding: 1.2rem 0; display: block;
+            font-weight: 500; font-size: 1rem; transition: var(--transition);
+            position: relative;
+        }
+        .nav-link:hover { color: var(--primary-yellow); }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: 20px; left: 0;
+            width: 0; height: 3px; background: var(--primary-yellow);
+            transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        .nav-right { display: flex; align-items: center; gap: 1rem; }
+        .nav-btn {
+            background: transparent; border: 2px solid white; color: white;
+            padding: 0.6rem 1.5rem; border-radius: 5px; font-weight: 600;
+            text-decoration: none; transition: var(--transition);
+        }
+        .nav-btn:hover {
+            background: var(--primary-yellow); border-color: var(--primary-yellow);
+            color: var(--primary-blue); transform: scale(1.05); /* Added scale effect */
+            box-shadow: 0 4px 10px rgba(255, 193, 7, 0.5);
+        }
+
+        .hamburger {
+            display: none; flex-direction: column; cursor: pointer;
+            padding: 0.5rem; z-index: 1001;
+        }
+        .hamburger span {
+            width: 28px; height: 3px; background: white; margin: 4px 0;
+            border-radius: 3px; transition: var(--transition);
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* Mobile Menu Close Button Styling (Top Corner) */
+        .close-menu {
+            background: none; border: none; color: var(--primary-yellow); /* Yellow X */
+            font-size: 2.5rem; cursor: pointer; padding: 0.5rem;
+            width: 50px; height: 50px; display: flex; align-items: center;
+            justify-content: center; transition: var(--transition);
+            position: absolute; top: 1rem; right: 1rem; /* Positioning in corner */
+            z-index: 1003; /* Above everything */
+        }
+        .close-menu:hover { transform: rotate(90deg) scale(1.1); } /* More rotation */
+
+        /* Mobile Menu Header - Hidden on Desktop */
+        .mobile-menu-header { display: none; }
+
+        /* --- DROPDOWN STYLES (NEW) --- */
+        .has-dropdown {
+            position: relative; /* Essential for absolute positioning of dropdown */
+        }
+
+        .dropdown-menu {
+            list-style: none;
+            position: absolute;
+            top: 100%; /* Position below the parent link */
+            left: 0;
+            background: var(--primary-blue);
+            min-width: 180px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+            z-index: 999;
+            padding: 0.5rem 0;
+        }
+        
+        .has-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item a {
+            color: white;
+            padding: 0.8rem 1.5rem; /* Padding for dropdown links */
+            display: block;
+            white-space: nowrap;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .dropdown-item a:hover {
+            background: rgba(255, 193, 7, 0.1); /* Light yellow hover background */
+            color: var(--primary-yellow);
+        }
+        
+        /* Remove the yellow underline for the dropdown parent link */
+        .has-dropdown > .nav-link::after {
+            display: none;
+        }
+        /* Style for the chevron icon */
+        .dropdown-icon {
+            font-size: 0.7rem;
+            margin-left: 0.5rem;
+            transition: transform 0.3s;
+        }
+        .has-dropdown:hover .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+
+        /* ----------------------------------------------------
+        * HERO SECTION
+        * ----------------------------------------------------
+        */
+        .hero {
+            background: linear-gradient(rgba(26, 55, 77, 0.7), rgba(26, 55, 77, 0.7)),
+                        url('https://picsum.photos/1920/1080?random=1&tag=construction-site') center/cover;
+            color: white; min-height: 90vh; display: flex; align-items: center;
+            padding: 5rem 2rem; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-container {
+            max-width: 1400px; margin: 0 auto; display: grid;
+            grid-template-columns: 3fr 2fr; gap: 4rem; align-items: center;
+            width: 100%;
+        }
+
+        .hero-content > * {
+            animation: fadeInUp 1s ease-out; /* Apply fadeInUp to children */
+        }
+
+        .hero-content h1 {
+            animation-delay: 0.1s;
+        }
+        .hero-content p {
+            animation-delay: 0.2s;
+        }
+        .hero-content .hero-buttons {
+            animation-delay: 0.3s;
+        }
+
+        .hero-badge {
+            display: inline-block; background: var(--primary-yellow);
+            color: var(--primary-blue); padding: 0.6rem 1.5rem;
+            border-radius: 30px; font-weight: 700; margin-bottom: 1.5rem;
+            text-shadow: none;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem; margin-bottom: 1.5rem; font-weight: 900;
+            line-height: 1.1; color: white;
+        }
+        .hero-highlight { color: var(--primary-yellow); }
+        .hero p { font-size: 1.3rem; margin-bottom: 2.5rem; line-height: 1.7; }
+        .hero-buttons { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+
+        .btn {
+            padding: 1.1rem 2.8rem; border-radius: 5px; font-size: 1.1rem;
+            font-weight: 700; text-decoration: none; transition: var(--transition);
+            display: inline-block; text-align: center;
+        }
+        .btn:hover {
+            transform: translateY(-5px); /* Increased lift */
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-primary { background: var(--primary-yellow); color: var(--primary-blue); border: 2px solid var(--primary-yellow); }
+        .btn-primary:hover { background: #e6b200; }
+
+        .btn-secondary { background: transparent; color: white; border: 2px solid white; }
+        .btn-secondary:hover { background: white; color: var(--primary-blue); border-color: white;}
+
+        .hero-image-wrapper {
+            border-radius: 10px; overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            transition: var(--transition);
+            transform: scale(1);
+        }
+        .hero-image-wrapper:hover { transform: scale(1.05); } /* Increased scale effect */
+        .hero-image-wrapper img { width: 100%; display: block; height: auto; object-fit: cover; }
+
+
+        /* ----------------------------------------------------
+        * FEATURED SERVICES (COURSES-GRID repurposed)
+        * ----------------------------------------------------
+        */
+        .services-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem;
+            max-width: 1400px; margin: 0 auto;
+        }
+        .service-card {
+            background: white; border-radius: 10px; overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08); transition: var(--transition);
+            border: 1px solid #dee2e6; text-align: center;
+        }
+        .service-card:hover {
+            transform: translateY(-12px); /* Increased lift */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary-yellow);
+        }
+        .service-img { height: 220px; overflow: hidden; background: var(--primary-blue); }
+        .service-img img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .service-card:hover .service-img img { transform: scale(1.1); } /* Increased scale effect */
+        .service-content { padding: 2rem; }
+        .service-category {
+            display: inline-block; background: var(--primary-blue); color: white;
+            padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.85rem;
+            font-weight: 700; margin-bottom: 1rem;
+        }
+        .service-content h3 { color: var(--text-dark); margin-bottom: 0.7rem; font-size: 1.4rem; font-weight: 700; }
+        .service-content p { color: var(--text-body); margin-bottom: 1.5rem; }
+        .service-link {
+            display: inline-block; color: var(--primary-yellow); font-weight: 600;
+            text-decoration: none; transition: var(--transition);
+        }
+        .service-link:hover { color: var(--primary-blue); transform: translateX(5px); } /* Slide arrow */
+
+        /* ----------------------------------------------------
+        * CORE PILLARS (BENEFITS-GRID repurposed)
+        * ----------------------------------------------------
+        */
+        .pillars-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem;
+            max-width: 1400px; margin: 0 auto;
+        }
+        .pillar-card {
+            text-align: center; padding: 3rem 2rem; border-radius: 10px;
+            background: white; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e9ecef; transition: var(--transition);
+        }
+        .pillar-card:hover {
+            transform: translateY(-10px) rotateX(5deg); /* Subtle 3D tilt */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-blue);
+        }
+        .pillar-icon {
+            font-size: 3.5rem; margin-bottom: 1.5rem; color: var(--primary-yellow);
+            transition: transform 0.5s ease;
+        }
+        .pillar-card:hover .pillar-icon { transform: scale(1.1) rotate(-5deg); } /* Rotate on hover */
+        .pillar-card h3 { color: var(--primary-blue); margin-bottom: 1rem; font-size: 1.4rem; font-weight: 700; }
+        .pillar-card p { color: var(--text-body); }
+
+        /* ----------------------------------------------------
+        * STATISTICS (With Running Number Setup)
+        * ----------------------------------------------------
+        */
+        .statistics { background: var(--primary-blue); color: white; padding: 5rem 2rem; }
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem;
+            max-width: 1400px; margin: 0 auto;
+        }
+        .stat-item {
+            text-align: center; padding: 2.5rem 2rem; border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+            overflow: hidden; /* Hide overflow for effect */
+        }
+
+        .stat-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 4rem; font-weight: 900; margin-bottom: 0.5rem;
+            color: var(--primary-yellow);
+            display: block;
+        }
+
+        .stat-label { font-size: 1.2rem; font-weight: 600; }
+
+        /* ----------------------------------------------------
+        * FOOTER
+        * ----------------------------------------------------
+        */
+        footer { background: var(--text-dark); color: white; padding: 5rem 2rem 2rem; }
+        .footer-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; max-width: 1400px; margin: 0 auto; }
+        .footer-logo { font-size: 2rem; font-weight: 900; margin-bottom: 1.5rem; color: var(--primary-yellow); }
+        .footer-about p { color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem; }
+        .social-links { display: flex; gap: 1rem; }
+        .social-link {
+            width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px; display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.2rem; text-decoration: none; transition: var(--transition);
+        }
+        .social-link:hover { background: var(--primary-yellow); color: var(--primary-blue); transform: scale(1.2); } /* Increased scale */
+        .footer-section h3 { font-size: 1.4rem; margin-bottom: 1.5rem; font-weight: 700; color: white; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: var(--transition); }
+        .footer-links a:hover { color: var(--primary-yellow); padding-left: 5px; }
+        .contact-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: center; }
+        .contact-icon {
+            width: 45px; height: 45px; background: var(--primary-yellow);
+            border-radius: 5px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; flex-shrink: 0; color: var(--primary-blue);
+        }
+        .contact-text p { color: rgba(255, 255, 255, 0.9); margin: 0; }
+        .newsletter-form { display: flex; flex-direction: column; gap: 0.8rem; }
+        .newsletter-input { padding: 0.9rem 1.2rem; border: none; border-radius: 5px; background: rgba(255, 255, 255, 0.1); color: white; }
+        .newsletter-input::placeholder { color: rgba(255, 255, 255, 0.6); }
+        .newsletter-btn {
+            padding: 0.9rem 2rem; background: var(--primary-yellow); color: var(--primary-blue);
+            border: none; border-radius: 5px; font-weight: 700; cursor: pointer;
+            transition: var(--transition);
+        }
+        .newsletter-btn:hover { background: #e6b200; transform: translateY(-2px); }
+        .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 2rem; margin-top: 3rem; text-align: center; color: rgba(255, 255, 255, 0.7); }
+
+        /* ----------------------------------------------------
+        * RESPONSIVE DESIGN - With Mobile Menu Fixes
+        * ----------------------------------------------------
+        */
+        @media (max-width: 968px) {
+            .navbar-container { padding: 0 2rem; }
+            .hamburger { display: flex; }
+            
+            /* Mobile Menu Styling */
+            .nav-menu {
+                position: fixed; top: 0; left: -100%; width: 100%; height: 100vh;
+                background: var(--primary-blue); flex-direction: column;
+                justify-content: flex-start; padding-top: 5rem; /* Space for X button */
+                transition: left 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86); /* Smoother Slide */
+                gap: 0; overflow-y: auto; z-index: 1002;
+                box-shadow: 5px 0 15px rgba(0,0,0,0.3); display: flex;
+            }
+            .nav-menu.active { left: 0; }
+
+            /* Hide Logo in Mobile Menu content (it's covered by X) */
+            .mobile-menu-header { display: none; } 
+
+            .nav-item { width: 100%; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+            .nav-link { justify-content: space-between; padding: 1rem 1.5rem; width: 100%; font-size: 1.05rem; color: white !important; }
+            .nav-link::after { display: none; }
+            .nav-right { width: 100%; background: transparent; flex-direction: column; padding: 1.5rem; gap: 1rem; margin-top: auto; display: flex !important; }
+            .nav-btn { width: 100%; text-align: center; display: block; }
+            
+            /* --- DROPDOWN MOBILE STYLES (NEW) --- */
+            .dropdown-menu {
+                position: static; /* Stack vertically in mobile */
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease-out;
+                background: rgba(0, 0, 0, 0.2); /* Darker background for nested list */
+                padding: 0;
+                min-width: unset;
+                box-shadow: none;
+            }
+
+            /* This class is toggled by JS to expand the mobile dropdown */
+            .has-dropdown.active .dropdown-menu {
+                max-height: 200px; /* Adjust based on content height */
+                padding: 0.5rem 0;
+            }
+            
+            .dropdown-item {
+                border-bottom: none; /* Remove extra border */
+            }
+
+            .dropdown-item a {
+                padding-left: 2.5rem; /* Indent sub-links */
+            }
+            
+            .has-dropdown:hover .dropdown-icon {
+                transform: none; /* Disable desktop rotation */
+            }
+            .has-dropdown.active .dropdown-icon {
+                transform: rotate(180deg); /* Rotate icon on mobile active */
+            }
+
+            /* HERO MOBILE */
+            .hero { padding: 4rem 1.5rem !important; }
+            .hero-container { grid-template-columns: 1fr !important; gap: 2rem !important; }
+            .hero h1 { font-size: 2.5rem !important; margin-bottom: 1rem !important; }
+            .hero p { font-size: 1rem !important; margin-bottom: 2rem !important; }
+            .hero-buttons { flex-direction: column !important; gap: 1rem !important; width: 100% !important; }
+            .btn { width: 100% !important; padding: 1rem 2rem !important; font-size: 1rem !important; }
+            .hero-image { display: block !important; order: -1; } 
+
+            /* SECTIONS MOBILE */
+            .section { padding: 3rem 1.5rem !important; }
+            .section-title { font-size: 2rem !important; }
+            .section-subtitle { font-size: 1rem !important; margin-bottom: 2rem !important; }
+
+            /* SERVICES/PILLARS/STATS MOBILE */
+            .services-grid, .pillars-grid, .stats-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+
+            /* FOOTER MOBILE */
+            footer { padding: 3rem 1.5rem 2rem !important; }
+            .footer-container { grid-template-columns: 1fr !important; gap: 2rem !important; }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 { font-size: 2rem !important; }
+            .section-title { font-size: 1.75rem !important; }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo"><i class="fas fa-hard-hat"></i> SiteWorks Builders</a>
+
+            <ul class="nav-menu" id="navMenu">
+                <button class="close-menu" id="closeMenu">✕</button>
+
+                <li class="nav-item has-dropdown">
+                    <a href="index.html" class="nav-link" id="homeLink">
+                        Home <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a href="index.html">Home 1: Default</a></li>
+                        <li class="dropdown-item"><a href="homepage2.html">Home 2: Commercial</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About Us</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+
+                <div class="nav-right">
+                    <a href="#quote" class="nav-btn">Get a Quote</a>
+                </div>
+            </ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge" style="animation-delay: 0.0s;">🧱 Building Trust Since 1995</div>
+                <h1 style="animation-delay: 0.1s;">Your Partner in <span class="hero-highlight">World-Class Construction</span></h1>
+                <p style="animation-delay: 0.2s;">Delivering high-quality, sustainable commercial and residential projects on time and on budget.</p>
+                <div class="hero-buttons" style="animation-delay: 0.3s;">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#contact" class="btn btn-secondary">Request a Quote</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-wrapper" style="animation: slideInLeft 1s ease-out 0.4s backwards;">
+                    <img src="https://picsum.photos/600/400?random=2&tag=engineer" alt="Construction Engineer on Site">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-alt" id="services">
+        <h2 class="section-title">Our Core Services</h2>
+        <p class="section-subtitle">We manage projects from concept to completion, specializing in structural integrity and timely delivery.</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="https://picsum.photos/400/220?random=3&tag=commercial" alt="Commercial Construction">
+                </div>
+                <div class="service-content">
+                    <span class="service-category">Commercial</span>
+                    <h3>Commercial Contracting</h3>
+                    <p>Expertise in offices, retail, and industrial facilities. We build for business growth.</p>
+                    <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="https://picsum.photos/400/220?random=4&tag=residential" alt="Residential Development">
+                </div>
+                <div class="service-content">
+                    <span class="service-category">Residential</span>
+                    <h3>High-End Residential</h3>
+                    <p>Building custom homes and multi-family developments with precision and quality finishes.</p>
+                    <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="https://picsum.photos/400/220?random=5&tag=renovation" alt="Renovation">
+                </div>
+                <div class="service-content">
+                    <span class="service-category">Design & Build</span>
+                    <h3>Renovation & Remodeling</h3>
+                    <p>Transforming existing spaces with smart design and efficient construction methodologies.</p>
+                    <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+        <h2 class="section-title">Our Guiding Pillars</h2>
+        <p class="section-subtitle">The foundations of every SiteWorks project: safety, quality, and commitment.</p>
+        <div class="pillars-grid">
+            <div class="pillar-card">
+                <div class="pillar-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Unwavering Safety</h3>
+                <p>Zero-incident policy and strict adherence to all OSHA and local safety regulations.</p>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-icon"><i class="fas fa-handshake"></i></div>
+                <h3>Client Partnership</h3>
+                <p>Transparent communication and collaborative planning from groundbreaking to handover.</p>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-icon"><i class="fas fa-tools"></i></div>
+                <h3>Superior Quality</h3>
+                <p>Commitment to using premium materials and employing highly skilled, certified tradesmen.</p>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-icon"><i class="fas fa-tree"></i></div>
+                <h3>Sustainable Build</h3>
+                <p>Prioritizing eco-friendly methods and materials for energy-efficient, long-lasting structures.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="statistics" id="stats">
+        <h2 class="section-title" style="color: white;">Our Impact & Success</h2>
+        <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Our accomplishments are built on a foundation of reliability and excellence.</p>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number" data-target="250" data-prefix="" data-suffix="+">0</div>
+                <div class="stat-label">Successful Projects</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="10" data-prefix="" data-suffix="M+">0</div>
+                <div class="stat-label">Sq. Ft. Constructed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="28" data-prefix="" data-suffix="">0</div>
+                <div class="stat-label">Years of Operation</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="98" data-prefix="" data-suffix="%">0</div>
+                <div class="stat-label">On-Time Delivery</div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo"><i class="fas fa-hard-hat"></i> SiteWorks</div>
+                <p>The foundation of your future. Delivering construction excellence across the region.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#projects">Recent Work</a></li>
+                    <li><a href="#about">Our Team</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div class="contact-text"><p>(555) 123-SITE</p></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="contact-text"><p>info@siteworks.com</p></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="contact-text"><p>123 Main Street, Suite 200, Metropolis</p></div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Stay Informed</h3>
+                <p>Sign up for our newsletter to get project updates and company news.</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Your work email">
+                    <button class="newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 SiteWorks Builders. Built with <i class="fas fa-heart" style="color: var(--primary-yellow);"></i> and Code.</p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        const navbar = document.getElementById('navbar');
+        const statNumbers = document.querySelectorAll('.stat-number');
+        const sections = document.querySelectorAll('.section');
+        // NEW ELEMENTS FOR DROPDOWN
+        const homeDropdown = document.querySelector('.has-dropdown');
+        const homeLink = document.getElementById('homeLink');
+        let statsAnimated = false;
+
+        // --- Mobile Menu Toggle ---
+        function toggleMenu() {
+            const isActive = navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            document.body.style.overflow = isActive ? 'hidden' : '';
+            
+            // Optionally close the dropdown when closing the main menu
+            if (!isActive && homeDropdown && homeDropdown.classList.contains('active')) {
+                homeDropdown.classList.remove('active');
+            }
+        }
+
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        closeMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        // --- New: Mobile Dropdown Toggle ---
+        if (homeDropdown && homeLink) {
+            homeLink.addEventListener('click', (e) => {
+                if (window.innerWidth <= 968) {
+                    // Prevent the link from immediately navigating on mobile
+                    e.preventDefault(); 
+                    // Toggle the 'active' class on the parent li
+                    homeDropdown.classList.toggle('active');
+                } else {
+                    // On desktop, clicking 'Home' still navigates to index.html (or reloads the page)
+                    // You might need to adjust this depending on whether you want 'Home' to be clickable on desktop.
+                }
+            });
+        }
+
+
+        // Close main menu when any link is clicked (updated to handle non-dropdown links and actual dropdown links)
+        navMenu.querySelectorAll('.nav-link, .nav-btn, .dropdown-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                // Check if the link is NOT the main homeLink itself (which is used to open/close the mobile dropdown)
+                if (window.innerWidth <= 968 && link.id !== 'homeLink') {
+                    // Timeout allows hash navigation or page change to occur before closing the UI
+                    setTimeout(toggleMenu, 300); 
+                }
+            });
+        });
+
+        // --- Sticky Nav Bar Effect ---
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // --- Resize Handler (for mobile menu) ---
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 968 && navMenu.classList.contains('active')) {
+                toggleMenu(); // Closes menu when resizing to desktop
+            }
+            // Ensure mobile dropdown is closed/inactive when resizing to desktop
+            if (window.innerWidth > 968 && homeDropdown && homeDropdown.classList.contains('active')) {
+                homeDropdown.classList.remove('active');
+            }
+        });
+
+
+        // --- Running Number Counter Animation ---
+        function countUp(el) {
+            const target = parseInt(el.getAttribute('data-target'));
+            const prefix = el.getAttribute('data-prefix') || '';
+            const suffix = el.getAttribute('data-suffix') || '';
+            let start = 0;
+            const duration = 2000; // 2 seconds
+            const step = (target / duration) * 10;
+            const isFloat = target % 1 !== 0;
+
+            const timer = setInterval(() => {
+                start += step;
+                if (start >= target) {
+                    clearInterval(timer);
+                    start = target;
+                }
+                
+                let displayValue = Math.floor(start);
+                if (isFloat) {
+                    // Handle float targets if needed, but current targets are integers
+                    displayValue = start.toFixed(1);
+                }
+                
+                el.textContent = prefix + displayValue + suffix;
+            }, 10);
+        }
+
+        // --- Intersection Observer for Animations (FadeIn/Counting) ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2
+        };
+
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Stop observing the section once it's visible
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            // Skip the hero section as its content animation is handled via CSS delay
+            if (!section.classList.contains('hero')) { 
+                sectionObserver.observe(section);
+            }
+        });
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !statsAnimated) {
+                    statNumbers.forEach(countUp);
+                    statsAnimated = true; // Prevents re-animation on scroll up/down
+                }
+            });
+        }, { threshold: 0.5 }); // High threshold to ensure stats section is well in view
+
+        // Observe the statistics section
+        const statsSection = document.getElementById('stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+    </script>
+</body>
+</html>
