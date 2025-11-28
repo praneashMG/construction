@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SiteWorks Builders Service Details - Comprehensive breakdown of our construction and contracting services.">
+    <title id="pageTitle">Structural Steel Fabrication Details - SiteWorks Builders</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /*
+        * ----------------------------------------------------
+        * SiteWorks Builders CSS - Themed for Construction
+        * Primary Colors: Deep Blue (#1A374D), Safety Yellow (#FFC107), Light Gray (#F8F9FA), Dark Text (#343A40)
+        * ----------------------------------------------------
+        */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1A374D; 		/* Deep Blue */
+            --primary-yellow: #FFC107; 	/* Safety Yellow */
+            --text-dark: #343A40;
+            --text-body: #555;
+            --text-muted: #6c757d; /* From second doc */
+            --bg-white: #ffffff;
+            --bg-light: #F8F9FA; 		/* Light Gray/Beige */
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother animation curve - Kept original from first doc */
+            --shadow-base: 0 8px 20px rgba(0, 0, 0, 0.1); /* From second doc */
+            --info: #17a2b8; /* From second doc */
+            --success-check: #28a745; /* From second doc */
+            --service-main-border: #E0E4E7; /* From second doc */
+        }
+
+        body {
+            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-body);
+            overflow-x: hidden;
+            background-color: var(--bg-white);
+        }
+
+        /* UTILITIES - Mostly from first doc, adjusted/consolidated */
+        .section {
+            padding: 5rem 2rem;
+            /* Placeholder styles from first doc, commented out/adjusted for the content page layout */
+            /* opacity: 0; transform: translateY(20px); transition: opacity 1s ease-out, transform 1s ease-out; */
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-alt { background: var(--bg-light); }
+        .section-title {
+            text-align: center; font-size: 3rem; margin-bottom: 1rem;
+            color: var(--primary-blue); font-weight: 900;
+        }
+        .section-subtitle {
+            text-align: center; color: var(--text-body); font-size: 1.2rem;
+            margin-bottom: 3.5rem; max-width: 700px; margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* CSS Animation Keyframes */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translate3d(0, 100px, 0); }
+            to { opacity: 1; transform: translate3d(0, 0, 0); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translate3d(-100px, 0, 0); }
+            to { opacity: 1; transform: translate3d(0, 0, 0); }
+        }
+
+        /* ----------------------------------------------------
+        * NAVIGATION (From first doc)
+        * ----------------------------------------------------
+        */
+        nav {
+            background: var(--primary-blue); padding: 0; position: sticky;
+            top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: background 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(26, 55, 77, 0.95);
+        }
+        .navbar-container {
+            max-width: 1400px; margin: 0 auto; display: flex;
+            justify-content: space-between; align-items: center; padding: 0 3rem;
+            min-height: 80px;
+        }
+        .logo {
+            color: var(--primary-yellow); font-size: 1.8rem; font-weight: 900;
+            display: flex; align-items: center; gap: 0.5rem; text-decoration: none;
+            transition: var(--transition);
+        }
+        .logo i { font-size: 2rem; }
+
+        .nav-menu {
+            list-style: none; display: flex; align-items: center; gap: 2rem; margin: 0;
+        }
+        .nav-link {
+            color: white; text-decoration: none; padding: 1.2rem 0; display: block;
+            font-weight: 500; font-size: 1rem; transition: var(--transition);
+            position: relative;
+        }
+        .nav-link:hover { color: var(--primary-yellow); }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: 20px; left: 0;
+            width: 0; height: 3px; background: var(--primary-yellow);
+            transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        .nav-right { display: flex; align-items: center; gap: 1rem; }
+        .nav-btn {
+            background: transparent; border: 2px solid white; color: white;
+            padding: 0.6rem 1.5rem; border-radius: 5px; font-weight: 600;
+            text-decoration: none; transition: var(--transition);
+        }
+        .nav-btn:hover {
+            background: var(--primary-yellow); border-color: var(--primary-yellow);
+            color: var(--primary-blue); transform: scale(1.05); /* Added scale effect */
+            box-shadow: 0 4px 10px rgba(255, 193, 7, 0.5);
+        }
+
+        .hamburger {
+            display: none; flex-direction: column; cursor: pointer;
+            padding: 0.5rem; z-index: 1001;
+        }
+        .hamburger span {
+            width: 28px; height: 3px; background: white; margin: 4px 0;
+            border-radius: 3px; transition: var(--transition);
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* Mobile Menu Close Button Styling (Top Corner) */
+        .close-menu {
+            background: none; border: none; color: var(--primary-yellow); /* Yellow X */
+            font-size: 2.5rem; cursor: pointer; padding: 0.5rem;
+            width: 50px; height: 50px; display: flex; align-items: center;
+            justify-content: center; transition: var(--transition);
+            position: absolute; top: 1rem; right: 1rem; /* Positioning in corner */
+            z-index: 1003; /* Above everything */
+        }
+        .close-menu:hover { transform: rotate(90deg) scale(1.1); } /* More rotation */
+
+        /* Mobile Menu Header - Hidden on Desktop */
+        .mobile-menu-header { display: none; }
+
+        /* --- DROPDOWN STYLES (NEW) --- */
+        .has-dropdown {
+            position: relative; /* Essential for absolute positioning of dropdown */
+        }
+
+        .dropdown-menu {
+            list-style: none;
+            position: absolute;
+            top: 100%; /* Position below the parent link */
+            left: 0;
+            background: var(--primary-blue);
+            min-width: 180px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+            z-index: 999;
+            padding: 0.5rem 0;
+        }
+        
+        .has-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item a {
+            color: white;
+            padding: 0.8rem 1.5rem; /* Padding for dropdown links */
+            display: block;
+            white-space: nowrap;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .dropdown-item a:hover {
+            background: rgba(255, 193, 7, 0.1); /* Light yellow hover background */
+            color: var(--primary-yellow);
+        }
+        
+        /* Remove the yellow underline for the dropdown parent link */
+        .has-dropdown > .nav-link::after {
+            display: none;
+        }
+        /* Style for the chevron icon */
+        .dropdown-icon {
+            font-size: 0.7rem;
+            margin-left: 0.5rem;
+            transition: transform 0.3s;
+        }
+        .has-dropdown:hover .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        /* ----------------------------------------------------
+        * FOOTER (From first doc)
+        * ----------------------------------------------------
+        */
+        footer { background: var(--text-dark); color: white; padding: 5rem 2rem 2rem; }
+        .footer-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; max-width: 1400px; margin: 0 auto; }
+        .footer-logo { font-size: 2rem; font-weight: 900; margin-bottom: 1.5rem; color: var(--primary-yellow); }
+        .footer-about p { color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem; }
+        .social-links { display: flex; gap: 1rem; }
+        .social-link {
+            width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px; display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.2rem; text-decoration: none; transition: var(--transition);
+        }
+        .social-link:hover { background: var(--primary-yellow); color: var(--primary-blue); transform: scale(1.2); } /* Increased scale */
+        .footer-section h3 { font-size: 1.4rem; margin-bottom: 1.5rem; font-weight: 700; color: white; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: var(--transition); }
+        .footer-links a:hover { color: var(--primary-yellow); padding-left: 5px; }
+        .contact-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: center; }
+        .contact-icon {
+            width: 45px; height: 45px; background: var(--primary-yellow);
+            border-radius: 5px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; flex-shrink: 0; color: var(--primary-blue);
+        }
+        .contact-text p { color: rgba(255, 255, 255, 0.9); margin: 0; }
+        .newsletter-form { display: flex; flex-direction: column; gap: 0.8rem; }
+        .newsletter-input { padding: 0.9rem 1.2rem; border: none; border-radius: 5px; background: rgba(255, 255, 255, 0.1); color: white; }
+        .newsletter-input::placeholder { color: rgba(255, 255, 255, 0.6); }
+        .newsletter-btn {
+            padding: 0.9rem 2rem; background: var(--primary-yellow); color: var(--primary-blue);
+            border: none; border-radius: 5px; font-weight: 700; cursor: pointer;
+            transition: var(--transition);
+        }
+        .newsletter-btn:hover { background: #e6b200; transform: translateY(-2px); }
+        .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 2rem; margin-top: 3rem; text-align: center; color: rgba(255, 255, 255, 0.7); }
+
+        /* ----------------------------------------------------
+        * SERVICE DETAILS CSS (From second doc)
+        * ----------------------------------------------------
+        */
+        
+        /* ===== BREADCRUMB - Geometric Look ===== */
+        .breadcrumb {
+            background: var(--bg-light);
+            padding: 1.5rem 5%;
+            border-bottom: 3px solid var(--primary-yellow);
+        }
+
+        .breadcrumb-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary-blue);
+        }
+
+        .breadcrumb span {
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        /* ===== SERVICE DETAILS SECTION - 2 Column Layout ===== */
+        .service-details-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+
+        .service-main {
+            padding-right: 3rem;
+            /* Using subtle dark separator */
+            border-right: 1px solid var(--service-main-border); 
+        }
+        
+        /* HEADER & METADATA */
+        .service-header { margin-bottom: 2rem; }
+
+        .service-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--primary-yellow);
+            color: var(--primary-blue);
+            border-radius: 3px;
+            font-size: 1rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .service-title {
+            font-size: 3.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+        }
+
+        .service-meta {
+            display: flex;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed var(--service-main-border);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .meta-item i {
+            color: var(--primary-yellow); /* Yellow icons */
+            font-size: 1.1rem;
+        }
+
+        .service-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 5px solid var(--primary-yellow); /* Yellow Frame */
+            transition: all 0.4s ease-in-out; /* Adjusted to use defined variable if needed, keeping original */
+        }
+        .service-image:hover { transform: scale(1.01); }
+
+        .service-summary, .service-description p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--text-dark);
+        }
+
+        /* FEATURES LIST (CHECKLIST) */
+        .section-heading {
+            font-size: 2.2rem;
+            color: var(--primary-blue);
+            margin: 3rem 0 1.5rem;
+            font-weight: 900;
+            border-bottom: 3px solid var(--primary-yellow); /* Section Accent */
+            padding-bottom: 0.5rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+            gap: 1.5rem;
+        }
+
+        .features-list li {
+            padding: 1.2rem;
+            background: var(--bg-light);
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            box-shadow: var(--shadow-base);
+        }
+
+        .features-list li i {
+            color: var(--primary-yellow); /* Yellow checks */
+            font-size: 1.2rem;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        
+        /* PROJECT PHASES/CURRICULUM */
+        .curriculum-item {
+            background: var(--bg-white);
+            border: 1px solid var(--service-main-border);
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .curriculum-item:hover {
+            border-color: var(--primary-blue);
+            background: var(--bg-light);
+            transform: translateX(5px);
+        }
+
+        .curriculum-title {
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .curriculum-duration {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* ===== SIDEBAR - High Contrast CTA ===== */
+        .service-sidebar {
+            position: sticky;
+            top: 40px; /* Adjusted sticky position */
+            height: fit-content;
+        }
+
+        .contact-card {
+            background: var(--primary-blue);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .cta-text {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .inquire-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary-yellow);
+            color: var(--primary-blue);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.4s ease-in-out;
+            text-transform: uppercase;
+        }
+
+        .inquire-btn:hover {
+            transform: translateY(-3px);
+            background: #e6b200;
+        }
+
+        .info-card {
+            background: var(--bg-light); /* Light background for technical info */
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow-base);
+        }
+
+        .info-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 900;
+            border-bottom: 3px solid var(--primary-yellow);
+            padding-bottom: 0.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--service-main-border);
+        }
+
+        .info-item:last-child { border-bottom: none; }
+
+        .info-label { color: var(--text-muted); font-weight: 500; }
+
+        .info-value { color: var(--primary-blue); font-weight: 700; }
+        
+        /* ----------------------------------------------------
+        * RESPONSIVE DESIGN (Combined and Consolidated)
+        * ----------------------------------------------------
+        */
+        @media (max-width: 968px) {
+            .navbar-container { padding: 0 2rem; }
+            .hamburger { display: flex; }
+            
+            /* Mobile Menu Styling (from first doc) */
+            .nav-menu {
+                position: fixed; top: 0; left: -100%; width: 100%; height: 100vh;
+                background: var(--primary-blue); flex-direction: column;
+                justify-content: flex-start; padding-top: 5rem;
+                transition: left 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+                gap: 0; overflow-y: auto; z-index: 1002;
+                box-shadow: 5px 0 15px rgba(0,0,0,0.3); display: flex;
+            }
+            .nav-menu.active { left: 0; }
+            .mobile-menu-header { display: none; } 
+            .nav-item { width: 100%; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+            .nav-link { justify-content: space-between; padding: 1rem 1.5rem; width: 100%; font-size: 1.05rem; color: white !important; }
+            .nav-link::after { display: none; }
+            .nav-right { width: 100%; background: transparent; flex-direction: column; padding: 1.5rem; gap: 1rem; margin-top: auto; display: flex !important; }
+            .nav-btn { width: 100%; text-align: center; display: block; }
+            
+            /* Dropdown mobile styles */
+            .dropdown-menu { position: static; opacity: 1; visibility: visible; transform: none; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: rgba(0, 0, 0, 0.2); padding: 0; min-width: unset; box-shadow: none; }
+            .has-dropdown.active .dropdown-menu { max-height: 200px; padding: 0.5rem 0; }
+            .dropdown-item { border-bottom: none; }
+            .dropdown-item a { padding-left: 2.5rem; }
+            .has-dropdown:hover .dropdown-icon { transform: none; }
+            .has-dropdown.active .dropdown-icon { transform: rotate(180deg); }
+            
+            /* Service Page Mobile Layout (from second doc) */
+            .service-details-container {
+                grid-template-columns: 1fr;
+                padding: 3rem 2rem;
+            }
+            .service-main { border-right: none; padding-right: 0; }
+            .service-sidebar { top: 20px; }
+            .service-title { font-size: 2.5rem; }
+            .service-image { height: 350px; }
+            .section-heading { font-size: 2rem; }
+            .features-list { grid-template-columns: 1fr; }
+
+            /* FOOTER MOBILE (from first doc) */
+            footer { padding: 3rem 1.5rem 2rem !important; }
+            .footer-container { grid-template-columns: 1fr !important; gap: 2rem !important; }
+        }
+
+        @media (max-width: 576px) {
+            .service-details-container { padding: 2rem 1.5rem; }
+            .service-title { font-size: 2rem; }
+            .service-image { height: 250px; border-width: 3px; }
+            .service-main { padding-right: 0; }
+            .section-heading { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo"><i class="fas fa-hard-hat"></i> SiteWorks Builders</a>
+
+            <ul class="nav-menu" id="navMenu">
+                <button class="close-menu" id="closeMenu">✕</button>
+
+                <li class="nav-item has-dropdown">
+                    <a href="index.html" class="nav-link" id="homeLink">
+                        Home <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a href="index.html">Home 1: Default</a></li>
+                        <li class="dropdown-item"><a href="homepage2.html">Home 2: Commercial</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="Aboutus.html" class="nav-link">About Us</a></li>
+                <li class="nav-item"><a href="service.html" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="#projects" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact Us</a></li>
+
+                <div class="nav-right">
+                    <a href="#quote" class="nav-btn">Get a Quote</a>
+                </div>
+            </ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="services.html">Services</a> / 
+            <span id="breadcrumbService">Service Details</span>
+        </div>
+    </section>
+
+    <section class="service-details-container">
+        <div class="service-main">
+            <div class="service-header">
+                <span class="service-badge" id="serviceBadge">Structural</span>
+                <h1 class="service-title" id="serviceTitle">Structural Steel Fabrication & Erection</h1>
+                <p class="service-summary" id="serviceSummary">In-house design, fabrication, and erection capabilities for complex structural steel components in high-rise and industrial builds.</p>
+            </div>
+
+            <img src="https://picsum.photos/800/400?random=555&tag=steel-weld" alt="Service Image" class="service-image" id="serviceImage">
+
+            <h2 class="section-heading">Scope of Work</h2>
+            <div class="service-description" id="serviceDescription">
+                <p>This division manages the end-to-end process of structural steel, ensuring total quality control and efficiency. From connection design and 3D modeling to the final lift and welding on-site, our team delivers the foundational framework for large-scale, complex structures.</p>
+            </div>
+
+            <h2 class="section-heading">Key Capabilities</h2>
+            <ul class="features-list" id="serviceFeatures">
+                <li><i class="fas fa-check-circle"></i> Advanced Connection Design using finite element analysis for optimized safety.</li>
+                <li><i class="fas fa-check-circle"></i> In-House Fabrication minimizing lead times and ensuring precise component tolerances.</li>
+                <li><i class="fas fa-check-circle"></i> 4D Scheduling Integration to coordinate steel delivery and erection with other trades.</li>
+                <li><i class="fas fa-check-circle"></i> Certified Welding Teams dedicated to highest quality standards (AWS/ISO certified).</li>
+                <li><i class="fas fa-check-circle"></i> Complex High-Rise Erection experienced in safely hoisting and bolting beams at extreme heights.</li>
+                <li><i class="fas fa-check-circle"></i> Rigorous Quality Assurance and third-party inspection processes.</li>
+            </ul>
+
+            <h2 class="section-heading">Project Phases</h2>
+            <ul class="curriculum-list" id="servicePhases">
+                <li class="curriculum-item">
+                    <span class="curriculum-title">Phase 1: Engineering & Connection Design</span>
+                    <span class="curriculum-duration">4 Weeks</span>
+                </li>
+                <li class="curriculum-item">
+                    <span class="curriculum-title">Phase 2: Detailing & Shop Drawing</span>
+                    <span class="curriculum-duration">8 Weeks</span>
+                </li>
+                <li class="curriculum-item">
+                    <span class="curriculum-title">Phase 3: Fabrication & Quality Control</span>
+                    <span class="curriculum-duration">12 Weeks</span>
+                </li>
+                <li class="curriculum-item">
+                    <span class="curriculum-title">Phase 4: Site Erection & Welding</span>
+                    <span class="curriculum-duration">Variable</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="service-sidebar">
+            <div class="contact-card">
+                <p class="cta-text">Ready to launch your large-scale project?</p>
+                <a href="contact.html" class="inquire-btn">Inquire Now</a>
+                <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin-top: 0.5rem;">Or call us for an immediate consultation.</p>
+            </div>
+
+            <div class="info-card" id="infoCard">
+                <h3>Service Overview</h3>
+                <div class="info-item">
+                    <span class="info-label">Division</span>
+                    <span class="info-value" id="infoDivision">Structural Trades</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Typical Duration</span>
+                    <span class="info-value" id="infoDuration">4 - 18 Months</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Certifications</span>
+                    <span class="info-value">AWS, ISO 9001</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Technology Used</span>
+                    <span class="info-value">Tekla, BIM 360</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Suitability</span>
+                    <span class="info-value">Commercial, Industrial, Civil</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo"><i class="fas fa-hard-hat"></i> SiteWorks</div>
+                <p>The foundation of your future. Delivering construction excellence across the region.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                 <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>                
+                    <li><a href="Aboutus.html">About</a></li>
+                    <li><a href="service.html">Services</a></li>
+                    <li><a href="sitemap.html">Blog</a></li>
+                    <li><a href="sitemap.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div class="contact-text"><p>(555) 123-SITE</p></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="contact-text"><p>info@siteworks.com</p></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="contact-text"><p>123 Main Street, Suite 200, Metropolis</p></div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Stay Informed</h3>
+                <p>Sign up for our newsletter to get project updates and company news.</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Your work email">
+                    <button class="newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 SiteWorks Builders. Built with <i class="fas fa-heart" style="color: var(--primary-yellow);"></i> and Code.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // --- Navigation and Animation JS (From Document 1) ---
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        const navbar = document.getElementById('navbar');
+        const statNumbers = document.querySelectorAll('.stat-number');
+        const sections = document.querySelectorAll('.section');
+        const homeDropdown = document.querySelector('.has-dropdown');
+        const homeLink = document.getElementById('homeLink');
+        let statsAnimated = false;
+
+        // --- Mobile Menu Toggle ---
+        function toggleMenu() {
+            const isActive = navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            document.body.style.overflow = isActive ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        closeMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        // --- New: Mobile Dropdown Toggle ---
+        if (homeDropdown) {
+            homeLink.addEventListener('click', (e) => {
+                if (window.innerWidth <= 968) {
+                    e.preventDefault(); 
+                    homeDropdown.classList.toggle('active');
+                }
+            });
+        }
+
+        // Close menu when a link is clicked
+        navMenu.querySelectorAll('.nav-link, .nav-btn, .dropdown-item a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 968 && !link.closest('.has-dropdown') ) {
+                    setTimeout(toggleMenu, 300); 
+                }
+                
+                if (window.innerWidth <= 968 && link.closest('.dropdown-item')) {
+                     setTimeout(toggleMenu, 300); 
+                }
+            });
+        });
+
+        // --- Sticky Nav Bar Effect ---
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // --- Resize Handler (for mobile menu) ---
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 968 && navMenu.classList.contains('active')) {
+                toggleMenu(); 
+            }
+            if (window.innerWidth > 968 && homeDropdown.classList.contains('active')) {
+                homeDropdown.classList.remove('active');
+            }
+        });
+
+
+        // --- Running Number Counter Animation --- (Kept but functionality is not in the new content)
+        function countUp(el) {
+            const target = parseInt(el.getAttribute('data-target'));
+            const prefix = el.getAttribute('data-prefix') || '';
+            const suffix = el.getAttribute('data-suffix') || '';
+            let start = 0;
+            const duration = 2000; 
+            const step = (target / duration) * 10;
+            const isFloat = target % 1 !== 0;
+
+            const timer = setInterval(() => {
+                start += step;
+                if (start >= target) {
+                    clearInterval(timer);
+                    start = target;
+                }
+                
+                let displayValue = Math.floor(start);
+                if (isFloat) {
+                    displayValue = start.toFixed(1);
+                }
+                
+                el.textContent = prefix + displayValue + suffix;
+            }, 10);
+        }
+
+        // --- Intersection Observer for Animations (FadeIn/Counting) --- (Kept for the existing sections)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2
+        };
+
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            if (!section.classList.contains('hero')) { 
+                sectionObserver.observe(section);
+            }
+        });
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !statsAnimated) {
+                    statNumbers.forEach(countUp);
+                    statsAnimated = true; 
+                }
+            });
+        }, { threshold: 0.5 }); 
+
+        const statsSection = document.getElementById('stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // --- DYNAMIC CONTENT JS (From Document 2) ---
+        
+        // --- DYNAMIC DATA SOURCE (Mapping Service IDs to Details) ---
+        const services = {
+            management: {
+                badge: 'Core Services', title: 'Design-Build & Management', category: 'General Contracting', duration: 'Variable',
+                image: 'https://picsum.photos/800/400?random=111&tag=management',
+                summary: 'Comprehensive project management spanning initial planning, design coordination, procurement, and construction execution.',
+                capabilities: [ 'Pre-construction consulting and estimating', 'Value engineering and cost control', 'Full-cycle contract management', 'Integrated design and engineering teams', 'Risk assessment and mitigation', 'Client collaboration portals'],
+                phases: [
+                    { title: 'Pre-Construction & Design Coordination', duration: '6-12 Weeks' },
+                    { title: 'Procurement & Scheduling', duration: '4-8 Weeks' },
+                    { title: 'Execution & Construction', duration: 'Variable' },
+                    { title: 'Commissioning & Handover', duration: '4 Weeks' }
+                ],
+                overview: [
+                    { label: 'Division', value: 'General Contracting' },
+                    { label: 'Typical Duration', value: '6-24 Months' },
+                    { label: 'Certifications', value: 'LEED, ISO' },
+                    { label: 'Technology Used', value: 'Procore, Bluebeam' },
+                    { label: 'Suitability', value: 'Commercial, Residential, Institutional' }
+                ]
+            },
+            industrial: {
+                badge: 'Industrial', title: 'Industrial Facilities Construction', category: 'High-Spec', duration: '12-24 Months',
+                image: 'https://picsum.photos/800/400?random=222&tag=warehouse',
+                summary: 'Specialized services for constructing large-scale industrial warehouses, manufacturing plants, and logistics hubs with critical operational requirements.',
+                capabilities: [ 'High-bay warehouse design and build', 'Cold storage facility expertise', 'Specialized flooring and loading docks', 'MEP systems integration for machinery', 'Fast-track construction methods', 'Advanced security planning'],
+                phases: [
+                    { title: 'Needs Analysis & Site Prep', duration: '8 Weeks' },
+                    { title: 'Structural Erection (Fast-Track)', duration: '6 Months' },
+                    { title: 'Internal Fit-Out & Systems', duration: '8 Months' },
+                    { title: 'Testing & Final Commissioning', duration: '4 Weeks' }
+                ],
+                overview: [
+                    { label: 'Division', value: 'Industrial Construction' },
+                    { label: 'Typical Duration', value: '12-24 Months' },
+                    { label: 'Certifications', value: 'OSHA 30, ISO' },
+                    { label: 'Technology Used', value: 'BIM, Drone Mapping' },
+                    { label: 'Suitability', value: 'Industrial, Logistics' }
+                ]
+            },
+            roadways: {
+                badge: 'Civil', title: 'Roadway Construction & Paving', category: 'Infrastructure', duration: 'Variable',
+                image: 'https://picsum.photos/800/400?random=333&tag=roadwork',
+                summary: 'Design, construction, and maintenance of public and private access roads, highways, and complex urban intersections.',
+                capabilities: [ 'Asphalt and concrete paving', 'Subgrade preparation and stabilization', 'Drainage and culvert installation', 'Traffic management planning', 'Bridge and overpass construction', 'Public works compliance'],
+                phases: [
+                    { title: 'Geotechnical Survey & Design', duration: '4 Weeks' },
+                    { title: 'Earthwork & Grading', duration: '8 Weeks' },
+                    { title: 'Base Layers & Paving', duration: '12 Weeks' },
+                    { title: 'Line Marking & Safety Systems', duration: '2 Weeks' }
+                ],
+                overview: [
+                    { label: 'Division', value: 'Civil Infrastructure' },
+                    { label: 'Typical Duration', value: 'Variable' },
+                    { label: 'Certifications', value: 'AASHTO, Local Govt.' },
+                    { label: 'Technology Used', value: 'GPS Grading, Surveying' },
+                    { label: 'Suitability', value: 'Public Works, Commercial' }
+                ]
+            },
+            bim: {
+                badge: 'Specialized', title: 'BIM & 4D Project Modeling', category: 'Technology', duration: 'Project Specific',
+                image: 'https://picsum.photos/800/400?random=444&tag=bim',
+                summary: 'Advanced Building Information Modeling (BIM) services integrated with 4D scheduling to enhance visualization, predict clashes, and optimize project timelines.',
+                capabilities: [ '3D model creation and visualization', 'Clash detection and resolution (MEP/Structure)', '4D scheduling and project phasing simulation', 'Accurate material quantity takeoffs', 'Client collaboration portals', 'Design optimization'],
+                phases: [
+                    { title: 'Initial 3D Modeling (Design Stage)', duration: '8 Weeks' },
+                    { title: '4D Integration (Scheduling)', duration: '4 Weeks' },
+                    { title: 'Clash Detection & Optimization', duration: 'Ongoing' },
+                    { title: 'Site Monitoring & Model Updates', duration: 'Ongoing' }
+                ],
+                overview: [
+                    { label: 'Division', value: 'Pre-Construction' },
+                    { label: 'Typical Duration', value: 'Project Specific' },
+                    { label: 'Certifications', value: 'Revit Certified' },
+                    { label: 'Technology Used', value: 'Tekla, BIM 360' },
+                    { label: 'Suitability', value: 'High-Density, Complex MEP' }
+                ]
+            },
+            steel: {
+                badge: 'Structural', title: 'Structural Steel Fabrication', category: 'Structural Trades', duration: '4-18 Months',
+                image: 'https://picsum.photos/800/400?random=555&tag=steel-weld',
+                summary: 'In-house design, fabrication, and erection capabilities for complex structural steel components in high-rise and industrial builds.',
+                capabilities: [ 'Advanced Connection Design', 'In-House Fabrication', '4D Scheduling Integration', 'Certified Welding Teams (AWS/ISO)', 'Complex High-Rise Erection', 'Rigorous Quality Assurance'],
+                phases: [
+                    { title: 'Engineering & Connection Design', duration: '4 Weeks' },
+                    { title: 'Detailing & Shop Drawing', duration: '8 Weeks' },
+                    { title: 'Fabrication & Quality Control', duration: '12 Weeks' },
+                    { title: 'Site Erection & Welding', duration: 'Variable' }
+                ],
+                overview: [
+                    { label: 'Division', value: 'Structural Trades' },
+                    { label: 'Typical Duration', value: '4-18 Months' },
+                    { label: 'Certifications', value: 'AWS, ISO 9001' },
+                    { label: 'Technology Used', value: 'Tekla, BIM 360' },
+                    { label: 'Suitability', value: 'Commercial, Industrial, Civil' }
+                ]
+            },
+            // --- Additional Placeholders (to support services.html links) ---
+            renovation: { badge: 'Core Services', title: 'Major Renovations & Retrofitting', category: 'Upgrade', duration: '6-12 Months', image: 'https://picsum.photos/800/400?random=666&tag=home-renovation', summary: 'Transforming existing buildings with structural upgrades, modern interiors, and sustainable retrofits.', capabilities: ['Structural reinforcement', 'Interior demolition', 'MEP upgrades', 'Sustainable retrofits'], phases: [{title: 'Inspection & Scoping', duration: '4 Weeks'}], overview: []},
+            utilities: { badge: 'Civil', title: 'Underground Utilities & Drainage', category: 'Infrastructure', duration: '2-8 Months', image: 'https://picsum.photos/800/400?random=777&tag=piping', summary: 'Installation of water, sewer, storm drainage systems, and complex underground utility infrastructure.', capabilities: ['Trenching and excavation', 'Pipe laying', 'Drainage system design', 'Backfilling and compaction'], phases: [{title: 'Utility Design & Planning', duration: '4 Weeks'}], overview: []},
+            grading: { badge: 'Civil', title: 'Site Grading & Preparation', category: 'Earthwork', duration: '4-12 Weeks', image: 'https://picsum.photos/800/400?random=888&tag=excavator', summary: 'Large-scale site preparation, excavation, complex grading, and soil stabilization for foundations.', capabilities: ['Excavation', 'Soil stabilization', 'Compaction testing', 'Foundational prep'], phases: [{title: 'Survey & Analysis', duration: '1 Week'}], overview: []},
+            mep: { badge: 'Specialized', title: 'MEP & HVAC Integration', category: 'Systems', duration: 'Project Specific', image: 'https://picsum.photos/800/400?random=999&tag=hvac', summary: 'Expert management and integration of Mechanical, Electrical, and Plumbing (MEP) and HVAC systems.', capabilities: ['MEP coordination', 'HVAC installation', 'Plumbing systems', 'Electrical fit-out', 'BIM integration'], phases: [{title: 'MEP Design Review', duration: '6 Weeks'}], overview: []},
+        };
+
+        // --- DYNAMIC PAGE UPDATING FUNCTION ---
+        function updateServiceDetails(serviceId) {
+            const data = services[serviceId] || services.steel; 
+
+            // 1. Update Header and Breadcrumb
+            document.getElementById('pageTitle').textContent = data.title + ' - SiteWorks Builders';
+            document.getElementById('breadcrumbService').textContent = data.title;
+            document.getElementById('serviceBadge').textContent = data.badge;
+            document.getElementById('serviceTitle').textContent = data.title;
+            document.getElementById('serviceSummary').textContent = data.summary;
+            document.getElementById('serviceImage').src = data.image;
+            document.getElementById('serviceImage').alt = data.title;
+            
+            // 2. Update Capabilities/Features List
+            const featuresList = document.getElementById('serviceFeatures');
+            featuresList.innerHTML = data.capabilities.map(cap => `
+                <li><i class="fas fa-check-circle"></i> ${cap}</li>
+            `).join('');
+
+            // 3. Update Project Phases
+            const phasesList = document.getElementById('servicePhases');
+            phasesList.innerHTML = data.phases.map((phase, index) => `
+                <li class="curriculum-item">
+                    <span class="curriculum-title">Phase ${index + 1}: ${phase.title}</span>
+                    <span class="curriculum-duration">${phase.duration}</span>
+                </li>
+            `).join('');
+            
+            // 4. Update Info Card
+            const infoCard = document.getElementById('infoCard');
+            if (data.overview && infoCard) {
+                const infoHtml = data.overview.map(item => `
+                    <div class="info-item">
+                        <span class="info-label">${item.label}</span>
+                        <span class="info-value">${item.value}</span>
+                    </div>
+                `).join('');
+                infoCard.innerHTML = `<h3>Service Overview</h3>` + infoHtml;
+            }
+        }
+
+        // Run on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const serviceId = urlParams.get('service');
+            updateServiceDetails(serviceId || 'steel'); // Default service on load
+        });
+    </script>
+</body>
+</html>

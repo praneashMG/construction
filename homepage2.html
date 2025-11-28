@@ -39,8 +39,8 @@
         /* UTILITIES */
         .section {
             padding: 5rem 2rem;
-            opacity: 0; /* Hidden by default for animation */
-            transform: translateY(20px);
+            opacity: 1; 
+            transform: translateY(0);
             transition: opacity 1s ease-out, transform 1s ease-out;
         }
 
@@ -59,7 +59,7 @@
             margin-bottom: 3.5rem; max-width: 700px; margin-left: auto;
             margin-right: auto;
         }
-
+        
         /* CSS Animation Keyframes */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translate3d(0, 100px, 0); }
@@ -119,7 +119,7 @@
         }
         .nav-btn:hover {
             background: var(--primary-yellow); border-color: var(--primary-yellow);
-            color: var(--primary-blue); transform: scale(1.05); /* Added scale effect */
+            color: var(--primary-blue); transform: scale(1.05);
             box-shadow: 0 4px 10px rgba(255, 193, 7, 0.5);
         }
 
@@ -137,73 +137,115 @@
 
         /* Mobile Menu Close Button Styling (Top Corner) */
         .close-menu {
-            background: none; border: none; color: var(--primary-yellow); /* Yellow X */
+            background: none; border: none; color: var(--primary-yellow); 
             font-size: 2.5rem; cursor: pointer; padding: 0.5rem;
             width: 50px; height: 50px; display: flex; align-items: center;
             justify-content: center; transition: var(--transition);
-            position: absolute; top: 1rem; right: 1rem; /* Positioning in corner */
-            z-index: 1003; /* Above everything */
+            position: absolute; top: 1rem; right: 1rem;
+            z-index: 1003; 
         }
-        .close-menu:hover { transform: rotate(90deg) scale(1.1); } /* More rotation */
+        .close-menu:hover { transform: rotate(90deg) scale(1.1); }
 
         /* Mobile Menu Header - Hidden on Desktop */
         .mobile-menu-header { display: none; }
 
-        /* --- DROPDOWN STYLES (NEW) --- */
-        .has-dropdown {
-            position: relative; /* Essential for absolute positioning of dropdown */
-        }
-
+        /* --- DROPDOWN STYLES --- */
+        .has-dropdown { position: relative; }
         .dropdown-menu {
-            list-style: none;
-            position: absolute;
-            top: 100%; /* Position below the parent link */
-            left: 0;
-            background: var(--primary-blue);
-            min-width: 180px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
-            z-index: 999;
-            padding: 0.5rem 0;
+            list-style: none; position: absolute; top: 100%; left: 0; background: var(--primary-blue);
+            min-width: 180px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); opacity: 0;
+            visibility: hidden; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+            z-index: 999; padding: 0.5rem 0;
         }
+        .has-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-item a { color: white; padding: 0.8rem 1.5rem; display: block; white-space: nowrap; text-decoration: none; transition: background 0.2s, color 0.2s; }
+        .dropdown-item a:hover { background: rgba(255, 193, 7, 0.1); color: var(--primary-yellow); }
+        .has-dropdown > .nav-link::after { display: none; }
+        .dropdown-icon { font-size: 0.7rem; margin-left: 0.5rem; transition: transform 0.3s; }
+        .has-dropdown:hover .dropdown-icon { transform: rotate(180deg); }
         
-        .has-dropdown:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+        /* ----------------------------------------------------
+        * CONTENT STYLES (Cleaned up from Inline CSS)
+        * ----------------------------------------------------
+        */
+        .hero {
+            background-size: cover !important;
+            background-position: center !important;
+            display: flex; align-items: center;
         }
+        .hero-container { margin: 0 auto; text-align: center; }
 
-        .dropdown-item a {
-            color: white;
-            padding: 0.8rem 1.5rem; /* Padding for dropdown links */
-            display: block;
-            white-space: nowrap;
-            text-decoration: none;
-            transition: background 0.2s, color 0.2s;
-        }
-
-        .dropdown-item a:hover {
-            background: rgba(255, 193, 7, 0.1); /* Light yellow hover background */
-            color: var(--primary-yellow);
-        }
+        .hero h1 { font-size: 4rem; font-weight: 900; margin-bottom: 1.5rem; line-height: 1.2; color: white; }
+        .hero-highlight { color: var(--primary-yellow); }
+        .hero p { font-size: 1.3rem; margin-bottom: 2.5rem; line-height: 1.7; color: rgba(255, 255, 255, 0.9); }
         
-        /* Remove the yellow underline for the dropdown parent link */
-        .has-dropdown > .nav-link::after {
-            display: none;
+        /* Buttons used in CTA/Hero */
+        .btn {
+            padding: 1.2rem 3rem; border-radius: 8px; font-size: 1.1rem;
+            font-weight: 700; text-decoration: none; transition: all 0.3s ease;
+            display: inline-block; text-align: center; border: 2px solid transparent;
         }
-        /* Style for the chevron icon */
-        .dropdown-icon {
-            font-size: 0.7rem;
-            margin-left: 0.5rem;
-            transition: transform 0.3s;
-        }
-        .has-dropdown:hover .dropdown-icon {
-            transform: rotate(180deg);
-        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); }
 
+        .btn-primary-yellow { background: var(--primary-yellow); color: var(--primary-blue); border-color: var(--primary-yellow); }
+        .btn-secondary-white { background: transparent; color: white; border-color: white; }
+        .btn-cta-blue { background: var(--primary-blue); color: var(--primary-yellow); border-color: var(--primary-blue); }
+        .btn-cta-transparent { background: transparent; color: var(--primary-blue); border-color: var(--primary-blue); }
+
+
+        /* Card and Grid Styles */
+        .courses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; max-width: 1400px; margin: 0 auto; }
+        .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem; max-width: 1400px; margin: 0 auto; padding: 2rem 0; }
+        .steps-grid.partner-advantage { grid-template-columns: repeat(3, 1fr); max-width: 1200px; margin: 0 auto; }
+
+        .category-badge { display: inline-block; padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.9rem; font-weight: 600; margin-bottom: 2rem; }
+        .badge-blue { background: rgba(26, 55, 77, 0.1); color: var(--primary-blue); }
+        .badge-yellow { background: rgba(255, 193, 7, 0.2); color: var(--primary-yellow); }
+        .badge-innovation { background: rgba(0, 123, 255, 0.1); color: #007BFF; }
+
+
+        .course-card {
+            border-radius: 10px; overflow: hidden; background: var(--bg-white);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05); transition: var(--transition);
+            border: 1px solid #e9ecef; cursor: pointer;
+        }
+        .course-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); border-color: var(--primary-blue); }
+        
+        .course-img { height: 250px; background: var(--primary-blue); overflow: hidden; position: relative; }
+        .course-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: transform 0.4s; }
+        .course-card:hover .course-img img { transform: scale(1.05); }
+        
+        .course-category { position: absolute; top: 1rem; left: 1rem; padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700; z-index: 2; background: white; color: var(--primary-blue); }
+        
+        .course-content { padding: 2rem; border-top: 5px solid transparent; }
+        .course-content.project-card { border-top-color: var(--primary-yellow); }
+        .course-content h3 { color: var(--primary-blue); margin-bottom: 0.7rem; font-size: 1.4rem; font-weight: 700; }
+        .course-content p { color: var(--text-body); margin-bottom: 1.2rem; line-height: 1.7; }
+
+        .course-meta { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--bg-light); padding-top: 1.2rem; }
+        .meta-label-blue { font-size: 1.2rem; color: var(--primary-blue); }
+        .meta-label-yellow { font-size: 1.2rem; color: var(--primary-yellow); }
+        .meta-duration { color: var(--text-muted); }
+
+        .step-card {
+            padding: 2rem; border-radius: 10px; background: white; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition); border: 1px dashed #e9ecef; cursor: pointer;
+        }
+        .step-card.partner-advantage { border-left: 5px solid var(--primary-yellow); border-top: 1px solid #e9ecef; border-right: 1px solid #e9ecef; border-bottom: 1px solid #e9ecef; }
+        .step-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); }
+        
+        .step-number { width: 60px; height: 60px; background: var(--primary-blue); color: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; margin: 0 auto 1.5rem; transition: transform 0.3s;
+        }
+        .step-card.partner-advantage .step-number { font-size: 1.8rem; }
+        .step-card:hover .step-number { transform: scale(1.1); }
+        .step-card h3 { color: var(--primary-blue); margin-bottom: 0.75rem; font-size: 1.4rem; font-weight: 700; }
+
+        /* CTA Section */
+        .cta-section { color: var(--primary-blue); text-align: center; background: var(--primary-yellow); }
+        .cta-section h2 { color: var(--primary-blue); }
+        .cta-section p { color: rgba(26, 55, 77, 0.9); }
+        
         /* ----------------------------------------------------
         * FOOTER
         * ----------------------------------------------------
@@ -213,35 +255,27 @@
         .footer-logo { font-size: 2rem; font-weight: 900; margin-bottom: 1.5rem; color: var(--primary-yellow); }
         .footer-about p { color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem; }
         .social-links { display: flex; gap: 1rem; }
-        .social-link {
-            width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1);
-            border-radius: 5px; display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 1.2rem; text-decoration: none; transition: var(--transition);
-        }
-        .social-link:hover { background: var(--primary-yellow); color: var(--primary-blue); transform: scale(1.2); } /* Increased scale */
+        .social-link { width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border-radius: 5px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; text-decoration: none; transition: var(--transition); }
+        .social-link:hover { background: var(--primary-yellow); color: var(--primary-blue); transform: scale(1.2); }
         .footer-section h3 { font-size: 1.4rem; margin-bottom: 1.5rem; font-weight: 700; color: white; }
         .footer-links { list-style: none; }
         .footer-links li { margin-bottom: 0.8rem; }
         .footer-links a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: var(--transition); }
         .footer-links a:hover { color: var(--primary-yellow); padding-left: 5px; }
         .contact-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: center; }
-        .contact-icon {
-            width: 45px; height: 45px; background: var(--primary-yellow);
-            border-radius: 5px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; flex-shrink: 0; color: var(--primary-blue);
-        }
+        .contact-icon { width: 45px; height: 45px; background: var(--primary-yellow); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; color: var(--primary-blue); }
         .contact-text p { color: rgba(255, 255, 255, 0.9); margin: 0; }
         .newsletter-form { display: flex; flex-direction: column; gap: 0.8rem; }
         .newsletter-input { padding: 0.9rem 1.2rem; border: none; border-radius: 5px; background: rgba(255, 255, 255, 0.1); color: white; }
         .newsletter-input::placeholder { color: rgba(255, 255, 255, 0.6); }
-        .newsletter-btn {
-            padding: 0.9rem 2rem; background: var(--primary-yellow); color: var(--primary-blue);
-            border: none; border-radius: 5px; font-weight: 700; cursor: pointer;
-            transition: var(--transition);
-        }
+        .newsletter-btn { padding: 0.9rem 2rem; background: var(--primary-yellow); color: var(--primary-blue); border: none; border-radius: 5px; font-weight: 700; cursor: pointer; transition: var(--transition); }
         .newsletter-btn:hover { background: #e6b200; transform: translateY(-2px); }
         .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 2rem; margin-top: 3rem; text-align: center; color: rgba(255, 255, 255, 0.7); }
 
+        /* ----------------------------------------------------
+        * RESPONSIVE DESIGN
+        * ----------------------------------------------------
+        */
         @media (max-width: 968px) {
             .navbar-container { padding: 0 2rem; }
             .hamburger { display: flex; }
@@ -250,61 +284,42 @@
             .nav-menu {
                 position: fixed; top: 0; left: -100%; width: 100%; height: 100vh;
                 background: var(--primary-blue); flex-direction: column;
-                justify-content: flex-start; padding-top: 5rem; /* Space for X button */
-                transition: left 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86); /* Smoother Slide */
+                justify-content: flex-start; 
+                transition: left 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86); 
                 gap: 0; overflow-y: auto; z-index: 1002;
-                box-shadow: 5px 0 15px rgba(0,0,0,0.3); display: flex;
+                box-shadow: 5px 0 15px rgba(0,0,0,0.3); 
             }
             .nav-menu.active { left: 0; }
-
-            /* Hide Logo in Mobile Menu content (it's covered by X) */
-            .mobile-menu-header { display: none; } 
-
+            
+            /* Menu Items and Links */
             .nav-item { width: 100%; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
             .nav-link { justify-content: space-between; padding: 1rem 1.5rem; width: 100%; font-size: 1.05rem; color: white !important; }
             .nav-link::after { display: none; }
             .nav-right { width: 100%; background: transparent; flex-direction: column; padding: 1.5rem; gap: 1rem; margin-top: auto; display: flex !important; }
             .nav-btn { width: 100%; text-align: center; display: block; }
             
-            /* --- DROPDOWN MOBILE STYLES (NEW) --- */
-            .dropdown-menu {
-                position: static; /* Stack vertically in mobile */
-                opacity: 1;
-                visibility: visible;
-                transform: none;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.4s ease-out;
-                background: rgba(0, 0, 0, 0.2); /* Darker background for nested list */
-                padding: 0;
-                min-width: unset;
-                box-shadow: none;
-            }
+            /* DROPDOWN MOBILE */
+            .dropdown-menu { position: static; opacity: 1; visibility: visible; transform: none; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: rgba(0, 0, 0, 0.2); padding: 0; min-width: unset; box-shadow: none; }
+            .has-dropdown.active .dropdown-menu { max-height: 200px; padding: 0.5rem 0; }
+            .dropdown-item a { padding-left: 2.5rem; }
+            .has-dropdown.active .dropdown-icon { transform: rotate(180deg); }
+            
+            /* CONTENT MOBILE */
+            .section { padding: 3rem 1.5rem; }
+            .section-title { font-size: 2.5rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .hero-buttons { flex-direction: column; }
+            .btn { width: 100%; }
 
-            /* This class is toggled by JS to expand the mobile dropdown */
-            .has-dropdown.active .dropdown-menu {
-                max-height: 200px; /* Adjust based on content height */
-                padding: 0.5rem 0;
-            }
-            
-            .dropdown-item {
-                border-bottom: none; /* Remove extra border */
-            }
-
-            .dropdown-item a {
-                padding-left: 2.5rem; /* Indent sub-links */
-            }
-            
-            .has-dropdown:hover .dropdown-icon {
-                transform: none; /* Disable desktop rotation */
-            }
-            .has-dropdown.active .dropdown-icon {
-                transform: rotate(180deg); /* Rotate icon on mobile active */
-            }
-            
-            /* FOOTER MOBILE */
-            footer { padding: 3rem 1.5rem 2rem !important; }
-            .footer-container { grid-template-columns: 1fr !important; gap: 2rem !important; }
+            .courses-grid, .steps-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .steps-grid.partner-advantage { grid-template-columns: 1fr; }
+            .footer-container { grid-template-columns: 1fr; gap: 2rem; }
+        }
+        
+        @media (max-width: 479px) {
+            .section-title { font-size: 2rem; }
+            .hero h1 { font-size: 2rem; }
         }
     </style>
 </head>
@@ -315,8 +330,6 @@
             <a href="index.html" class="logo"><i class="fas fa-hard-hat"></i> SiteWorks Builders</a>
 
             <ul class="nav-menu" id="navMenu">
-                <button class="close-menu" id="closeMenu">✕</button>
-
                 <li class="nav-item has-dropdown">
                     <a href="index.html" class="nav-link" id="homeLink">
                         Home <i class="fas fa-chevron-down dropdown-icon"></i>
@@ -326,10 +339,12 @@
                         <li class="dropdown-item"><a href="homepage2.html">Home 2: Commercial</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
-                <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
-                <li class="nav-item"><a href="#about" class="nav-link">About Us</a></li>
-                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="Aboutus.html" class="nav-link">About Us</a></li>
+                <li class="nav-item"><a href="service.html" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="#projects" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact Us</a></li>
+                
+                <button class="close-menu" id="closeMenu">✕</button>
 
                 <div class="nav-right">
                     <a href="#quote" class="nav-btn">Get a Quote</a>
@@ -342,31 +357,191 @@
         </div>
     </nav>
 
-    <div class="section hero" style="height: 80vh; background: lightgray; display: flex; align-items: center; justify-content: center;">
-        <h1 style="color: var(--primary-blue);">Welcome to SiteWorks Builders</h1>
-    </div>
-    <div id="stats" class="section section-alt" style="text-align: center;">
-        <h2 class="section-title">Our Achievements</h2>
-        <div style="display: flex; justify-content: space-around; max-width: 800px; margin: 0 auto;">
-            <div style="text-align: center;">
-                <p class="stat-number" data-target="150" data-suffix="+" style="font-size: 3rem; color: var(--primary-yellow); font-weight: 900;">0</p>
-                <p>Projects Completed</p>
-            </div>
-            <div style="text-align: center;">
-                <p class="stat-number" data-target="25" data-suffix="M+" data-prefix="$" style="font-size: 3rem; color: var(--primary-yellow); font-weight: 900;">$0</p>
-                <p>Value Delivered</p>
-            </div>
-            <div style="text-align: center;">
-                <p class="stat-number" data-target="100" data-suffix="%" style="font-size: 3rem; color: var(--primary-yellow); font-weight: 900;">0</p>
-                <p>Safety Record</p>
+    <section class="hero section" style="
+        background-image: linear-gradient(rgba(26, 55, 77, 0.75), rgba(26, 55, 77, 0.75)), 
+                          url('https://picsum.photos/1920/1080?random=1&tag=steel-structure');
+        min-height: 80vh; 
+        padding-top: 10rem;
+        padding-bottom: 10rem;
+    ">
+        <div class="hero-container" style="max-width: 1100px;">
+            <h1>Building the Future, <span class="hero-highlight">Brick by Solid Brick</span></h1>
+            <p>A General Contractor focused on commercial excellence, superior quality, and timely project delivery across the region.</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary-yellow">View Featured Projects</a>
+                <a href="#contact" class="btn btn-secondary-white">Request a Free Estimate</a>
             </div>
         </div>
-    </div>
-    <div id="services" class="section" style="height: 50vh; display: flex; align-items: center; justify-content: center;">
-        <h2 class="section-title">Our Services</h2>
-    </div>
+    </section>
 
+    <section class="section section-alt" id="services">
+        <div style="text-align: center;">
+            <span class="category-badge badge-blue">🔨 CAPABILITIES</span>
+        </div>
+        <h2 class="section-title">Specialized Construction Disciplines</h2>
+        <p class="section-subtitle">Our in-house expertise covers the entire lifecycle of complex developments.</p>
+        <div class="courses-grid">
+            <div class="course-card">
+                <div class="course-img">
+                    <img src="https://picsum.photos/400/250?random=20&tag=commercial-office" alt="Commercial Office Building">
+                    <span class="course-category">Commercial</span>
+                </div>
+                <div class="course-content">
+                    <h3>High-Rise & Office Towers</h3>
+                    <p>End-to-end management for structural steel, MEP, and curtain wall systems.</p>
+                    <div class="course-meta">
+                        <span class="meta-label-yellow">ISO Certified</span>
+                        <span class="meta-duration">🏢 50+ Projects</span>
+                    </div>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-img">
+                    <img src="https://picsum.photos/400/250?random=21&tag=civil-road" alt="Road and Infrastructure Project">
+                    <span class="course-category">Infrastructure</span>
+                </div>
+                <div class="course-content">
+                    <h3>Civil & Public Works</h3>
+                    <p>Roadways, bridges, utilities, and large-scale earthwork and grading projects.</p>
+                    <div class="course-meta">
+                        <span class="meta-label-yellow">Prequalified Vendor</span>
+                        <span class="meta-duration">🛣 200 Km+</span>
+                    </div>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-img">
+                    <img src="https://picsum.photos/400/250?random=22&tag=industrial-warehouse" alt="Industrial Warehouse Interior">
+                    <span class="course-category">Industrial</span>
+                </div>
+                <div class="course-content">
+                    <h3>Warehouse & Logistics Hubs</h3>
+                    <p>Fast-track construction of distribution centers, manufacturing plants, and cold storage.</p>
+                    <div class="course-meta">
+                        <span class="meta-label-yellow">Design-Build</span>
+                        <span class="meta-duration">🏭 80% Cost Savings</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <section class="section">
+        <div style="text-align: center;">
+            <span class="category-badge badge-innovation">💡 INNOVATION</span>
+        </div>
+        <h2 class="section-title">Technology & Project Transparency</h2>
+        <p class="section-subtitle">We leverage digital tools to ensure accuracy, safety, and real-time client access.</p>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number"><i class="fas fa-cube"></i></div>
+                <h3>BIM Modeling</h3>
+                <p>Clash detection and 4D visualization before construction begins.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number"><i class="fas fa-eye"></i></div>
+                <h3>Drone Mapping</h3>
+                <p>Accurate site surveys, progress monitoring, and high-resolution imaging.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number"><i class="fas fa-laptop-code"></i></div>
+                <h3>Client Portal</h3>
+                <p>Access to daily logs, scheduling, and budget tracking 24/7.</p>
+            </div>
+             <div class="step-card">
+                <div class="step-number"><i class="fas fa-hard-hat"></i></div>
+                <h3>Safety Compliance</h3>
+                <p>Digital site inspections and immediate hazard reporting for compliance.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="projects" style="background: var(--primary-blue);">
+        <div style="text-align: center;">
+            <span class="category-badge badge-yellow">⭐ FEATURED PROJECTS</span>
+        </div>
+        <h2 class="section-title" style="color: white;">Our Proven Track Record</h2>
+        <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.8);">See the quality and scope of our recent work across diverse sectors.</p>
+        <div class="courses-grid">
+            <div class="course-card">
+                <div class="course-img">
+                    <img src="https://picsum.photos/400/250?random=23&tag=hospital" alt="Modern Hospital Building">
+                    <span class="course-category">Healthcare</span>
+                </div>
+                <div class="course-content project-card">
+                    <h3>City Medical Center</h3>
+                    <p>A state-of-the-art 300-bed facility delivered 2 weeks ahead of schedule.</p>
+                    <div class="course-meta">
+                        <span class="meta-label-blue">$45M Value</span>
+                        <span class="meta-duration"><i class="fas fa-calendar-alt"></i> Completed Q2 2024</span>
+                    </div>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-img">
+                    <img src="https://picsum.photos/400/250?random=24&tag=university-building" alt="University Lecture Hall">
+                    <span class="course-category">Education</span>
+                </div>
+                <div class="course-content project-card">
+                    <h3>Innovation Campus Hall</h3>
+                    <p>New structural build for a multi-disciplinary university research center.</p>
+                    <div class="course-meta">
+                        <span class="meta-label-blue">LEED Gold</span>
+                        <span class="meta-duration"><i class="fas fa-calendar-alt"></i> Completed Q4 2023</span>
+                    </div>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-img">
+                    <img src="https://picsum.photos/400/250?random=25&tag=apartment-complex" alt="Residential Apartment Complex">
+                    <span class="course-category">Residential</span>
+                </div>
+                <div class="course-content project-card">
+                    <h3>The Riverfront Lofts</h3>
+                    <p>Luxury apartment complex featuring underground parking and sustainable materials.</p>
+                    <div class="course-meta">
+                        <span class="meta-label-blue">150 Units</span>
+                        <span class="meta-duration"><i class="fas fa-calendar-alt"></i> Ongoing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 4rem;">
+            <a href="projects.html" class="btn btn-primary-yellow">See All Case Studies</a>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <h2 class="section-title">The SiteWorks Partnership Advantage</h2>
+        <p class="section-subtitle">We don't just build, we partner. Our process is designed for client success and accountability.</p>
+        <div class="steps-grid partner-advantage">
+            <div class="step-card partner-advantage">
+                <div class="step-number">🤝</div>
+                <h3>Pre-Construction Planning</h3>
+                <p>Detailed cost estimation, value engineering, and timeline optimization. **Minimize risk** early.</p>
+            </div>
+            <div class="step-card partner-advantage">
+                <div class="step-number">⏱️</div>
+                <h3>Execution & Quality Control</h3>
+                <p>Dedicated site management, strict adherence to quality standards, and continuous safety audits.</p>
+            </div>
+            <div class="step-card partner-advantage">
+                <div class="step-number">🔑</div>
+                <h3>Project Handover & Support</h3>
+                <p>Comprehensive close-out documents, team training, and industry-leading warranty support.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section section" id="contact">
+        <h2 >Let's Build Something Great Together</h2>
+        <p>Ready to discuss your next commercial, civil, or industrial project? Contact us today.</p>
+        <div class="hero-buttons">
+            <a href="contact.html" class="btn btn-cta-blue">Talk to an Engineer</a>
+            <a href="about.html" class="btn btn-cta-transparent">Meet Our Team</a>
+        </div>
+    </section>
+    
     <footer id="contact">
         <div class="footer-container">
             <div class="footer-about">
@@ -380,12 +555,13 @@
             </div>
             <div class="footer-section">
                 <h3>Quick Links</h3>
+               
                 <ul class="footer-links">
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#projects">Recent Work</a></li>
-                    <li><a href="#about">Our Team</a></li>
-                    <li><a href="careers.html">Careers</a></li>
-                    <li><a href="sitemap.html">Sitemap</a></li>
+                    <li><a href="index.html">Home</a></li>                
+                    <li><a href="Aboutus.html">About</a></li>
+                    <li><a href="service.html">Services</a></li>
+                    <li><a href="sitemap.html">Blog</a></li>
+                    <li><a href="sitemap.html">Contact Us</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -422,9 +598,9 @@
         const navMenu = document.getElementById('navMenu');
         const closeMenu = document.getElementById('closeMenu');
         const navbar = document.getElementById('navbar');
-        const statNumbers = document.querySelectorAll('.stat-number');
+        const statNumbers = document.querySelectorAll('.stat-number'); 
         const sections = document.querySelectorAll('.section');
-        const homeDropdown = document.querySelector('.has-dropdown'); // Select the new dropdown item
+        const homeDropdown = document.querySelector('.has-dropdown');
         const homeLink = document.getElementById('homeLink');
         let statsAnimated = false;
 
@@ -433,6 +609,9 @@
             const isActive = navMenu.classList.toggle('active');
             hamburger.classList.toggle('active');
             document.body.style.overflow = isActive ? 'hidden' : '';
+            if (!isActive && homeDropdown && homeDropdown.classList.contains('active')) {
+                homeDropdown.classList.remove('active');
+            }
         }
 
         hamburger.addEventListener('click', (e) => {
@@ -446,34 +625,20 @@
         });
 
         // --- New: Mobile Dropdown Toggle ---
-        // Prevents the default action (page navigation) and toggles the mobile menu
         if (homeDropdown) {
             homeLink.addEventListener('click', (e) => {
                 if (window.innerWidth <= 968) {
-                    e.preventDefault(); // Stop navigation on mobile
+                    e.preventDefault(); 
                     homeDropdown.classList.toggle('active');
-                } else {
-                    // For desktop, allow default behavior (like navigating to index.html)
-                    // You might still want to prevent default if you only want the dropdown to appear
-                    // For now, allowing default for desktop click on 'Home'
                 }
             });
         }
 
-
-        // Close menu when a link is clicked (updated to handle non-dropdown links)
+        // Close menu when a link is clicked (updated to handle navigation)
         navMenu.querySelectorAll('.nav-link, .nav-btn, .dropdown-item a').forEach(link => {
             link.addEventListener('click', () => {
-                // If the clicked link is a dropdown link OR if we are on desktop
-                // we want to close the full menu (only needed if link causes navigation)
-                if (window.innerWidth <= 968 && !link.closest('.has-dropdown') ) {
-                    // Timeout allows link navigation before closing, unless it's the home link itself
+                if (window.innerWidth <= 968 && link.id !== 'homeLink') {
                     setTimeout(toggleMenu, 300); 
-                }
-                
-                // If it's a dropdown link inside the mobile menu, close the main menu
-                if (window.innerWidth <= 968 && link.closest('.dropdown-item')) {
-                     setTimeout(toggleMenu, 300); 
                 }
             });
         });
@@ -490,22 +655,21 @@
         // --- Resize Handler (for mobile menu) ---
         window.addEventListener('resize', () => {
             if (window.innerWidth > 968 && navMenu.classList.contains('active')) {
-                toggleMenu(); // Closes menu when resizing to desktop
+                toggleMenu(); 
             }
-            // Ensure mobile dropdown is closed/inactive when resizing to desktop
-            if (window.innerWidth > 968 && homeDropdown.classList.contains('active')) {
+            if (window.innerWidth > 968 && homeDropdown && homeDropdown.classList.contains('active')) {
                 homeDropdown.classList.remove('active');
             }
         });
 
 
-        // --- Running Number Counter Animation ---
+        // --- Running Number Counter Animation (Retained for future use) ---
         function countUp(el) {
             const target = parseInt(el.getAttribute('data-target'));
             const prefix = el.getAttribute('data-prefix') || '';
             const suffix = el.getAttribute('data-suffix') || '';
             let start = 0;
-            const duration = 2000; // 2 seconds
+            const duration = 2000;
             const step = (target / duration) * 10;
             const isFloat = target % 1 !== 0;
 
@@ -518,7 +682,6 @@
                 
                 let displayValue = Math.floor(start);
                 if (isFloat) {
-                    // Handle float targets if needed, but current targets are integers
                     displayValue = start.toFixed(1);
                 }
                 
@@ -526,7 +689,7 @@
             }, 10);
         }
 
-        // --- Intersection Observer for Animations (FadeIn/Counting) ---
+        // --- Intersection Observer for Animations (Retained for future use) ---
         const observerOptions = {
             root: null,
             rootMargin: '0px',
@@ -537,33 +700,31 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    // Stop observing the section once it's visible
                     observer.unobserve(entry.target); 
                 }
             });
         }, observerOptions);
 
         sections.forEach(section => {
-            // Skip the hero section as its content animation is handled via CSS delay
-            if (!section.classList.contains('hero')) { 
-                sectionObserver.observe(section);
-            }
+            // Re-enable this if you add animation classes back to the new sections
+            // if (!section.classList.contains('hero')) { 
+            //     sectionObserver.observe(section);
+            // }
         });
 
         const statsObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting && !statsAnimated) {
                     statNumbers.forEach(countUp);
-                    statsAnimated = true; // Prevents re-animation on scroll up/down
+                    statsAnimated = true; 
                 }
             });
-        }, { threshold: 0.5 }); // High threshold to ensure stats section is well in view
+        }, { threshold: 0.5 }); 
 
-        // Observe the statistics section
         const statsSection = document.getElementById('stats');
         if (statsSection) {
             statsObserver.observe(statsSection);
         }
     </script>
-    </body>
+</body>
 </html>
