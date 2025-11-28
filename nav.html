@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SiteWorks Builders - General Contracting, Civil, Commercial, and Industrial Services.">
     <title>SiteWorks Builders - General Contracting & Construction</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /*
-        * ----------------------------------------------------
-        * SiteWorks Builders CSS - Themed for Construction
-        * Primary Colors: Deep Blue (#1A374D), Safety Yellow (#FFC107), Light Gray (#F8F9FA), Dark Text (#343A40)
-        * ----------------------------------------------------
-        */
+         * ----------------------------------------------------
+         * SiteWorks Builders CSS - Themed for Construction
+         * Primary Colors: Deep Blue (#1A374D), Safety Yellow (#FFC107), Light Gray (#F8F9FA), Dark Text (#343A40)
+         * ----------------------------------------------------
+         */
         * {
             margin: 0;
             padding: 0;
@@ -24,14 +23,9 @@
             --primary-yellow: #FFC107; 	/* Safety Yellow */
             --text-dark: #343A40;
             --text-body: #555;
-            --text-muted: #6c757d; /* From second doc */
             --bg-white: #ffffff;
             --bg-light: #F8F9FA; 		/* Light Gray/Beige */
-            --shadow-base: 0 8px 20px rgba(0, 0, 0, 0.1); /* From second doc */
-            --shadow-hover: 0 15px 35px rgba(26, 55, 77, 0.3); /* From second doc */
             --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother animation curve */
-            --overlay-dark: rgba(26, 55, 77, 0.85); /* From second doc */
-            --accent-border: #E0E4E7; /* From second doc */
         }
 
         body {
@@ -45,27 +39,24 @@
         /* UTILITIES */
         .section {
             padding: 5rem 2rem;
-            opacity: 0; /* Hidden by default for animation - From first doc */
-            transform: translateY(20px); /* From first doc */
-            transition: opacity 1s ease-out, transform 1s ease-out; /* From first doc */
+            opacity: 0; /* Hidden by default for animation */
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
         }
-        
-        .section-alt { background: var(--bg-light); }
-        
-        /* Visibility for animation - From first doc */
+
         .section.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Overriding and consolidating section titles */
+        .section-alt { background: var(--bg-light); }
         .section-title {
-            text-align: center; font-size: 3.5rem; margin-bottom: 0.5rem; /* Updated from first doc */
+            text-align: center; font-size: 3rem; margin-bottom: 1rem;
             color: var(--primary-blue); font-weight: 900;
         }
         .section-subtitle {
-            text-align: center; color: var(--text-muted); font-size: 1.3rem; /* Updated from first doc */
-            margin-bottom: 3rem; max-width: 800px; margin-left: auto;
+            text-align: center; color: var(--text-body); font-size: 1.2rem;
+            margin-bottom: 3.5rem; max-width: 700px; margin-left: auto;
             margin-right: auto;
         }
 
@@ -80,9 +71,9 @@
         }
 
         /* ----------------------------------------------------
-        * NAVIGATION (From first doc)
-        * ----------------------------------------------------
-        */
+         * NAVIGATION
+         * ----------------------------------------------------
+         */
         nav {
             background: var(--primary-blue); padding: 0; position: sticky;
             top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -146,13 +137,17 @@
 
         /* Mobile Menu Close Button Styling (Top Corner) */
         .close-menu {
+            /* * IMPORTANT: Hide by default on desktop, will be shown in mobile media query 
+             * when the menu is active. 
+             */
+            display: none; 
+
             background: none; border: none; color: var(--primary-yellow); /* Yellow X */
             font-size: 2.5rem; cursor: pointer; padding: 0.5rem;
-            width: 50px; height: 50px; display: flex; align-items: center;
+            width: 50px; height: 50px; align-items: center;
             justify-content: center; transition: var(--transition);
             position: absolute; top: 1rem; right: 1rem; /* Positioning in corner */
             z-index: 1003; /* Above everything */
-            display: none;
         }
         .close-menu:hover { transform: rotate(90deg) scale(1.1); } /* More rotation */
 
@@ -215,175 +210,12 @@
         }
 
         /* ----------------------------------------------------
-        * HERO SECTION - Dark, Strong Header (From second doc)
-        * Overriding first document's placeholder hero
-        * ----------------------------------------------------
-        */
-        .hero {
-            background: linear-gradient(var(--overlay-dark), var(--primary-blue)),
-                        url('https://picsum.photos/1920/800?random=1&tag=services-crane') center/cover;
-            padding: 10rem 5%;
-            min-height: 50vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            border-bottom: 8px solid var(--primary-yellow);
-            /* Resetting animation states since this is the main content hero */
-            opacity: 1; 
-            transform: translateY(0);
-            transition: none;
-        }
-        .hero-content h1 { font-size: 4.5rem; margin-bottom: 1rem; color: white; font-weight: 900; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); }
-        .hero-content p { font-size: 1.4rem; color: var(--bg-light); max-width: 900px; margin: 0 auto; }
-
-
-        /* ----------------------------------------------------
-        * SERVICES GRID - Premium Card Design (From second doc)
-        * ----------------------------------------------------
-        */
-        .category-section { max-width: 1400px; margin: 0 auto; padding: 4rem 0; }
-        .category-header { text-align: center; margin-bottom: 3rem; }
-        
-        .category-badge { 
-            display: inline-block; padding: 0.6rem 1.8rem; border-radius: 50px; 
-            font-size: 0.95rem; font-weight: 700; margin-bottom: 1rem;
-            text-transform: uppercase;
-        }
-        /* Specific badge coloring */
-        .badge-core { background: var(--primary-yellow); color: var(--primary-blue); }
-        .badge-civil { background: var(--primary-blue); color: var(--primary-yellow); }
-        .badge-special { background: var(--primary-yellow); color: var(--primary-blue); } 
-        
-        .category-title { font-size: 2.8rem; color: var(--primary-blue); margin-bottom: 0.5rem; font-weight: 900; }
-
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 3rem;
-        }
-
-
-        /* Service Card - NEW PREMIUM LOOK */
-        .service-card {
-            background: var(--bg-white);
-            border-radius: 10px; 
-            box-shadow: var(--shadow-base);
-            transition: var(--transition);
-            border: 2px solid var(--accent-border); /* Subtle outer border */
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--primary-yellow); /* Yellow highlight on hover */
-        }
-        
-        .service-img {
-            height: 220px;
-            overflow: hidden;
-            background: var(--primary-blue);
-            position: relative;
-        }
-
-
-        .service-img img {
-            width: 100%; height: 100%; object-fit: cover;
-            opacity: 0.8;
-            filter: grayscale(10%);
-            transition: transform 0.5s, opacity 0.5s, filter 0.5s;
-        }
-
-
-        .service-card:hover .service-img img {
-            transform: scale(1.15); /* Stronger zoom effect */
-            opacity: 1;
-            filter: grayscale(0%);
-        }
-        
-        /* Yellow detail stripe below image */
-        .service-img::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 8px;
-            background: var(--primary-yellow);
-            transition: var(--transition);
-        }
-        
-        /* Yellow badge on hover moves to accent bar color */
-        .service-card:hover .service-badge {
-            background: var(--primary-blue);
-            color: white;
-        }
-
-
-        .service-badge {
-            position: absolute; top: 1rem; right: 1rem;
-            background: var(--primary-yellow); color: var(--primary-blue);
-            padding: 0.3rem 0.8rem; border-radius: 3px; font-weight: 700; z-index: 2;
-        }
-
-
-        .service-content {
-            padding: 2rem;
-        }
-
-
-        .service-content h3 {
-            color: var(--primary-blue);
-            margin-bottom: 0.5rem;
-            font-size: 1.6rem;
-            font-weight: 900;
-        }
-
-
-        .service-content p {
-            color: var(--text-body);
-            margin-bottom: 1.5rem;
-            font-size: 1rem;
-        }
-
-
-        .service-meta {
-            display: flex; justify-content: space-between; align-items: center;
-            border-top: 1px solid var(--accent-border); padding-top: 1.2rem;
-        }
-        
-        .view-details-btn {
-            background: var(--primary-blue); color: white;
-            padding: 0.8rem 1.5rem; border-radius: 5px; font-weight: 600;
-            text-decoration: none; transition: var(--transition);
-            text-transform: uppercase;
-        }
-        .view-details-btn:hover { 
-            background: var(--primary-yellow); 
-            color: var(--primary-blue); 
-            transform: scale(1.05); 
-            box-shadow: 0 5px 10px rgba(255, 193, 7, 0.3);
-        }
-        
-        .meta-focus {
-            font-size: 1rem;
-            font-weight: 700; 
-            color: var(--primary-yellow);
-        }
-
-        /* ----------------------------------------------------
-        * FOOTER (From first doc)
-        * ----------------------------------------------------
-        */
+         * FOOTER
+         * ----------------------------------------------------
+         */
         footer { background: var(--text-dark); color: white; padding: 5rem 2rem 2rem; }
         .footer-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; max-width: 1400px; margin: 0 auto; }
         .footer-logo { font-size: 2rem; font-weight: 900; margin-bottom: 1.5rem; color: var(--primary-yellow); }
-        /* Adjusted footer-logo color for consistency with second doc: footer-logo { color: white; } - Keeping original yellow from first doc */
         .footer-about p { color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem; }
         .social-links { display: flex; gap: 1rem; }
         .social-link {
@@ -396,7 +228,7 @@
         .footer-links { list-style: none; }
         .footer-links li { margin-bottom: 0.8rem; }
         .footer-links a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: var(--transition); }
-        .footer-links a:hover { color: var(--primary-yellow); padding-left: 5px; } /* Keeping original yellow from first doc for hover */
+        .footer-links a:hover { color: var(--primary-yellow); padding-left: 5px; }
         .contact-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: center; }
         .contact-icon {
             width: 45px; height: 45px; background: var(--primary-yellow);
@@ -415,16 +247,11 @@
         .newsletter-btn:hover { background: #e6b200; transform: translateY(-2px); }
         .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 2rem; margin-top: 3rem; text-align: center; color: rgba(255, 255, 255, 0.7); }
 
-        /* ----------------------------------------------------
-        * RESPONSIVE DESIGN (Combined and Adjusted)
-        * ----------------------------------------------------
-        */
         @media (max-width: 968px) {
             .navbar-container { padding: 0 2rem; }
+            /* Hamburger is visible on mobile */
             .hamburger { display: flex; }
-            .nav-menu.active .close-menu { 
-        display: flex; /* Show the X button */
-    }
+            
             /* Mobile Menu Styling */
             .nav-menu {
                 position: fixed; top: 0; left: -100%; width: 100%; height: 100vh;
@@ -434,7 +261,16 @@
                 gap: 0; overflow-y: auto; z-index: 1002;
                 box-shadow: 5px 0 15px rgba(0,0,0,0.3); display: flex;
             }
-            .nav-menu.active { left: 0; }
+            .nav-menu.active { 
+                left: 0; 
+            }
+
+            /* * MODIFICATION: Display the close button ONLY when the nav-menu is active (open)
+             * on mobile screens. We target the button when the parent menu has the 'active' class.
+             */
+            .nav-menu.active .close-menu { 
+                display: flex; /* Show the X button */
+            }
 
             /* Hide Logo in Mobile Menu content (it's covered by X) */
             .mobile-menu-header { display: none; } 
@@ -481,30 +317,10 @@
                 transform: rotate(180deg); /* Rotate icon on mobile active */
             }
             
-            /* CONTENT adjustments from second doc */
-            .hero h1 { font-size: 3rem; }
-            .section-title { font-size: 2.5rem; }
-            .category-title { font-size: 2rem; }
-            .services-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-
-            /* FOOTER MOBILE (From first doc) */
+            /* FOOTER MOBILE */
             footer { padding: 3rem 1.5rem 2rem !important; }
             .footer-container { grid-template-columns: 1fr !important; gap: 2rem !important; }
-            .footer-container { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; } /* Override from second doc for tablets */
         }
-        
-        @media (max-width: 576px) {
-            .hero { padding: 6rem 1.5rem; }
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 1.1rem; }
-            .section { padding: 3rem 1.5rem; }
-            .service-card { margin: 0; }
-            .service-content { padding: 1.5rem; }
-            .service-content h3 { font-size: 1.4rem; }
-            /* Footer mobile override from second doc */
-            .footer-container { grid-template-columns: 1fr; }
-        }
-
     </style>
 </head>
 <body>
@@ -524,10 +340,11 @@
                         <li class="dropdown-item"><a href="homepage2.html">Home 2: Commercial</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a href="Aboutus.html" class="nav-link">About Us</a></li>
-                <li class="nav-item"><a href="service.html" class="nav-link">Services</a></li>
-                <li class="nav-item"><a href="#projects" class="nav-link">Blog</a></li>
-                <li class="nav-item"><a href="#contact" class="nav-link">Contact Us</a></li>
+                <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About Us</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+
                 <div class="nav-right">
                     <a href="#quote" class="nav-btn">Get a Quote</a>
                 </div>
@@ -538,182 +355,32 @@
             </div>
         </div>
     </nav>
-    
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Expertise Built From the Ground Up</h1>
-            <p>We provide comprehensive general contracting services, specialized divisions, and innovative solutions for projects of all sizes.</p>
-        </div>
-    </section>
 
-    <section class="section">
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-badge badge-core">🏗️ CORE SERVICES</span>
-                <h2 class="category-title">General Contracting & Construction</h2>
-                <p class="category-description">Our foundational services covering commercial, residential, and industrial construction.</p>
+    <div class="section hero" style="height: 80vh; background: lightgray; display: flex; align-items: center; justify-content: center;">
+        <h1 style="color: var(--primary-blue);">Welcome to SiteWorks Builders</h1>
+    </div>
+    <div id="stats" class="section section-alt" style="text-align: center;">
+        <h2 class="section-title">Our Achievements</h2>
+        <div style="display: flex; justify-content: space-around; max-width: 800px; margin: 0 auto;">
+            <div style="text-align: center;">
+                <p class="stat-number" data-target="150" data-suffix="+" style="font-size: 3rem; color: var(--primary-yellow); font-weight: 900;">0</p>
+                <p>Projects Completed</p>
             </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://picsum.photos/400/200?random=11&tag=commercial" alt="Commercial Construction">
-                        <span class="service-badge">Commercial</span>
-                    </div>
-                    <div class="service-content">
-                        <h3>Design-Build & Management</h3>
-                        <p>Complete project management from initial design conceptualization through final construction and commissioning.</p>
-                        <div class="service-meta">
-                            <span class="meta-focus">Key Focus</span>
-                            <a href="service-details.html?service=management" class="view-details-btn">View Details <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://picsum.photos/400/200?random=12&tag=industrial" alt="Industrial Facility">
-                        <span class="service-badge">Industrial</span>
-                    </div>
-                    <div class="service-content">
-                        <h3>Industrial Facilities</h3>
-                        <p>Specialized construction of warehouses, distribution centers, and manufacturing plants with high-spec requirements.</p>
-                        <div class="service-meta">
-                            <span class="meta-focus">High-Spec</span>
-                            <a href="service-details.html?service=industrial" class="view-details-btn">View Details <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://picsum.photos/400/200?random=13&tag=remodeling" alt="Renovation">
-                        <span class="service-badge">Renovation</span>
-                    </div>
-                    <div class="service-content">
-                        <h3>Major Renovations & Retrofitting</h3>
-                        <p>Transforming existing buildings with structural upgrades, modern interiors, and sustainable retrofits.</p>
-                        <div class="service-meta">
-                            <span class="meta-focus">Upgrade</span>
-                            <a href="service-details.html?service=renovation" class="view-details-btn">View Details <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
+            <div style="text-align: center;">
+                <p class="stat-number" data-target="25" data-suffix="M+" data-prefix="$" style="font-size: 3rem; color: var(--primary-yellow); font-weight: 900;">$0</p>
+                <p>Value Delivered</p>
+            </div>
+            <div style="text-align: center;">
+                <p class="stat-number" data-target="100" data-suffix="%" style="font-size: 3rem; color: var(--primary-yellow); font-weight: 900;">0</p>
+                <p>Safety Record</p>
             </div>
         </div>
-    </section>
+    </div>
+    <div id="services" class="section" style="height: 50vh; display: flex; align-items: center; justify-content: center;">
+        <h2 class="section-title">Our Services</h2>
+    </div>
 
-    <section class="section section-alt">
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-badge badge-civil">🚧 CIVIL & INFRASTRUCTURE</span>
-                <h2 class="category-title">Civil Engineering & Earthwork</h2>
-                <p class="category-description">Foundational site preparation, utilities, and large-scale public works projects.</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://picsum.photos/400/200?random=14&tag=road" alt="Road Construction">
-                        <span class="service-badge">Roadways</span>
-                    </div>
-                    <div class="service-content">
-                        <h3>Roadway Construction & Paving</h3>
-                        <p>Construction and maintenance of public and private access roads, paving, and traffic management systems.</p>
-                        <div class="service-meta">
-                            <span class="meta-focus">Safety First</span>
-                            <a href="service-details.html?service=roadways" class="view-details-btn">View Details <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://picsum.photos/400/200?random=15&tag=utility" alt="Utility Works">
-                        <span class="service-badge">Utilities</span>
-                    </div>
-                    <div class="service-content">
-                        <h3>Underground Utilities & Drainage</h3>
-                        <p>Installation of water, sewer, storm drainage systems, and complex underground utility infrastructure.</p>
-                        <div class="service-meta">
-                            <span class="meta-focus">Complex</span>
-                            <a href="service-details.html?service=utilities" class="view-details-btn">View Details <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://picsum.photos/400/200?random=16&tag=grading" alt="Earthwork Grading">
-                        <span class="service-badge">Earthwork</span>
-                    </div>
-                    <div class="service-content">
-                        <h3>Site Grading & Preparation</h3>
-                        <p>Large-scale site preparation, excavation, complex grading, and soil stabilization for foundations.</p>
-                        <div class="service-meta">
-                            <span class="meta-focus">Foundation</span>
-                            <a href="service-details.html?service=grading" class="view-details-btn">View Details <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-badge badge-special">💡 SPECIALIZED & TECH</span>
-                <h2 class="category-title">Technology & Specialized Trades</h2>
-                <p class="category-description">Integrating modern technology and specialized trade services for efficiency.</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://picsum.photos/400/200?random=17&tag=bim" alt="BIM Modeling">
-                        <span class="service-badge">Tech</span>
-                    </div>
-                    <div class="service-content">
-                        <h3>BIM & 4D Project Modeling</h3>
-                        <p>Advanced Building Information Modeling (BIM) and 4D scheduling for clash detection and visualization.</p>
-                        <div class="service-meta">
-                            <span class="meta-focus">Innovation</span>
-                            <a href="service-details.html?service=bim" class="view-details-btn">View Details <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://picsum.photos/400/200?random=18&tag=steel" alt="Structural Steel Framing">
-                        <span class="service-badge">Structure</span>
-                    </div>
-                    <div class="service-content">
-                        <h3>Structural Steel Fabrication</h3>
-                        <p>In-house capability for design, fabrication, and erection of complex structural steel frameworks.</p>
-                        <div class="service-meta">
-                            <span class="meta-focus">Quality</span>
-                            <a href="service-details.html?service=steel" class="view-details-btn">View Details <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://picsum.photos/400/200?random=19&tag=mep" alt="MEP Systems">
-                        <span class="service-badge">MEP</span>
-                    </div>
-                    <div class="service-content">
-                        <h3>MEP & HVAC Integration</h3>
-                        <p>Expert management and integration of Mechanical, Electrical, and Plumbing (MEP) and HVAC systems.</p>
-                        <div class="service-meta">
-                            <span class="meta-focus">Precision</span>
-                            <a href="service-details.html?service=mep" class="view-details-btn">View Details <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
     <footer id="contact">
         <div class="footer-container">
             <div class="footer-about">
@@ -727,12 +394,12 @@
             </div>
             <div class="footer-section">
                 <h3>Quick Links</h3>
-                 <ul class="footer-links">
-                    <li><a href="index.html">Home</a></li>                
-                    <li><a href="Aboutus.html">About</a></li>
-                    <li><a href="service.html">Services</a></li>
-                    <li><a href="sitemap.html">Blog</a></li>
-                    <li><a href="sitemap.html">Contact Us</a></li>
+                <ul class="footer-links">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#projects">Recent Work</a></li>
+                    <li><a href="#about">Our Team</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -769,11 +436,11 @@
         const navMenu = document.getElementById('navMenu');
         const closeMenu = document.getElementById('closeMenu');
         const navbar = document.getElementById('navbar');
-        // Removed statNumbers and related logic as the stats section was removed from the content body.
+        const statNumbers = document.querySelectorAll('.stat-number');
         const sections = document.querySelectorAll('.section');
-        const homeDropdown = document.querySelector('.has-dropdown'); 
+        const homeDropdown = document.querySelector('.has-dropdown'); // Select the new dropdown item
         const homeLink = document.getElementById('homeLink');
-        let statsAnimated = false; // Kept to avoid breaking the original script structure, though not used.
+        let statsAnimated = false;
 
         // --- Mobile Menu Toggle ---
         function toggleMenu() {
@@ -801,7 +468,6 @@
                     homeDropdown.classList.toggle('active');
                 } else {
                     // For desktop, allow default behavior (like navigating to index.html)
-                    // For now, allowing default for desktop click on 'Home'
                 }
             });
         }
@@ -845,7 +511,7 @@
         });
 
 
-        // --- Running Number Counter Animation --- (Kept but no longer used in the content)
+        // --- Running Number Counter Animation ---
         function countUp(el) {
             const target = parseInt(el.getAttribute('data-target'));
             const prefix = el.getAttribute('data-prefix') || '';
@@ -868,8 +534,7 @@
                     displayValue = start.toFixed(1);
                 }
                 
-                // Commented out as the element is removed:
-                // el.textContent = prefix + displayValue + suffix; 
+                el.textContent = prefix + displayValue + suffix;
             }, 10);
         }
 
@@ -891,14 +556,26 @@
         }, observerOptions);
 
         sections.forEach(section => {
-            // The first document's hero logic is no longer relevant, but the section logic is.
+            // Skip the hero section as its content animation is handled via CSS delay
             if (!section.classList.contains('hero')) { 
                 sectionObserver.observe(section);
             }
         });
 
-        // Removed the statsObserver logic since the #stats element was removed.
-        
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !statsAnimated) {
+                    statNumbers.forEach(countUp);
+                    statsAnimated = true; // Prevents re-animation on scroll up/down
+                }
+            });
+        }, { threshold: 0.5 }); // High threshold to ensure stats section is well in view
+
+        // Observe the statistics section
+        const statsSection = document.getElementById('stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
     </script>
-</body>
+    </body>
 </html>

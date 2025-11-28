@@ -19,15 +19,13 @@
         }
 
         :root {
-            --primary-blue: #1A374D; 		
-            --primary-yellow: #FFC107; 	/* Safety Yellow */
+            --primary-blue: #1A374D; 
+            --primary-yellow: #FFC107; 
             --text-dark: #343A40;
             --text-body: #555;
             --bg-white: #ffffff;
-            --bg-light: #F8F9FA; 		/* Light Gray/Beige */
-            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother animation curve */
-            
-            /* ADDED FOR ABOUT PAGE CONTENT */
+            --bg-light: #F8F9FA; 
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             --text-muted: #6c757d;
             --shadow-base: 0 4px 15px rgba(0, 0, 0, 0.1);
             --shadow-hover: 0 10px 30px rgba(26, 55, 77, 0.2);
@@ -40,7 +38,7 @@
             color: var(--text-body);
             overflow-x: hidden;
             background-color: var(--bg-white);
-             margin-top: 0; /* Reset for combined page */
+            margin-top: 0;
         }
 
         /* UTILITIES */
@@ -66,6 +64,8 @@
             margin-bottom: 3.5rem; max-width: 700px; margin-left: auto;
             margin-right: auto;
         }
+        .btn { background: transparent; border: 2px solid white; color: white; padding: 0.7rem 1.8rem; border-radius: 5px; font-weight: 600; text-decoration: none; transition: var(--transition); display: inline-block; }
+        .btn:hover { background: var(--primary-blue); border-color: var(--primary-blue); color: white; transform: translateY(-2px); } 
 
         /* CSS Animation Keyframes */
         @keyframes fadeInUp {
@@ -78,9 +78,9 @@
         }
         
         /* ----------------------------------------------------
-        * NAVIGATION (First Block's CSS)
-        * ----------------------------------------------------
-        */
+         * NAVIGATION (From HTML 2)
+         * ----------------------------------------------------
+         */
         nav {
             background: var(--primary-blue); padding: 0; position: sticky;
             top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -126,7 +126,7 @@
         }
         .nav-btn:hover {
             background: var(--primary-yellow); border-color: var(--primary-yellow);
-            color: var(--primary-blue); transform: scale(1.05); /* Added scale effect */
+            color: var(--primary-blue); transform: scale(1.05);
             box-shadow: 0 4px 10px rgba(255, 193, 7, 0.5);
         }
 
@@ -142,39 +142,78 @@
         .hamburger.active span:nth-child(2) { opacity: 0; }
         .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-        /* Mobile Menu Close Button Styling (Top Corner) */
         .close-menu {
-            background: none; border: none; color: var(--primary-yellow); /* Yellow X */
+            display: none; 
+            background: none; border: none; color: var(--primary-yellow);
             font-size: 2.5rem; cursor: pointer; padding: 0.5rem;
-            width: 50px; height: 50px; display: flex; align-items: center;
+            width: 50px; height: 50px; align-items: center;
             justify-content: center; transition: var(--transition);
-            position: absolute; top: 1rem; right: 1rem; /* Positioning in corner */
-            z-index: 1003; /* Above everything */
+            position: absolute; top: 1rem; right: 1rem;
+            z-index: 1003;
         }
-        .close-menu:hover { transform: rotate(90deg) scale(1.1); } /* More rotation */
+        .close-menu:hover { transform: rotate(90deg) scale(1.1); }
 
-        /* Mobile Menu Header - Hidden on Desktop */
         .mobile-menu-header { display: none; }
 
-        /* --- DROPDOWN STYLES (First Block's CSS) --- */
-        .has-dropdown { position: relative; }
-        .dropdown-menu {
-            list-style: none; position: absolute; top: 100%; left: 0; background: var(--primary-blue);
-            min-width: 180px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); opacity: 0;
-            visibility: hidden; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
-            z-index: 999; padding: 0.5rem 0;
+        /* --- DROPDOWN STYLES (NEW) --- */
+        .has-dropdown {
+            position: relative;
         }
-        .has-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-        .dropdown-item a { color: white; padding: 0.8rem 1.5rem; display: block; white-space: nowrap; text-decoration: none; transition: background 0.2s, color 0.2s; }
-        .dropdown-item a:hover { background: rgba(255, 193, 7, 0.1); color: var(--primary-yellow); }
-        .has-dropdown > .nav-link::after { display: none; }
-        .dropdown-icon { font-size: 0.7rem; margin-left: 0.5rem; transition: transform 0.3s; }
-        .has-dropdown:hover .dropdown-icon { transform: rotate(180deg); }
+
+        .dropdown-menu {
+            list-style: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--primary-blue);
+            min-width: 180px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+            z-index: 999;
+            padding: 0.5rem 0;
+        }
+        
+        .has-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item a {
+            color: white;
+            padding: 0.8rem 1.5rem;
+            display: block;
+            white-space: nowrap;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .dropdown-item a:hover {
+            background: rgba(255, 193, 7, 0.1);
+            color: var(--primary-yellow);
+        }
+        
+        .has-dropdown > .nav-link::after {
+            display: none;
+        }
+        .dropdown-icon {
+            font-size: 0.7rem;
+            margin-left: 0.5rem;
+            transition: transform 0.3s;
+        }
+        .has-dropdown:hover .dropdown-icon {
+            transform: rotate(180deg);
+        }
 
         /* ----------------------------------------------------
-        * ABOUT PAGE STYLES (Second Block's CSS)
-        * ----------------------------------------------------
-        */
+         * PAGE CONTENT STYLES (From HTML 1)
+         * ----------------------------------------------------
+         */
+        
+        /* Hero Section */
         .hero {
             background: linear-gradient(var(--overlay-dark), var(--overlay-dark)),
                         url('https://picsum.photos/1920/800?random=1&tag=construction-plans') center/cover;
@@ -182,9 +221,7 @@
         }
         .hero h1 { font-size: 4.5rem; margin-bottom: 1.5rem; color: var(--primary-yellow); font-weight: 900; text-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); }
         .hero p { font-size: 1.5rem; color: var(--bg-light); max-width: 800px; margin: 0 auto 2rem; }
-        .btn { background: transparent; border: 2px solid var(--primary-blue); color: var(--primary-blue); padding: 0.7rem 1.8rem; border-radius: 5px; font-weight: 600; text-decoration: none; transition: var(--transition); display: inline-block; }
-        .btn:hover { background: var(--primary-blue); color: white; transform: translateY(-2px); }
-
+        
         /* Mission & Vision */
         .mission-vision-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto; }
         .mission-card { background: var(--bg-white); padding: 3rem; border-radius: 10px; box-shadow: var(--shadow-base); border-left: 5px solid var(--primary-yellow); transition: var(--transition); border-top: 1px solid #e9ecef; border-right: 1px solid #e9ecef; border-bottom: 1px solid #e9ecef; text-align: left; }
@@ -221,19 +258,23 @@
         .quote-icon { font-size: 3rem; color: var(--primary-yellow); opacity: 0.7; position: absolute; top: 0.5rem; right: 0.5rem; }
         .testimonial-text { font-size: 1.05rem; color: var(--text-dark); line-height: 1.7; margin-bottom: 1.5rem; }
         .testimonial-author { display: flex; align-items: center; gap: 1rem; border-top: 2px solid var(--primary-blue); padding-top: 1rem; }
-        .author-avatar { width: 55px; height: 55px; background: var(--primary-blue); color: var(--primary-yellow); border-radius: 50%; font-size: 1.4rem; font-weight: bold; flex-shrink: 0; }
+        .author-avatar { width: 55px; height: 55px; background: var(--primary-blue); color: var(--primary-yellow); border-radius: 50%; font-size: 1.4rem; font-weight: bold; flex-shrink: 0; display: flex; align-items: center; justify-content: center;}
         .rating { color: var(--primary-yellow); font-size: 1rem; margin-top: 0.3rem; }
-
+        
         /* ----------------------------------------------------
-        * FOOTER (First Block's CSS)
-        * ----------------------------------------------------
-        */
+         * FOOTER (From HTML 2)
+         * ----------------------------------------------------
+         */
         footer { background: var(--text-dark); color: white; padding: 5rem 2rem 2rem; }
         .footer-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; max-width: 1400px; margin: 0 auto; }
         .footer-logo { font-size: 2rem; font-weight: 900; margin-bottom: 1.5rem; color: var(--primary-yellow); }
         .footer-about p { color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem; }
         .social-links { display: flex; gap: 1rem; }
-        .social-link { width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border-radius: 5px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; text-decoration: none; transition: var(--transition); }
+        .social-link {
+            width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px; display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.2rem; text-decoration: none; transition: var(--transition);
+        }
         .social-link:hover { background: var(--primary-yellow); color: var(--primary-blue); transform: scale(1.2); }
         .footer-section h3 { font-size: 1.4rem; margin-bottom: 1.5rem; font-weight: 700; color: white; }
         .footer-links { list-style: none; }
@@ -241,54 +282,97 @@
         .footer-links a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: var(--transition); }
         .footer-links a:hover { color: var(--primary-yellow); padding-left: 5px; }
         .contact-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: center; }
-        .contact-icon { width: 45px; height: 45px; background: var(--primary-yellow); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; color: var(--primary-blue); }
+        .contact-icon {
+            width: 45px; height: 45px; background: var(--primary-yellow);
+            border-radius: 5px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; flex-shrink: 0; color: var(--primary-blue);
+        }
         .contact-text p { color: rgba(255, 255, 255, 0.9); margin: 0; }
         .newsletter-form { display: flex; flex-direction: column; gap: 0.8rem; }
         .newsletter-input { padding: 0.9rem 1.2rem; border: none; border-radius: 5px; background: rgba(255, 255, 255, 0.1); color: white; }
         .newsletter-input::placeholder { color: rgba(255, 255, 255, 0.6); }
-        .newsletter-btn { padding: 0.9rem 2rem; background: var(--primary-yellow); color: var(--primary-blue); border: none; border-radius: 5px; font-weight: 700; cursor: pointer; transition: var(--transition); }
+        .newsletter-btn {
+            padding: 0.9rem 2rem; background: var(--primary-yellow); color: var(--primary-blue);
+            border: none; border-radius: 5px; font-weight: 700; cursor: pointer;
+            transition: var(--transition);
+        }
         .newsletter-btn:hover { background: #e6b200; transform: translateY(-2px); }
         .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 2rem; margin-top: 3rem; text-align: center; color: rgba(255, 255, 255, 0.7); }
 
+
         /* ----------------------------------------------------
-        * RESPONSIVE DESIGN (Merged and Finalized)
-        * ----------------------------------------------------
-        */
+         * RESPONSIVE DESIGN (MERGED)
+         * ----------------------------------------------------
+         */
         @media (max-width: 968px) {
+            
+            /* NAVIGATION & MOBILE MENU */
             .navbar-container { padding: 0 2rem; }
             .hamburger { display: flex; }
+            .nav-menu {
+                position: fixed; top: 0; left: -100%; width: 100%; height: 100vh;
+                background: var(--primary-blue); flex-direction: column;
+                justify-content: flex-start; padding-top: 5rem;
+                transition: left 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+                gap: 0; overflow-y: auto; z-index: 1002;
+                box-shadow: 5px 0 15px rgba(0,0,0,0.3); display: flex;
+            }
+            .nav-menu.active { 
+                left: 0; 
+            }
+            .nav-menu.active .close-menu { 
+                display: flex;
+            }
+            .mobile-menu-header { display: none; } 
+            .nav-item { width: 100%; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+            .nav-link { justify-content: space-between; padding: 1rem 1.5rem; width: 100%; font-size: 1.05rem; color: white !important; }
+            .nav-link::after { display: none; }
+            .nav-right { width: 100%; background: transparent; flex-direction: column; padding: 1.5rem; gap: 1rem; margin-top: auto; display: flex !important; }
+            .nav-btn { width: 100%; text-align: center; display: block; }
             
-            .nav-menu { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; background: var(--primary-blue); flex-direction: column; justify-content: flex-start; padding: 0 !important; margin: 0 !important; transition: all 0.4s ease; gap: 0 !important; overflow-y: auto; z-index: 1002; display: flex; }
-            .nav-menu.active { left: 0; }
-
-            .mobile-menu-header { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem; background: var(--primary-blue); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-            .mobile-logo { color: var(--primary-yellow); font-size: 1.5rem; font-weight: 900; display: flex; align-items: center; gap: 0.5rem; }
-            .close-menu { color: var(--primary-yellow); position: static; }
-            
-            .nav-item { width: 100%; border-bottom: 1px solid rgba(255, 255, 255, 0.05); margin: 0 !important; padding: 0 !important; }
-            .nav-link { justify-content: space-between !important; padding: 1rem 1.5rem !important; margin: 0 !important; color: white !important; }
-            .nav-right { width: 100%; flex-direction: column; padding: 1.5rem; gap: 1rem; margin-top: auto; display: flex !important; position: static; }
-            .nav-btn { width: 100%; }
-
-            /* DROPDOWN MOBILE */
-            .dropdown-menu { position: static; opacity: 1; visibility: visible; transform: none; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: rgba(0, 0, 0, 0.2); padding: 0; min-width: unset; box-shadow: none; }
-            .has-dropdown.active .dropdown-menu { max-height: 200px; padding: 0.5rem 0; }
-            .dropdown-item a { padding-left: 2.5rem; }
-            .has-dropdown.active .dropdown-icon { transform: rotate(180deg); }
-
+            /* DROPDOWN MOBILE STYLES */
+            .dropdown-menu {
+                position: static; 
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease-out;
+                background: rgba(0, 0, 0, 0.2);
+                padding: 0;
+                min-width: unset;
+                box-shadow: none;
+            }
+            .has-dropdown.active .dropdown-menu {
+                max-height: 200px; 
+                padding: 0.5rem 0;
+            }
+            .dropdown-item a {
+                padding-left: 2.5rem;
+            }
+            .has-dropdown:hover .dropdown-icon {
+                transform: none;
+            }
+            .has-dropdown.active .dropdown-icon {
+                transform: rotate(180deg);
+            }
 
             /* CONTENT ADJUSTMENTS */
             .hero h1 { font-size: 3rem; }
             .hero p { font-size: 1.2rem; }
             .section { padding: 3rem 1.5rem; }
             .section-title { font-size: 2.5rem; }
+            .stats-section { padding: 3rem 1.5rem; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
             .stat-item { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
             .stat-item:nth-last-child(1), .stat-item:nth-last-child(2) { border-bottom: none; }
             .stat-number { font-size: 3rem; }
             .mission-vision-grid, .team-grid, .testimonials-grid { grid-template-columns: 1fr; gap: 2rem; }
-            .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
 
+            /* FOOTER MOBILE */
+            footer { padding: 3rem 1.5rem 2rem !important; }
+            .footer-container { grid-template-columns: 1fr !important; gap: 2rem !important; }
         }
 
         @media (max-width: 576px) {
@@ -298,6 +382,9 @@
             .mission-card, .testimonial-card, .team-card { padding: 1.5rem; }
             .stats-grid { grid-template-columns: 1fr; }
             .stat-item { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+            .stats-grid .stat-item:last-child { border-bottom: none; } 
+            .stats-grid .stat-item:nth-last-child(-n+5) { border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+            .stats-grid .stat-item:last-child { border-bottom: none; } 
         }
     </style>
 </head>
@@ -318,10 +405,10 @@
                         <li class="dropdown-item"><a href="homepage2.html">Home 2: Commercial</a></li>
                     </ul>
                 </li>
-                 <li class="nav-item"><a href="Aboutus.html" class="nav-link">About Us</a></li>
-                <li class="nav-item"><a href="service.html" class="nav-link">Services</a></li>
-                <li class="nav-item"><a href="#projects" class="nav-link">Blog</a></li>
-                <li class="nav-item"><a href="#contact" class="nav-link">Contact Us</a></li>
+                <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="#team" class="nav-link">About Us</a></li> <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+
                 <div class="nav-right">
                     <a href="#quote" class="nav-btn">Get a Quote</a>
                 </div>
@@ -337,7 +424,7 @@
         <div class="hero-content">
             <h1>The Foundation of Our Business</h1>
             <p>Built on two decades of experience, **SiteWorks** is dedicated to **safety, quality, and partnership**. See how we deliver excellence.</p>
-             <a href="#team" class="btn">Meet Our Leaders</a>
+            <a href="#team" class="btn">Meet Our Leaders</a>
         </div>
     </section>
 
@@ -358,27 +445,27 @@
         </div>
     </section>
 
-    <section class="section stats-section">
+    <section class="section stats-section" id="stats">
         <h2 class="section-title" style="color: white;">Impact Built on Dedication</h2>
         <div class="stats-grid">
             <div class="stat-item">
-                <span class="stat-number">25+</span>
+                <span class="stat-number" data-target="25" data-suffix="+">0</span>
                 <span class="stat-label">Years Experience</span>
             </div>
             <div class="stat-item">
-                <span class="stat-number">150+</span>
+                <span class="stat-number" data-target="150" data-suffix="+">0</span>
                 <span class="stat-label">Successful Projects</span>
             </div>
             <div class="stat-item">
-                <span class="stat-number">$1B+</span>
+                <span class="stat-number" data-target="1" data-prefix="$" data-suffix="B+">$0</span>
                 <span class="stat-label">Value Constructed</span>
             </div>
             <div class="stat-item">
-                <span class="stat-number">98%</span>
+                <span class="stat-number" data-target="98" data-suffix="%">0</span>
                 <span class="stat-label">On-Time Delivery</span>
             </div>
             <div class="stat-item">
-                <span class="stat-number">0</span>
+                <span class="stat-number" data-target="0">0</span>
                 <span class="stat-label">Recordable Incidents</span>
             </div>
         </div>
@@ -435,7 +522,7 @@
         </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="testimonials">
         <h2 class="section-title">Client Testimonials</h2>
         <p class="section-subtitle">Hear from partners who trust us with their critical projects.</p>
         <div class="testimonials-grid">
@@ -478,6 +565,7 @@
         </div>
     </section>
 
+
     <footer id="contact">
         <div class="footer-container">
             <div class="footer-about">
@@ -492,11 +580,11 @@
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
-                    <li><a href="index.html">Home</a></li>                
-                    <li><a href="Aboutus.html">About</a></li>
-                    <li><a href="service.html">Services</a></li>
-                    <li><a href="sitemap.html">Blog</a></li>
-                    <li><a href="sitemap.html">Contact Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#projects">Recent Work</a></li>
+                    <li><a href="#team">Our Team</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -534,8 +622,9 @@
         const closeMenu = document.getElementById('closeMenu');
         const navbar = document.getElementById('navbar');
         const statNumbers = document.querySelectorAll('.stat-number');
-        const sections = document.querySelectorAll('.section');
-        const homeDropdown = document.querySelector('.has-dropdown');
+        // Select all sections with the 'section' class, including the hero
+        const sections = document.querySelectorAll('.section'); 
+        const homeDropdown = document.querySelector('.has-dropdown'); 
         const homeLink = document.getElementById('homeLink');
         let statsAnimated = false;
 
@@ -543,7 +632,8 @@
         function toggleMenu() {
             const isActive = navMenu.classList.toggle('active');
             hamburger.classList.toggle('active');
-            document.body.style.overflow = isActive ? 'hidden' : '';
+            // Prevent scrolling on the main body when menu is open on mobile
+            document.body.style.overflow = isActive ? 'hidden' : ''; 
         }
 
         hamburger.addEventListener('click', (e) => {
@@ -556,24 +646,32 @@
             toggleMenu();
         });
 
-        // --- New: Mobile Dropdown Toggle ---
+        // --- Mobile Dropdown Toggle ---
         if (homeDropdown) {
             homeLink.addEventListener('click', (e) => {
                 if (window.innerWidth <= 968) {
-                    e.preventDefault(); 
+                    e.preventDefault(); // Stop navigation on mobile
                     homeDropdown.classList.toggle('active');
                 }
             });
         }
 
+
         // Close menu when a link is clicked
         navMenu.querySelectorAll('.nav-link, .nav-btn, .dropdown-item a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 968 && !link.closest('.has-dropdown')) {
-                    setTimeout(toggleMenu, 300);
-                }
-                if (window.innerWidth <= 968 && link.closest('.dropdown-item')) {
-                    setTimeout(toggleMenu, 300);
+            link.addEventListener('click', (e) => {
+                // Determine if the full menu should close
+                const isDropdownParent = link.closest('.has-dropdown');
+
+                if (window.innerWidth <= 968) {
+                    // For dropdown *sub-links* (which navigate), close the menu
+                    if (link.closest('.dropdown-item')) {
+                        setTimeout(toggleMenu, 300);
+                    } 
+                    // For main links (not dropdowns), close the menu
+                    else if (!isDropdownParent) {
+                         setTimeout(toggleMenu, 300);
+                    }
                 }
             });
         });
@@ -589,11 +687,17 @@
         
         // --- Resize Handler (for mobile menu) ---
         window.addEventListener('resize', () => {
-            if (window.innerWidth > 968 && navMenu.classList.contains('active')) {
-                toggleMenu(); 
-            }
-            if (window.innerWidth > 968 && homeDropdown && homeDropdown.classList.contains('active')) {
-                homeDropdown.classList.remove('active');
+            if (window.innerWidth > 968) {
+                // If menu is open on desktop size, close it and restore body scroll
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    hamburger.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+                // Ensure mobile dropdown is closed/inactive when resizing to desktop
+                if (homeDropdown.classList.contains('active')) {
+                    homeDropdown.classList.remove('active');
+                }
             }
         });
 
@@ -606,8 +710,7 @@
             let start = 0;
             const duration = 2000;
             const step = (target / duration) * 10;
-            const isFloat = target % 1 !== 0;
-
+            
             const timer = setInterval(() => {
                 start += step;
                 if (start >= target) {
@@ -616,11 +719,14 @@
                 }
                 
                 let displayValue = Math.floor(start);
-                if (isFloat) {
-                    displayValue = start.toFixed(1);
+                if (target === 1 && prefix === '$') { // Special handling for $1B+
+                    displayValue = (start).toFixed(0);
+                    if (start >= 1) displayValue = "1";
+                    el.textContent = prefix + displayValue + suffix;
+                } else {
+                     el.textContent = prefix + displayValue + suffix;
                 }
                 
-                el.textContent = prefix + displayValue + suffix;
             }, 10);
         }
 
@@ -641,15 +747,19 @@
         }, observerOptions);
 
         sections.forEach(section => {
-            sectionObserver.observe(section);
+            // Hero section is not observed for the fade-in effect here, assuming it's visible by default
+            if (!section.classList.contains('hero')) { 
+                sectionObserver.observe(section);
+            }
         });
 
-        // This logic is retained for consistency, though the content structure was removed
-        const statsObserver = new IntersectionObserver((entries) => {
+        // Separate observer just for stats to handle the counter animation
+        const statsObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting && !statsAnimated) {
                     statNumbers.forEach(countUp);
                     statsAnimated = true;
+                    observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.5 });

@@ -143,6 +143,7 @@
             justify-content: center; transition: var(--transition);
             position: absolute; top: 1rem; right: 1rem;
             z-index: 1003; 
+            display: none;
         }
         .close-menu:hover { transform: rotate(90deg) scale(1.1); }
 
@@ -279,6 +280,9 @@
         @media (max-width: 968px) {
             .navbar-container { padding: 0 2rem; }
             .hamburger { display: flex; }
+            .nav-menu.active .close-menu { 
+        display: flex; /* Show the X button */
+    }
             
             /* Mobile Menu Styling */
             .nav-menu {

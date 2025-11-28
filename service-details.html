@@ -148,6 +148,7 @@
             justify-content: center; transition: var(--transition);
             position: absolute; top: 1rem; right: 1rem; /* Positioning in corner */
             z-index: 1003; /* Above everything */
+            display: none;
         }
         .close-menu:hover { transform: rotate(90deg) scale(1.1); } /* More rotation */
 
@@ -506,6 +507,9 @@
         @media (max-width: 968px) {
             .navbar-container { padding: 0 2rem; }
             .hamburger { display: flex; }
+            .nav-menu.active .close-menu { 
+        display: flex; /* Show the X button */
+    }
             
             /* Mobile Menu Styling (from first doc) */
             .nav-menu {
@@ -584,7 +588,6 @@
                     <a href="#quote" class="nav-btn">Get a Quote</a>
                 </div>
             </ul>
-
             <div class="hamburger" id="hamburger">
                 <span></span><span></span><span></span>
             </div>

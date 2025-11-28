@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiteWorks Builders - General Contracting & Contact</title>
+    <meta name="description" content="General Contracting services and contact form for SiteWorks Builders.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /*
+        * ----------------------------------------------------
+        * SiteWorks Builders CSS - Merged for All Sections
+        * Primary Colors: Deep Blue (#1A374D), Safety Yellow (#FFC107)
+        * ----------------------------------------------------
+        */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1A374D;
+            --primary-yellow: #FFC107;
+            --text-dark: #343A40;
+            --text-body: #555;
+            --text-muted: #6c757d;
+            --bg-white: #ffffff;
+            --bg-light: #F8F9FA;
+            --shadow-base: 0 5px 20px rgba(0, 0, 0, 0.15);
+            --shadow-hover: 0 12px 30px rgba(255, 193, 7, 0.3);
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --success: #4CAF50;
+            --form-bg: #F0F3F5;
+            /* Placeholder for undefined var(--accent-border) */
+            --accent-border-color: #e9ecef; 
+        }
+
+        body {
+            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-body);
+            background-color: var(--bg-white);
+            overflow-x: hidden;
+        }
+
+        /* ----------------------------------------------------
+         * UTILITIES & ANIMATIONS
+         * ----------------------------------------------------
+         */
+        .section {
+            padding: 5rem 2rem;
+            opacity: 0; 
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-alt {
+            background: var(--bg-light);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+            font-weight: 900;
+        }
+
+        /* ----------------------------------------------------
+         * NAVIGATION STYLES
+         * ----------------------------------------------------
+         */
+        nav {
+            background: var(--primary-blue);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: background 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(26, 55, 77, 0.95);
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 3rem;
+            min-height: 80px;
+        }
+
+        .logo {
+            color: var(--primary-yellow);
+            font-size: 1.8rem;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin: 0;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 1.2rem 0;
+            display: block;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-yellow);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary-yellow);
+            transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-yellow);
+            border-color: var(--primary-yellow);
+            color: var(--primary-blue);
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(255, 193, 7, 0.5);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: white;
+            margin: 4px 0;
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .close-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary-yellow);
+            font-size: 2.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            width: 50px;
+            height: 50px;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1003;
+        }
+
+        .close-menu:hover {
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        /* --- DROPDOWN STYLES --- */
+        .has-dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            list-style: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--primary-blue);
+            min-width: 180px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+            z-index: 999;
+            padding: 0.5rem 0;
+        }
+
+        .has-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item a {
+            color: white;
+            padding: 0.8rem 1.5rem;
+            display: block;
+            white-space: nowrap;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .dropdown-item a:hover {
+            background: rgba(255, 193, 7, 0.1);
+            color: var(--primary-yellow);
+        }
+
+        .has-dropdown > .nav-link::after {
+            display: none;
+        }
+
+        .dropdown-icon {
+            font-size: 0.7rem;
+            margin-left: 0.5rem;
+            transition: transform 0.3s;
+        }
+
+        .has-dropdown:hover .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        /* ----------------------------------------------------
+         * PAGE CONTENT STYLES (HOME & CONTACT)
+         * ----------------------------------------------------
+         */
+
+        /* Home Page Hero (Placeholder for content) */
+        .page-hero {
+            height: 80vh;
+            background: lightgray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .page-hero h1 {
+            color: var(--primary-blue);
+        }
+        .stats-content {
+            display: flex;
+            justify-content: space-around;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 3rem;
+            color: var(--primary-yellow);
+            font-weight: 900;
+        }
+        .services-section {
+            height: 50vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+        }
+
+
+        /* CONTACT SECTIONS */
+        .contact-hero {
+            background: linear-gradient(rgba(26, 55, 77, 0.9), rgba(26, 55, 77, 0.9)), 
+                        url('https://picsum.photos/1920/450?random=1&tag=construction-crew') center/cover;
+            color: white;
+            padding: 8rem 5%;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .contact-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 900;
+            color: var(--primary-yellow);
+        }
+
+        .contact-hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            opacity: 0.9;
+        }
+
+        /* Info Cards */
+        .contact-info-section {
+            padding: 3rem 5%;
+            background: var(--bg-light);
+            margin-top: -3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .contact-cards {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: var(--primary-blue);
+            color: white;
+            padding: 2.5rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-base);
+            text-align: center;
+            transition: var(--transition);
+            border: 2px solid var(--primary-yellow);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(255, 193, 7, 0.5);
+        }
+
+        .contact-icon {
+            width: 65px;
+            height: 65px;
+            background: var(--primary-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin: 0 auto 1.2rem;
+            transition: transform 0.3s;
+        }
+        
+        .contact-card:hover .contact-icon {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .contact-card h3 {
+            color: white;
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+            font-weight: 900;
+        }
+
+        .contact-card p, .contact-card a {
+            color: var(--bg-light);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .contact-card a {
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .contact-card a:hover {
+            color: var(--primary-yellow);
+        }
+
+        /* Form and Details */
+        .contact-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 5%;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        .contact-form-container {
+            background: var(--form-bg);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-base);
+            border-left: 5px solid var(--primary-yellow);
+        }
+        
+        .contact-form-container h2 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 2.2rem;
+            font-weight: 900;
+        }
+
+        .contact-form-container p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 1px solid var(--accent-border-color); /* Used defined var */
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition);
+            background: white;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-yellow);
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.3);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.1rem;
+            background: var(--primary-blue);
+            color: white;
+            border: 2px solid var(--primary-blue);
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-yellow);
+            color: var(--primary-blue);
+            border-color: var(--primary-yellow);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .detail-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-base);
+            border: 1px solid var(--accent-border-color); /* Used defined var */
+        }
+
+        .detail-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
+            border-bottom: 3px solid var(--primary-yellow);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .detail-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .detail-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-blue);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-yellow);
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .detail-info h4 {
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .detail-info p {
+            color: var(--text-body);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        
+        .text-muted-contact {
+            color: var(--text-muted); 
+            margin-bottom: 1rem;
+        }
+
+        .social-links-contact {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link-contact {
+            width: 45px;
+            height: 45px;
+            background: var(--bg-light);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+            transition: var(--transition);
+        }
+
+        .social-link-contact:hover {
+            background: var(--primary-yellow);
+            color: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+
+        /* Map Section */
+        .map-wrapper {
+            padding: 0 5% 5rem;
+        }
+
+        .map-container-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .map-section-title {
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            font-weight: 900;
+        }
+
+        .map-section {
+            width: 100%;
+            height: 450px;
+            background: var(--bg-light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-base);
+            border: 2px solid var(--accent-border-color); /* Used defined var */
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        .success-message {
+            display: none;
+            background: var(--success);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+        
+        /* ----------------------------------------------------
+         * FOOTER STYLES
+         * ----------------------------------------------------
+         */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 5rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary-yellow);
+            color: var(--primary-blue);
+            transform: scale(1.2);
+        }
+
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-yellow);
+            padding-left: 5px;
+        }
+
+        /* Reusing .detail-item and adjusting .detail-icon if necessary */
+        .contact-icon-footer { 
+            width: 45px; 
+            height: 45px; 
+            background: var(--primary-yellow);
+            border-radius: 5px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            font-size: 1.2rem; 
+            flex-shrink: 0; 
+            color: var(--primary-blue);
+        }
+
+        .contact-text p {
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+        }
+
+        .newsletter-input {
+            padding: 0.9rem 1.2rem;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .newsletter-btn {
+            padding: 0.9rem 2rem;
+            background: var(--primary-yellow);
+            color: var(--primary-blue);
+            border: none;
+            border-radius: 5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-btn:hover {
+            background: #e6b200;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* ----------------------------------------------------
+         * RESPONSIVE DESIGN
+         * ----------------------------------------------------
+         */
+        @media (max-width: 1023px) {
+            .contact-info-section { margin-top: -2rem; }
+            .contact-cards { grid-template-columns: repeat(2, 1fr); }
+            .contact-section { grid-template-columns: 1fr; gap: 2.5rem; }
+            
+            .navbar-container { padding: 0 2rem; }
+            .hamburger { display: flex; background: none; border:none}
+            .nav-menu {
+                position: fixed; top: 0; left: -100%; width: 100%; height: 100vh;
+                background: var(--primary-blue); flex-direction: column;
+                justify-content: flex-start; padding-top: 5rem;
+                transition: left 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+                gap: 0; overflow-y: auto; z-index: 1002;
+                box-shadow: 5px 0 15px rgba(0,0,0,0.3); display: flex;
+            }
+            .nav-menu.active { left: 0; }
+            .nav-menu.active .close-menu { display: flex; }
+
+            .nav-item { width: 100%; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+            .nav-link { justify-content: space-between; padding: 1rem 1.5rem; width: 100%; color: white !important; }
+            .nav-link::after { display: none; }
+            .nav-right { width: 100%; background: transparent; flex-direction: column; padding: 1.5rem; gap: 1rem; margin-top: auto; display: flex !important; }
+            .nav-btn { width: 100%; text-align: center; display: block; }
+            
+            .dropdown-menu {
+                position: static; max-height: 0; overflow: hidden;
+                transition: max-height 0.4s ease-out;
+                background: rgba(0, 0, 0, 0.2); padding: 0; min-width: unset; box-shadow: none;
+                opacity: 1; visibility: visible; transform: none; /* Override desktop properties */
+            }
+            .has-dropdown.active .dropdown-menu { max-height: 200px; padding: 0.5rem 0; }
+            .dropdown-item a { padding-left: 2.5rem; }
+            .has-dropdown.active .dropdown-icon { transform: rotate(180deg); }
+        }
+
+        @media (max-width: 767px) {
+            .contact-hero { padding: 5rem 1.5rem; min-height: 300px; }
+            .contact-hero h1 { font-size: 2.5rem; }
+            .contact-hero p { font-size: 1.1rem; }
+            .contact-info-section { padding: 3rem 1.5rem; margin-top: 0; }
+            .contact-cards { grid-template-columns: 1fr; gap: 1.5rem; }
+            .contact-card { margin-top: 0; padding: 2rem 1.5rem; }
+            .contact-section { padding: 3rem 1.5rem; gap: 2rem; }
+            .contact-form-container { padding: 2rem 1.5rem; }
+            .contact-form-container h2 { font-size: 1.8rem; }
+            .map-wrapper { padding: 0 1.5rem 3rem; }
+            .map-section-title { font-size: 2rem; }
+            .map-section { height: 300px; }
+            
+            footer { padding: 3rem 1.5rem 2rem !important; }
+            .footer-container { grid-template-columns: 1fr !important; gap: 2rem !important; }
+        }
+
+        @media (max-width: 480px) {
+            .contact-hero h1 { font-size: 2rem; }
+            .contact-card { padding: 1.5rem; }
+            .contact-icon { width: 55px; height: 55px; font-size: 1.4rem; }
+            .submit-btn { padding: 0.8rem; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="navbar-container">
+            <a href="#home-content" class="logo"><i class="fas fa-hard-hat"></i> SiteWorks Builders</a>
+
+            <ul class="nav-menu" id="navMenu">
+                <button type="button" class="close-menu" id="closeMenu">✕</button>
+
+                <li class="nav-item has-dropdown">
+                    <a href="#home-content" class="nav-link" id="homeLink" aria-haspopup="true" aria-expanded="false">
+                        Home <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="homeLink">
+                        <li class="dropdown-item"><a href="#home-content">Home 1: Default</a></li>
+                        <li class="dropdown-item"><a href="homepage2.html">Home 2: Commercial</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About Us</a></li>
+                <li class="nav-item"><a href="#contact-form-start" class="nav-link">Contact</a></li>
+                <div class="nav-right">
+                    <a href="#contact-form-start" class="nav-btn">Get a Quote</a>
+                </div>
+            </ul>
+
+            <button type="button" class="hamburger" id="hamburger" aria-label="Open Menu" aria-controls="navMenu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+    <section id="contact-start" class="contact-hero">
+        <h1>Contact SiteWorks Builders</h1>
+        <p>Start your next construction project with a team you can trust. Reach out to our project management experts today.</p>
+    </section>
+
+    <section class="contact-info-section">
+        <div class="contact-cards">
+            <div class="contact-card">
+                <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                <h3>Call Our Office</h3>
+                <p>Mon-Fri: 7AM - 5PM EST<br><a href="tel:(555) 123-SITE">(555) 123-SITE</a></p>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                <h3>Email Inquiries</h3>
+                <p>General: <a href="mailto:info@siteworks.com">info@siteworks.com</a><br>Quotes: <a href="mailto:quotes@siteworks.com">quotes@siteworks.com</a></p>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <h3>Headquarters</h3>
+                <p>123 Main Street, Suite 200,<br>Metropolis, ST 12345</p>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon"><i class="fas fa-headset"></i></div>
+                <h3>Support</h3>
+                <p>For current clients and ongoing projects.<br><a href="#">Client Portal Login</a></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="contact-form-container" id="contact-form-start">
+            <h2>Request a Quote or Consultation</h2>
+            <p>Tell us about your project needs, and we'll connect you with a relevant expert.</p>
+
+            <div class="success-message" id="successMessage">
+                ✅ Success! Your inquiry has been sent to our project management team.
+            </div>
+
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Your Name / Company *</label>
+                    <input type="text" id="name" class="form-control" placeholder="John Doe / Acme Corp" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" class="form-control" placeholder="your.email@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="(555) 123-4567">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Project Type / Subject *</label>
+                    <input type="text" id="subject" class="form-control" placeholder="e.g., New Warehouse Build, Civil Grading" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Project Description *</label>
+                    <textarea id="message" class="form-control" placeholder="Provide details on scope, timeline, and location..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit Inquiry</button>
+            </form>
+        </div>
+
+        <div class="contact-details">
+            <div class="detail-card">
+                <h3>Detailed Contact Information</h3>
+                <div class="detail-item">
+                    <div class="detail-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div class="detail-info">
+                        <h4>General Office</h4>
+                        <p>Toll Free: (555) 123-SITE<br>Fax: (555) 987-0000</p>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="detail-info">
+                        <h4>Project Submissions</h4>
+                        <p>Bid Documents: bids@siteworks.com<br>Support: support@siteworks.com</p>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-icon"><i class="fas fa-clock"></i></div>
+                    <div class="detail-info">
+                        <h4>Site Hours</h4>
+                        <p>Mon - Fri: 7:00 AM - 3:00 PM<br>Office: 9:00 AM - 5:00 PM</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-card">
+                <h3>Connect With Us</h3>
+                <p class="text-muted-contact">Follow our latest projects and company news across our social channels.</p>
+                <div class="social-links-contact">
+                    <a href="#" class="social-link-contact" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="social-link-contact" aria-label="X Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="social-link-contact" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link-contact" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-link-contact" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="social-link-contact" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-wrapper">
+        <div class="map-container-wrapper">
+            <h2 class="map-section-title">Visit Our Headquarters</h2>
+            <div class="map-section">
+                <div class="map-container">
+                    <iframe 
+                        src="https://maps.google.com/maps?q=123+Main+Street,+Metropolis&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                        allowfullscreen 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Map location of SiteWorks Builders Headquarters">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo"><i class="fas fa-hard-hat"></i> SiteWorks</div>
+                <p>The foundation of your future. Delivering construction excellence across the region.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="social-link" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#projects">Recent Work</a></li>
+                    <li><a href="#about">Our Team</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <div class="contact-item">
+                    <div class="contact-icon-footer"><i class="fas fa-phone-alt"></i></div>
+                    <div class="contact-text"><p>(555) 123-SITE</p></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon-footer"><i class="fas fa-envelope"></i></div>
+                    <div class="contact-text"><p>info@siteworks.com</p></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon-footer"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="contact-text"><p>123 Main Street, Suite 200, Metropolis</p></div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Stay Informed</h3>
+                <p>Sign up for our newsletter to get project updates and company news.</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Your work email">
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 SiteWorks Builders. Built with <i class="fas fa-heart" style="color: var(--primary-yellow);"></i> and Code.</p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        const navbar = document.getElementById('navbar');
+        const statNumbers = document.querySelectorAll('.stat-number');
+        const sections = document.querySelectorAll('.section');
+        const homeDropdown = document.querySelector('.has-dropdown');
+        const homeLink = document.getElementById('homeLink');
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        let statsAnimated = false;
+
+        // --- Mobile Menu Toggle ---
+        function toggleMenu() {
+            const isActive = navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            document.body.style.overflow = isActive ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        closeMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        // --- New: Mobile Dropdown Toggle ---
+        if (homeDropdown) {
+            homeLink.addEventListener('click', (e) => {
+                if (window.innerWidth <= 1023) { // Use 1023px based on CSS media query
+                    e.preventDefault(); 
+                    homeDropdown.classList.toggle('active');
+                }
+            });
+        }
+
+        // Close menu when a link is clicked
+        navMenu.querySelectorAll('.nav-link, .nav-btn, .dropdown-item a').forEach(link => {
+            link.addEventListener('click', () => {
+                // If on mobile and clicking a navigation link (not the home dropdown toggle)
+                if (window.innerWidth <= 1023 && (!link.closest('.has-dropdown') || link.closest('.dropdown-item'))) {
+                    // Slight delay to allow navigation anchor to fire before closing
+                    setTimeout(toggleMenu, 300);
+                }
+            });
+        });
+
+        // --- Sticky Nav Bar Effect & Resize Handler ---
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 1023 && navMenu.classList.contains('active')) {
+                toggleMenu(); // Closes menu when resizing to desktop
+            }
+            if (window.innerWidth > 1023 && homeDropdown && homeDropdown.classList.contains('active')) {
+                homeDropdown.classList.remove('active');
+            }
+        });
+
+
+        // --- Running Number Counter Animation ---
+        function countUp(el) {
+            const target = parseInt(el.getAttribute('data-target'));
+            const prefix = el.getAttribute('data-prefix') || '';
+            const suffix = el.getAttribute('data-suffix') || '';
+            let start = 0;
+            const duration = 2000;
+            const step = (target / duration) * 10;
+            // Removed float check as targets are integers, keeping the display clean.
+
+            const timer = setInterval(() => {
+                start += step;
+                if (start >= target) {
+                    clearInterval(timer);
+                    start = target;
+                }
+                
+                el.textContent = prefix + Math.floor(start) + suffix;
+            }, 10);
+        }
+
+        // --- Intersection Observer for Animations (FadeIn/Counting) ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2
+        };
+
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Stop observing the section once it's visible
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+             // Only observe sections that aren't visible by default or don't use the 'hero' class for main visibility
+            if (!section.classList.contains('page-hero') && !section.classList.contains('contact-hero')) { 
+                sectionObserver.observe(section);
+            }
+        });
+
+        const statsObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !statsAnimated) {
+                    statNumbers.forEach(countUp);
+                    statsAnimated = true; // Prevents re-animation on scroll up/down
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 }); 
+
+        const statsSection = document.getElementById('stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+        
+        // --- Form Submission Logic ---
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                successMessage.classList.add('show');
+                contactForm.reset();
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 5000);
+                contactForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        }
+    </script>
+</body>
+</html>
