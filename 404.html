@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 | Page Not Found - Growwpark</title>
+  <link rel="icon" type="image/jpeg" href="assets/growwpark_logo.jpg" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            safetyYellow: '#F9A825',
+            charcoal: '#1F1F1F',
+            concrete: '#B0B0B0',
+            steelBlue: '#2D3E50',
+            cementGray: '#E8E8E8'
+          },
+          fontFamily: {
+            'display': ['Inter', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'bounce-slow': 'bounce 3s infinite',
+          }
+        }
+      }
+    };
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    /* Construction grid pattern */
+    .construction-grid {
+      background-image: 
+        linear-gradient(to right, rgba(249, 168, 37, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(249, 168, 37, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Caution Tape Effect */
+    .caution-tape {
+      background: repeating-linear-gradient(
+        45deg,
+        #F9A825,
+        #F9A825 10px,
+        #1F1F1F 10px,
+        #1F1F1F 20px
+      );
+      height: 20px;
+      width: 100%;
+    }
+
+    /* RTL adjustments */
+    [dir="rtl"] .rtl-flip { transform: scaleX(-1); }
+    [dir="rtl"] .rtl-arrow { transform: rotate(180deg); }
+    
+    /* Force override of Tailwind positioning for floating buttons in RTL */
+    [dir="rtl"] .rtl-position { 
+      left: 1.5rem !important; 
+      right: auto !important; 
+    }
+
+    /* Flip text alignment in footer on desktop when RTL is active */
+    @media (min-width: 768px) {
+      [dir="rtl"] .rtl-text-flip { 
+        text-align: left; 
+      }
+    }
+
+    /* Glitch effect for 404 text */
+    .glitch-text {
+      position: relative;
+    }
+    
+    .glitch-text::before,
+    .glitch-text::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: inherit; 
+    }
+  </style>
+</head>
+
+<body class="bg-cementGray text-steelBlue dark:bg-charcoal dark:text-gray-100 transition-colors duration-300 flex flex-col min-h-screen relative">
+
+  <!-- Floating Controls (Theme & RTL) - Replaced Navbar -->
+  <div class="absolute top-6 right-6 z-50 flex gap-3 rtl-position">
+    <button id="themeToggle" class="flex h-10 w-10 items-center justify-center rounded-full bg-white dark:bg-white/10 border border-gray-200 dark:border-white/10 shadow-lg hover:bg-safetyYellow hover:text-charcoal hover:border-safetyYellow transition-all" aria-label="Toggle Theme">
+      <i class="fas fa-moon"></i>
+    </button>
+    <button id="rtlToggle" class="flex h-10 w-10 items-center justify-center rounded-full bg-white dark:bg-white/10 border border-gray-200 dark:border-white/10 shadow-lg hover:bg-safetyYellow hover:text-charcoal hover:border-safetyYellow transition-all" aria-label="Toggle RTL">
+      <i class="fas fa-exchange-alt"></i>
+    </button>
+  </div>
+
+  <!-- 404 Main Content -->
+  <main class="flex-grow flex items-center justify-center relative construction-grid overflow-hidden py-12 md:py-20">
+    
+    <!-- Background Decor -->
+    <div class="absolute top-20 left-10 text-9xl opacity-5 dark:opacity-[0.02] font-black select-none pointer-events-none rotate-12">404</div>
+    <div class="absolute bottom-20 right-10 text-9xl opacity-5 dark:opacity-[0.02] font-black select-none pointer-events-none -rotate-12">ERROR</div>
+
+    <div class="container mx-auto px-4 relative z-10 text-center">
+      
+      <!-- Icon/Illustration -->
+      <div class="mb-8 relative inline-block">
+        <div class="text-9xl text-safetyYellow animate-bounce-slow drop-shadow-2xl">
+            <i class="fas fa-traffic-cone"></i>
+        </div>
+        <!-- Shadow -->
+        <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-4 bg-black/20 dark:bg-black/50 rounded-[100%] blur-sm"></div>
+      </div>
+
+      <!-- Main Text -->
+      <h1 class="text-7xl md:text-9xl font-black text-charcoal dark:text-white mb-2 tracking-tighter" data-text="404">
+        4<span class="text-safetyYellow">0</span>4
+      </h1>
+      
+      <div class="max-w-md mx-auto relative mb-8">
+        <div class="caution-tape absolute -left-4 top-1/2 -translate-y-1/2 -rotate-2 w-[110%] shadow-lg"></div>
+        <div class="bg-charcoal text-safetyYellow font-bold uppercase tracking-widest text-lg md:text-xl py-2 px-6 relative inline-block transform rotate-2 border-2 border-safetyYellow">
+          Site Restricted
+        </div>
+      </div>
+
+      <h2 class="text-2xl md:text-3xl font-bold mb-4 text-steelBlue dark:text-gray-200">
+        Project Not Found
+      </h2>
+      
+      <p class="text-gray-600 dark:text-gray-400 mb-10 max-w-lg mx-auto text-balance">
+        The blueprint you are looking for seems to be missing, demolished, or under construction. Let's get you back to solid ground.
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="index.html" class="group relative overflow-hidden bg-safetyYellow text-charcoal font-bold py-4 px-8 rounded-lg shadow-lg hover:bg-yellow-500 hover:shadow-xl transition-all active:scale-95 w-full sm:w-auto">
+          <span class="relative z-10 flex items-center justify-center gap-2">
+            <i class="fas fa-arrow-left rtl-arrow transition-transform group-hover:-translate-x-1"></i>
+            Return to Homepage
+          </span>
+        </a>
+        
+        <a href="contact.html" class="group bg-white dark:bg-white/5 border-2 border-gray-200 dark:border-white/10 text-charcoal dark:text-white font-bold py-3.5 px-8 rounded-lg hover:border-safetyYellow hover:text-safetyYellow transition-all active:scale-95 w-full sm:w-auto">
+          <span class="flex items-center justify-center gap-2">
+            <i class="fas fa-headset"></i>
+            Report Issue
+          </span>
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer (Simplified) -->
+  <footer class="bg-charcoal border-t border-white/10 py-8 text-white">
+    <div class="mx-auto max-w-7xl px-4 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-2">
+        <div class="h-8 w-8 rounded-full bg-safetyYellow flex items-center justify-center text-charcoal">
+          <i class="fas fa-hard-hat text-sm"></i>
+        </div>
+        <span class="font-bold tracking-wide">GROWW BUILDERS</span>
+      </div>
+      <div class="text-gray-500 text-sm text-center md:text-right rtl-text-flip">
+        © 2026 SiteWorks Construction Group.<br class="hidden sm:block"> lost? call <span class="text-safetyYellow">+1 (555) 123-4567</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts for Theme and RTL -->
+  <script>
+    const htmlEl = document.documentElement;
+    const bodyEl = document.body;
+
+    // Theme Logic
+    const themeBtn = document.getElementById('themeToggle');
+    
+    function setTheme(isDark) {
+      if (isDark) {
+        htmlEl.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+      } else {
+        htmlEl.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+        themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+    }
+
+    themeBtn.addEventListener('click', () => setTheme(!htmlEl.classList.contains('dark')));
+    
+    // Initialize Theme
+    setTheme(localStorage.getItem('theme') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+    // RTL Logic
+    const rtlBtn = document.getElementById('rtlToggle');
+    
+    rtlBtn.addEventListener('click', () => {
+      // Toggle dir attribute on HTML tag for proper layout flipping
+      const currentDir = htmlEl.getAttribute('dir') || 'ltr';
+      htmlEl.setAttribute('dir', currentDir === 'ltr' ? 'rtl' : 'ltr');
+    });
+  </script>
+</body>
+</html>

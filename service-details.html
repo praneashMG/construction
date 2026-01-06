@@ -1,1022 +1,825 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SiteWorks Builders Service Details - Comprehensive breakdown of our construction and contracting services.">
-    <title id="pageTitle">Structural Steel Fabrication Details - SiteWorks Builders</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        /*
-        * ----------------------------------------------------
-        * SiteWorks Builders CSS - Themed for Construction
-        * Primary Colors: Deep Blue (#1A374D), Safety Yellow (#FFC107), Light Gray (#F8F9FA), Dark Text (#343A40)
-        * ----------------------------------------------------
-        */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Growwpark | Construction</title>
+  <link rel="icon" type="image/jpeg" href="assets/growwpark_logo.jpg" />
+  <meta name="description" content="SiteWorks Builders Service Details - Comprehensive breakdown of our construction and contracting services.">
+  <title id="pageTitle">Service Details - SiteWorks Builders</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            safetyYellow: '#F9A825',
+            charcoal: '#1F1F1F',
+            concrete: '#B0B0B0',
+            steelBlue: '#2A4365',
+            darkSurface: '#121212',
+            lightSurface: '#F3F4F6'
+          },
+          fontFamily: {
+            sans: ['Open Sans', 'sans-serif'],
+            heading: ['Montserrat', 'sans-serif'],
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.8s ease-out forwards',
+            'slide-up': 'slideUp 0.6s ease-out forwards',
+            'float': 'float 3s ease-in-out infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' }
+            },
+            slideUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' }
+            }
+          }
         }
-
-        :root {
-            --primary-blue: #1A374D; 		/* Deep Blue */
-            --primary-yellow: #FFC107; 	/* Safety Yellow */
-            --text-dark: #343A40;
-            --text-body: #555;
-            --text-muted: #6c757d; /* From second doc */
-            --bg-white: #ffffff;
-            --bg-light: #F8F9FA; 		/* Light Gray/Beige */
-            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother animation curve - Kept original from first doc */
-            --shadow-base: 0 8px 20px rgba(0, 0, 0, 0.1); /* From second doc */
-            --info: #17a2b8; /* From second doc */
-            --success-check: #28a745; /* From second doc */
-            --service-main-border: #E0E4E7; /* From second doc */
-        }
-
-        body {
-            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-body);
-            overflow-x: hidden;
-            background-color: var(--bg-white);
-        }
-
-        /* UTILITIES - Mostly from first doc, adjusted/consolidated */
-        .section {
-            padding: 5rem 2rem;
-            /* Placeholder styles from first doc, commented out/adjusted for the content page layout */
-            /* opacity: 0; transform: translateY(20px); transition: opacity 1s ease-out, transform 1s ease-out; */
-        }
-
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-alt { background: var(--bg-light); }
-        .section-title {
-            text-align: center; font-size: 3rem; margin-bottom: 1rem;
-            color: var(--primary-blue); font-weight: 900;
-        }
-        .section-subtitle {
-            text-align: center; color: var(--text-body); font-size: 1.2rem;
-            margin-bottom: 3.5rem; max-width: 700px; margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* CSS Animation Keyframes */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translate3d(0, 100px, 0); }
-            to { opacity: 1; transform: translate3d(0, 0, 0); }
-        }
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translate3d(-100px, 0, 0); }
-            to { opacity: 1; transform: translate3d(0, 0, 0); }
-        }
-
-        /* ----------------------------------------------------
-        * NAVIGATION (From first doc)
-        * ----------------------------------------------------
-        */
-        nav {
-            background: var(--primary-blue); padding: 0; position: sticky;
-            top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: background 0.4s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(26, 55, 77, 0.95);
-        }
-        .navbar-container {
-            max-width: 1400px; margin: 0 auto; display: flex;
-            justify-content: space-between; align-items: center; padding: 0 3rem;
-            min-height: 80px;
-        }
-        .logo {
-            color: var(--primary-yellow); font-size: 1.8rem; font-weight: 900;
-            display: flex; align-items: center; gap: 0.5rem; text-decoration: none;
-            transition: var(--transition);
-        }
-        .logo i { font-size: 2rem; }
-
-        .nav-menu {
-            list-style: none; display: flex; align-items: center; gap: 2rem; margin: 0;
-        }
-        .nav-link {
-            color: white; text-decoration: none; padding: 1.2rem 0; display: block;
-            font-weight: 500; font-size: 1rem; transition: var(--transition);
-            position: relative;
-        }
-        .nav-link:hover { color: var(--primary-yellow); }
-        .nav-link::after {
-            content: ''; position: absolute; bottom: 20px; left: 0;
-            width: 0; height: 3px; background: var(--primary-yellow);
-            transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        .nav-link:hover::after { width: 100%; }
-
-        .nav-right { display: flex; align-items: center; gap: 1rem; }
-        .nav-btn {
-            background: transparent; border: 2px solid white; color: white;
-            padding: 0.6rem 1.5rem; border-radius: 5px; font-weight: 600;
-            text-decoration: none; transition: var(--transition);
-        }
-        .nav-btn:hover {
-            background: var(--primary-yellow); border-color: var(--primary-yellow);
-            color: var(--primary-blue); transform: scale(1.05); /* Added scale effect */
-            box-shadow: 0 4px 10px rgba(255, 193, 7, 0.5);
-        }
-
-        .hamburger {
-            display: none; flex-direction: column; cursor: pointer;
-            padding: 0.5rem; z-index: 1001;
-        }
-        .hamburger span {
-            width: 28px; height: 3px; background: white; margin: 4px 0;
-            border-radius: 3px; transition: var(--transition);
-        }
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-        /* Mobile Menu Close Button Styling (Top Corner) */
-        .close-menu {
-            background: none; border: none; color: var(--primary-yellow); /* Yellow X */
-            font-size: 2.5rem; cursor: pointer; padding: 0.5rem;
-            width: 50px; height: 50px; display: flex; align-items: center;
-            justify-content: center; transition: var(--transition);
-            position: absolute; top: 1rem; right: 1rem; /* Positioning in corner */
-            z-index: 1003; /* Above everything */
-            display: none;
-        }
-        .close-menu:hover { transform: rotate(90deg) scale(1.1); } /* More rotation */
-
-        /* Mobile Menu Header - Hidden on Desktop */
-        .mobile-menu-header { display: none; }
-
-        /* --- DROPDOWN STYLES (NEW) --- */
-        .has-dropdown {
-            position: relative; /* Essential for absolute positioning of dropdown */
-        }
-
-        .dropdown-menu {
-            list-style: none;
-            position: absolute;
-            top: 100%; /* Position below the parent link */
-            left: 0;
-            background: var(--primary-blue);
-            min-width: 180px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
-            z-index: 999;
-            padding: 0.5rem 0;
-        }
-        
-        .has-dropdown:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-item a {
-            color: white;
-            padding: 0.8rem 1.5rem; /* Padding for dropdown links */
-            display: block;
-            white-space: nowrap;
-            text-decoration: none;
-            transition: background 0.2s, color 0.2s;
-        }
-
-        .dropdown-item a:hover {
-            background: rgba(255, 193, 7, 0.1); /* Light yellow hover background */
-            color: var(--primary-yellow);
-        }
-        
-        /* Remove the yellow underline for the dropdown parent link */
-        .has-dropdown > .nav-link::after {
-            display: none;
-        }
-        /* Style for the chevron icon */
-        .dropdown-icon {
-            font-size: 0.7rem;
-            margin-left: 0.5rem;
-            transition: transform 0.3s;
-        }
-        .has-dropdown:hover .dropdown-icon {
-            transform: rotate(180deg);
-        }
-
-        /* ----------------------------------------------------
-        * FOOTER (From first doc)
-        * ----------------------------------------------------
-        */
-        footer { background: var(--text-dark); color: white; padding: 5rem 2rem 2rem; }
-        .footer-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; max-width: 1400px; margin: 0 auto; }
-        .footer-logo { font-size: 2rem; font-weight: 900; margin-bottom: 1.5rem; color: var(--primary-yellow); }
-        .footer-about p { color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem; }
-        .social-links { display: flex; gap: 1rem; }
-        .social-link {
-            width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1);
-            border-radius: 5px; display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 1.2rem; text-decoration: none; transition: var(--transition);
-        }
-        .social-link:hover { background: var(--primary-yellow); color: var(--primary-blue); transform: scale(1.2); } /* Increased scale */
-        .footer-section h3 { font-size: 1.4rem; margin-bottom: 1.5rem; font-weight: 700; color: white; }
-        .footer-links { list-style: none; }
-        .footer-links li { margin-bottom: 0.8rem; }
-        .footer-links a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: var(--transition); }
-        .footer-links a:hover { color: var(--primary-yellow); padding-left: 5px; }
-        .contact-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: center; }
-        .contact-icon {
-            width: 45px; height: 45px; background: var(--primary-yellow);
-            border-radius: 5px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; flex-shrink: 0; color: var(--primary-blue);
-        }
-        .contact-text p { color: rgba(255, 255, 255, 0.9); margin: 0; }
-        .newsletter-form { display: flex; flex-direction: column; gap: 0.8rem; }
-        .newsletter-input { padding: 0.9rem 1.2rem; border: none; border-radius: 5px; background: rgba(255, 255, 255, 0.1); color: white; }
-        .newsletter-input::placeholder { color: rgba(255, 255, 255, 0.6); }
-        .newsletter-btn {
-            padding: 0.9rem 2rem; background: var(--primary-yellow); color: var(--primary-blue);
-            border: none; border-radius: 5px; font-weight: 700; cursor: pointer;
-            transition: var(--transition);
-        }
-        .newsletter-btn:hover { background: #e6b200; transform: translateY(-2px); }
-        .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 2rem; margin-top: 3rem; text-align: center; color: rgba(255, 255, 255, 0.7); }
-
-        /* ----------------------------------------------------
-        * SERVICE DETAILS CSS (From second doc)
-        * ----------------------------------------------------
-        */
-        
-        /* ===== BREADCRUMB - Geometric Look ===== */
-        .breadcrumb {
-            background: var(--bg-light);
-            padding: 1.5rem 5%;
-            border-bottom: 3px solid var(--primary-yellow);
-        }
-
-        .breadcrumb-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .breadcrumb a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .breadcrumb a:hover {
-            color: var(--primary-blue);
-        }
-
-        .breadcrumb span {
-            color: var(--primary-blue);
-            font-weight: 700;
-        }
-
-        /* ===== SERVICE DETAILS SECTION - 2 Column Layout ===== */
-        .service-details-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 4rem 5%;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 3rem;
-        }
-
-        .service-main {
-            padding-right: 3rem;
-            /* Using subtle dark separator */
-            border-right: 1px solid var(--service-main-border); 
-        }
-        
-        /* HEADER & METADATA */
-        .service-header { margin-bottom: 2rem; }
-
-        .service-badge {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            background: var(--primary-yellow);
-            color: var(--primary-blue);
-            border-radius: 3px;
-            font-size: 1rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-        }
-
-        .service-title {
-            font-size: 3.5rem;
-            color: var(--primary-blue);
-            margin-bottom: 1.5rem;
-            font-weight: 900;
-            line-height: 1.1;
-        }
-
-        .service-meta {
-            display: flex;
-            gap: 2.5rem;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px dashed var(--service-main-border);
-        }
-
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        .meta-item i {
-            color: var(--primary-yellow); /* Yellow icons */
-            font-size: 1.1rem;
-        }
-
-        .service-image {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 3rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border: 5px solid var(--primary-yellow); /* Yellow Frame */
-            transition: all 0.4s ease-in-out; /* Adjusted to use defined variable if needed, keeping original */
-        }
-        .service-image:hover { transform: scale(1.01); }
-
-        .service-summary, .service-description p {
-            font-size: 1.15rem;
-            line-height: 1.9;
-            color: var(--text-dark);
-        }
-
-        /* FEATURES LIST (CHECKLIST) */
-        .section-heading {
-            font-size: 2.2rem;
-            color: var(--primary-blue);
-            margin: 3rem 0 1.5rem;
-            font-weight: 900;
-            border-bottom: 3px solid var(--primary-yellow); /* Section Accent */
-            padding-bottom: 0.5rem;
-        }
-
-        .features-list {
-            list-style: none;
-            margin-bottom: 3rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
-            gap: 1.5rem;
-        }
-
-        .features-list li {
-            padding: 1.2rem;
-            background: var(--bg-light);
-            border-radius: 8px;
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            box-shadow: var(--shadow-base);
-        }
-
-        .features-list li i {
-            color: var(--primary-yellow); /* Yellow checks */
-            font-size: 1.2rem;
-            margin-top: 2px;
-            flex-shrink: 0;
-        }
-        
-        /* PROJECT PHASES/CURRICULUM */
-        .curriculum-item {
-            background: var(--bg-white);
-            border: 1px solid var(--service-main-border);
-            border-radius: 8px;
-            margin-bottom: 0.8rem;
-            padding: 1.2rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.4s ease-in-out;
-        }
-
-        .curriculum-item:hover {
-            border-color: var(--primary-blue);
-            background: var(--bg-light);
-            transform: translateX(5px);
-        }
-
-        .curriculum-title {
-            font-weight: 700;
-            color: var(--primary-blue);
-        }
-
-        .curriculum-duration {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* ===== SIDEBAR - High Contrast CTA ===== */
-        .service-sidebar {
-            position: sticky;
-            top: 40px; /* Adjusted sticky position */
-            height: fit-content;
-        }
-
-        .contact-card {
-            background: var(--primary-blue);
-            border-radius: 15px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .cta-text {
-            color: white;
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .inquire-btn {
-            width: 100%;
-            padding: 1rem;
-            background: var(--primary-yellow);
-            color: var(--primary-blue);
-            border: none;
-            border-radius: 8px;
-            font-size: 1.2rem;
-            font-weight: 900;
-            cursor: pointer;
-            transition: all 0.4s ease-in-out;
-            text-transform: uppercase;
-        }
-
-        .inquire-btn:hover {
-            transform: translateY(-3px);
-            background: #e6b200;
-        }
-
-        .info-card {
-            background: var(--bg-light); /* Light background for technical info */
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: var(--shadow-base);
-        }
-
-        .info-card h3 {
-            color: var(--primary-blue);
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            font-weight: 900;
-            border-bottom: 3px solid var(--primary-yellow);
-            padding-bottom: 0.5rem;
-        }
-
-        .info-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--service-main-border);
-        }
-
-        .info-item:last-child { border-bottom: none; }
-
-        .info-label { color: var(--text-muted); font-weight: 500; }
-
-        .info-value { color: var(--primary-blue); font-weight: 700; }
-        
-        /* ----------------------------------------------------
-        * RESPONSIVE DESIGN (Combined and Consolidated)
-        * ----------------------------------------------------
-        */
-        @media (max-width: 968px) {
-            .navbar-container { padding: 0 2rem; }
-            .hamburger { display: flex; }
-            .nav-menu.active .close-menu { 
-        display: flex; /* Show the X button */
+      }
+    };
+  </script>
+  <style>
+    /* RTL adjustments */
+    [dir="rtl"] .rtl-flip { transform: scaleX(-1); }
+    /* Smooth mobile menu transition */
+    #mobileMenu {
+      transition: all 0.3s ease-in-out;
     }
-            
-            /* Mobile Menu Styling (from first doc) */
-            .nav-menu {
-                position: fixed; top: 0; left: -100%; width: 100%; height: 100vh;
-                background: var(--primary-blue); flex-direction: column;
-                justify-content: flex-start; padding-top: 5rem;
-                transition: left 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
-                gap: 0; overflow-y: auto; z-index: 1002;
-                box-shadow: 5px 0 15px rgba(0,0,0,0.3); display: flex;
-            }
-            .nav-menu.active { left: 0; }
-            .mobile-menu-header { display: none; } 
-            .nav-item { width: 100%; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-            .nav-link { justify-content: space-between; padding: 1rem 1.5rem; width: 100%; font-size: 1.05rem; color: white !important; }
-            .nav-link::after { display: none; }
-            .nav-right { width: 100%; background: transparent; flex-direction: column; padding: 1.5rem; gap: 1rem; margin-top: auto; display: flex !important; }
-            .nav-btn { width: 100%; text-align: center; display: block; }
-            
-            /* Dropdown mobile styles */
-            .dropdown-menu { position: static; opacity: 1; visibility: visible; transform: none; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: rgba(0, 0, 0, 0.2); padding: 0; min-width: unset; box-shadow: none; }
-            .has-dropdown.active .dropdown-menu { max-height: 200px; padding: 0.5rem 0; }
-            .dropdown-item { border-bottom: none; }
-            .dropdown-item a { padding-left: 2.5rem; }
-            .has-dropdown:hover .dropdown-icon { transform: none; }
-            .has-dropdown.active .dropdown-icon { transform: rotate(180deg); }
-            
-            /* Service Page Mobile Layout (from second doc) */
-            .service-details-container {
-                grid-template-columns: 1fr;
-                padding: 3rem 2rem;
-            }
-            .service-main { border-right: none; padding-right: 0; }
-            .service-sidebar { top: 20px; }
-            .service-title { font-size: 2.5rem; }
-            .service-image { height: 350px; }
-            .section-heading { font-size: 2rem; }
-            .features-list { grid-template-columns: 1fr; }
-
-            /* FOOTER MOBILE (from first doc) */
-            footer { padding: 3rem 1.5rem 2rem !important; }
-            .footer-container { grid-template-columns: 1fr !important; gap: 2rem !important; }
-        }
-
-        @media (max-width: 576px) {
-            .service-details-container { padding: 2rem 1.5rem; }
-            .service-title { font-size: 2rem; }
-            .service-image { height: 250px; border-width: 3px; }
-            .service-main { padding-right: 0; }
-            .section-heading { font-size: 1.6rem; }
-        }
-    </style>
-</head>
-<body>
-    <nav id="navbar">
-        <div class="navbar-container">
-            <a href="index.html" class="logo"><i class="fas fa-hard-hat"></i> SiteWorks Builders</a>
-
-            <ul class="nav-menu" id="navMenu">
-                <button class="close-menu" id="closeMenu">✕</button>
-
-                <li class="nav-item has-dropdown">
-                    <a href="index.html" class="nav-link" id="homeLink">
-                        Home <i class="fas fa-chevron-down dropdown-icon"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-item"><a href="index.html">Home 1: Default</a></li>
-                        <li class="dropdown-item"><a href="homepage2.html">Home 2: Commercial</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item"><a href="Aboutus.html" class="nav-link">About Us</a></li>
-                <li class="nav-item"><a href="service.html" class="nav-link">Services</a></li>
-                <li class="nav-item"><a href="#projects" class="nav-link">Blog</a></li>
-                <li class="nav-item"><a href="#contact" class="nav-link">Contact Us</a></li>
-
-                <div class="nav-right">
-                    <a href="#quote" class="nav-btn">Get a Quote</a>
-                </div>
-            </ul>
-            <div class="hamburger" id="hamburger">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-    </nav>
-
-    <section class="breadcrumb">
-        <div class="breadcrumb-container">
-            <a href="services.html">Services</a> / 
-            <span id="breadcrumbService">Service Details</span>
-        </div>
-    </section>
-
-    <section class="service-details-container">
-        <div class="service-main">
-            <div class="service-header">
-                <span class="service-badge" id="serviceBadge">Structural</span>
-                <h1 class="service-title" id="serviceTitle">Structural Steel Fabrication & Erection</h1>
-                <p class="service-summary" id="serviceSummary">In-house design, fabrication, and erection capabilities for complex structural steel components in high-rise and industrial builds.</p>
-            </div>
-
-            <img src="https://picsum.photos/800/400?random=555&tag=steel-weld" alt="Service Image" class="service-image" id="serviceImage">
-
-            <h2 class="section-heading">Scope of Work</h2>
-            <div class="service-description" id="serviceDescription">
-                <p>This division manages the end-to-end process of structural steel, ensuring total quality control and efficiency. From connection design and 3D modeling to the final lift and welding on-site, our team delivers the foundational framework for large-scale, complex structures.</p>
-            </div>
-
-            <h2 class="section-heading">Key Capabilities</h2>
-            <ul class="features-list" id="serviceFeatures">
-                <li><i class="fas fa-check-circle"></i> Advanced Connection Design using finite element analysis for optimized safety.</li>
-                <li><i class="fas fa-check-circle"></i> In-House Fabrication minimizing lead times and ensuring precise component tolerances.</li>
-                <li><i class="fas fa-check-circle"></i> 4D Scheduling Integration to coordinate steel delivery and erection with other trades.</li>
-                <li><i class="fas fa-check-circle"></i> Certified Welding Teams dedicated to highest quality standards (AWS/ISO certified).</li>
-                <li><i class="fas fa-check-circle"></i> Complex High-Rise Erection experienced in safely hoisting and bolting beams at extreme heights.</li>
-                <li><i class="fas fa-check-circle"></i> Rigorous Quality Assurance and third-party inspection processes.</li>
-            </ul>
-
-            <h2 class="section-heading">Project Phases</h2>
-            <ul class="curriculum-list" id="servicePhases">
-                <li class="curriculum-item">
-                    <span class="curriculum-title">Phase 1: Engineering & Connection Design</span>
-                    <span class="curriculum-duration">4 Weeks</span>
-                </li>
-                <li class="curriculum-item">
-                    <span class="curriculum-title">Phase 2: Detailing & Shop Drawing</span>
-                    <span class="curriculum-duration">8 Weeks</span>
-                </li>
-                <li class="curriculum-item">
-                    <span class="curriculum-title">Phase 3: Fabrication & Quality Control</span>
-                    <span class="curriculum-duration">12 Weeks</span>
-                </li>
-                <li class="curriculum-item">
-                    <span class="curriculum-title">Phase 4: Site Erection & Welding</span>
-                    <span class="curriculum-duration">Variable</span>
-                </li>
-            </ul>
-        </div>
-
-        <div class="service-sidebar">
-            <div class="contact-card">
-                <p class="cta-text">Ready to launch your large-scale project?</p>
-                <a href="contact.html" class="inquire-btn">Inquire Now</a>
-                <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin-top: 0.5rem;">Or call us for an immediate consultation.</p>
-            </div>
-
-            <div class="info-card" id="infoCard">
-                <h3>Service Overview</h3>
-                <div class="info-item">
-                    <span class="info-label">Division</span>
-                    <span class="info-value" id="infoDivision">Structural Trades</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Typical Duration</span>
-                    <span class="info-value" id="infoDuration">4 - 18 Months</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Certifications</span>
-                    <span class="info-value">AWS, ISO 9001</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Technology Used</span>
-                    <span class="info-value">Tekla, BIM 360</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Suitability</span>
-                    <span class="info-value">Commercial, Industrial, Civil</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer id="contact">
-        <div class="footer-container">
-            <div class="footer-about">
-                <div class="footer-logo"><i class="fas fa-hard-hat"></i> SiteWorks</div>
-                <p>The foundation of your future. Delivering construction excellence across the region.</p>
-                <div class="social-links">
-                    <a href="#" class="social-link"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                 <ul class="footer-links">
-                    <li><a href="index.html">Home</a></li>                
-                    <li><a href="Aboutus.html">About</a></li>
-                    <li><a href="service.html">Services</a></li>
-                    <li><a href="sitemap.html">Blog</a></li>
-                    <li><a href="sitemap.html">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact Info</h3>
-                <div class="contact-item">
-                    <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
-                    <div class="contact-text"><p>(555) 123-SITE</p></div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                    <div class="contact-text"><p>info@siteworks.com</p></div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <div class="contact-text"><p>123 Main Street, Suite 200, Metropolis</p></div>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3>Stay Informed</h3>
-                <p>Sign up for our newsletter to get project updates and company news.</p>
-                <form class="newsletter-form">
-                    <input type="email" class="newsletter-input" placeholder="Your work email">
-                    <button class="newsletter-btn">Subscribe</button>
-                </form>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 SiteWorks Builders. Built with <i class="fas fa-heart" style="color: var(--primary-yellow);"></i> and Code.</p>
-        </div>
-    </footer>
     
-    <script>
-        // --- Navigation and Animation JS (From Document 1) ---
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('navMenu');
-        const closeMenu = document.getElementById('closeMenu');
-        const navbar = document.getElementById('navbar');
-        const statNumbers = document.querySelectorAll('.stat-number');
-        const sections = document.querySelectorAll('.section');
-        const homeDropdown = document.querySelector('.has-dropdown');
-        const homeLink = document.getElementById('homeLink');
-        let statsAnimated = false;
+    /* Custom Animations */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+        animation: fadeInUp 0.8s ease forwards;
+        opacity: 0;
+    }
+    
+    /* Sticky Sidebar Offset */
+    .sticky-sidebar {
+        position: sticky;
+        top: 100px; /* Adjust based on navbar height */
+    }
+    
+    /* Custom styles for service details */
+    .service-card {
+      transition: all 0.3s ease;
+      border-left: 4px solid #F9A825;
+    }
+    
+    .service-card:hover {
+      transform: translateX(5px);
+      box-shadow: 0 10px 25px rgba(249, 168, 37, 0.1);
+    }
+    
+    .phase-indicator {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #F9A825;
+      color: #1F1F1F;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    
+    .feature-icon {
+      background: linear-gradient(135deg, #F9A825, #FFC107);
+      color: #1F1F1F;
+    }
+    
+    @media (max-width: 768px) {
+      .sticky-sidebar {
+        position: static;
+        top: auto;
+      }
+    }
+    
+    /* Gradient backgrounds */
+    .gradient-bg {
+      background: linear-gradient(135deg, #1F1F1F 0%, #2A2A2A 100%);
+    }
+    
+    .yellow-gradient {
+      background: linear-gradient(135deg, #F9A825, #FFC107);
+    }
+  </style>
+</head>
 
-        // --- Mobile Menu Toggle ---
-        function toggleMenu() {
-            const isActive = navMenu.classList.toggle('active');
-            hamburger.classList.toggle('active');
-            document.body.style.overflow = isActive ? 'hidden' : '';
-        }
+<body class="bg-white text-gray-800 dark:bg-charcoal dark:text-gray-100 transition-colors duration-300" data-dir="ltr">
 
-        hamburger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleMenu();
-        });
+  <!-- ============================================ -->
+  <!-- NAVBAR                                       -->
+  <!-- ============================================ -->
+  <nav id="navbar" class="sticky top-0 z-50 transition-colors duration-300 bg-white text-charcoal border-b border-gray-200 dark:bg-charcoal dark:text-white dark:border-white/10 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
+      
+      <!-- Logo Section -->
+      <a href="index.html" class="flex items-center gap-2 shrink-0 group">
+        <span class="flex h-10 w-10 items-center justify-center rounded-full bg-safetyYellow text-charcoal shadow-lg group-hover:scale-110 transition-transform">
+          <i class="fas fa-hard-hat text-lg"></i>
+        </span>
+        <div class="leading-tight">
+          <span class="block text-xl font-bold tracking-tight">Groww</span>
+          <span class="block text-xs font-medium text-safetyYellow uppercase tracking-widest">Builders</span>
+        </div>
+      </a>
 
-        closeMenu.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleMenu();
-        });
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center gap-2">
+        <ul class="flex items-center gap-1 text-sm font-semibold">
+          <li class="relative group">
+            <button class="flex items-center gap-1 rounded-md px-3 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
+              <span>Home</span>
+              <i class="fas fa-chevron-down text-[10px] group-hover:rotate-180 transition-transform"></i>
+            </button>
+            <ul class="invisible absolute start-0 mt-2 w-48 rounded-lg bg-white border border-gray-100 dark:bg-charcoal dark:border-white/10 p-2 opacity-0 shadow-2xl transition-all group-hover:visible group-hover:opacity-100 z-50">
+              <li><a href="index.html" class="block rounded-md px-4 py-2 hover:bg-safetyYellow hover:text-charcoal transition-colors">Home 1</a></li>
+              <li><a href="homepage2.html" class="block rounded-md px-4 py-2 hover:bg-safetyYellow hover:text-charcoal transition-colors">Home 2</a></li>
+            </ul>
+          </li>
 
-        // --- New: Mobile Dropdown Toggle ---
-        if (homeDropdown) {
-            homeLink.addEventListener('click', (e) => {
-                if (window.innerWidth <= 968) {
-                    e.preventDefault(); 
-                    homeDropdown.classList.toggle('active');
-                }
-            });
-        }
+          <li>
+            <a href="service.html"
+              class="block rounded-md px-4 py-2
+                    bg-safetyYellow text-charcoal
+                    font-bold shadow-md
+                    transition-colors">
+              Services
+            </a>
+          </li>
 
-        // Close menu when a link is clicked
-        navMenu.querySelectorAll('.nav-link, .nav-btn, .dropdown-item a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 968 && !link.closest('.has-dropdown') ) {
-                    setTimeout(toggleMenu, 300); 
-                }
-                
-                if (window.innerWidth <= 968 && link.closest('.dropdown-item')) {
-                     setTimeout(toggleMenu, 300); 
-                }
-            });
-        });
+          <li><a href="blog.html" class="block rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">Blog</a></li>
+          <li><a href="aboutus.html" class="block rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">About</a></li>
+          <li><a href="contact.html" class="block rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">Contact</a></li>
+          
+          <li class="relative group">
+            <button class="flex items-center gap-1 rounded-md px-3 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
+              <span>Dashboard</span>
+              <i class="fas fa-chevron-down text-[10px] group-hover:rotate-180 transition-transform"></i>
+            </button>
+            <ul class="invisible absolute start-0 mt-2 w-56 rounded-lg bg-white border border-gray-100 dark:bg-charcoal dark:border-white/10 p-2 opacity-0 shadow-2xl transition-all group-hover:visible group-hover:opacity-100 z-50">
+              <li><a href="admin.html" class="block rounded-md px-4 py-2 hover:bg-safetyYellow hover:text-charcoal transition-colors">Admin Panel</a></li>
+              <li><a href="user.html" class="block rounded-md px-4 py-2 hover:bg-safetyYellow hover:text-charcoal transition-colors">User Dashboard</a></li>
+            </ul>
+          </li>
+        </ul>
 
-        // --- Sticky Nav Bar Effect ---
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+        <div class="ms-4 flex items-center gap-3 border-s border-gray-200 dark:border-white/10 ps-4">
+          <button id="themeToggleDesktop" class="flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 dark:border-white/10 hover:bg-safetyYellow hover:text-charcoal transition-all">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button id="rtlToggleDesktop" class="flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 dark:border-white/10 hover:bg-safetyYellow hover:text-charcoal transition-all">
+            <i class="fas fa-exchange-alt"></i>
+          </button>
+          
+          <a href="login.html" class="ms-2 inline-flex items-center gap-2 rounded-md bg-safetyYellow px-5 py-2 text-sm font-bold text-charcoal hover:bg-yellow-500 transition-transform active:scale-95 shadow-lg shadow-safetyYellow/20">
+            <i class="fas fa-user-plus text-xs"></i>
+            <span>Register</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Mobile Controls -->
+      <div class="flex items-center gap-3 lg:hidden">
+        <button id="themeToggleMobile" class="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 dark:border-white/10">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="hamburger" class="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-md bg-gray-100 dark:bg-white/5" aria-label="Toggle Menu">
+          <span id="line1" class="h-0.5 w-6 bg-current transition-all duration-300"></span>
+          <span id="line2" class="h-0.5 w-6 bg-current transition-all duration-300"></span>
+          <span id="line3" class="h-0.5 w-6 bg-current transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Drawer -->
+    <div id="mobileMenu" class="hidden border-t border-gray-100 bg-white dark:bg-charcoal dark:border-white/5 lg:hidden overflow-hidden transition-all duration-300">
+      <div class="flex flex-col gap-1 p-4">
         
-        // --- Resize Handler (for mobile menu) ---
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 968 && navMenu.classList.contains('active')) {
-                toggleMenu(); 
-            }
-            if (window.innerWidth > 968 && homeDropdown.classList.contains('active')) {
-                homeDropdown.classList.remove('active');
-            }
-        });
+        <details class="group">
+          <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5 list-none">
+            <div class="flex items-center gap-4">
+              <i class="fas fa-home text-safetyYellow w-6"></i> Home
+            </div>
+            <i class="fas fa-chevron-down text-xs group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <div class="mt-1 flex flex-col gap-1 ps-14 text-gray-500 dark:text-gray-400">
+            <a href="index.html" class="py-2 hover:text-safetyYellow">Home 1</a>
+            <a href="homepage2.html" class="py-2 hover:text-safetyYellow">Home 2</a>
+          </div>
+        </details>
 
+        <a href="service.html"
+   class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-bold
+          bg-safetyYellow text-charcoal shadow-md
+          hover:bg-yellow-500 transition-all">
+  
+  <i class="fas fa-concierge-bell w-6 text-white"></i>
+  <span>Services</span>
+</a>
 
-        // --- Running Number Counter Animation --- (Kept but functionality is not in the new content)
-        function countUp(el) {
-            const target = parseInt(el.getAttribute('data-target'));
-            const prefix = el.getAttribute('data-prefix') || '';
-            const suffix = el.getAttribute('data-suffix') || '';
-            let start = 0;
-            const duration = 2000; 
-            const step = (target / duration) * 10;
-            const isFloat = target % 1 !== 0;
+        <a href="blog.html" class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+          <i class="fas fa-blog text-safetyYellow w-6"></i> Blog
+        </a>
+        <a href="aboutus.html" class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+          <i class="fas fa-info-circle text-safetyYellow w-6"></i> About Us
+        </a>
+        <a href="contact.html" class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+          <i class="fas fa-envelope text-safetyYellow w-6"></i> Contact
+        </a>
 
-            const timer = setInterval(() => {
-                start += step;
-                if (start >= target) {
-                    clearInterval(timer);
-                    start = target;
-                }
-                
-                let displayValue = Math.floor(start);
-                if (isFloat) {
-                    displayValue = start.toFixed(1);
-                }
-                
-                el.textContent = prefix + displayValue + suffix;
-            }, 10);
-        }
+        <details class="group">
+          <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5 list-none">
+            <div class="flex items-center gap-4">
+              <i class="fas fa-tachometer-alt text-safetyYellow w-6"></i> Dashboard
+            </div>
+            <i class="fas fa-chevron-down text-xs group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <div class="mt-1 flex flex-col gap-1 ps-14 text-gray-500 dark:text-gray-400">
+            <a href="admin.html" class="py-2 hover:text-safetyYellow">Admin Panel</a>
+            <a href="user.html" class="py-2 hover:text-safetyYellow">User Dashboard</a>
+          </div>
+        </details>
 
-        // --- Intersection Observer for Animations (FadeIn/Counting) --- (Kept for the existing sections)
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.2
-        };
+        <div class="mt-4 pt-4 border-t border-gray-100 dark:border-white/10">
+          <button id="rtlToggleMobile" class="flex w-full items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+            <i class="fas fa-exchange-alt text-safetyYellow w-6"></i> Switch Direction (RTL)
+          </button>
+          <a href="login.html" class="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-safetyYellow py-4 text-center text-lg font-bold text-charcoal active:scale-95 transition-transform">
+            <i class="fas fa-user-plus"></i> Register
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-        const sectionObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); 
-                }
-            });
-        }, observerOptions);
+  <!-- ============================================ -->
+  <!-- BREADCRUMB                                   -->
+  <!-- ============================================ -->
+  <div class="bg-gradient-to-r from-charcoal to-gray-900 border-b border-gray-800 dark:border-white/10 py-6 md:py-8">
+    <div class="container mx-auto px-4 md:px-6 max-w-7xl">
+        <nav class="flex text-sm md:text-base text-gray-300" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3 rtl:space-x-reverse flex-wrap">
+                <li class="inline-flex items-center mb-1 md:mb-0">
+                    <a href="index.html" class="inline-flex items-center hover:text-safetyYellow transition-colors">
+                        <i class="fas fa-home me-2"></i> Home
+                    </a>
+                </li>
+                <li class="mb-1 md:mb-0">
+                    <div class="flex items-center">
+                        <i class="fas fa-chevron-right text-xs mx-1 rtl:rotate-180"></i>
+                        <a href="service.html" class="ms-1 hover:text-safetyYellow transition-colors">Services</a>
+                    </div>
+                </li>
+                <li aria-current="page" class="mb-1 md:mb-0">
+                    <div class="flex items-center">
+                        <i class="fas fa-chevron-right text-xs mx-1 rtl:rotate-180"></i>
+                        <span class="ms-1 font-bold text-safetyYellow" id="breadcrumbService">Service Details</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+        <h1 class="text-2xl md:text-3xl font-bold text-white mt-4 font-heading">Service Details</h1>
+    </div>
+  </div>
 
-        sections.forEach(section => {
-            if (!section.classList.contains('hero')) { 
-                sectionObserver.observe(section);
-            }
-        });
+  <!-- ============================================ -->
+  <!-- MAIN CONTENT                                 -->
+  <!-- ============================================ -->
+  <main class="py-10 md:py-16 bg-white dark:bg-charcoal transition-colors duration-300">
+      <div class="container mx-auto px-4 md:px-6 max-w-7xl grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
+          
+          <!-- LEFT COLUMN: Service Info -->
+          <div class="lg:col-span-2 fade-in">
+              <!-- Header Section -->
+              <div class="mb-8 md:mb-10 bg-gradient-to-r from-white to-gray-50 dark:from-gray-900 dark:to-charcoal rounded-2xl p-6 md:p-8 shadow-lg">
+                  <span id="serviceBadge" class="inline-block bg-safetyYellow text-charcoal font-bold px-4 py-2 rounded-full text-sm uppercase tracking-wider mb-4 shadow-md">
+                      Structural
+                  </span>
+                  <h1 id="serviceTitle" class="text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal dark:text-white mb-4 md:mb-6 font-heading leading-tight">
+                      Structural Steel Fabrication
+                  </h1>
+                  <p id="serviceSummary" class="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                      In-house design, fabrication, and erection capabilities for complex structural steel components in high-rise and industrial builds.
+                  </p>
+                  
+                  <!-- Quick Stats -->
+                  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 md:mt-8">
+                      <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center shadow-sm">
+                          <div class="text-2xl font-bold text-safetyYellow">4-18</div>
+                          <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Months</div>
+                      </div>
+                      <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center shadow-sm">
+                          <div class="text-2xl font-bold text-safetyYellow">AWS/ISO</div>
+                          <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Certified</div>
+                      </div>
+                      <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center shadow-sm">
+                          <div class="text-2xl font-bold text-safetyYellow">100%</div>
+                          <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">In-House</div>
+                      </div>
+                      <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center shadow-sm">
+                          <div class="text-2xl font-bold text-safetyYellow">24/7</div>
+                          <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Support</div>
+                      </div>
+                  </div>
+              </div>
 
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !statsAnimated) {
-                    statNumbers.forEach(countUp);
-                    statsAnimated = true; 
-                }
-            });
-        }, { threshold: 0.5 }); 
+              <!-- Main Image -->
+              <div class="relative rounded-2xl overflow-hidden shadow-2xl mb-8 md:mb-12 h-[250px] md:h-[400px] lg:h-[450px] border-4 border-white dark:border-white/5 bg-gray-200 dark:bg-gray-800">
+                  <img id="serviceImage" src="https://picsum.photos/800/400?random=555&tag=steel-weld" alt="Service Detail" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+                  <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                      <div class="text-white text-lg md:text-xl font-bold">Premium Structural Solutions</div>
+                  </div>
+              </div>
 
-        const statsSection = document.getElementById('stats');
-        if (statsSection) {
-            statsObserver.observe(statsSection);
-        }
+              <!-- Scope of Work -->
+              <div class="mb-10 md:mb-12 bg-white dark:bg-gray-900 rounded-2xl p-6 md:p-8 shadow-lg service-card">
+                  <h2 class="text-2xl md:text-3xl font-bold text-charcoal dark:text-white mb-6 font-heading flex items-center gap-3">
+                      <span class="phase-indicator">1</span>
+                      <span>Scope of Work</span>
+                  </h2>
+                  <div id="serviceDescription" class="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-400 leading-relaxed text-base md:text-lg">
+                      <p>This division manages the end-to-end process of structural steel, ensuring total quality control and efficiency. From connection design and 3D modeling to the final lift and welding on-site, our team delivers the foundational framework for large-scale, complex structures.</p>
+                      <p class="mt-4">Our integrated approach combines cutting-edge technology with skilled craftsmanship to deliver projects on time and within budget, while maintaining the highest safety standards in the industry.</p>
+                  </div>
+              </div>
 
-        // --- DYNAMIC CONTENT JS (From Document 2) ---
+              <!-- Key Capabilities -->
+              <div class="mb-10 md:mb-12 bg-white dark:bg-gray-900 rounded-2xl p-6 md:p-8 shadow-lg service-card">
+                  <h2 class="text-2xl md:text-3xl font-bold text-charcoal dark:text-white mb-6 font-heading flex items-center gap-3">
+                      <span class="phase-indicator">2</span>
+                      <span>Key Capabilities</span>
+                  </h2>
+                  <ul id="serviceFeatures" class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                      <!-- Dynamic Content Populates Here -->
+                  </ul>
+              </div>
+
+              <!-- Project Phases -->
+              <div class="bg-white dark:bg-gray-900 rounded-2xl p-6 md:p-8 shadow-lg service-card">
+                  <h2 class="text-2xl md:text-3xl font-bold text-charcoal dark:text-white mb-6 font-heading flex items-center gap-3">
+                      <span class="phase-indicator">3</span>
+                      <span>Project Phases</span>
+                  </h2>
+                  <ul id="servicePhases" class="space-y-4 md:space-y-6">
+                      <!-- Dynamic Content Populates Here -->
+                  </ul>
+              </div>
+          </div>
+
+          <!-- RIGHT COLUMN: Sidebar -->
+          <div class="lg:col-span-1 space-y-6 md:space-y-8 fade-in" style="animation-delay: 0.2s;">
+              
+              <!-- CTA Card -->
+              <div class="gradient-bg text-white rounded-2xl p-6 md:p-8 shadow-xl relative overflow-hidden">
+                  <div class="absolute -top-10 -right-10 w-40 h-40 bg-safetyYellow/10 rounded-full animate-float"></div>
+                  <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-safetyYellow/5 rounded-full animate-float" style="animation-delay: 1s;"></div>
+                  
+                  <div class="relative z-10">
+                      <h3 class="text-xl md:text-2xl font-bold mb-4 font-heading">Ready to Build?</h3>
+                      <p class="text-gray-300 mb-6 text-sm md:text-base">Start your large-scale project with a team you can trust. Let's build excellence together.</p>
+                      
+                      <a href="contact.html" class="block w-full text-center yellow-gradient text-charcoal font-bold py-4 rounded-lg hover:shadow-lg transition-all transform hover:-translate-y-1 shadow-lg uppercase tracking-widest text-sm md:text-base">
+                          <i class="fas fa-paper-plane me-2"></i> Inquire Now
+                      </a>
+                      
+                      <div class="mt-6 pt-6 border-t border-white/10 text-center">
+                          <p class="text-sm text-gray-400 mb-2">Or call for immediate consultation</p>
+                          <a href="tel:5551234567" class="text-lg md:text-xl font-bold text-safetyYellow hover:text-white transition-colors flex items-center justify-center gap-2">
+                              <i class="fas fa-phone"></i> (555) 123-SITE
+                          </a>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Info Card -->
+              <div id="infoCard" class="bg-white dark:bg-gray-900 rounded-2xl p-6 md:p-8 border border-gray-200 dark:border-white/10 shadow-lg">
+                   <!-- Dynamic Content Populates Here -->
+              </div>
+
+              <!-- Related Services -->
+              <div class="bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 md:p-8 border border-gray-200 dark:border-white/10 shadow-lg">
+                  <h3 class="text-xl font-bold text-charcoal dark:text-white mb-6 font-heading border-b-2 border-safetyYellow inline-block pb-2">Related Services</h3>
+                  <div class="space-y-4">
+                      <a href="?service=management" class="flex items-start gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg hover:shadow-md transition-all group">
+                          <div class="feature-icon rounded-lg p-2 group-hover:scale-110 transition-transform">
+                              <i class="fas fa-clipboard-list text-lg"></i>
+                          </div>
+                          <div>
+                              <h4 class="font-bold text-charcoal dark:text-white group-hover:text-safetyYellow transition-colors">Design-Build Management</h4>
+                              <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Comprehensive project management</p>
+                          </div>
+                      </a>
+                      
+                      <a href="?service=industrial" class="flex items-start gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg hover:shadow-md transition-all group">
+                          <div class="feature-icon rounded-lg p-2 group-hover:scale-110 transition-transform">
+                              <i class="fas fa-industry text-lg"></i>
+                          </div>
+                          <div>
+                              <h4 class="font-bold text-charcoal dark:text-white group-hover:text-safetyYellow transition-colors">Industrial Facilities</h4>
+                              <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Large-scale industrial construction</p>
+                          </div>
+                      </a>
+                      
+                      <a href="?service=mep" class="flex items-start gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg hover:shadow-md transition-all group">
+                          <div class="feature-icon rounded-lg p-2 group-hover:scale-110 transition-transform">
+                              <i class="fas fa-tools text-lg"></i>
+                          </div>
+                          <div>
+                              <h4 class="font-bold text-charcoal dark:text-white group-hover:text-safetyYellow transition-colors">MEP Integration</h4>
+                              <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Mechanical & electrical systems</p>
+                          </div>
+                      </a>
+                  </div>
+              </div>
+
+              <!-- Download Brochure -->
+              <div class="bg-safetyYellow/10 border border-safetyYellow/20 rounded-2xl p-6 md:p-8 text-center">
+                  <div class="feature-icon rounded-full p-4 inline-flex mb-4">
+                      <i class="fas fa-file-pdf text-2xl"></i>
+                  </div>
+                  <h4 class="text-xl font-bold text-charcoal dark:text-white mb-2">Download Brochure</h4>
+                  <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">Get detailed specifications and case studies</p>
+                  <a href="#" class="inline-flex items-center gap-2 bg-safetyYellow text-charcoal font-bold py-3 px-6 rounded-lg hover:shadow-lg transition-all">
+                      <i class="fas fa-download"></i> Download PDF
+                  </a>
+              </div>
+          </div>
+
+      </div>
+  </main>
+
+  <!-- ============================================ -->
+  <!-- FOOTER                                       -->
+  <!-- ============================================ -->
+  <footer class="bg-[#1a1a1a] pt-16 md:pt-24 pb-12 text-gray-300 font-sans border-t border-gray-800">
+    <div class="container mx-auto px-4 md:px-6 max-w-7xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 lg:gap-16 border-b border-gray-800 pb-12 md:pb-16">
         
-        // --- DYNAMIC DATA SOURCE (Mapping Service IDs to Details) ---
-        const services = {
-            management: {
-                badge: 'Core Services', title: 'Design-Build & Management', category: 'General Contracting', duration: 'Variable',
-                image: 'https://picsum.photos/800/400?random=111&tag=management',
-                summary: 'Comprehensive project management spanning initial planning, design coordination, procurement, and construction execution.',
-                capabilities: [ 'Pre-construction consulting and estimating', 'Value engineering and cost control', 'Full-cycle contract management', 'Integrated design and engineering teams', 'Risk assessment and mitigation', 'Client collaboration portals'],
-                phases: [
-                    { title: 'Pre-Construction & Design Coordination', duration: '6-12 Weeks' },
-                    { title: 'Procurement & Scheduling', duration: '4-8 Weeks' },
-                    { title: 'Execution & Construction', duration: 'Variable' },
-                    { title: 'Commissioning & Handover', duration: '4 Weeks' }
-                ],
-                overview: [
-                    { label: 'Division', value: 'General Contracting' },
-                    { label: 'Typical Duration', value: '6-24 Months' },
-                    { label: 'Certifications', value: 'LEED, ISO' },
-                    { label: 'Technology Used', value: 'Procore, Bluebeam' },
-                    { label: 'Suitability', value: 'Commercial, Residential, Institutional' }
-                ]
-            },
-            industrial: {
-                badge: 'Industrial', title: 'Industrial Facilities Construction', category: 'High-Spec', duration: '12-24 Months',
-                image: 'https://picsum.photos/800/400?random=222&tag=warehouse',
-                summary: 'Specialized services for constructing large-scale industrial warehouses, manufacturing plants, and logistics hubs with critical operational requirements.',
-                capabilities: [ 'High-bay warehouse design and build', 'Cold storage facility expertise', 'Specialized flooring and loading docks', 'MEP systems integration for machinery', 'Fast-track construction methods', 'Advanced security planning'],
-                phases: [
-                    { title: 'Needs Analysis & Site Prep', duration: '8 Weeks' },
-                    { title: 'Structural Erection (Fast-Track)', duration: '6 Months' },
-                    { title: 'Internal Fit-Out & Systems', duration: '8 Months' },
-                    { title: 'Testing & Final Commissioning', duration: '4 Weeks' }
-                ],
-                overview: [
-                    { label: 'Division', value: 'Industrial Construction' },
-                    { label: 'Typical Duration', value: '12-24 Months' },
-                    { label: 'Certifications', value: 'OSHA 30, ISO' },
-                    { label: 'Technology Used', value: 'BIM, Drone Mapping' },
-                    { label: 'Suitability', value: 'Industrial, Logistics' }
-                ]
-            },
-            roadways: {
-                badge: 'Civil', title: 'Roadway Construction & Paving', category: 'Infrastructure', duration: 'Variable',
-                image: 'https://picsum.photos/800/400?random=333&tag=roadwork',
-                summary: 'Design, construction, and maintenance of public and private access roads, highways, and complex urban intersections.',
-                capabilities: [ 'Asphalt and concrete paving', 'Subgrade preparation and stabilization', 'Drainage and culvert installation', 'Traffic management planning', 'Bridge and overpass construction', 'Public works compliance'],
-                phases: [
-                    { title: 'Geotechnical Survey & Design', duration: '4 Weeks' },
-                    { title: 'Earthwork & Grading', duration: '8 Weeks' },
-                    { title: 'Base Layers & Paving', duration: '12 Weeks' },
-                    { title: 'Line Marking & Safety Systems', duration: '2 Weeks' }
-                ],
-                overview: [
-                    { label: 'Division', value: 'Civil Infrastructure' },
-                    { label: 'Typical Duration', value: 'Variable' },
-                    { label: 'Certifications', value: 'AASHTO, Local Govt.' },
-                    { label: 'Technology Used', value: 'GPS Grading, Surveying' },
-                    { label: 'Suitability', value: 'Public Works, Commercial' }
-                ]
-            },
-            bim: {
-                badge: 'Specialized', title: 'BIM & 4D Project Modeling', category: 'Technology', duration: 'Project Specific',
-                image: 'https://picsum.photos/800/400?random=444&tag=bim',
-                summary: 'Advanced Building Information Modeling (BIM) services integrated with 4D scheduling to enhance visualization, predict clashes, and optimize project timelines.',
-                capabilities: [ '3D model creation and visualization', 'Clash detection and resolution (MEP/Structure)', '4D scheduling and project phasing simulation', 'Accurate material quantity takeoffs', 'Client collaboration portals', 'Design optimization'],
-                phases: [
-                    { title: 'Initial 3D Modeling (Design Stage)', duration: '8 Weeks' },
-                    { title: '4D Integration (Scheduling)', duration: '4 Weeks' },
-                    { title: 'Clash Detection & Optimization', duration: 'Ongoing' },
-                    { title: 'Site Monitoring & Model Updates', duration: 'Ongoing' }
-                ],
-                overview: [
-                    { label: 'Division', value: 'Pre-Construction' },
-                    { label: 'Typical Duration', value: 'Project Specific' },
-                    { label: 'Certifications', value: 'Revit Certified' },
-                    { label: 'Technology Used', value: 'Tekla, BIM 360' },
-                    { label: 'Suitability', value: 'High-Density, Complex MEP' }
-                ]
-            },
-            steel: {
-                badge: 'Structural', title: 'Structural Steel Fabrication', category: 'Structural Trades', duration: '4-18 Months',
-                image: 'https://picsum.photos/800/400?random=555&tag=steel-weld',
-                summary: 'In-house design, fabrication, and erection capabilities for complex structural steel components in high-rise and industrial builds.',
-                capabilities: [ 'Advanced Connection Design', 'In-House Fabrication', '4D Scheduling Integration', 'Certified Welding Teams (AWS/ISO)', 'Complex High-Rise Erection', 'Rigorous Quality Assurance'],
-                phases: [
-                    { title: 'Engineering & Connection Design', duration: '4 Weeks' },
-                    { title: 'Detailing & Shop Drawing', duration: '8 Weeks' },
-                    { title: 'Fabrication & Quality Control', duration: '12 Weeks' },
-                    { title: 'Site Erection & Welding', duration: 'Variable' }
-                ],
-                overview: [
-                    { label: 'Division', value: 'Structural Trades' },
-                    { label: 'Typical Duration', value: '4-18 Months' },
-                    { label: 'Certifications', value: 'AWS, ISO 9001' },
-                    { label: 'Technology Used', value: 'Tekla, BIM 360' },
-                    { label: 'Suitability', value: 'Commercial, Industrial, Civil' }
-                ]
-            },
-            // --- Additional Placeholders (to support services.html links) ---
-            renovation: { badge: 'Core Services', title: 'Major Renovations & Retrofitting', category: 'Upgrade', duration: '6-12 Months', image: 'https://picsum.photos/800/400?random=666&tag=home-renovation', summary: 'Transforming existing buildings with structural upgrades, modern interiors, and sustainable retrofits.', capabilities: ['Structural reinforcement', 'Interior demolition', 'MEP upgrades', 'Sustainable retrofits'], phases: [{title: 'Inspection & Scoping', duration: '4 Weeks'}], overview: []},
-            utilities: { badge: 'Civil', title: 'Underground Utilities & Drainage', category: 'Infrastructure', duration: '2-8 Months', image: 'https://picsum.photos/800/400?random=777&tag=piping', summary: 'Installation of water, sewer, storm drainage systems, and complex underground utility infrastructure.', capabilities: ['Trenching and excavation', 'Pipe laying', 'Drainage system design', 'Backfilling and compaction'], phases: [{title: 'Utility Design & Planning', duration: '4 Weeks'}], overview: []},
-            grading: { badge: 'Civil', title: 'Site Grading & Preparation', category: 'Earthwork', duration: '4-12 Weeks', image: 'https://picsum.photos/800/400?random=888&tag=excavator', summary: 'Large-scale site preparation, excavation, complex grading, and soil stabilization for foundations.', capabilities: ['Excavation', 'Soil stabilization', 'Compaction testing', 'Foundational prep'], phases: [{title: 'Survey & Analysis', duration: '1 Week'}], overview: []},
-            mep: { badge: 'Specialized', title: 'MEP & HVAC Integration', category: 'Systems', duration: 'Project Specific', image: 'https://picsum.photos/800/400?random=999&tag=hvac', summary: 'Expert management and integration of Mechanical, Electrical, and Plumbing (MEP) and HVAC systems.', capabilities: ['MEP coordination', 'HVAC installation', 'Plumbing systems', 'Electrical fit-out', 'BIM integration'], phases: [{title: 'MEP Design Review', duration: '6 Weeks'}], overview: []},
-        };
+        <!-- Company Info -->
+        <div class="space-y-6">
+          <a href="#" class="flex items-center gap-3">
+            <div class="h-12 w-12 rounded-lg bg-safetyYellow flex items-center justify-center shadow-lg shadow-yellow-900/20">
+              <i class="fas fa-hard-hat text-2xl text-charcoal"></i>
+            </div>
+            <div class="leading-none">
+              <span class="block text-xl font-bold tracking-tight">Groww</span>
+          <span class="block text-xs font-medium text-safetyYellow uppercase tracking-widest">Builders</span>
+            </div>
+          </a>
+          <p class="text-gray-400 text-sm leading-relaxed">Building the future with precision, integrity, and innovation since 2008. We are committed to excellence in every project we undertake.</p>
+          <div class="flex gap-4">
+            <a href="#" class="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-safetyYellow hover:text-charcoal transition-all duration-300">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-safetyYellow hover:text-charcoal transition-all duration-300">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-safetyYellow hover:text-charcoal transition-all duration-300">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </div>
+        </div>
 
-        // --- DYNAMIC PAGE UPDATING FUNCTION ---
-        function updateServiceDetails(serviceId) {
-            const data = services[serviceId] || services.steel; 
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Quick Links</h4>
+          <ul class="space-y-3 text-sm">
+            <li>
+              <a href="index.html" class="block hover:text-safetyYellow transition-colors">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="service.html" class="block hover:text-safetyYellow transition-colors">
+                Services
+              </a>
+            </li>
+            <li>
+              <a href="blog.html" class="block hover:text-safetyYellow transition-colors">
+                Blog
+              </a>
+            </li>
+            <li>
+              <a href="aboutus.html" class="block hover:text-safetyYellow transition-colors">
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="contact.html" class="block hover:text-safetyYellow transition-colors">
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
 
-            // 1. Update Header and Breadcrumb
-            document.getElementById('pageTitle').textContent = data.title + ' - SiteWorks Builders';
-            document.getElementById('breadcrumbService').textContent = data.title;
-            document.getElementById('serviceBadge').textContent = data.badge;
-            document.getElementById('serviceTitle').textContent = data.title;
-            document.getElementById('serviceSummary').textContent = data.summary;
-            document.getElementById('serviceImage').src = data.image;
-            document.getElementById('serviceImage').alt = data.title;
-            
-            // 2. Update Capabilities/Features List
-            const featuresList = document.getElementById('serviceFeatures');
-            featuresList.innerHTML = data.capabilities.map(cap => `
-                <li><i class="fas fa-check-circle"></i> ${cap}</li>
-            `).join('');
+        <!-- Contact Info -->
+        <div>
+          <h4 class="text-white font-bold mb-8 uppercase tracking-wider text-sm">Contact Us</h4>
+          <div class="space-y-6 text-sm">
+            <div class="flex items-start gap-4">
+              <i class="fas fa-map-marker-alt text-safetyYellow mt-1"></i>
+              <span>123 Construction Ave, Suite 100<br>New York, NY 10001</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <i class="fas fa-phone text-safetyYellow"></i>
+              <span>+1 (555) 123-4567</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <i class="fas fa-envelope text-safetyYellow"></i>
+              <span>info@siteworks.com</span>
+            </div>
+          </div>
+        </div>
 
-            // 3. Update Project Phases
-            const phasesList = document.getElementById('servicePhases');
-            phasesList.innerHTML = data.phases.map((phase, index) => `
-                <li class="curriculum-item">
-                    <span class="curriculum-title">Phase ${index + 1}: ${phase.title}</span>
-                    <span class="curriculum-duration">${phase.duration}</span>
-                </li>
-            `).join('');
-            
-            // 4. Update Info Card
-            const infoCard = document.getElementById('infoCard');
-            if (data.overview && infoCard) {
-                const infoHtml = data.overview.map(item => `
-                    <div class="info-item">
-                        <span class="info-label">${item.label}</span>
-                        <span class="info-value">${item.value}</span>
-                    </div>
-                `).join('');
-                infoCard.innerHTML = `<h3>Service Overview</h3>` + infoHtml;
-            }
-        }
+        <!-- Newsletter -->
+        <div>
+          <h4 class="text-white font-bold mb-8 uppercase tracking-wider text-sm">Stay Updated</h4>
+          <p class="text-gray-400 mb-6 text-sm">Subscribe to receive construction insights and project updates.</p>
+          <form class="space-y-4">
+            <div class="relative">
+                <input type="email" placeholder="Your email address" 
+                    class="w-full px-4 py-3 rounded bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-safetyYellow focus:outline-none focus:ring-1 focus:ring-safetyYellow transition-all">
+            </div>
+            <button type="submit" class="w-full bg-safetyYellow text-charcoal font-bold py-3 rounded hover:bg-yellow-400 transition-colors uppercase tracking-wider text-sm">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+        <div>&copy; 2026 SiteWorks Construction Group. All rights reserved.</div>
+        <div class="flex gap-4 md:gap-6">
+          <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+          <a href="#" class="hover:text-white transition-colors">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-        // Run on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const serviceId = urlParams.get('service');
-            updateServiceDetails(serviceId || 'steel'); // Default service on load
-        });
-    </script>
+  <script>
+    // --- Shared Logic (Nav, Theme, RTL) ---
+    const htmlEl = document.documentElement;
+    const bodyEl = document.body;
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const l1 = document.getElementById('line1');
+    const l2 = document.getElementById('line2');
+    const l3 = document.getElementById('line3');
+
+    // Menu Toggle Logic
+    if(hamburger) {
+        hamburger.addEventListener('click', () => {
+          const isHidden = mobileMenu.classList.toggle('hidden');
+          if (!isHidden) {
+            l1.style.transform = 'translateY(8px) rotate(45deg)';
+            l2.style.opacity = '0';
+            l3.style.transform = 'translateY(-8px) rotate(-45deg)';
+          } else {
+            l1.style.transform = 'none';
+            l2.style.opacity = '1';
+            l3.style.transform = 'none';
+          }
+        });
+    }
+
+    // Theme Logic
+    const themeBtns = [document.getElementById('themeToggleDesktop'), document.getElementById('themeToggleMobile')];
+    function setTheme(isDark) {
+      if (isDark) {
+        htmlEl.classList.add('dark');
+        try { localStorage.setItem('theme', 'dark'); } catch(e) {}
+        themeBtns.forEach(btn => btn ? btn.innerHTML = '<i class="fas fa-sun"></i>' : null);
+      } else {
+        htmlEl.classList.remove('dark');
+        try { localStorage.setItem('theme', 'light'); } catch(e) {}
+        themeBtns.forEach(btn => btn ? btn.innerHTML = '<i class="fas fa-moon"></i>' : null);
+      }
+    }
+
+    themeBtns.forEach(btn => {
+      if(btn) btn.addEventListener('click', () => setTheme(!htmlEl.classList.contains('dark')));
+    });
+
+    // Initialize Theme
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      setTheme(true);
+    } else {
+      setTheme(false);
+    }
+
+    // RTL Logic
+    const rtlBtns = [document.getElementById('rtlToggleDesktop'), document.getElementById('rtlToggleMobile')];
+    rtlBtns.forEach(btn => {
+      if(btn) {
+          btn.addEventListener('click', () => {
+          const currentDir = htmlEl.getAttribute('dir') || 'ltr';
+          const newDir = currentDir === 'ltr' ? 'rtl' : 'ltr';
+          htmlEl.setAttribute('dir', newDir);
+          bodyEl.setAttribute('dir', newDir);
+        });
+      }
+    });
+
+    // --- Dynamic Content Logic ---
+    const services = {
+        management: {
+            badge: 'Core Services', title: 'Design-Build & Management', category: 'General Contracting', duration: 'Variable',
+            image: '/assets/s1.avif',
+            summary: 'Comprehensive project management spanning initial planning, design coordination, procurement, and construction execution.',
+            capabilities: [ 'Pre-construction consulting and estimating', 'Value engineering and cost control', 'Full-cycle contract management', 'Integrated design and engineering teams', 'Risk assessment and mitigation', 'Client collaboration portals'],
+            phases: [
+                { title: 'Pre-Construction & Design', duration: '6-12 Weeks' },
+                { title: 'Procurement & Scheduling', duration: '4-8 Weeks' },
+                { title: 'Execution & Construction', duration: 'Variable' },
+                { title: 'Commissioning & Handover', duration: '4 Weeks' }
+            ],
+            overview: [
+                { label: 'Division', value: 'General Contracting' },
+                { label: 'Typical Duration', value: '6-24 Months' },
+                { label: 'Certifications', value: 'LEED, ISO' },
+                { label: 'Technology Used', value: 'Procore, Bluebeam' },
+                { label: 'Suitability', value: 'Commercial, Residential' }
+            ]
+        },
+        industrial: {
+            badge: 'Industrial', title: 'Industrial Facilities Construction', category: 'High-Spec', duration: '12-24 Months',
+            image: '/assets/s2.avif',
+            summary: 'Specialized services for constructing large-scale industrial warehouses, manufacturing plants, and logistics hubs with critical operational requirements.',
+            capabilities: [ 'High-bay warehouse design and build', 'Cold storage facility expertise', 'Specialized flooring and loading docks', 'MEP systems integration for machinery', 'Fast-track construction methods', 'Advanced security planning'],
+            phases: [
+                { title: 'Needs Analysis & Site Prep', duration: '8 Weeks' },
+                { title: 'Structural Erection & Eviction', duration: '6 Months' },
+                { title: 'Internal Fit-Out & Systems', duration: '8 Months' },
+                { title: 'Testing & Final Commissioning', duration: '4 Weeks' }
+            ],
+            overview: [
+                { label: 'Division', value: 'Industrial Construction' },
+                { label: 'Typical Duration', value: '12-24 Months' },
+                { label: 'Certifications', value: 'OSHA 30, ISO' },
+                { label: 'Technology Used', value: 'BIM, Drone Mapping' },
+                { label: 'Suitability', value: 'Industrial, Logistics' }
+            ]
+        },
+        roadways: {
+            badge: 'Civil', title: 'Roadway Construction & Paving', category: 'Infrastructure', duration: 'Variable',
+            image: 'https://picsum.photos/800/400?random=333&tag=roadwork',
+            summary: 'Design, construction, and maintenance of public and private access roads, highways, and complex urban intersections.',
+            capabilities: [ 'Asphalt and concrete paving', 'Subgrade preparation and stabilization', 'Drainage and culvert installation', 'Traffic management planning', 'Bridge and overpass construction', 'Public works compliance'],
+            phases: [
+                { title: 'Geotechnical Survey & Design', duration: '4 Weeks' },
+                { title: 'Earthwork & Grading', duration: '8 Weeks' },
+                { title: 'Base Layers & Paving', duration: '12 Weeks' },
+                { title: 'Line Marking & Safety Systems', duration: '2 Weeks' }
+            ],
+            overview: [
+                { label: 'Division', value: 'Civil Infrastructure' },
+                { label: 'Typical Duration', value: 'Variable' },
+                { label: 'Certifications', value: 'AASHTO, Local Govt.' },
+                { label: 'Technology Used', value: 'GPS Grading, Surveying' },
+                { label: 'Suitability', value: 'Public Works, Commercial' }
+            ]
+        },
+        bim: {
+            badge: 'Specialized', title: 'BIM & 4D Project Modeling', category: 'Technology', duration: 'Project Specific',
+            image: '/assets/4d.webp',
+            summary: 'Advanced Building Information Modeling (BIM) services integrated with 4D scheduling to enhance visualization, predict clashes, and optimize project timelines.',
+            capabilities: [ '3D model creation and visualization', 'Clash detection and resolution (MEP/Structure)', '4D scheduling and project phasing simulation', 'Accurate material quantity takeoffs', 'Client collaboration portals', 'Design optimization'],
+            phases: [
+                { title: 'Initial 3D Modeling', duration: '8 Weeks' },
+                { title: '4D Integration (Scheduling)', duration: '4 Weeks' },
+                { title: 'Clash Detection & Optimization', duration: 'Ongoing' },
+                { title: 'Site Monitoring & Updates', duration: 'Ongoing' }
+            ],
+            overview: [
+                { label: 'Division', value: 'Pre-Construction' },
+                { label: 'Typical Duration', value: 'Project Specific' },
+                { label: 'Certifications', value: 'Revit Certified' },
+                { label: 'Technology Used', value: 'Tekla, BIM 360' },
+                { label: 'Suitability', value: 'High-Density, Complex MEP' }
+            ]
+        },
+        steel: {
+            badge: 'Structural', title: 'Structural Steel Fabrication', category: 'Structural Trades', duration: '4-18 Months',
+            image: '/assets/steel.jpg',
+            summary: 'In-house design, fabrication, and erection capabilities for complex structural steel components in high-rise and industrial builds.',
+            capabilities: [ 'Advanced Connection Design', 'In-House Fabrication', '4D Scheduling Integration', 'Certified Welding Teams (AWS/ISO)', 'Complex High-Rise Erection', 'Rigorous Quality Assurance'],
+            phases: [
+                { title: 'Engineering & Connection Design', duration: '4 Weeks' },
+                { title: 'Detailing & Shop Drawing', duration: '8 Weeks' },
+                { title: 'Fabrication & Quality Control', duration: '12 Weeks' },
+                { title: 'Site Erection & Welding', duration: 'Variable' }
+            ],
+            overview: [
+                { label: 'Division', value: 'Structural Trades' },
+                { label: 'Typical Duration', value: '4-18 Months' },
+                { label: 'Certifications', value: 'AWS, ISO 9001' },
+                { label: 'Technology Used', value: 'Tekla, BIM 360' },
+                { label: 'Suitability', value: 'Commercial, Industrial' }
+            ]
+        },
+        // Placeholders
+        renovation: { badge: 'Core Services', title: 'Major Renovations', category: 'Upgrade', duration: '6-12 Months', image: '/assets/s3.avif', summary: 'Transforming existing buildings with structural upgrades, modern interiors, and sustainable retrofits.', capabilities: ['Structural reinforcement', 'Interior demolition', 'MEP upgrades', 'Sustainable retrofits'], phases: [{title: 'Inspection & Scoping', duration: '4 Weeks'}], overview: []},
+        utilities: { badge: 'Civil', title: 'Underground Utilities', category: 'Infrastructure', duration: '2-8 Months', image: 'https://picsum.photos/800/400?random=777&tag=piping', summary: 'Installation of water, sewer, storm drainage systems, and complex underground utility infrastructure.', capabilities: ['Trenching and excavation', 'Pipe laying', 'Drainage system design', 'Backfilling and compaction'], phases: [{title: 'Utility Design & Planning', duration: '4 Weeks'}], overview: []},
+        grading: { badge: 'Civil', title: 'Site Grading & Preparation', category: 'Earthwork', duration: '4-12 Weeks', image: 'https://picsum.photos/800/400?random=888&tag=excavator', summary: 'Large-scale site preparation, excavation, complex grading, and soil stabilization for foundations.', capabilities: ['Excavation', 'Soil stabilization', 'Compaction testing', 'Foundational prep'], phases: [{title: 'Survey & Analysis', duration: '1 Week'}], overview: []},
+        mep: { badge: 'Specialized', title: 'MEP & HVAC Integration', category: 'Systems', duration: 'Project Specific', image: '/assets/dd.jpg', summary: 'Expert management and integration of Mechanical, Electrical, and Plumbing (MEP) and HVAC systems.', capabilities: ['MEP coordination', 'HVAC installation', 'Plumbing systems', 'Electrical fit-out', 'BIM integration'], phases: [{title: 'MEP Design Review', duration: '6 Weeks'}], overview: []},
+    };
+
+    function updateServiceDetails(serviceId) {
+        const data = services[serviceId] || services.steel; 
+
+        // 1. Update Header and Breadcrumb
+        document.getElementById('pageTitle').textContent = data.title + ' - SiteWorks Builders';
+        document.getElementById('breadcrumbService').textContent = data.title;
+        document.getElementById('serviceBadge').textContent = data.badge;
+        document.getElementById('serviceTitle').textContent = data.title;
+        document.getElementById('serviceSummary').textContent = data.summary;
+        document.getElementById('serviceImage').src = data.image;
+        document.getElementById('serviceImage').alt = data.title;
+        
+        // 2. Update Capabilities/Features List
+        const featuresList = document.getElementById('serviceFeatures');
+        featuresList.innerHTML = data.capabilities.map(cap => `
+            <li class="bg-gray-50 dark:bg-white/5 p-4 rounded-lg flex items-start gap-3 shadow-sm border border-gray-100 dark:border-white/5 transition-all hover:-translate-y-1 hover:shadow-md">
+                <div class="feature-icon rounded-lg p-2 flex-shrink-0">
+                    <i class="fas fa-check text-sm"></i>
+                </div>
+                <span class="text-gray-700 dark:text-gray-300 font-medium text-sm md:text-base">${cap}</span>
+            </li>
+        `).join('');
+
+        // 3. Update Project Phases
+        const phasesList = document.getElementById('servicePhases');
+        phasesList.innerHTML = data.phases.map((phase, index) => `
+            <li class="bg-white dark:bg-zinc-800 border border-gray-200 dark:border-white/10 rounded-lg p-5 flex flex-col md:flex-row justify-between items-center gap-3 hover:border-safetyYellow transition-all shadow-sm">
+                <div class="flex items-center gap-3 w-full md:w-auto">
+                    <div class="phase-indicator">${index + 1}</div>
+                    <div>
+                        <span class="font-bold text-charcoal dark:text-white text-base md:text-lg">${phase.title}</span>
+                    </div>
+                </div>
+                <span class="text-sm font-semibold text-safetyYellow bg-safetyYellow/10 px-3 py-1 rounded-full md:ml-auto">${phase.duration}</span>
+            </li>
+        `).join('');
+        
+        // 4. Update Info Card
+        const infoCard = document.getElementById('infoCard');
+        if (data.overview && infoCard) {
+            const infoHtml = data.overview.map(item => `
+                <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-white/10 last:border-0">
+                    <span class="text-gray-500 dark:text-gray-400 font-medium text-sm md:text-base">${item.label}</span>
+                    <span class="text-charcoal dark:text-white font-bold text-end text-sm md:text-base">${item.value}</span>
+                </div>
+            `).join('');
+            
+            infoCard.innerHTML = `
+                <h3 class="text-xl font-bold text-charcoal dark:text-white mb-6 font-heading flex items-center gap-3">
+                    <div class="feature-icon rounded-lg p-2">
+                        <i class="fas fa-info"></i>
+                    </div>
+                    <span>Service Overview</span>
+                </h3>
+                <div class="space-y-1">
+                    ${infoHtml}
+                </div>
+            `;
+        }
+    }
+
+    // Run on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const serviceId = urlParams.get('service');
+        updateServiceDetails(serviceId || 'steel'); 
+        
+        // Add animation to cards
+        const cards = document.querySelectorAll('.service-card, .sticky-sidebar');
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+            card.classList.add('animate-slide-up');
+        });
+    });
+    
+  </script>
 </body>
 </html>

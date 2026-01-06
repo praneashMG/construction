@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SiteWorks | Construction Management</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            safetyYellow: '#F9A825',
+            safetyYellowHover: '#E69500',
+            charcoal: '#1F1F1F',
+            charcoalLight: '#2D2D2D',
+            steelBlue: '#2D3E50',
+            cementGray: '#F4F4F4'
+          },
+          fontFamily: {
+            'sans': ['Inter', 'system-ui', 'sans-serif'],
+          },
+          backgroundImage: {
+            'construction-pattern': "url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop')",
+          }
+        }
+      }
+    };
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    
+    /* Background Pattern for the whole page */
+    .blueprint-bg {
+      background-color: #f3f4f6;
+      background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    
+    .dark .blueprint-bg {
+      background-color: #121212;
+      background-image: radial-gradient(#333 1px, transparent 1px);
+    }
+
+    /* Custom Input Styling */
+    .form-input-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .form-input-icon {
+      position: absolute;
+      left: 1rem;
+      z-index: 10;
+      transition: color 0.3s ease;
+    }
+
+    [dir="rtl"] .form-input-icon {
+      left: auto;
+      right: 1rem;
+    }
+
+    .form-input-field {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.75rem;
+      border-radius: 0.75rem;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    [dir="rtl"] .form-input-field {
+      padding: 0.75rem 2.75rem 0.75rem 1rem;
+    }
+
+    .form-input-field:focus {
+      outline: none;
+      border-color: #F9A825;
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(249, 168, 37, 0.1);
+    }
+
+    /* Dark Mode Inputs */
+    .dark .form-input-field {
+      background: #2D2D2D;
+      border-color: #404040;
+      color: white;
+    }
+    .dark .form-input-field:focus {
+      background: #262626;
+    }
+
+    .form-input-field:focus + .form-input-icon,
+    .form-input-container:focus-within .form-input-icon {
+      color: #F9A825;
+    }
+
+    /* Tabs */
+    .tab-btn {
+      position: relative;
+      color: #6b7280;
+    }
+    .tab-btn.active {
+      color: #F9A825;
+    }
+    .tab-btn::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: #F9A825;
+      transition: width 0.3s ease;
+    }
+    .tab-btn.active::after {
+      width: 100%;
+    }
+
+    /* Password Strength */
+    .strength-segment {
+      height: 4px;
+      border-radius: 2px;
+      background: #e5e7eb;
+      transition: all 0.3s ease;
+    }
+    .dark .strength-segment { background: #404040; }
+
+    /* Toast */
+    #messageToast {
+      transform: translateY(150%);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    #messageToast.show { transform: translateY(0); }
+
+    /* Glass Effect for Image Overlay */
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+
+<body class="blueprint-bg text-steelBlue dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-300">
+
+  <!-- Floating Header Controls -->
+  <div class="fixed top-4 right-4 z-50 flex gap-2">
+    <button id="rtlToggle" class="h-10 w-10 rounded-full bg-white dark:bg-charcoal border border-gray-200 dark:border-gray-700 shadow-lg flex items-center justify-center hover:scale-105 transition-transform text-gray-600 dark:text-gray-300" title="Switch Direction">
+      <i class="fas fa-right-left text-xs"></i>
+    </button>
+    <button id="themeToggle" class="h-10 w-10 rounded-full bg-white dark:bg-charcoal border border-gray-200 dark:border-gray-700 shadow-lg flex items-center justify-center hover:scale-105 transition-transform text-gray-600 dark:text-gray-300" title="Toggle Theme">
+      <i id="themeIcon" class="fas fa-moon text-xs"></i>
+    </button>
+  </div>
+
+  <main class="flex-grow flex items-center justify-center p-4 sm:p-6 lg:p-8">
+    
+    <!-- Main Card Container -->
+    <div class="w-full max-w-[1100px] bg-white dark:bg-[#1F1F1F] rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row transition-colors duration-300 min-h-[600px]">
+      
+      <!-- LEFT SIDE: Visual/Brand (Hidden on Mobile, Visible on Desktop) -->
+      <div class="hidden lg:flex lg:w-1/2 relative bg-gray-900 overflow-hidden flex-col justify-between p-12 text-white">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+          <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2831&auto=format&fit=crop" class="w-full h-full object-cover opacity-60" alt="Construction Site">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/30"></div>
+        </div>
+
+        <!-- Content relative z-10 -->
+        <div class="relative z-10">
+       <div class="flex justify-center mb-8">
+  <a href="index.html" class="flex items-center gap-3 group">
+    
+    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-safetyYellow text-charcoal shadow-lg group-hover:scale-110 transition-transform">
+      <i class="fas fa-hard-hat text-lg"></i>
+    </span>
+
+    <div class="leading-tight text-left">
+      <span class="block text-xl font-bold tracking-tight text-white">
+        Groww
+      </span>
+      <span class="block text-xs font-medium text-safetyYellow uppercase tracking-widest">
+        Builders
+      </span>
+    </div>
+
+  </a>
+</div>
+
+
+          
+          <h2 class="text-4xl font-bold leading-tight mb-4">Build the future,<br>manage with precision.</h2>
+          <p class="text-gray-300 text-lg max-w-sm">Streamline your construction projects, track inventory, and manage your workforce in one unified dashboard.</p>
+        </div>
+
+        <!-- Stats/Social Proof -->
+        <div class="relative z-10 mt-auto">
+          <div class="glass-panel p-6 rounded-2xl">
+            <div class="flex items-center gap-4 mb-3">
+              <div class="flex -space-x-3">
+                <img class="w-10 h-10 rounded-full border-2 border-white/20" src="https://i.pravatar.cc/100?img=11" alt="User">
+                <img class="w-10 h-10 rounded-full border-2 border-white/20" src="https://i.pravatar.cc/100?img=12" alt="User">
+                <img class="w-10 h-10 rounded-full border-2 border-white/20" src="https://i.pravatar.cc/100?img=33" alt="User">
+              </div>
+              <div>
+                <div class="flex text-safetyYellow text-xs mb-0.5">
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="text-xs font-medium text-white">Trusted by 2,000+ Engineers</p>
+              </div>
+            </div>
+            <p class="text-sm text-gray-300 italic">"SiteWorks completely transformed how we handle on-site logistics. A must-have tool."</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE: Form Area -->
+      <div class="w-full lg:w-1/2 p-6 sm:p-10 lg:p-14 flex flex-col justify-center">
+        
+        <!-- Mobile Header (Only visible on small screens) -->
+      <!-- Mobile Header (Only visible on small screens) -->
+<div class="lg:hidden flex items-center justify-center mb-8">
+  <a href="index.html" class="flex items-center gap-3 group">
+    
+    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-safetyYellow text-charcoal shadow-lg group-hover:scale-110 transition-transform">
+      <i class="fas fa-hard-hat text-lg"></i>
+    </span>
+
+    <div class="leading-tight text-left">
+      <span class="block text-lg font-bold tracking-tight text-steelBlue dark:text-white">
+        Groww
+      </span>
+      <span class="block text-[10px] font-medium text-safetyYellow uppercase tracking-widest">
+        Builders
+      </span>
+    </div>
+
+  </a>
+</div>
+
+        <div class="max-w-md mx-auto w-full">
+          <!-- Welcome Text -->
+          <div class="mb-8 text-center lg:text-left">
+            <h1 id="formTitle" class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2">Welcome Back</h1>
+            <p id="formSubtitle" class="text-gray-500 dark:text-gray-400 text-sm">Please enter your details to access your dashboard.</p>
+          </div>
+
+          <!-- Tabs -->
+          <div class="flex border-b-2 border-gray-100 dark:border-gray-800 mb-8">
+            <button onclick="switchTab('login')" id="loginTab" class="tab-btn active flex-1 pb-3 text-sm font-semibold transition-colors">Log In</button>
+            <button onclick="switchTab('register')" id="registerTab" class="tab-btn flex-1 pb-3 text-sm font-semibold transition-colors">Sign Up</button>
+          </div>
+
+          <!-- Login Form -->
+          <form id="loginForm" class="space-y-5 animate-fade-in">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 ml-1">Email</label>
+              <div class="form-input-container">
+                <i class="fas fa-envelope form-input-icon text-gray-400"></i>
+                <input type="email" placeholder="engineer@site.com" class="form-input-field" required>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 ml-1">Password</label>
+              <div class="form-input-container">
+                <i class="fas fa-lock form-input-icon text-gray-400"></i>
+                <input type="password" placeholder="••••••••" class="form-input-field" required>
+                <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-safetyYellow transition-colors toggle-password p-1">
+                  <i class="fas fa-eye text-xs"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <input type="checkbox" class="accent-safetyYellow h-4 w-4 rounded border-gray-300 transition-colors">
+                <span class="text-xs font-medium text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200">Remember me</span>
+              </label>
+              <a href="#" class="text-xs font-bold text-safetyYellow hover:text-safetyYellowHover transition-colors">Forgot Password</a>
+            </div>
+
+            <button type="submit" class="w-full py-3.5 bg-safetyYellow hover:bg-safetyYellowHover text-charcoal font-bold rounded-xl shadow-lg shadow-yellow-500/20 hover:shadow-yellow-500/30 transform hover:-translate-y-0.5 transition-all duration-200 text-sm">
+              Access Dashboard
+            </button>
+          </form>
+
+          <!-- Register Form (Hidden) -->
+          <form id="registerForm" class="space-y-4 hidden">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 ml-1">First Name</label>
+                <div class="form-input-container">
+                  <i class="fas fa-user form-input-icon text-gray-400"></i>
+                  <input type="text" placeholder="John" class="form-input-field" required>
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 ml-1">Last Name</label>
+                <div class="form-input-container">
+                  <i class="fas fa-user-tag form-input-icon text-gray-400"></i>
+                  <input type="text" placeholder="Doe" class="form-input-field" required>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 ml-1">Work Email</label>
+              <div class="form-input-container">
+                <i class="fas fa-building form-input-icon text-gray-400"></i>
+                <input type="email" placeholder="john@company.com" class="form-input-field" required>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 ml-1">Password</label>
+              <div class="form-input-container">
+                <i class="fas fa-key form-input-icon text-gray-400"></i>
+                <input type="password" id="regPassword" placeholder="Create a strong password" class="form-input-field" required>
+              </div>
+              <!-- Strength Bars -->
+              <div class="grid grid-cols-4 gap-1 mt-2 px-1">
+                <div class="strength-segment" id="s1"></div>
+                <div class="strength-segment" id="s2"></div>
+                <div class="strength-segment" id="s3"></div>
+                <div class="strength-segment" id="s4"></div>
+              </div>
+            </div>
+
+            <!-- Terms and Conditions Checkbox -->
+            <div class="flex items-start gap-2 mt-2">
+              <div class="flex items-center h-5">
+                <input type="checkbox" id="terms" class="accent-safetyYellow h-4 w-4 rounded border-gray-300 transition-colors cursor-pointer" required>
+              </div>
+              <label for="terms" class="text-xs font-medium text-gray-600 dark:text-gray-400 cursor-pointer">
+                I agree to the <a href="#" class="text-safetyYellow hover:text-safetyYellowHover hover:underline">Terms and Conditions</a> and <a href="#" class="text-safetyYellow hover:text-safetyYellowHover hover:underline">Privacy Policy</a>
+              </label>
+            </div>
+
+            <button type="submit" class="w-full py-3.5 bg-charcoal dark:bg-white text-white dark:text-charcoal font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 text-sm mt-2">
+              Create Account
+            </button>
+          </form>
+
+          <!-- Social Login -->
+          <div class="relative my-8">
+            <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-100 dark:border-gray-800"></div></div>
+            <div class="relative flex justify-center text-[10px] uppercase font-bold tracking-widest text-gray-400">
+              <span class="px-2 bg-white dark:bg-[#1F1F1F]">Or continue with</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <button class="flex items-center justify-center gap-2 p-2.5 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group">
+              <i class="fab fa-google text-red-500 group-hover:scale-110 transition-transform"></i>
+              <span class="text-xs font-bold text-gray-600 dark:text-gray-300">Google</span>
+            </button>
+            <button class="flex items-center justify-center gap-2 p-2.5 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group">
+              <i class="fab fa-microsoft text-blue-500 group-hover:scale-110 transition-transform"></i>
+              <span class="text-xs font-bold text-gray-600 dark:text-gray-300">Microsoft</span>
+            </button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Message Toast -->
+  <div id="messageToast" class="fixed bottom-6 right-6 z-50">
+    <div class="bg-charcoal dark:bg-white text-white dark:text-charcoal px-6 py-4 rounded-xl shadow-2xl flex items-center gap-4">
+      <div class="h-8 w-8 rounded-full bg-green-500 flex items-center justify-center text-white text-sm">
+        <i class="fas fa-check"></i>
+      </div>
+      <div>
+        <h4 class="text-sm font-bold">Success</h4>
+        <p id="toastContent" class="text-xs opacity-90">Welcome to the platform!</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- THEME LOGIC ---
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const html = document.documentElement;
+
+    function updateTheme(isDark) {
+      if (isDark) {
+        html.classList.add('dark');
+        themeIcon.className = 'fas fa-sun';
+      } else {
+        html.classList.remove('dark');
+        themeIcon.className = 'fas fa-moon';
+      }
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      updateTheme(!html.classList.contains('dark'));
+    });
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      updateTheme(true);
+    }
+
+    // --- RTL LOGIC ---
+    const rtlToggle = document.getElementById('rtlToggle');
+    rtlToggle.addEventListener('click', () => {
+      const isRTL = document.body.dir === 'rtl';
+      document.body.dir = isRTL ? 'ltr' : 'rtl';
+      document.documentElement.lang = isRTL ? 'en' : 'ar';
+    });
+
+    // --- TAB SWITCHING ---
+    function switchTab(target) {
+      const loginTab = document.getElementById('loginTab');
+      const registerTab = document.getElementById('registerTab');
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+      const title = document.getElementById('formTitle');
+      const subtitle = document.getElementById('formSubtitle');
+
+      if (target === 'login') {
+        loginTab.classList.add('active');
+        registerTab.classList.remove('active');
+        loginForm.classList.remove('hidden');
+        registerForm.classList.add('hidden');
+        
+        // Update Title Text
+        title.innerText = "Welcome Back";
+        subtitle.innerText = "Please enter your details to access your dashboard.";
+        
+        // Animation Reset
+        loginForm.classList.remove('animate-fade-in');
+        void loginForm.offsetWidth; // trigger reflow
+        loginForm.classList.add('animate-fade-in');
+      } else {
+        registerTab.classList.add('active');
+        loginTab.classList.remove('active');
+        registerForm.classList.remove('hidden');
+        loginForm.classList.add('hidden');
+
+        // Update Title Text
+        title.innerText = "Create Account";
+        subtitle.innerText = "Start managing your construction sites today.";
+
+        // Animation Reset
+        registerForm.classList.remove('animate-fade-in');
+        void registerForm.offsetWidth;
+        registerForm.classList.add('animate-fade-in');
+      }
+    }
+
+    // --- PASSWORD VISIBILITY ---
+    document.querySelectorAll('.toggle-password').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const input = this.parentElement.querySelector('input');
+        const icon = this.querySelector('i');
+        if (input.type === 'password') {
+          input.type = 'text';
+          icon.className = 'fas fa-eye-slash text-xs';
+        } else {
+          input.type = 'password';
+          icon.className = 'fas fa-eye text-xs';
+        }
+      });
+    });
+
+    // --- PASSWORD STRENGTH ---
+    const regPassword = document.getElementById('regPassword');
+    const segments = [document.getElementById('s1'), document.getElementById('s2'), document.getElementById('s3'), document.getElementById('s4')];
+
+    if(regPassword) {
+        regPassword.addEventListener('input', (e) => {
+          const val = e.target.value;
+          let score = 0;
+          if(val.length > 5) score++;
+          if(val.length > 8) score++;
+          if(/[A-Z]/.test(val) && /[0-9]/.test(val)) score++;
+          if(/[^A-Za-z0-9]/.test(val)) score++;
+
+          // Reset
+          segments.forEach(s => { s.style.backgroundColor = ''; s.classList.remove('bg-red-500', 'bg-yellow-500', 'bg-green-500'); });
+
+          // Apply Color
+          const colors = ['bg-red-500', 'bg-yellow-500', 'bg-green-400', 'bg-green-600'];
+          
+          for(let i=0; i < 4; i++) {
+             if(i < score) {
+               segments[i].classList.add(colors[score-1] || 'bg-red-500');
+             }
+          }
+        });
+    }
+
+    // --- TOAST NOTIFICATION ---
+    function showToast(message) {
+      const toast = document.getElementById('messageToast');
+      document.getElementById('toastContent').innerText = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      showToast('Logging securely into SiteWorks...');
+    });
+
+    document.getElementById('registerForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      showToast('Creating your new account...');
+    });
+  </script>
+</body>
+</html>

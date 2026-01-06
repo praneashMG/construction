@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Growwpark | User Dashboard</title>
+  <link rel="icon" type="image/jpeg" href="assets/growwpark_logo.jpg" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          screens: {
+            'xs': '475px',
+          },
+          colors: {
+            safetyYellow: '#F9A825',
+            charcoal: '#1F1F1F',
+            concrete: '#B0B0B0',
+            steelBlue: '#2A4365',
+            darkSurface: '#121212',
+            lightSurface: '#F3F4F6'
+          },
+          fontFamily: {
+            sans: ['Open Sans', 'sans-serif'],
+            heading: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    [dir="rtl"] .rtl-flip { transform: scaleX(-1); }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    /* View Transitions */
+    .view-section {
+        display: none;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+    .view-section.active {
+        display: block;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Mobile specific adjustments */
+    @media (max-width: 640px) {
+      .touch-target {
+        min-height: 44px;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-black text-gray-800 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden" data-dir="ltr">
+
+  <!-- Mobile Overlay -->
+  <div id="sidebarOverlay" class="fixed inset-0 z-40 bg-black/50 hidden lg:hidden backdrop-blur-sm transition-opacity touch-none" onclick="toggleSidebar()"></div>
+
+  <!-- SIDEBAR (User Variant) -->
+  <aside id="sidebar" class="fixed inset-y-0 start-0 z-50 w-72 bg-steelBlue text-white transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-out flex flex-col shadow-2xl rtl:translate-x-full lg:rtl:translate-x-0 h-[100dvh]">
+    
+    <!-- Sidebar Header -->
+    <div class="h-16 md:h-20 flex items-center px-6 border-b border-white/10 bg-black/10 shrink-0">
+     <a href="index.html" class="block">
+  <div class="flex items-center gap-3 group cursor-pointer">
+    <span
+      class="flex h-10 w-10 items-center justify-center rounded-full bg-white text-steelBlue shadow-lg
+             group-hover:scale-110 transition-transform"
+    >
+      <i class="fas fa-user text-lg"></i>
+    </span>
+
+    <div class="leading-tight">
+      <span class="block text-lg font-bold tracking-tight text-white">Groww</span>
+      <span class="block text-[10px] font-bold text-safetyYellow uppercase tracking-widest">
+        BUILDERS
+      </span>
+    </div>
+  </div>
+</a>
+
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="flex-1 overflow-y-auto no-scrollbar py-6 px-4 space-y-2">
+      <p class="px-4 text-xs font-bold text-blue-200 uppercase tracking-widest mb-2">Menu</p>
+      
+      <button onclick="navigate('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 bg-white text-steelBlue rounded-lg font-bold transition-colors shadow-md nav-item touch-target">
+        <i class="fas fa-home w-5 text-center"></i> Dashboard
+      </button>
+      <button onclick="navigate('projects')" id="nav-projects" class="w-full flex items-center gap-3 px-4 py-3 text-blue-100 hover:bg-white/10 hover:text-white rounded-lg transition-colors nav-item touch-target">
+        <i class="fas fa-hard-hat w-5 text-center"></i> My Projects
+      </button>
+      <button onclick="navigate('messages')" id="nav-messages" class="w-full flex items-center gap-3 px-4 py-3 text-blue-100 hover:bg-white/10 hover:text-white rounded-lg transition-colors nav-item touch-target">
+        <i class="fas fa-envelope w-5 text-center"></i> Messages
+        <span class="ms-auto bg-safetyYellow text-charcoal text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm">3</span>
+      </button>
+      <button onclick="navigate('contracts')" id="nav-contracts" class="w-full flex items-center gap-3 px-4 py-3 text-blue-100 hover:bg-white/10 hover:text-white rounded-lg transition-colors nav-item touch-target">
+        <i class="fas fa-file-contract w-5 text-center"></i> Contracts
+      </button>
+      <button onclick="navigate('invoices')" id="nav-invoices" class="w-full flex items-center gap-3 px-4 py-3 text-blue-100 hover:bg-white/10 hover:text-white rounded-lg transition-colors nav-item touch-target">
+        <i class="fas fa-receipt w-5 text-center"></i> Invoices
+      </button>
+    </nav>
+
+    <!-- Sidebar Footer -->
+    <div class="p-4 border-t border-white/10 bg-black/10 shrink-0 pb-safe">
+        <!-- Settings Toggles -->
+        <div class="flex items-center justify-between mb-6 px-2">
+            <button id="themeToggleSidebar" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-safetyYellow hover:text-charcoal transition-colors focus:outline-none focus:ring-2 focus:ring-safetyYellow" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button onclick="navigate('dashboard')" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-safetyYellow hover:text-charcoal transition-colors" title="Home">
+                <i class="fas fa-home"></i>
+            </button>
+
+            <button id="rtlToggleSidebar" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-safetyYellow hover:text-charcoal transition-colors focus:outline-none focus:ring-2 focus:ring-safetyYellow" aria-label="Toggle RTL">
+                <i class="fas fa-exchange-alt"></i>
+            </button>
+        </div>
+
+        <!-- Auth Controls -->
+        <div class="space-y-3">
+          <a href="login.html"
+   class="w-full flex items-center justify-center gap-2 py-3 
+          bg-red-500/20 hover:bg-red-500 text-white 
+          rounded-lg font-bold transition-colors touch-target">
+  <i class="fas fa-sign-out-alt"></i> Logout
+</a>
+
+        </div>
+        
+        <!-- User Profile Stub -->
+        <div class="mt-4 flex items-center gap-3 px-2 pt-2 border-t border-white/5">
+            <div class="w-10 h-10 rounded-full bg-white text-steelBlue flex items-center justify-center font-bold text-lg border-2 border-safetyYellow shadow-sm">
+                JD
+            </div>
+            <div class="overflow-hidden">
+                <p class="text-sm font-bold text-white truncate">John Doe</p>
+                <p class="text-xs text-blue-200 truncate">Client Account</p>
+            </div>
+        </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT WRAPPER -->
+  <div class="lg:ps-72 min-h-screen flex flex-col transition-all duration-300">
+    
+    <!-- Top Header -->
+    <header class="h-16 md:h-20 bg-white dark:bg-charcoal border-b border-gray-200 dark:border-white/5 px-4 md:px-6 flex items-center justify-between sticky top-0 z-30 transition-colors duration-300 shadow-sm md:shadow-none">
+      <div class="flex items-center gap-3 md:gap-4">
+        <button onclick="toggleSidebar()" class="lg:hidden p-2 -ml-2 text-charcoal dark:text-white hover:bg-gray-100 dark:hover:bg-white/10 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-safetyYellow touch-target" aria-label="Open Sidebar">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+        <div>
+            <h1 id="pageTitle" class="text-lg md:text-2xl font-bold font-heading text-charcoal dark:text-white leading-tight truncate max-w-[200px] xs:max-w-none">Welcome back, John</h1>
+            <p id="pageSubtitle" class="text-xs text-gray-500 dark:text-gray-400 hidden xs:block">Client Dashboard</p>
+        </div>
+      </div>
+      
+      <!-- Desktop Active Project Badge -->
+      <div class="hidden md:flex bg-gray-100 dark:bg-white/5 px-4 py-2 rounded-full text-sm font-semibold text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-white/5">
+        <span class="text-safetyYellow mr-2 animate-pulse">●</span> Active Project: <span class="font-bold ml-1 text-charcoal dark:text-white">Metro Station North</span>
+      </div>
+
+      <!-- Mobile Indicators -->
+      <div class="flex items-center gap-4">
+          <div class="md:hidden w-2 h-2 rounded-full bg-safetyYellow animate-pulse" title="Active Project: Metro Station North"></div>
+          
+          <div class="relative group">
+            <button class="relative cursor-pointer touch-target p-1" onclick="document.getElementById('notifDropdown').classList.toggle('hidden')">
+                <i class="fas fa-bell text-gray-400 text-xl"></i>
+                <span class="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white dark:border-charcoal"></span>
+            </button>
+            <!-- Dropdown -->
+            <div id="notifDropdown" class="hidden absolute right-0 top-full mt-2 w-72 bg-white dark:bg-zinc-800 rounded-xl shadow-xl border border-gray-200 dark:border-white/10 p-2 z-50">
+                <p class="text-xs font-bold text-gray-500 px-3 py-2 uppercase">Notifications</p>
+                <div class="space-y-1">
+                    <a href="#" onclick="navigate('invoices')" class="block px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg text-charcoal dark:text-white">
+                        <i class="fas fa-file-invoice text-blue-500 mr-2"></i> New Invoice #INV-001
+                    </a>
+                    <a href="#" class="block px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg text-charcoal dark:text-white">
+                        <i class="fas fa-hard-hat text-yellow-500 mr-2"></i> Safety Report Added
+                    </a>
+                </div>
+            </div>
+          </div>
+      </div>
+    </header>
+
+    <!-- Content Area -->
+    <main class="flex-1 p-4 md:p-6 lg:p-8 space-y-6 md:space-y-8 relative overflow-x-hidden">
+      
+      <!-- VIEW: DASHBOARD (Home) -->
+      <div id="view-dashboard" class="view-section active">
+          <!-- Section 1: Project Status Hero -->
+          <div class="bg-charcoal text-white rounded-2xl p-5 md:p-8 shadow-xl relative overflow-hidden group border border-white/5 mb-8">
+            <div class="absolute top-0 right-0 w-40 md:w-64 h-40 md:h-64 bg-safetyYellow/10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3 group-hover:bg-safetyYellow/20 transition-colors duration-500 pointer-events-none"></div>
+            
+            <div class="relative z-10">
+                <div class="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6">
+                    <div>
+                        <h2 class="text-xl md:text-3xl font-bold font-heading mb-1 break-words">Metro Station North</h2>
+                        <p class="text-xs md:text-sm text-gray-400 flex items-center gap-2">
+                            <span>ID: #88219</span>
+                            <span class="w-1 h-1 bg-gray-600 rounded-full"></span>
+                            <span>Started: Jan 15, 2026</span>
+                        </p>
+                    </div>
+                    <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded text-xs md:text-sm font-bold border border-green-500/30 flex items-center gap-2 self-start">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> On Schedule
+                    </span>
+                </div>
+                
+                <div class="mb-2 flex justify-between text-sm font-bold">
+                    <span>Completion Status</span>
+                    <span>75%</span>
+                </div>
+                <div class="w-full bg-white/10 rounded-full h-3 md:h-4 mb-8 backdrop-blur-sm">
+                    <div class="bg-safetyYellow h-3 md:h-4 rounded-full transition-all duration-1000 shadow-[0_0_15px_rgba(249,168,37,0.5)]" style="width: 75%"></div>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-4 pt-6 border-t border-white/10">
+                    <div class="space-y-1">
+                        <p class="text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">Next Milestone</p>
+                        <p class="font-bold text-sm md:text-base">Roof Installation</p>
+                    </div>
+                    <div class="space-y-1">
+                        <p class="text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">Due Date</p>
+                        <p class="font-bold text-sm md:text-base">Dec 10, 2025</p>
+                    </div>
+                    <div class="space-y-1">
+                        <p class="text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">Budget Used</p>
+                        <p class="font-bold text-sm md:text-base">$900k <span class="text-gray-500 font-normal">/ $1.2M</span></p>
+                    </div>
+                    <div class="space-y-1">
+                        <p class="text-[10px] md:text-xs text-gray-400 uppercase tracking-widest font-bold">Manager</p>
+                        <div class="flex items-center gap-2">
+                            <div class="w-5 h-5 rounded-full bg-safetyYellow text-charcoal text-[10px] flex items-center justify-center font-bold">MA</div>
+                            <p class="font-bold text-sm md:text-base">Mikey Aloe</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+          <!-- Section 2 & 3 Combined in Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+            
+            <!-- Section 2: Notifications & Timeline -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Notifications -->
+                <div class="bg-white dark:bg-zinc-800 rounded-xl shadow-sm border border-gray-200 dark:border-white/5 overflow-hidden">
+                    <div class="p-5 md:p-6 border-b border-gray-100 dark:border-white/5 flex justify-between items-center">
+                        <h3 class="text-base md:text-lg font-bold text-charcoal dark:text-white font-heading">Recent Notifications</h3>
+                        <button onclick="navigate('messages')" class="text-xs font-bold text-safetyYellow hover:underline p-2">View All</button>
+                    </div>
+                    <div class="divide-y divide-gray-100 dark:divide-white/5">
+                        <div onclick="navigate('invoices')" class="flex gap-4 p-4 md:p-5 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors cursor-pointer group">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-file-invoice"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-bold text-charcoal dark:text-white text-sm truncate">New Invoice Generated</h4>
+                                    <span class="text-[10px] text-gray-400 whitespace-nowrap ml-2">2h ago</span>
+                                </div>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate">Invoice #INV-2026-001 is ready for review.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 p-4 md:p-5 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors cursor-pointer group">
+                            <div class="w-10 h-10 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-hard-hat"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-bold text-charcoal dark:text-white text-sm truncate">Site Safety Update</h4>
+                                    <span class="text-[10px] text-gray-400 whitespace-nowrap ml-2">Yesterday</span>
+                                </div>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate">Weekly safety inspection completed. 100% compliance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="bg-white dark:bg-zinc-800 rounded-xl shadow-sm border border-gray-200 dark:border-white/5 p-5 md:p-6">
+                    <h3 class="text-base md:text-lg font-bold text-charcoal dark:text-white mb-6 font-heading">Upcoming Milestones</h3>
+                    <div class="space-y-6 relative pl-2">
+                        <div class="absolute left-[19px] top-2 bottom-2 w-0.5 bg-gray-100 dark:bg-white/10"></div>
+                        <div class="relative flex items-start gap-4">
+                            <div class="w-4 h-4 bg-green-500 rounded-full border-4 border-white dark:border-zinc-800 z-10 mt-1"></div>
+                            <div class="flex-1">
+                                <h4 class="text-sm font-bold text-charcoal dark:text-white">Foundation Complete</h4>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Signed off on Nov 15</p>
+                            </div>
+                        </div>
+                        <div class="relative flex items-start gap-4">
+                            <div class="w-4 h-4 bg-safetyYellow rounded-full border-4 border-white dark:border-zinc-800 z-10 mt-1 animate-pulse"></div>
+                            <div class="flex-1">
+                                <h4 class="text-sm font-bold text-charcoal dark:text-white">Framing & Structure</h4>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">In Progress (Due Dec 5)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Sidebar Tools -->
+            <div class="space-y-6">
+                <!-- Weather Widget (New Section) -->
+                <div class="bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-xl shadow-sm p-5 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest opacity-80">Site Weather</p>
+                        <h4 class="text-2xl font-bold mt-1">24°C</h4>
+                        <p class="text-xs opacity-90">Partly Cloudy</p>
+                    </div>
+                    <i class="fas fa-cloud-sun text-4xl opacity-80"></i>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="bg-white dark:bg-zinc-800 rounded-xl shadow-sm border border-gray-200 dark:border-white/5 p-5 md:p-6">
+                    <h3 class="text-base md:text-lg font-bold text-charcoal dark:text-white mb-4 font-heading">Quick Actions</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="openModal('requestModal')" class="p-4 bg-gray-50 dark:bg-white/5 hover:bg-safetyYellow hover:text-charcoal rounded-xl flex flex-col items-center gap-2 transition-all">
+                            <i class="fas fa-plus-circle text-xl"></i>
+                            <span class="text-xs font-bold">New Request</span>
+                        </button>
+                        <button onclick="openModal('contactModal')" class="p-4 bg-gray-50 dark:bg-white/5 hover:bg-safetyYellow hover:text-charcoal rounded-xl flex flex-col items-center gap-2 transition-all">
+                            <i class="fas fa-comment-dots text-xl"></i>
+                            <span class="text-xs font-bold">Contact PM</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Budget -->
+                <div class="bg-gradient-to-br from-white to-gray-50 dark:from-zinc-800 dark:to-zinc-900 rounded-xl shadow-sm border border-gray-200 dark:border-white/5 p-5 md:p-6">
+                    <h3 class="text-xs md:text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Budget Overview</h3>
+                    <div class="flex justify-between items-end mb-2">
+                        <span class="text-xl md:text-2xl font-black text-charcoal dark:text-white">$900k</span>
+                        <span class="text-xs font-semibold text-gray-500 mb-1">of $1.2M</span>
+                    </div>
+                    <div class="w-full bg-gray-200 dark:bg-black/30 rounded-full h-2">
+                        <div class="bg-safetyYellow h-2 rounded-full" style="width: 75%"></div>
+                    </div>
+                </div>
+            </div>
+          </div>
+      </div>
+
+      <!-- VIEW: PROJECTS -->
+      <div id="view-projects" class="view-section">
+          
+          <!-- Section 1: Header & Filters -->
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+              <div>
+                  <h2 class="text-2xl font-bold font-heading text-charcoal dark:text-white">My Projects</h2>
+                  <p class="text-sm text-gray-500 dark:text-gray-400">Manage your ongoing and completed sites</p>
+              </div>
+              <div class="flex bg-gray-100 dark:bg-zinc-800 p-1 rounded-lg self-start md:self-auto">
+                  <button class="px-4 py-1.5 text-xs font-bold rounded-md bg-white dark:bg-zinc-700 shadow-sm text-charcoal dark:text-white">Active</button>
+                  <button class="px-4 py-1.5 text-xs font-bold rounded-md text-gray-500 dark:text-gray-400 hover:text-charcoal dark:hover:text-white transition-colors">Completed</button>
+                  <button class="px-4 py-1.5 text-xs font-bold rounded-md text-gray-500 dark:text-gray-400 hover:text-charcoal dark:hover:text-white transition-colors">All</button>
+              </div>
+          </div>
+
+          <!-- Section 2: Featured Active Project -->
+          <div class="bg-white dark:bg-zinc-800 rounded-2xl shadow-sm border border-gray-200 dark:border-white/5 overflow-hidden mb-8 group">
+              <div class="h-48 bg-gray-200 dark:bg-zinc-700 relative">
+                  <!-- Gradient Overlay -->
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+                      <div class="flex justify-between items-end">
+                          <div>
+                              <span class="bg-safetyYellow text-charcoal text-[10px] font-bold px-2 py-1 rounded mb-2 inline-block">IN PROGRESS</span>
+                              <h3 class="text-2xl md:text-3xl font-bold text-white font-heading">Metro Station North</h3>
+                              <p class="text-white/80 text-sm mt-1"><i class="fas fa-map-marker-alt mr-1 text-safetyYellow"></i> 124 Greenway Blvd, Downtown</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="p-6">
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <!-- Progress Details -->
+                      <div class="md:col-span-2 space-y-6">
+                          <div>
+                              <div class="flex justify-between items-center mb-2">
+                                  <span class="text-sm font-bold text-gray-500 dark:text-gray-400">Overall Completion</span>
+                                  <span class="text-lg font-bold text-charcoal dark:text-white">75%</span>
+                              </div>
+                              <div class="w-full bg-gray-100 dark:bg-zinc-700 rounded-full h-3">
+                                  <div class="bg-safetyYellow h-3 rounded-full relative" style="width: 75%">
+                                      <div class="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1/2 w-4 h-4 bg-white border-2 border-safetyYellow rounded-full shadow-sm"></div>
+                                  </div>
+                              </div>
+                          </div>
+                          
+                          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                              <div class="p-3 bg-gray-50 dark:bg-zinc-700/30 rounded-xl border border-gray-100 dark:border-white/5">
+                                  <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">Start Date</p>
+                                  <p class="font-bold text-charcoal dark:text-white text-sm">Jan 15, 2026</p>
+                              </div>
+                              <div class="p-3 bg-gray-50 dark:bg-zinc-700/30 rounded-xl border border-gray-100 dark:border-white/5">
+                                  <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">End Date</p>
+                                  <p class="font-bold text-charcoal dark:text-white text-sm">Dec 10, 2025</p>
+                              </div>
+                              <div class="p-3 bg-gray-50 dark:bg-zinc-700/30 rounded-xl border border-gray-100 dark:border-white/5">
+                                  <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">Budget</p>
+                                  <p class="font-bold text-green-600 dark:text-green-400 text-sm">$1.2M</p>
+                              </div>
+                              <div class="p-3 bg-gray-50 dark:bg-zinc-700/30 rounded-xl border border-gray-100 dark:border-white/5">
+                                  <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">Team</p>
+                                  <div class="flex -space-x-2 mt-0.5">
+                                      <div class="w-6 h-6 rounded-full bg-blue-500 border-2 border-white dark:border-zinc-800"></div>
+                                      <div class="w-6 h-6 rounded-full bg-green-500 border-2 border-white dark:border-zinc-800"></div>
+                                      <div class="w-6 h-6 rounded-full bg-gray-300 border-2 border-white dark:border-zinc-800 flex items-center justify-center text-[8px] font-bold text-charcoal">+4</div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <!-- Quick Actions Column -->
+                      <div class="flex flex-col gap-3 justify-center border-t md:border-t-0 md:border-l border-gray-100 dark:border-white/10 pt-6 md:pt-0 md:pl-6">
+                          <button onclick="navigate('dashboard')" class="w-full py-3 bg-charcoal dark:bg-white dark:text-charcoal text-white rounded-xl font-bold text-sm hover:opacity-90 transition-opacity shadow-lg shadow-charcoal/20">
+                              View Dashboard
+                          </button>
+                          <button class="w-full py-3 border border-gray-200 dark:border-zinc-600 rounded-xl font-bold text-sm text-charcoal dark:text-white hover:bg-gray-50 dark:hover:bg-zinc-700 transition-colors">
+                              Site Reports
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Section 3: Past Projects Grid -->
+          <h3 class="text-lg font-bold text-charcoal dark:text-white mb-4 pl-1">Past Projects</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Card 2 -->
+              <div class="bg-white dark:bg-zinc-800 rounded-xl p-5 border border-gray-200 dark:border-white/5 flex gap-4 items-center shadow-sm hover:shadow-md transition-all cursor-pointer group">
+                  <div class="w-16 h-16 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-2xl text-green-600 group-hover:scale-110 transition-transform duration-300">
+                      <i class="fas fa-tree"></i>
+                  </div>
+                  <div class="flex-1">
+                      <h4 class="font-bold text-charcoal dark:text-white text-lg group-hover:text-steelBlue transition-colors">City Park Renovation</h4>
+                      <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Completed Dec 2023</p>
+                  </div>
+                  <div class="text-right">
+                      <span class="inline-block text-[10px] uppercase font-bold text-green-700 bg-green-100 dark:bg-green-900/50 px-2 py-1 rounded-md">Done</span>
+                  </div>
+              </div>
+              
+              <!-- Card 3 -->
+              <div class="bg-white dark:bg-zinc-800 rounded-xl p-5 border border-gray-200 dark:border-white/5 flex gap-4 items-center shadow-sm hover:shadow-md transition-all cursor-pointer opacity-75 hover:opacity-100 group">
+                  <div class="w-16 h-16 rounded-lg bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-2xl text-gray-400 group-hover:scale-110 transition-transform duration-300">
+                      <i class="fas fa-warehouse"></i>
+                  </div>
+                  <div class="flex-1">
+                      <h4 class="font-bold text-charcoal dark:text-white text-lg group-hover:text-steelBlue transition-colors">Old Warehouse</h4>
+                      <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Completed Aug 2022</p>
+                  </div>
+                  <div class="text-right">
+                      <span class="inline-block text-[10px] uppercase font-bold text-gray-500 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-md">Archived</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- VIEW: MESSAGES -->
+      <div id="view-messages" class="view-section">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[calc(100vh-140px)]">
+              <!-- Section 1: Contacts List -->
+              <div class="hidden lg:block bg-white dark:bg-zinc-800 rounded-2xl shadow-sm border border-gray-200 dark:border-white/5 overflow-hidden">
+                  <div class="p-4 border-b border-gray-100 dark:border-white/5 bg-gray-50 dark:bg-white/5">
+                      <h3 class="font-bold text-charcoal dark:text-white">Contacts</h3>
+                  </div>
+                  <div class="p-2 space-y-1 overflow-y-auto h-full">
+                      <div class="flex items-center gap-3 p-3 rounded-xl bg-blue-50 dark:bg-blue-900/20 cursor-pointer">
+                          <div class="w-10 h-10 rounded-full bg-safetyYellow text-charcoal flex items-center justify-center font-bold text-sm">MA</div>
+                          <div>
+                              <p class="text-sm font-bold text-charcoal dark:text-white">Mikey Aloe</p>
+                              <p class="text-xs text-gray-500">Project Manager</p>
+                          </div>
+                      </div>
+                      <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 cursor-pointer">
+                          <div class="w-10 h-10 rounded-full bg-steelBlue text-white flex items-center justify-center font-bold text-sm">JS</div>
+                          <div>
+                              <p class="text-sm font-bold text-charcoal dark:text-white">Jane Smith</p>
+                              <p class="text-xs text-gray-500">Site Supervisor</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Section 2: Chat Interface -->
+              <div class="lg:col-span-2 bg-white dark:bg-zinc-800 rounded-2xl shadow-sm border border-gray-200 dark:border-white/5 flex flex-col h-full">
+                  <div class="p-4 border-b border-gray-100 dark:border-white/5 flex justify-between items-center">
+                      <h2 class="text-lg font-bold font-heading text-charcoal dark:text-white">Mikey Aloe <span class="text-xs font-normal text-gray-500 ml-2">Active now</span></h2>
+                      <button class="lg:hidden text-steelBlue"><i class="fas fa-users"></i></button>
+                  </div>
+                  <div class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-black/20">
+                      <!-- Section 3 inside chat: Pinned Notice (Example) -->
+                      <div class="bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-700/30 p-3 rounded-lg flex gap-3 mb-6">
+                          <i class="fas fa-thumbtack text-yellow-500 mt-1"></i>
+                          <div>
+                              <p class="text-xs font-bold text-yellow-800 dark:text-yellow-200 uppercase">Pinned Notice</p>
+                              <p class="text-sm text-yellow-900 dark:text-yellow-100">Site will be closed this Friday for maintenance.</p>
+                          </div>
+                      </div>
+
+                      <div class="flex gap-3">
+                          <div class="w-8 h-8 rounded-full bg-safetyYellow flex items-center justify-center text-xs font-bold text-charcoal">MA</div>
+                          <div class="bg-white dark:bg-zinc-700 p-3 rounded-tr-xl rounded-br-xl rounded-bl-xl shadow-sm max-w-[80%]">
+                              <p class="text-sm text-charcoal dark:text-white">Hi John, just wanted to update you that the roof installation is scheduled for next Tuesday.</p>
+                              <span class="text-[10px] text-gray-400 block mt-1">10:30 AM</span>
+                          </div>
+                      </div>
+                      <div class="flex gap-3 justify-end">
+                          <div class="bg-steelBlue text-white p-3 rounded-tl-xl rounded-tr-xl rounded-bl-xl shadow-sm max-w-[80%]">
+                              <p class="text-sm">Great, thanks for the update Mikey! Will the site be accessible?</p>
+                              <span class="text-[10px] text-blue-200 block mt-1">10:35 AM</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="p-4 border-t border-gray-100 dark:border-white/5 bg-white dark:bg-zinc-800 rounded-b-2xl">
+                      <div class="flex gap-2">
+                          <input type="text" placeholder="Type a message..." class="flex-1 px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-white/5 focus:outline-none focus:border-safetyYellow dark:text-white">
+                          <button class="w-10 h-10 bg-safetyYellow text-charcoal rounded-lg flex items-center justify-center hover:bg-yellow-600 transition-colors"><i class="fas fa-paper-plane"></i></button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- VIEW: CONTRACTS -->
+      <div id="view-contracts" class="view-section">
+          <!-- Section 1: Pending Actions -->
+          <div class="bg-orange-50 dark:bg-orange-900/10 border border-orange-200 dark:border-orange-700/30 rounded-xl p-4 mb-6 flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-800 text-orange-600 dark:text-orange-200 flex items-center justify-center shrink-0">
+                  <i class="fas fa-signature"></i>
+              </div>
+              <div class="flex-1">
+                  <h4 class="text-sm font-bold text-orange-800 dark:text-orange-200">Action Required</h4>
+                  <p class="text-sm text-orange-700 dark:text-orange-300 mt-1">Please review and sign the <strong>Roofing Material Addendum</strong>.</p>
+              </div>
+              <button class="px-4 py-2 bg-orange-500 text-white text-xs font-bold rounded-lg hover:bg-orange-600">Review</button>
+          </div>
+
+          <!-- Section 2: Active Contracts Grid -->
+          <div class="bg-white dark:bg-zinc-800 rounded-2xl shadow-sm p-6 border border-gray-200 dark:border-white/5 mb-6">
+              <div class="flex justify-between items-center mb-6">
+                  <h2 class="text-xl font-bold font-heading text-charcoal dark:text-white">Documents & Contracts</h2>
+                  <button class="text-xs bg-steelBlue text-white px-3 py-2 rounded hover:bg-opacity-90"><i class="fas fa-upload mr-1"></i> Upload</button>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <div class="p-4 border border-gray-200 dark:border-white/10 rounded-xl hover:border-safetyYellow transition-colors group cursor-pointer">
+                      <div class="flex items-center gap-3 mb-3">
+                          <i class="fas fa-file-pdf text-red-500 text-2xl"></i>
+                          <div>
+                              <p class="font-bold text-sm text-charcoal dark:text-white">Main_Contract.pdf</p>
+                              <p class="text-xs text-gray-500">2.4 MB • Jan 10, 2026</p>
+                          </div>
+                      </div>
+                      <div class="flex justify-end">
+                          <button class="text-xs text-steelBlue hover:underline">Download</button>
+                      </div>
+                  </div>
+                  <div class="p-4 border border-gray-200 dark:border-white/10 rounded-xl hover:border-safetyYellow transition-colors group cursor-pointer">
+                      <div class="flex items-center gap-3 mb-3">
+                          <i class="fas fa-file-image text-blue-500 text-2xl"></i>
+                          <div>
+                              <p class="font-bold text-sm text-charcoal dark:text-white">Site_Plan_A.png</p>
+                              <p class="text-xs text-gray-500">5.1 MB • Jan 12, 2026</p>
+                          </div>
+                      </div>
+                      <div class="flex justify-end">
+                          <button class="text-xs text-steelBlue hover:underline">Download</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Section 3: Archive List -->
+          <div>
+              <h3 class="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-3">Archive</h3>
+              <div class="bg-gray-100 dark:bg-white/5 rounded-xl p-4 space-y-2">
+                  <div class="flex items-center justify-between text-sm text-gray-600 dark:text-gray-300">
+                      <span><i class="fas fa-archive mr-2"></i> 2023_Project_Brief.pdf</span>
+                      <span class="text-xs opacity-60">Dec 2023</span>
+                  </div>
+                  <div class="flex items-center justify-between text-sm text-gray-600 dark:text-gray-300">
+                      <span><i class="fas fa-archive mr-2"></i> Initial_Quote.pdf</span>
+                      <span class="text-xs opacity-60">Nov 2023</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- VIEW: INVOICES -->
+      <div id="view-invoices" class="view-section">
+          <!-- Section 1: Cost Analysis Bars -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div class="bg-white dark:bg-zinc-800 rounded-2xl shadow-sm p-6 border border-gray-200 dark:border-white/5">
+                  <h3 class="text-sm font-bold text-gray-500 uppercase mb-4">Total Spend</h3>
+                  <p class="text-3xl font-black text-charcoal dark:text-white mb-2">$17,500.00</p>
+                  <p class="text-xs text-green-600 font-bold mb-4">Paid to date</p>
+                  <div class="w-full bg-gray-200 dark:bg-black/30 rounded-full h-3">
+                      <div class="bg-green-500 h-3 rounded-full" style="width: 65%"></div>
+                  </div>
+              </div>
+              <div class="bg-white dark:bg-zinc-800 rounded-2xl shadow-sm p-6 border border-gray-200 dark:border-white/5">
+                  <h3 class="text-sm font-bold text-gray-500 uppercase mb-4">Next Payment</h3>
+                  <p class="text-3xl font-black text-charcoal dark:text-white mb-2">$12,500.00</p>
+                  <p class="text-xs text-yellow-600 font-bold mb-4">Due Oct 15</p>
+                  <button class="w-full py-2 bg-steelBlue text-white rounded-lg text-sm font-bold hover:bg-opacity-90">Pay Now</button>
+              </div>
+          </div>
+<!-- Section 2: Documents & Contracts -->
+<div class="bg-white dark:bg-zinc-800 rounded-2xl shadow-sm p-6 border border-gray-200 dark:border-white/5 mb-6">
+  
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-xl font-bold font-heading text-charcoal dark:text-white">
+      Documents & Contracts
+    </h2>
+    <button class="text-xs bg-steelBlue text-white px-3 py-2 rounded-lg hover:bg-opacity-90">
+      <i class="fas fa-upload mr-1"></i> Upload
+    </button>
+  </div>
+
+  <!-- Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    
+    <!-- Card -->
+    <div class="h-full p-4 border border-gray-200 dark:border-white/10 rounded-xl 
+                hover:border-safetyYellow transition-colors flex flex-col">
+      
+      <div class="flex items-start gap-3 mb-3">
+        <i class="fas fa-file-pdf text-red-500 text-2xl shrink-0"></i>
+        <div class="min-w-0">
+          <p class="font-bold text-sm text-charcoal dark:text-white truncate">
+            Main_Contract.pdf
+          </p>
+          <p class="text-xs text-gray-500">
+            2.4 MB • Jan 10, 2026
+          </p>
+        </div>
+      </div>
+
+      <!-- Push button to bottom -->
+      <div class="mt-auto flex justify-end">
+        <button class="text-xs text-steelBlue hover:underline">
+          Download
+        </button>
+      </div>
+    </div>
+
+    <!-- Card -->
+    <div class="h-full p-4 border border-gray-200 dark:border-white/10 rounded-xl 
+                hover:border-safetyYellow transition-colors flex flex-col">
+      
+      <div class="flex items-start gap-3 mb-3">
+        <i class="fas fa-file-image text-blue-500 text-2xl shrink-0"></i>
+        <div class="min-w-0">
+          <p class="font-bold text-sm text-charcoal dark:text-white truncate">
+            Site_Plan_A.png
+          </p>
+          <p class="text-xs text-gray-500">
+            5.1 MB • Jan 12, 2026
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-auto flex justify-end">
+        <button class="text-xs text-steelBlue hover:underline">
+          Download
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+   <!-- Section 3: Payment Methods -->
+          <div>
+              <h3 class="text-lg font-bold text-charcoal dark:text-white mb-4">Payment Methods</h3>
+              <div class="flex flex-col md:flex-row gap-4">
+                  <div class="flex items-center gap-4 p-4 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-white/10 rounded-xl shadow-sm">
+                      <i class="fab fa-cc-visa text-3xl text-blue-900 dark:text-blue-400"></i>
+                      <div>
+                          <p class="font-bold text-sm text-charcoal dark:text-white">Visa ending in 4242</p>
+                          <p class="text-xs text-gray-500">Expires 12/25</p>
+                      </div>
+                      <span class="ml-auto text-xs bg-gray-100 dark:bg-white/10 px-2 py-1 rounded">Default</span>
+                  </div>
+                  <button class="flex items-center justify-center gap-2 p-4 border-2 border-dashed border-gray-300 dark:border-white/20 rounded-xl text-gray-500 hover:text-charcoal hover:border-charcoal transition-colors">
+                      <i class="fas fa-plus"></i> Add Method
+                  </button>
+              </div>
+          </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- MODALS -->
+  
+  <!-- Request Modal -->
+  <div id="requestModal" class="fixed inset-0 z-50 bg-black/70 hidden items-center justify-center backdrop-blur-sm p-4">
+      <div class="bg-white dark:bg-zinc-800 rounded-2xl shadow-2xl w-full max-w-lg transform scale-95 transition-all">
+          <div class="px-6 py-4 border-b border-gray-100 dark:border-white/10 flex justify-between items-center">
+              <h3 class="font-bold text-lg text-charcoal dark:text-white">New Request</h3>
+              <button onclick="closeModal('requestModal')" class="text-gray-400 hover:text-red-500"><i class="fas fa-times"></i></button>
+          </div>
+          <div class="p-6 space-y-4">
+              <div>
+                  <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Subject</label>
+                  <input type="text" placeholder="e.g. Change order request" class="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-white/5 focus:outline-none focus:border-safetyYellow dark:text-white">
+              </div>
+              <div>
+                  <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Description</label>
+                  <textarea rows="4" placeholder="Describe your request..." class="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-white/5 focus:outline-none focus:border-safetyYellow dark:text-white"></textarea>
+              </div>
+          </div>
+          <div class="px-6 py-4 bg-gray-50 dark:bg-white/5 flex justify-end gap-2 rounded-b-2xl">
+              <button onclick="closeModal('requestModal')" class="px-4 py-2 text-sm font-bold text-gray-500 hover:text-charcoal">Cancel</button>
+              <button onclick="closeModal('requestModal')" class="px-4 py-2 text-sm font-bold bg-safetyYellow text-charcoal rounded-lg hover:bg-yellow-600 shadow-sm">Submit Request</button>
+          </div>
+      </div>
+  </div>
+
+  <!-- Contact Modal -->
+  <div id="contactModal" class="fixed inset-0 z-50 bg-black/70 hidden items-center justify-center backdrop-blur-sm p-4">
+      <div class="bg-white dark:bg-zinc-800 rounded-2xl shadow-2xl w-full max-w-md transform scale-95 transition-all">
+          <div class="px-6 py-4 border-b border-gray-100 dark:border-white/10 flex justify-between items-center">
+              <h3 class="font-bold text-lg text-charcoal dark:text-white">Contact Project Manager</h3>
+              <button onclick="closeModal('contactModal')" class="text-gray-400 hover:text-red-500"><i class="fas fa-times"></i></button>
+          </div>
+          <div class="p-6 space-y-4">
+              <div class="flex items-center gap-3 mb-4">
+                  <div class="w-12 h-12 rounded-full bg-safetyYellow text-charcoal flex items-center justify-center font-bold text-lg">MA</div>
+                  <div>
+                      <p class="font-bold text-charcoal dark:text-white">Mikey Aloe</p>
+                      <p class="text-xs text-gray-500">Project Manager • mikey@siteworks.com</p>
+                  </div>
+              </div>
+              <textarea rows="3" placeholder="Type your quick message here..." class="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-white/5 focus:outline-none focus:border-safetyYellow dark:text-white"></textarea>
+          </div>
+          <div class="px-6 py-4 bg-gray-50 dark:bg-white/5 flex justify-end gap-2 rounded-b-2xl">
+              <button onclick="closeModal('contactModal')" class="px-4 py-2 text-sm font-bold text-gray-500 hover:text-charcoal">Cancel</button>
+              <button onclick="closeModal('contactModal')" class="px-4 py-2 text-sm font-bold bg-steelBlue text-white rounded-lg hover:bg-opacity-90 shadow-sm">Send</button>
+          </div>
+      </div>
+  </div>
+
+  <!-- Schedule Modal (Simple) -->
+  <div id="scheduleModal" class="fixed inset-0 z-50 bg-black/70 hidden items-center justify-center backdrop-blur-sm p-4">
+      <div class="bg-white dark:bg-zinc-800 rounded-2xl shadow-2xl w-full max-w-lg transform scale-95 transition-all">
+          <div class="px-6 py-4 border-b border-gray-100 dark:border-white/10 flex justify-between items-center">
+              <h3 class="font-bold text-lg text-charcoal dark:text-white">Schedule Overview</h3>
+              <button onclick="closeModal('scheduleModal')" class="text-gray-400 hover:text-red-500"><i class="fas fa-times"></i></button>
+          </div>
+          <div class="p-6">
+              <div class="space-y-4 relative pl-4 border-l-2 border-gray-200 dark:border-gray-700 ml-2">
+                  <div class="relative">
+                      <div class="absolute -left-[21px] top-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white dark:border-zinc-800"></div>
+                      <p class="text-sm font-bold text-charcoal dark:text-white">Nov 15 - Foundation</p>
+                      <p class="text-xs text-green-500">Completed</p>
+                  </div>
+                  <div class="relative">
+                      <div class="absolute -left-[21px] top-1 w-3 h-3 bg-safetyYellow rounded-full border-2 border-white dark:border-zinc-800 animate-pulse"></div>
+                      <p class="text-sm font-bold text-charcoal dark:text-white">Dec 05 - Framing</p>
+                      <p class="text-xs text-yellow-500">In Progress</p>
+                  </div>
+                  <div class="relative">
+                      <div class="absolute -left-[21px] top-1 w-3 h-3 bg-gray-300 rounded-full border-2 border-white dark:border-zinc-800"></div>
+                      <p class="text-sm font-bold text-gray-400">Dec 10 - Roofing</p>
+                      <p class="text-xs text-gray-400">Upcoming</p>
+                  </div>
+                  <div class="relative">
+                      <div class="absolute -left-[21px] top-1 w-3 h-3 bg-gray-300 rounded-full border-2 border-white dark:border-zinc-800"></div>
+                      <p class="text-sm font-bold text-gray-400">Jan 15 - Electrical</p>
+                      <p class="text-xs text-gray-400">Upcoming</p>
+                  </div>
+              </div>
+          </div>
+          <div class="px-6 py-4 bg-gray-50 dark:bg-white/5 flex justify-end rounded-b-2xl">
+              <button onclick="closeModal('scheduleModal')" class="px-4 py-2 text-sm font-bold bg-gray-200 dark:bg-gray-700 text-charcoal dark:text-white rounded-lg">Close</button>
+          </div>
+      </div>
+  </div>
+
+  <script>
+    // --- APP STATE & NAVIGATION ---
+    const appContainer = document.querySelector('.min-h-screen'); // Helper to find main wrap
+    const loginScreen = document.getElementById('loginScreen');
+
+    document.addEventListener('DOMContentLoaded', () => {
+        checkLoginState();
+    });
+
+    function navigate(viewId) {
+        // 1. Hide all views
+        document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+        
+        // 2. Show target view
+        const target = document.getElementById(`view-${viewId}`);
+        if(target) target.classList.add('active');
+
+        // 3. Update Title
+        const titles = {
+            'dashboard': 'Welcome back, John',
+            'projects': 'My Projects',
+            'messages': 'Messages',
+            'contracts': 'Contracts & Docs',
+            'invoices': 'Invoices'
+        };
+        const subTitles = {
+            'dashboard': 'Client Dashboard',
+            'projects': 'Manage your active sites',
+            'messages': 'Team Communication',
+            'contracts': 'Legal & Files',
+            'invoices': 'Billing History'
+        };
+        document.getElementById('pageTitle').textContent = titles[viewId] || 'Dashboard';
+        document.getElementById('pageSubtitle').textContent = subTitles[viewId] || '';
+
+        // 4. Update Sidebar Active State
+        document.querySelectorAll('.nav-item').forEach(el => {
+            el.classList.remove('bg-white', 'text-steelBlue', 'shadow-md');
+            el.classList.add('text-blue-100', 'hover:bg-white/10', 'hover:text-white');
+        });
+        const activeNav = document.getElementById(`nav-${viewId}`);
+        if(activeNav) {
+            activeNav.classList.remove('text-blue-100', 'hover:bg-white/10', 'hover:text-white');
+            activeNav.classList.add('bg-white', 'text-steelBlue', 'shadow-md');
+        }
+
+        // 5. Close sidebar on mobile
+        if (window.innerWidth < 1024) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            if (!sidebar.classList.contains('-translate-x-full')) {
+                toggleSidebar();
+            }
+        }
+    }
+
+    // --- MODALS ---
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if(!modal) return;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if(!modal) return;
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+
+    // --- SIDEBAR LOGIC ---
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const htmlEl = document.documentElement;
+    const bodyEl = document.body;
+
+    function toggleSidebar() {
+        const isClosed = sidebar.classList.contains('-translate-x-full') || (htmlEl.getAttribute('dir') === 'rtl' && sidebar.classList.contains('translate-x-full'));
+        if (isClosed) {
+            sidebar.classList.remove('-translate-x-full', 'rtl:translate-x-full'); 
+            overlay.classList.remove('hidden');
+            bodyEl.style.overflow = 'hidden'; 
+        } else {
+            if(htmlEl.getAttribute('dir') === 'rtl') sidebar.classList.add('rtl:translate-x-full');
+            else sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+            bodyEl.style.overflow = '';
+        }
+    }
+
+    // --- THEME ---
+    const themeBtn = document.getElementById('themeToggleSidebar');
+    function setTheme(isDark) {
+      if (isDark) {
+        htmlEl.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+      } else {
+        htmlEl.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+        themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+    }
+    themeBtn.addEventListener('click', () => setTheme(!htmlEl.classList.contains('dark')));
+    
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) setTheme(true);
+    else setTheme(false);
+
+    // --- RTL ---
+    const rtlBtn = document.getElementById('rtlToggleSidebar');
+    rtlBtn.addEventListener('click', () => {
+        const currentDir = htmlEl.getAttribute('dir') || 'ltr';
+        const newDir = currentDir === 'ltr' ? 'rtl' : 'ltr';
+        htmlEl.setAttribute('dir', newDir);
+        bodyEl.setAttribute('dir', newDir);
+        sidebar.classList.add('-translate-x-full', 'rtl:translate-x-full');
+        overlay.classList.add('hidden');
+        bodyEl.style.overflow = '';
+    });
+
+    // --- AUTHENTICATION ---
+    function checkLoginState() {
+        const isLoggedIn = sessionStorage.getItem('userLoggedIn');
+        if (isLoggedIn === 'true') {
+            loginScreen.classList.add('hidden');
+        } else {
+            // Only un-comment the next line if you want to force login on refresh
+            // loginScreen.classList.remove('hidden');
+            // For preview purposes, we default to logged in or hidden
+             loginScreen.classList.add('hidden');
+        }
+    }
+
+    function handleLogin(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('button');
+        const originalText = btn.innerText;
+        btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Signing In...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+            sessionStorage.setItem('userLoggedIn', 'true');
+            loginScreen.classList.add('hidden');
+            loginScreen.classList.remove('flex');
+            btn.innerText = originalText;
+            btn.disabled = false;
+        }, 800);
+    }
+
+    function logout() {
+        sessionStorage.removeItem('userLoggedIn');
+        loginScreen.classList.remove('hidden');
+        loginScreen.classList.add('flex');
+    }
+
+  </script>
+</body>
+</html>

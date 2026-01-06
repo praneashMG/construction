@@ -1,773 +1,697 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SiteWorks Builders - General Contracting & Construction</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        /*
-        * ----------------------------------------------------
-        * SiteWorks Builders CSS - Themed for Construction
-        * Primary Colors: Deep Blue (#1A374D), Safety Yellow (#FFC107), Light Gray (#F8F9FA), Dark Text (#343A40)
-        * ----------------------------------------------------
-        */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+  <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Growwpark | Construction</title>
+  <link rel="icon" type="image/jpeg" href="assets/growwpark_logo.jpg" />  <meta name="description" content="About SiteWorks Builders - Our mission, vision, leadership, and 25 years of construction excellence.">
+  <title>About Us - SiteWorks Builders</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            safetyYellow: '#F9A825',
+            charcoal: '#1F1F1F',
+            concrete: '#B0B0B0',
+            steelBlue: '#2A4365',
+            darkSurface: '#121212',
+            lightSurface: '#F3F4F6'
+          },
+          fontFamily: {
+            sans: ['Open Sans', 'sans-serif'],
+            heading: ['Montserrat', 'sans-serif'],
+          }
         }
-
-        :root {
-            --primary-blue: #1A374D; 
-            --primary-yellow: #FFC107; 
-            --text-dark: #343A40;
-            --text-body: #555;
-            --bg-white: #ffffff;
-            --bg-light: #F8F9FA; 
-            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --text-muted: #6c757d;
-            --shadow-base: 0 4px 15px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 10px 30px rgba(26, 55, 77, 0.2);
-            --overlay-dark: rgba(26, 55, 77, 0.85);
-        }
-
-        body {
-            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-body);
-            overflow-x: hidden;
-            background-color: var(--bg-white);
-            margin-top: 0;
-        }
-
-        /* UTILITIES */
-        .section {
-            padding: 5rem 2rem;
-            opacity: 0; /* Hidden by default for animation */
-            transform: translateY(20px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
-        }
-
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-alt { background: var(--bg-light); }
-        .section-title {
-            text-align: center; font-size: 3rem; margin-bottom: 1rem;
-            color: var(--primary-blue); font-weight: 900;
-        }
-        .section-subtitle {
-            text-align: center; color: var(--text-muted); font-size: 1.2rem;
-            margin-bottom: 3.5rem; max-width: 700px; margin-left: auto;
-            margin-right: auto;
-        }
-        .btn { background: transparent; border: 2px solid white; color: white; padding: 0.7rem 1.8rem; border-radius: 5px; font-weight: 600; text-decoration: none; transition: var(--transition); display: inline-block; }
-        .btn:hover { background: var(--primary-blue); border-color: var(--primary-blue); color: white; transform: translateY(-2px); } 
-
-        /* CSS Animation Keyframes */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translate3d(0, 100px, 0); }
-            to { opacity: 1; transform: translate3d(0, 0, 0); }
-        }
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translate3d(-100px, 0, 0); }
-            to { opacity: 1; transform: translate3d(0, 0, 0); }
-        }
-        
-        /* ----------------------------------------------------
-         * NAVIGATION (From HTML 2)
-         * ----------------------------------------------------
-         */
-        nav {
-            background: var(--primary-blue); padding: 0; position: sticky;
-            top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: background 0.4s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(26, 55, 77, 0.95);
-        }
-        .navbar-container {
-            max-width: 1400px; margin: 0 auto; display: flex;
-            justify-content: space-between; align-items: center; padding: 0 3rem;
-            min-height: 80px;
-        }
-        .logo {
-            color: var(--primary-yellow); font-size: 1.8rem; font-weight: 900;
-            display: flex; align-items: center; gap: 0.5rem; text-decoration: none;
-            transition: var(--transition);
-        }
-        .logo i { font-size: 2rem; }
-
-        .nav-menu {
-            list-style: none; display: flex; align-items: center; gap: 2rem; margin: 0;
-        }
-        .nav-link {
-            color: white; text-decoration: none; padding: 1.2rem 0; display: block;
-            font-weight: 500; font-size: 1rem; transition: var(--transition);
-            position: relative;
-        }
-        .nav-link:hover { color: var(--primary-yellow); }
-        .nav-link::after {
-            content: ''; position: absolute; bottom: 20px; left: 0;
-            width: 0; height: 3px; background: var(--primary-yellow);
-            transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        .nav-link:hover::after { width: 100%; }
-
-        .nav-right { display: flex; align-items: center; gap: 1rem; }
-        .nav-btn {
-            background: transparent; border: 2px solid white; color: white;
-            padding: 0.6rem 1.5rem; border-radius: 5px; font-weight: 600;
-            text-decoration: none; transition: var(--transition);
-        }
-        .nav-btn:hover {
-            background: var(--primary-yellow); border-color: var(--primary-yellow);
-            color: var(--primary-blue); transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(255, 193, 7, 0.5);
-        }
-
-        .hamburger {
-            display: none; flex-direction: column; cursor: pointer;
-            padding: 0.5rem; z-index: 1001;
-        }
-        .hamburger span {
-            width: 28px; height: 3px; background: white; margin: 4px 0;
-            border-radius: 3px; transition: var(--transition);
-        }
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-        .close-menu {
-            display: none; 
-            background: none; border: none; color: var(--primary-yellow);
-            font-size: 2.5rem; cursor: pointer; padding: 0.5rem;
-            width: 50px; height: 50px; align-items: center;
-            justify-content: center; transition: var(--transition);
-            position: absolute; top: 1rem; right: 1rem;
-            z-index: 1003;
-        }
-        .close-menu:hover { transform: rotate(90deg) scale(1.1); }
-
-        .mobile-menu-header { display: none; }
-
-        /* --- DROPDOWN STYLES (NEW) --- */
-        .has-dropdown {
-            position: relative;
-        }
-
-        .dropdown-menu {
-            list-style: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: var(--primary-blue);
-            min-width: 180px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
-            z-index: 999;
-            padding: 0.5rem 0;
-        }
-        
-        .has-dropdown:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-item a {
-            color: white;
-            padding: 0.8rem 1.5rem;
-            display: block;
-            white-space: nowrap;
-            text-decoration: none;
-            transition: background 0.2s, color 0.2s;
-        }
-
-        .dropdown-item a:hover {
-            background: rgba(255, 193, 7, 0.1);
-            color: var(--primary-yellow);
-        }
-        
-        .has-dropdown > .nav-link::after {
-            display: none;
-        }
-        .dropdown-icon {
-            font-size: 0.7rem;
-            margin-left: 0.5rem;
-            transition: transform 0.3s;
-        }
-        .has-dropdown:hover .dropdown-icon {
-            transform: rotate(180deg);
-        }
-
-        /* ----------------------------------------------------
-         * PAGE CONTENT STYLES (From HTML 1)
-         * ----------------------------------------------------
-         */
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(var(--overlay-dark), var(--overlay-dark)),
-                        url('https://picsum.photos/1920/800?random=1&tag=construction-plans') center/cover;
-            padding: 12rem 5%; min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center;
-        }
-        .hero h1 { font-size: 4.5rem; margin-bottom: 1.5rem; color: var(--primary-yellow); font-weight: 900; text-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); }
-        .hero p { font-size: 1.5rem; color: var(--bg-light); max-width: 800px; margin: 0 auto 2rem; }
-        
-        /* Mission & Vision */
-        .mission-vision-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto; }
-        .mission-card { background: var(--bg-white); padding: 3rem; border-radius: 10px; box-shadow: var(--shadow-base); border-left: 5px solid var(--primary-yellow); transition: var(--transition); border-top: 1px solid #e9ecef; border-right: 1px solid #e9ecef; border-bottom: 1px solid #e9ecef; text-align: left; }
-        .mission-card:hover { transform: translateY(-5px); border-left-color: var(--primary-blue); box-shadow: 0 10px 30px rgba(255, 193, 7, 0.1); }
-        .mission-icon { font-size: 3rem; margin-bottom: 1rem; color: var(--primary-blue); }
-        .mission-card h3 { color: var(--text-dark); font-size: 1.8rem; margin-bottom: 0.5rem; }
-
-        /* Stats Section */
-        .stats-section { background: var(--primary-blue); color: white; border-top: 5px solid var(--primary-yellow); padding: 4rem 2rem; }
-        .stats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2rem; max-width: 1300px; margin: 0 auto; }
-        .stat-item { text-align: center; padding: 1rem 0; border-right: 1px solid rgba(255, 255, 255, 0.15); }
-        .stat-item:last-child { border-right: none; }
-        .stat-number { font-size: 3.8rem; font-weight: 900; color: var(--primary-yellow); display: block; line-height: 1.1; }
-        .stat-label { font-size: 1.1rem; opacity: 0.9; text-transform: uppercase; font-weight: 500; }
-
-        /* Team Section */
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto; }
-        .team-card { border-radius: 5px; box-shadow: var(--shadow-base); border-top: 5px solid var(--primary-yellow); transition: var(--transition); text-align: center; background: var(--bg-white); }
-        .team-card:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); }
-        .team-img { height: 250px; background: var(--primary-blue); overflow: hidden; }
-        .team-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; filter: grayscale(80%); transition: transform 0.5s, opacity 0.5s, filter 0.5s; }
-        .team-card:hover .team-img img { opacity: 1; filter: grayscale(0%); transform: scale(1.05); }
-        .team-content { padding: 1.5rem; }
-        .team-content h3 { color: var(--text-dark); font-size: 1.5rem; margin-bottom: 0.5rem; font-weight: 700; }
-        .team-role { color: var(--primary-yellow); font-weight: 700; display: block; margin-bottom: 0.75rem; }
-        .team-social { padding-top: 1rem; border-top: 1px solid var(--bg-light); display: flex; justify-content: center; gap: 0.75rem; }
-        .social-icon { width: 35px; height: 35px; background: var(--bg-light); color: var(--primary-blue); border-radius: 50%; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
-        .social-icon:hover { background: var(--primary-yellow); color: var(--primary-blue); transform: scale(1.15); }
-
-        /* Testimonials */
-        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
-        .testimonial-card { padding: 2.5rem; border-radius: 10px; box-shadow: var(--shadow-base); border: 1px solid var(--bg-light); transition: var(--transition); position: relative; background: var(--bg-white); }
-        .testimonial-card:hover { transform: translateY(-5px); border-color: var(--primary-yellow); }
-        .quote-icon { font-size: 3rem; color: var(--primary-yellow); opacity: 0.7; position: absolute; top: 0.5rem; right: 0.5rem; }
-        .testimonial-text { font-size: 1.05rem; color: var(--text-dark); line-height: 1.7; margin-bottom: 1.5rem; }
-        .testimonial-author { display: flex; align-items: center; gap: 1rem; border-top: 2px solid var(--primary-blue); padding-top: 1rem; }
-        .author-avatar { width: 55px; height: 55px; background: var(--primary-blue); color: var(--primary-yellow); border-radius: 50%; font-size: 1.4rem; font-weight: bold; flex-shrink: 0; display: flex; align-items: center; justify-content: center;}
-        .rating { color: var(--primary-yellow); font-size: 1rem; margin-top: 0.3rem; }
-        
-        /* ----------------------------------------------------
-         * FOOTER (From HTML 2)
-         * ----------------------------------------------------
-         */
-        footer { background: var(--text-dark); color: white; padding: 5rem 2rem 2rem; }
-        .footer-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; max-width: 1400px; margin: 0 auto; }
-        .footer-logo { font-size: 2rem; font-weight: 900; margin-bottom: 1.5rem; color: var(--primary-yellow); }
-        .footer-about p { color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem; }
-        .social-links { display: flex; gap: 1rem; }
-        .social-link {
-            width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1);
-            border-radius: 5px; display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 1.2rem; text-decoration: none; transition: var(--transition);
-        }
-        .social-link:hover { background: var(--primary-yellow); color: var(--primary-blue); transform: scale(1.2); }
-        .footer-section h3 { font-size: 1.4rem; margin-bottom: 1.5rem; font-weight: 700; color: white; }
-        .footer-links { list-style: none; }
-        .footer-links li { margin-bottom: 0.8rem; }
-        .footer-links a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: var(--transition); }
-        .footer-links a:hover { color: var(--primary-yellow); padding-left: 5px; }
-        .contact-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: center; }
-        .contact-icon {
-            width: 45px; height: 45px; background: var(--primary-yellow);
-            border-radius: 5px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; flex-shrink: 0; color: var(--primary-blue);
-        }
-        .contact-text p { color: rgba(255, 255, 255, 0.9); margin: 0; }
-        .newsletter-form { display: flex; flex-direction: column; gap: 0.8rem; }
-        .newsletter-input { padding: 0.9rem 1.2rem; border: none; border-radius: 5px; background: rgba(255, 255, 255, 0.1); color: white; }
-        .newsletter-input::placeholder { color: rgba(255, 255, 255, 0.6); }
-        .newsletter-btn {
-            padding: 0.9rem 2rem; background: var(--primary-yellow); color: var(--primary-blue);
-            border: none; border-radius: 5px; font-weight: 700; cursor: pointer;
-            transition: var(--transition);
-        }
-        .newsletter-btn:hover { background: #e6b200; transform: translateY(-2px); }
-        .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 2rem; margin-top: 3rem; text-align: center; color: rgba(255, 255, 255, 0.7); }
-
-
-        /* ----------------------------------------------------
-         * RESPONSIVE DESIGN (MERGED)
-         * ----------------------------------------------------
-         */
-        @media (max-width: 968px) {
-            
-            /* NAVIGATION & MOBILE MENU */
-            .navbar-container { padding: 0 2rem; }
-            .hamburger { display: flex; }
-            .nav-menu {
-                position: fixed; top: 0; left: -100%; width: 100%; height: 100vh;
-                background: var(--primary-blue); flex-direction: column;
-                justify-content: flex-start; padding-top: 5rem;
-                transition: left 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
-                gap: 0; overflow-y: auto; z-index: 1002;
-                box-shadow: 5px 0 15px rgba(0,0,0,0.3); display: flex;
-            }
-            .nav-menu.active { 
-                left: 0; 
-            }
-            .nav-menu.active .close-menu { 
-                display: flex;
-            }
-            .mobile-menu-header { display: none; } 
-            .nav-item { width: 100%; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-            .nav-link { justify-content: space-between; padding: 1rem 1.5rem; width: 100%; font-size: 1.05rem; color: white !important; }
-            .nav-link::after { display: none; }
-            .nav-right { width: 100%; background: transparent; flex-direction: column; padding: 1.5rem; gap: 1rem; margin-top: auto; display: flex !important; }
-            .nav-btn { width: 100%; text-align: center; display: block; }
-            
-            /* DROPDOWN MOBILE STYLES */
-            .dropdown-menu {
-                position: static; 
-                opacity: 1;
-                visibility: visible;
-                transform: none;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.4s ease-out;
-                background: rgba(0, 0, 0, 0.2);
-                padding: 0;
-                min-width: unset;
-                box-shadow: none;
-            }
-            .has-dropdown.active .dropdown-menu {
-                max-height: 200px; 
-                padding: 0.5rem 0;
-            }
-            .dropdown-item a {
-                padding-left: 2.5rem;
-            }
-            .has-dropdown:hover .dropdown-icon {
-                transform: none;
-            }
-            .has-dropdown.active .dropdown-icon {
-                transform: rotate(180deg);
-            }
-
-            /* CONTENT ADJUSTMENTS */
-            .hero h1 { font-size: 3rem; }
-            .hero p { font-size: 1.2rem; }
-            .section { padding: 3rem 1.5rem; }
-            .section-title { font-size: 2.5rem; }
-            .stats-section { padding: 3rem 1.5rem; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-            .stat-item { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-            .stat-item:nth-last-child(1), .stat-item:nth-last-child(2) { border-bottom: none; }
-            .stat-number { font-size: 3rem; }
-            .mission-vision-grid, .team-grid, .testimonials-grid { grid-template-columns: 1fr; gap: 2rem; }
-
-            /* FOOTER MOBILE */
-            footer { padding: 3rem 1.5rem 2rem !important; }
-            .footer-container { grid-template-columns: 1fr !important; gap: 2rem !important; }
-        }
-
-        @media (max-width: 576px) {
-            .hero h1 { font-size: 2.2rem; }
-            .section-title { font-size: 2rem; }
-            .team-img { height: 200px; }
-            .mission-card, .testimonial-card, .team-card { padding: 1.5rem; }
-            .stats-grid { grid-template-columns: 1fr; }
-            .stat-item { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-            .stats-grid .stat-item:last-child { border-bottom: none; } 
-            .stats-grid .stat-item:nth-last-child(-n+5) { border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-            .stats-grid .stat-item:last-child { border-bottom: none; } 
-        }
-    </style>
-</head>
-<body>
-    <nav id="navbar">
-        <div class="navbar-container">
-            <a href="index.html" class="logo"><i class="fas fa-hard-hat"></i> SiteWorks Builders</a>
-
-            <ul class="nav-menu" id="navMenu">
-                <button class="close-menu" id="closeMenu">✕</button>
-
-                <li class="nav-item has-dropdown">
-                    <a href="index.html" class="nav-link" id="homeLink">
-                        Home <i class="fas fa-chevron-down dropdown-icon"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-item"><a href="index.html">Home 1: Default</a></li>
-                        <li class="dropdown-item"><a href="homepage2.html">Home 2: Commercial</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
-                <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
-                <li class="nav-item"><a href="#team" class="nav-link">About Us</a></li> <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-
-                <div class="nav-right">
-                    <a href="#quote" class="nav-btn">Get a Quote</a>
-                </div>
-            </ul>
-
-            <div class="hamburger" id="hamburger">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-    </nav>
-
-    <section class="hero">
-        <div class="hero-content">
-            <h1>The Foundation of Our Business</h1>
-            <p>Built on two decades of experience, **SiteWorks** is dedicated to **safety, quality, and partnership**. See how we deliver excellence.</p>
-            <a href="#team" class="btn">Meet Our Leaders</a>
-        </div>
-    </section>
-
-    <section class="section">
-        <h2 class="section-title">Our Guiding Principles</h2>
-        <p class="section-subtitle">Defining the commitment we make to every client and every project.</p>
-        <div class="mission-vision-grid">
-            <div class="mission-card">
-                <div class="mission-icon"><i class="fas fa-handshake"></i></div>
-                <h3>Our Mission: Partnership</h3>
-                <p>To deliver complex, **high-quality projects** by fostering a transparent, collaborative relationship with our clients from the initial concept to final handover.</p>
-            </div>
-            <div class="mission-card">
-                <div class="mission-icon"><i class="fas fa-eye"></i></div>
-                <h3>Our Vision: Innovation</h3>
-                <p>To lead the construction industry by adopting **cutting-edge technology** and **sustainable practices**, ensuring our structures are built for the future.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section stats-section" id="stats">
-        <h2 class="section-title" style="color: white;">Impact Built on Dedication</h2>
-        <div class="stats-grid">
-            <div class="stat-item">
-                <span class="stat-number" data-target="25" data-suffix="+">0</span>
-                <span class="stat-label">Years Experience</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" data-target="150" data-suffix="+">0</span>
-                <span class="stat-label">Successful Projects</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" data-target="1" data-prefix="$" data-suffix="B+">$0</span>
-                <span class="stat-label">Value Constructed</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" data-target="98" data-suffix="%">0</span>
-                <span class="stat-label">On-Time Delivery</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" data-target="0">0</span>
-                <span class="stat-label">Recordable Incidents</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="section section-alt" id="team">
-        <h2 class="section-title">Our Leadership Team</h2>
-        <p class="section-subtitle">A blend of seasoned engineers and innovative project managers drive our success.</p>
-        <div class="team-grid">
-            <div class="team-card">
-                <div class="team-img">
-                    <img src="https://picsum.photos/300/250?random=1&tag=engineer" alt="John Basco">
-                </div>
-                <div class="team-content">
-                    <h3>John Basco</h3>
-                    <p class="team-role">Founder & CEO</p>
-                    <p>P.E. & Master Builder with 25 years leading major commercial and civil construction projects.</p>
-                    <div class="team-social">
-                        <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-icon" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="team-card">
-                <div class="team-img">
-                    <img src="https://picsum.photos/300/250?random=2&tag=architect" alt="Priya Kapoor">
-                </div>
-                <div class="team-content">
-                    <h3>Priya Kapoor</h3>
-                    <p class="team-role">Head of Pre-Construction</p>
-                    <p>Expert in BIM, 4D modeling, and value engineering, ensuring maximum efficiency from concept.</p>
-                    <div class="team-social">
-                        <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-icon" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="team-card">
-                <div class="team-img">
-                    <img src="https://picsum.photos/300/250?random=3&tag=site-manager" alt="Mikey Aloe">
-                </div>
-                <div class="team-content">
-                    <h3>Mikey Aloe</h3>
-                    <p class="team-role">Chief Site Operations Officer</p>
-                    <p>Leads our field teams with a relentless focus on safety, quality control, and zero-incident site management.</p>
-                    <div class="team-social">
-                        <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-icon" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="testimonials">
-        <h2 class="section-title">Client Testimonials</h2>
-        <p class="section-subtitle">Hear from partners who trust us with their critical projects.</p>
-        <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
-                <p class="testimonial-text">"SiteWorks delivered our new HQ ahead of schedule and under budget. The **transparency** throughout the build, especially with the BIM modeling, was revolutionary."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">MS</div>
-                    <div class="author-info">
-                        <h4>Mark Stevens</h4>
-                        <p>CEO, TechCorp Innovations</p>
-                        <div class="rating">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-card">
-                <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
-                <p class="testimonial-text">"Their commitment to **safety** is unmatched. Not a single serious incident over two years of high-rise construction. That's the professionalism we demand."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">AP</div>
-                    <div class="author-info">
-                        <h4>Dr. Anya Patel</h4>
-                        <p>Director, City Health Systems</p>
-                        <div class="rating">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-card">
-                <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
-                <p class="testimonial-text">"The SiteWorks team managed the unexpected challenges of our civil project seamlessly. Their **communication** kept the local authority and stakeholders informed every step of the way."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">JL</div>
-                    <div class="author-info">
-                        <h4>James Liu</h4>
-                        <p>Project Lead, Metropolitan Council</p>
-                        <div class="rating">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <footer id="contact">
-        <div class="footer-container">
-            <div class="footer-about">
-                <div class="footer-logo"><i class="fas fa-hard-hat"></i> SiteWorks</div>
-                <p>The foundation of your future. Delivering construction excellence across the region.</p>
-                <div class="social-links">
-                    <a href="#" class="social-link"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#projects">Recent Work</a></li>
-                    <li><a href="#team">Our Team</a></li>
-                    <li><a href="careers.html">Careers</a></li>
-                    <li><a href="sitemap.html">Sitemap</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact Info</h3>
-                <div class="contact-item">
-                    <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
-                    <div class="contact-text"><p>(555) 123-SITE</p></div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                    <div class="contact-text"><p>info@siteworks.com</p></div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <div class="contact-text"><p>123 Main Street, Suite 200, Metropolis</p></div>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3>Stay Informed</h3>
-                <p>Sign up for our newsletter to get project updates and company news.</p>
-                <form class="newsletter-form">
-                    <input type="email" class="newsletter-input" placeholder="Your work email">
-                    <button class="newsletter-btn">Subscribe</button>
-                </form>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 SiteWorks Builders. Built with <i class="fas fa-heart" style="color: var(--primary-yellow);"></i> and Code.</p>
-        </div>
-    </footer>
+      }
+    };
+  </script>
+  <style>
+    /* RTL adjustments */
+    [dir="rtl"] .rtl-flip { transform: scaleX(-1); }
+    /* Smooth mobile menu transition */
+    #mobileMenu {
+      transition: all 0.3s ease-in-out;
+    }
     
-    <script>
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('navMenu');
-        const closeMenu = document.getElementById('closeMenu');
-        const navbar = document.getElementById('navbar');
-        const statNumbers = document.querySelectorAll('.stat-number');
-        // Select all sections with the 'section' class, including the hero
-        const sections = document.querySelectorAll('.section'); 
-        const homeDropdown = document.querySelector('.has-dropdown'); 
-        const homeLink = document.getElementById('homeLink');
-        let statsAnimated = false;
+    /* Custom Animations */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+        animation: fadeInUp 0.8s ease forwards;
+        opacity: 0;
+    }
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+  </style>
+</head>
 
-        // --- Mobile Menu Toggle ---
-        function toggleMenu() {
-            const isActive = navMenu.classList.toggle('active');
-            hamburger.classList.toggle('active');
-            // Prevent scrolling on the main body when menu is open on mobile
-            document.body.style.overflow = isActive ? 'hidden' : ''; 
-        }
+<body class="bg-white text-gray-800 dark:bg-charcoal dark:text-gray-100 transition-colors duration-300" data-dir="ltr">
 
-        hamburger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleMenu();
-        });
+  <!-- ============================================ -->
+  <!-- NAVBAR                                       -->
+  <!-- ============================================ -->
+  <nav id="navbar" class="sticky top-0 z-50 transition-colors duration-300 bg-white text-charcoal border-b border-gray-200 dark:bg-charcoal dark:text-white dark:border-white/10 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
+      
+      <!-- Logo Section -->
+      <a href="index.html" class="flex items-center gap-2 shrink-0 group">
+        <span class="flex h-10 w-10 items-center justify-center rounded-full bg-safetyYellow text-charcoal shadow-lg group-hover:scale-110 transition-transform">
+          <i class="fas fa-hard-hat text-lg"></i>
+        </span>
+        <div class="leading-tight">
+          <span class="block text-xl font-bold tracking-tight">Groww</span>
+          <span class="block text-xs font-medium text-safetyYellow uppercase tracking-widest">Builders</span>
+        </div>
+      </a>
 
-        closeMenu.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleMenu();
-        });
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center gap-2">
+        <ul class="flex items-center gap-1 text-sm font-semibold">
+          <li class="relative group">
+            <button class="flex items-center gap-1 rounded-md px-3 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
+              <span>Home</span>
+              <i class="fas fa-chevron-down text-[10px] group-hover:rotate-180 transition-transform"></i>
+            </button>
+            <ul class="invisible absolute start-0 mt-2 w-48 rounded-lg bg-white border border-gray-100 dark:bg-charcoal dark:border-white/10 p-2 opacity-0 shadow-2xl transition-all group-hover:visible group-hover:opacity-100 z-50">
+              <li><a href="index.html" class="block rounded-md px-4 py-2 hover:bg-safetyYellow hover:text-charcoal transition-colors">Home 1</a></li>
+              <li><a href="homepage2.html" class="block rounded-md px-4 py-2 hover:bg-safetyYellow hover:text-charcoal transition-colors">Home 2</a></li>
 
-        // --- Mobile Dropdown Toggle ---
-        if (homeDropdown) {
-            homeLink.addEventListener('click', (e) => {
-                if (window.innerWidth <= 968) {
-                    e.preventDefault(); // Stop navigation on mobile
-                    homeDropdown.classList.toggle('active');
-                }
-            });
-        }
+            </ul>
+          </li>
 
+          <li><a href="service.html" class="block rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">Services</a></li>
+          <li><a href="blog.html" class="block rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">Blog</a></li>
+<li>
+  <a href="aboutus.html"
+     class="block rounded-md px-4 py-2
+            bg-safetyYellow text-charcoal
+            font-bold shadow-md
+            transition-colors">
+    About
+  </a>
+</li>
+          <li><a href="contact.html" class="block rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">Contact</a></li>
+          
+          <li class="relative group">
+            <button class="flex items-center gap-1 rounded-md px-3 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
+              <span>Dashboard</span>
+              <i class="fas fa-chevron-down text-[10px] group-hover:rotate-180 transition-transform"></i>
+            </button>
+            <ul class="invisible absolute start-0 mt-2 w-56 rounded-lg bg-white border border-gray-100 dark:bg-charcoal dark:border-white/10 p-2 opacity-0 shadow-2xl transition-all group-hover:visible group-hover:opacity-100 z-50">
+              <li><a href="admin.html" class="block rounded-md px-4 py-2 hover:bg-safetyYellow hover:text-charcoal transition-colors">Admin Panel</a></li>
+              <li><a href="user.html" class="block rounded-md px-4 py-2 hover:bg-safetyYellow hover:text-charcoal transition-colors">User Dashboard</a></li>
+            </ul>
+          </li>
+        </ul>
 
-        // Close menu when a link is clicked
-        navMenu.querySelectorAll('.nav-link, .nav-btn, .dropdown-item a').forEach(link => {
-            link.addEventListener('click', (e) => {
-                // Determine if the full menu should close
-                const isDropdownParent = link.closest('.has-dropdown');
+        <div class="ms-4 flex items-center gap-3 border-s border-gray-200 dark:border-white/10 ps-4">
+          <button id="themeToggleDesktop" class="flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 dark:border-white/10 hover:bg-safetyYellow hover:text-charcoal transition-all">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button id="rtlToggleDesktop" class="flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 dark:border-white/10 hover:bg-safetyYellow hover:text-charcoal transition-all">
+            <i class="fas fa-exchange-alt"></i>
+          </button>
+          
+          <a href="login.html" class="ms-2 inline-flex items-center gap-2 rounded-md bg-safetyYellow px-5 py-2 text-sm font-bold text-charcoal hover:bg-yellow-500 transition-transform active:scale-95 shadow-lg shadow-safetyYellow/20">
+            <i class="fas fa-user-plus text-xs"></i>
+            <span>Register</span>
+          </a>
+        </div>
+      </div>
 
-                if (window.innerWidth <= 968) {
-                    // For dropdown *sub-links* (which navigate), close the menu
-                    if (link.closest('.dropdown-item')) {
-                        setTimeout(toggleMenu, 300);
-                    } 
-                    // For main links (not dropdowns), close the menu
-                    else if (!isDropdownParent) {
-                         setTimeout(toggleMenu, 300);
-                    }
-                }
-            });
-        });
+      <!-- Mobile Controls -->
+      <div class="flex items-center gap-3 lg:hidden">
+        <button id="themeToggleMobile" class="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 dark:border-white/10">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="hamburger" class="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-md bg-gray-100 dark:bg-white/5" aria-label="Toggle Menu">
+          <span id="line1" class="h-0.5 w-6 bg-current transition-all duration-300"></span>
+          <span id="line2" class="h-0.5 w-6 bg-current transition-all duration-300"></span>
+          <span id="line3" class="h-0.5 w-6 bg-current transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
 
-        // --- Sticky Nav Bar Effect ---
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+    <!-- Mobile Menu Drawer -->
+    <div id="mobileMenu" class="hidden border-t border-gray-100 bg-white dark:bg-charcoal dark:border-white/5 lg:hidden overflow-hidden transition-all duration-300">
+      <div class="flex flex-col gap-1 p-4">
         
-        // --- Resize Handler (for mobile menu) ---
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 968) {
-                // If menu is open on desktop size, close it and restore body scroll
-                if (navMenu.classList.contains('active')) {
-                    navMenu.classList.remove('active');
-                    hamburger.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-                // Ensure mobile dropdown is closed/inactive when resizing to desktop
-                if (homeDropdown.classList.contains('active')) {
-                    homeDropdown.classList.remove('active');
-                }
-            }
+        <details class="group">
+          <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5 list-none">
+            <div class="flex items-center gap-4">
+              <i class="fas fa-home text-safetyYellow w-6"></i> Home
+            </div>
+            <i class="fas fa-chevron-down text-xs group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <div class="mt-1 flex flex-col gap-1 ps-14 text-gray-500 dark:text-gray-400">
+            <a href="index.html" class="py-2 hover:text-safetyYellow">Home 1</a>
+            <a href="homepage2.html" class="py-2 hover:text-safetyYellow">Home 2</a>
+
+          </div>
+        </details>
+
+        <a href="services.html" class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+          <i class="fas fa-concierge-bell text-safetyYellow w-6"></i> Services
+        </a>
+        <a href="blog.html" class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+          <i class="fas fa-blog text-safetyYellow w-6"></i> Blog
+        </a>
+        <a href="aboutus.html"
+   class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-bold
+          bg-safetyYellow text-charcoal shadow-md
+          hover:bg-yellow-500 transition-all">
+
+  <i class="fas fa-info-circle w-6 text-white"></i>
+  <span>About Us</span>
+</a>
+
+        <a href="contact.html" class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+          <i class="fas fa-envelope text-safetyYellow w-6"></i> Contact
+        </a>
+
+        <details class="group">
+          <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5 list-none">
+            <div class="flex items-center gap-4">
+              <i class="fas fa-tachometer-alt text-safetyYellow w-6"></i> Dashboard
+            </div>
+            <i class="fas fa-chevron-down text-xs group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <div class="mt-1 flex flex-col gap-1 ps-14 text-gray-500 dark:text-gray-400">
+            <a href="admin.html" class="py-2 hover:text-safetyYellow">Admin Panel</a>
+            <a href="user.html" class="py-2 hover:text-safetyYellow">User Dashboard</a>
+          </div>
+        </details>
+
+        <div class="mt-4 pt-4 border-t border-gray-100 dark:border-white/10">
+          <button id="rtlToggleMobile" class="flex w-full items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+            <i class="fas fa-exchange-alt text-safetyYellow w-6"></i> Switch Direction (RTL)
+          </button>
+          <a href="login.html" class="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-safetyYellow py-4 text-center text-lg font-bold text-charcoal active:scale-95 transition-transform">
+            <i class="fas fa-user-plus"></i> Register
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================ -->
+  <!-- HERO SECTION                                 -->
+  <!-- ============================================ -->
+  <section class="relative h-[600px] flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src="/assets/abh.webp" 
+           alt="Construction Site Plans" class="w-full h-full object-cover">
+      <div class="absolute inset-0 bg-charcoal/80 dark:bg-charcoal/90 mix-blend-multiply"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 max-w-7xl relative z-10 text-center fade-in">
+      <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 font-heading leading-tight">
+        The Foundation of <br><span class="text-safetyYellow">Our Business</span>
+      </h1>
+      <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-10">
+        Built on two decades of experience, SiteWorks is dedicated to <strong>safety, quality, and partnership</strong>. See how we deliver excellence.
+      </p>
+      <a href="#team" class="inline-block border-2 border-white text-white hover:bg-safetyYellow hover:border-safetyYellow hover:text-charcoal px-8 py-3 rounded-lg font-bold text-sm uppercase tracking-widest transition-all duration-300 transform hover:-translate-y-1">
+        Meet Our Leaders
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- MISSION & VISION                             -->
+  <!-- ============================================ -->
+  <section class="py-24 bg-white dark:bg-charcoal transition-colors duration-300">
+    <div class="container mx-auto px-6 max-w-7xl">
+      <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
+        <span class="text-safetyYellow font-bold tracking-[0.2em] text-sm uppercase block mb-3">Our Core Values</span>
+        <h2 class="text-4xl font-bold text-charcoal dark:text-white mb-6 font-heading">Our Guiding Principles</h2>
+        <div class="h-1 w-20 bg-safetyYellow mx-auto mb-6"></div>
+        <p class="text-gray-600 dark:text-gray-400">Defining the commitment we make to every client and every project.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Mission Card -->
+        <div class="bg-gray-50 dark:bg-zinc-800 p-10 rounded-xl border-l-4 border-safetyYellow shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 fade-in delay-100 group">
+          <div class="w-16 h-16 bg-white dark:bg-charcoal rounded-full flex items-center justify-center text-3xl text-safetyYellow mb-6 shadow-sm group-hover:scale-110 transition-transform">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-charcoal dark:text-white mb-4 font-heading">Our Mission: Partnership</h3>
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+            To deliver complex, <strong>high-quality projects</strong> by fostering a transparent, collaborative relationship with our clients from the initial concept to final handover.
+          </p>
+        </div>
+
+        <!-- Vision Card -->
+        <div class="bg-gray-50 dark:bg-zinc-800 p-10 rounded-xl border-l-4 border-safetyYellow shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 fade-in delay-200 group">
+          <div class="w-16 h-16 bg-white dark:bg-charcoal rounded-full flex items-center justify-center text-3xl text-safetyYellow mb-6 shadow-sm group-hover:scale-110 transition-transform">
+            <i class="fas fa-eye"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-charcoal dark:text-white mb-4 font-heading">Our Vision: Innovation</h3>
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+            To lead the construction industry by adopting <strong>cutting-edge technology</strong> and <strong>sustainable practices</strong>, ensuring our structures are built for the future.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- STATS SECTION                                -->
+  <!-- ============================================ -->
+  <section id="stats" class="py-20 bg-steelBlue dark:bg-[#1a2e45] text-white border-t-8 border-safetyYellow relative overflow-hidden">
+    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+    <div class="container mx-auto px-6 max-w-7xl relative z-10">
+      <h2 class="text-3xl font-bold text-center mb-12 font-heading">Impact Built on Dedication</h2>
+      
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-8 text-center divide-x-0 md:divide-x divide-white/20">
+        <div class="p-4 fade-in">
+          <span class="block text-4xl md:text-5xl font-black text-safetyYellow mb-2 stat-number" data-target="25" data-suffix="+">0</span>
+          <span class="text-sm uppercase tracking-widest font-semibold opacity-90">Years Exp</span>
+        </div>
+        <div class="p-4 fade-in delay-100">
+          <span class="block text-4xl md:text-5xl font-black text-safetyYellow mb-2 stat-number" data-target="150" data-suffix="+">0</span>
+          <span class="text-sm uppercase tracking-widest font-semibold opacity-90">Projects</span>
+        </div>
+        <div class="p-4 fade-in delay-200">
+          <span class="block text-4xl md:text-5xl font-black text-safetyYellow mb-2 stat-number" data-target="1" data-prefix="$" data-suffix="B+">0</span>
+          <span class="text-sm uppercase tracking-widest font-semibold opacity-90">Value</span>
+        </div>
+        <div class="p-4 fade-in delay-300">
+          <span class="block text-4xl md:text-5xl font-black text-safetyYellow mb-2 stat-number" data-target="98" data-suffix="%">0</span>
+          <span class="text-sm uppercase tracking-widest font-semibold opacity-90">On-Time</span>
+        </div>
+        <div class="p-4 fade-in delay-300 col-span-2 md:col-span-1">
+          <span class="block text-4xl md:text-5xl font-black text-safetyYellow mb-2 stat-number" data-target="0">0</span>
+          <span class="text-sm uppercase tracking-widest font-semibold opacity-90">Incidents</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- LEADERSHIP TEAM                              -->
+  <!-- ============================================ -->
+  <section id="team" class="py-24 bg-gray-50 dark:bg-[#1a1a1a]">
+    <div class="container mx-auto px-6 max-w-7xl">
+      <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
+        <h2 class="text-4xl font-bold text-charcoal dark:text-white mb-6 font-heading">Our Leadership Team</h2>
+        <div class="h-1 w-20 bg-safetyYellow mx-auto mb-6"></div>
+        <p class="text-gray-600 dark:text-gray-400">A blend of seasoned engineers and innovative project managers drive our success.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Team Member 1 -->
+        <div class="bg-white dark:bg-zinc-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group fade-in">
+          <div class="h-72 overflow-hidden relative">
+            <img src="/assets/joo.jpg" alt="John Basco" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
+            <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-safetyYellow text-charcoal flex items-center justify-center hover:bg-white transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-safetyYellow text-charcoal flex items-center justify-center hover:bg-white transition-colors"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+          </div>
+          <div class="p-6 text-center border-t-4 border-safetyYellow">
+            <h3 class="text-xl font-bold text-charcoal dark:text-white mb-1">John Basco</h3>
+            <span class="text-safetyYellow font-bold text-sm uppercase tracking-wider block mb-3">Founder & CEO</span>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">P.E. & Master Builder with 25 years leading major commercial and civil construction projects.</p>
+          </div>
+        </div>
+
+        <!-- Team Member 2 -->
+        <div class="bg-white dark:bg-zinc-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group fade-in delay-100">
+          <div class="h-72 overflow-hidden relative">
+            <img src="/assets//rithi.jpeg" alt="Priya Kapoor" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
+            <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-safetyYellow text-charcoal flex items-center justify-center hover:bg-white transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-safetyYellow text-charcoal flex items-center justify-center hover:bg-white transition-colors"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+          </div>
+          <div class="p-6 text-center border-t-4 border-safetyYellow">
+            <h3 class="text-xl font-bold text-charcoal dark:text-white mb-1">Rithika</h3>
+            <span class="text-safetyYellow font-bold text-sm uppercase tracking-wider block mb-3">Head of Pre-Construction</span>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">Expert in BIM, 4D modeling, and value engineering, ensuring maximum efficiency from concept.</p>
+          </div>
+        </div>
+
+        <!-- Team Member 3 -->
+        <div class="bg-white dark:bg-zinc-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group fade-in delay-200">
+          <div class="h-72 overflow-hidden relative">
+            <img src="/assets/male1.jpg" alt="Mikey Aloe" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
+            <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-safetyYellow text-charcoal flex items-center justify-center hover:bg-white transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-safetyYellow text-charcoal flex items-center justify-center hover:bg-white transition-colors"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+          </div>
+          <div class="p-6 text-center border-t-4 border-safetyYellow">
+            <h3 class="text-xl font-bold text-charcoal dark:text-white mb-1">Mikey Aloe</h3>
+            <span class="text-safetyYellow font-bold text-sm uppercase tracking-wider block mb-3">Chief Site Operations</span>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">Leads our field teams with a relentless focus on safety, quality control, and zero-incident site management.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- TESTIMONIALS                                 -->
+  <!-- ============================================ -->
+  <section id="testimonials" class="py-24 bg-white dark:bg-charcoal">
+    <div class="container mx-auto px-6 max-w-7xl">
+      <div class="text-center mb-16 fade-in">
+        <h2 class="text-4xl font-bold text-charcoal dark:text-white mb-4 font-heading">Client Testimonials</h2>
+        <p class="text-gray-600 dark:text-gray-400">Hear from partners who trust us with their critical projects.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Testimonial 1 -->
+        <div class="bg-gray-50 dark:bg-zinc-800 p-8 rounded-xl shadow-md border border-gray-100 dark:border-white/5 relative fade-in">
+          <p class="text-gray-600 dark:text-gray-300 italic mb-6 leading-relaxed relative z-10">
+            "SiteWorks delivered our new HQ ahead of schedule and under budget. The <strong>transparency</strong> throughout the build, especially with the BIM modeling, was revolutionary."
+          </p>
+          <div class="flex items-center gap-4 pt-6 border-t border-gray-200 dark:border-white/10">
+            <div class="w-12 h-12 bg-steelBlue rounded-full flex items-center justify-center text-white font-bold text-lg">MS</div>
+            <div>
+              <h4 class="font-bold text-charcoal dark:text-white text-sm">Mark Stevens</h4>
+              <p class="text-xs text-gray-500 dark:text-gray-400 uppercase">CEO, TechCorp Innovations</p>
+              <div class="text-safetyYellow text-xs mt-1">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="bg-gray-50 dark:bg-zinc-800 p-8 rounded-xl shadow-md border border-gray-100 dark:border-white/5 relative fade-in delay-100">
+          <p class="text-gray-600 dark:text-gray-300 italic mb-6 leading-relaxed relative z-10">
+            "Their commitment to <strong>safety</strong> is unmatched. Not a single serious incident over two years of high-rise construction. That's the professionalism we demand."
+          </p>
+          <div class="flex items-center gap-4 pt-6 border-t border-gray-200 dark:border-white/10">
+            <div class="w-12 h-12 bg-steelBlue rounded-full flex items-center justify-center text-white font-bold text-lg">AP</div>
+            <div>
+              <h4 class="font-bold text-charcoal dark:text-white text-sm">Dr. Anya Patel</h4>
+              <p class="text-xs text-gray-500 dark:text-gray-400 uppercase">Director, City Health</p>
+              <div class="text-safetyYellow text-xs mt-1">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="bg-gray-50 dark:bg-zinc-800 p-8 rounded-xl shadow-md border border-gray-100 dark:border-white/5 relative fade-in delay-200">
+          <p class="text-gray-600 dark:text-gray-300 italic mb-6 leading-relaxed relative z-10">
+            "The SiteWorks team managed the unexpected challenges of our civil project seamlessly. Their <strong>communication</strong> kept the local authority and stakeholders informed."
+          </p>
+          <div class="flex items-center gap-4 pt-6 border-t border-gray-200 dark:border-white/10">
+            <div class="w-12 h-12 bg-steelBlue rounded-full flex items-center justify-center text-white font-bold text-lg">JL</div>
+            <div>
+              <h4 class="font-bold text-charcoal dark:text-white text-sm">James Liu</h4>
+              <p class="text-xs text-gray-500 dark:text-gray-400 uppercase">Project Lead, Metro Council</p>
+              <div class="text-safetyYellow text-xs mt-1">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FOOTER                                       -->
+  <!-- ============================================ -->
+  <footer class="bg-[#1a1a1a] pt-24 pb-12 text-gray-300 font-sans border-t border-gray-800">
+    <div class="container mx-auto px-6 max-w-7xl">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 border-b border-gray-800 pb-16">
+        
+        <!-- Company Info -->
+        <div class="space-y-6">
+        <a href="#" class="flex items-center gap-3 mb-6">
+  <div class="h-12 w-12 rounded-full bg-safetyYellow flex items-center justify-center shrink-0">
+    <i class="fas fa-hard-hat text-lg text-charcoal"></i>
+  </div>
+
+  <div class="flex flex-col justify-center leading-none">
+    <span class="text-base font-bold tracking-wide">GROWW</span>
+    <span class="text-xs font-semibold text-safetyYellow tracking-widest">
+      BUILDERS
+    </span>
+  </div>
+</a>
+
+          <p class="text-gray-400 text-sm leading-relaxed">Building the future with precision, integrity, and innovation since 2008. We are committed to excellence in every project we undertake.</p>
+          <div class="flex gap-4">
+            <a href="#" class="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-safetyYellow hover:text-charcoal transition-all duration-300">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-safetyYellow hover:text-charcoal transition-all duration-300">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-safetyYellow hover:text-charcoal transition-all duration-300">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+       <div>
+  <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">
+    Quick Links
+  </h4>
+
+  <ul class="space-y-3 text-sm">
+    <li>
+      <a href="index.html"
+         class="block hover:text-safetyYellow transition-colors">
+        Home
+      </a>
+    </li>
+
+    <li>
+      <a href="service.html"
+         class="block hover:text-safetyYellow transition-colors">
+        Services
+      </a>
+    </li>
+
+    <li>
+      <a href="blog.html"
+         class="block hover:text-safetyYellow transition-colors">
+        Blog
+      </a>
+    </li>
+
+    <li>
+      <a href="aboutus.html"
+         class="block hover:text-safetyYellow transition-colors">
+        About Us
+      </a>
+    </li>
+
+    <li>
+      <a href="contact.html"
+         class="block hover:text-safetyYellow transition-colors">
+        Contact
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+        <!-- Contact Info -->
+        <div>
+          <h4 class="text-white font-bold mb-8 uppercase tracking-wider text-sm">Contact Us</h4>
+          <div class="space-y-6 text-sm">
+            <div class="flex items-start gap-4">
+              <i class="fas fa-map-marker-alt text-safetyYellow mt-1"></i>
+              <span>123 Construction Ave, Suite 100<br>New York, NY 10001</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <i class="fas fa-phone text-safetyYellow"></i>
+              <span>+1 (555) 123-4567</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <i class="fas fa-envelope text-safetyYellow"></i>
+              <span>info@siteworks.com</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div>
+          <h4 class="text-white font-bold mb-8 uppercase tracking-wider text-sm">Stay Updated</h4>
+          <p class="text-gray-400 mb-6 text-sm">Subscribe to receive construction insights and project updates.</p>
+          <form class="space-y-4">
+            <div class="relative">
+                <input type="email" placeholder="Your email address" 
+                    class="w-full px-4 py-3 rounded bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-safetyYellow focus:outline-none focus:ring-1 focus:ring-safetyYellow transition-all">
+            </div>
+            <button type="submit" class="w-full bg-safetyYellow text-charcoal font-bold py-3 rounded hover:bg-yellow-400 transition-colors uppercase tracking-wider text-sm">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+        <div>&copy; 2026 SiteWorks Construction Group. All rights reserved.</div>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+          <a href="#" class="hover:text-white transition-colors">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // --- Shared Logic (Nav, Theme, RTL) ---
+    const htmlEl = document.documentElement;
+    const bodyEl = document.body;
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const l1 = document.getElementById('line1');
+    const l2 = document.getElementById('line2');
+    const l3 = document.getElementById('line3');
+
+    // Menu Toggle Logic
+    if(hamburger) {
+        hamburger.addEventListener('click', () => {
+          const isHidden = mobileMenu.classList.toggle('hidden');
+          if (!isHidden) {
+            l1.style.transform = 'translateY(8px) rotate(45deg)';
+            l2.style.opacity = '0';
+            l3.style.transform = 'translateY(-8px) rotate(-45deg)';
+          } else {
+            l1.style.transform = 'none';
+            l2.style.opacity = '1';
+            l3.style.transform = 'none';
+          }
         });
+    }
 
+    // Theme Logic
+    const themeBtns = [document.getElementById('themeToggleDesktop'), document.getElementById('themeToggleMobile')];
+    function setTheme(isDark) {
+      if (isDark) {
+        htmlEl.classList.add('dark');
+        try { localStorage.setItem('theme', 'dark'); } catch(e) {}
+        themeBtns.forEach(btn => btn ? btn.innerHTML = '<i class="fas fa-sun"></i>' : null);
+      } else {
+        htmlEl.classList.remove('dark');
+        try { localStorage.setItem('theme', 'light'); } catch(e) {}
+        themeBtns.forEach(btn => btn ? btn.innerHTML = '<i class="fas fa-moon"></i>' : null);
+      }
+    }
 
-        // --- Running Number Counter Animation ---
-        function countUp(el) {
-            const target = parseInt(el.getAttribute('data-target'));
-            const prefix = el.getAttribute('data-prefix') || '';
-            const suffix = el.getAttribute('data-suffix') || '';
-            let start = 0;
-            const duration = 2000;
-            const step = (target / duration) * 10;
+    themeBtns.forEach(btn => {
+      if(btn) btn.addEventListener('click', () => setTheme(!htmlEl.classList.contains('dark')));
+    });
+
+    // Initialize Theme
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      setTheme(true);
+    } else {
+      setTheme(false);
+    }
+
+    // RTL Logic
+    const rtlBtns = [document.getElementById('rtlToggleDesktop'), document.getElementById('rtlToggleMobile')];
+    rtlBtns.forEach(btn => {
+      if(btn) {
+          btn.addEventListener('click', () => {
+          const currentDir = htmlEl.getAttribute('dir') || 'ltr';
+          const newDir = currentDir === 'ltr' ? 'rtl' : 'ltr';
+          htmlEl.setAttribute('dir', newDir);
+          bodyEl.setAttribute('dir', newDir);
+        });
+      }
+    });
+
+    // --- Stats Counter Logic ---
+    const statNumbers = document.querySelectorAll('.stat-number');
+    const sections = document.querySelectorAll('.fade-in'); 
+    let statsAnimated = false;
+
+    function countUp(el) {
+        const target = parseInt(el.getAttribute('data-target'));
+        const prefix = el.getAttribute('data-prefix') || '';
+        const suffix = el.getAttribute('data-suffix') || '';
+        let start = 0;
+        const duration = 2000;
+        const step = (target / duration) * 10;
+        
+        const timer = setInterval(() => {
+            start += step;
+            if (start >= target) {
+                clearInterval(timer);
+                start = target;
+            }
             
-            const timer = setInterval(() => {
-                start += step;
-                if (start >= target) {
-                    clearInterval(timer);
-                    start = target;
-                }
-                
-                let displayValue = Math.floor(start);
-                if (target === 1 && prefix === '$') { // Special handling for $1B+
-                    displayValue = (start).toFixed(0);
-                    if (start >= 1) displayValue = "1";
-                    el.textContent = prefix + displayValue + suffix;
-                } else {
-                     el.textContent = prefix + displayValue + suffix;
-                }
-                
-            }, 10);
-        }
+            let displayValue = Math.floor(start);
+            if (target === 1 && prefix === '$') { 
+                displayValue = (start).toFixed(0);
+                if (start >= 1) displayValue = "1";
+            }
+            el.textContent = prefix + displayValue + suffix;
+        }, 10);
+    }
 
-        // --- Intersection Observer for Animations (FadeIn/Counting) ---
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
 
-        const sectionObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); 
-                }
-            });
-        }, observerOptions);
-
-        sections.forEach(section => {
-            // Hero section is not observed for the fade-in effect here, assuming it's visible by default
-            if (!section.classList.contains('hero')) { 
-                sectionObserver.observe(section);
+    const sectionObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
             }
         });
+    }, observerOptions);
 
-        // Separate observer just for stats to handle the counter animation
-        const statsObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !statsAnimated) {
-                    statNumbers.forEach(countUp);
-                    statsAnimated = true;
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
+    sections.forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(20px)';
+        section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        sectionObserver.observe(section);
+    });
 
-        const statsSection = document.getElementById('stats');
-        if (statsSection) {
-            statsObserver.observe(statsSection);
-        }
-    </script>
+    const statsObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !statsAnimated) {
+                statNumbers.forEach(countUp);
+                statsAnimated = true;
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    const statsSection = document.getElementById('stats');
+    if (statsSection) {
+        statsObserver.observe(statsSection);
+    }
+  </script>
 </body>
 </html>

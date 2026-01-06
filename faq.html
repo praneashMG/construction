@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Growwpark | Pricing & FAQs</title>
+  <link rel="icon" type="image/jpeg" href="assets/growwpark_logo.jpg" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            safetyYellow: '#F9A825',
+            charcoal: '#1F1F1F',
+            concrete: '#B0B0B0',
+            steelBlue: '#2D3E50',
+            cementGray: '#E8E8E8'
+          },
+          fontFamily: {
+            'display': ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .text-balance {
+      text-wrap: balance;
+    }
+    
+    /* Construction grid pattern */
+    .construction-grid {
+      background-image: 
+        linear-gradient(to right, rgba(249, 168, 37, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(249, 168, 37, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    
+    /* Tape effect reused from index */
+    .tape-corner {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .tape-corner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, #F9A825 0%, #FFB74D 100%);
+      clip-path: polygon(100% 0, 0 0, 100% 100%);
+      z-index: 1;
+    }
+    
+    /* Card hover lift effect */
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .hover-lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    /* FAQ Accordion Animations */
+    details > summary {
+      list-style: none;
+    }
+    details > summary::-webkit-details-marker {
+      display: none;
+    }
+    
+    details[open] summary ~ * {
+      animation: sweep .5s ease-in-out;
+    }
+
+    @keyframes sweep {
+      0%    {opacity: 0; transform: translateY(-10px)}
+      100%  {opacity: 1; transform: translateY(0)}
+    }
+  </style>
+</head>
+
+<body class="bg-cementGray text-steelBlue dark:bg-charcoal dark:text-gray-100 transition-colors duration-300" data-dir="ltr">
+
+  <!-- Navbar (Identical to Index) -->
+  <nav id="navbar" class="sticky top-0 z-50 transition-colors duration-300 bg-white text-charcoal border-b border-gray-200 dark:bg-charcoal dark:text-white dark:border-white/10 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
+      
+      <!-- Logo Section -->
+      <a href="index.html" class="flex items-center gap-2 shrink-0 group">
+        <span class="flex h-10 w-10 items-center justify-center rounded-full bg-safetyYellow text-charcoal shadow-lg group-hover:scale-110 transition-transform">
+          <i class="fas fa-hard-hat text-lg"></i>
+        </span>
+        <div class="leading-tight">
+          <span class="block text-xl font-bold tracking-tight">Groww</span>
+          <span class="block text-xs font-medium text-safetyYellow uppercase tracking-widest">Builders</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+    <div class="hidden lg:flex items-center gap-2">
+  <ul class="flex items-center gap-1 text-[13px] font-semibold">
+    
+    <!-- Home Dropdown -->
+    <li class="relative group">
+      <button class="home-trigger flex items-center gap-1 rounded-md px-2.5 py-1.5 hover:bg-safetyYellow hover:text-charcoal transition-colors">
+        <span>Home</span>
+        <i class="fas fa-chevron-down text-[9px]"></i>
+      </button>
+      <ul class="invisible absolute left-0 mt-2 w-44 rounded-lg bg-white border border-gray-100 dark:bg-charcoal dark:border-white/10 p-1.5 opacity-0 shadow-xl transition-all group-hover:visible group-hover:opacity-100 z-50">
+        <li>
+          <a href="index.html" class="block rounded-md px-3 py-1.5 hover:bg-safetyYellow hover:text-charcoal transition-colors">Home 1</a>
+        </li>
+        <li>
+          <a href="homepage2.html" class="block rounded-md px-3 py-1.5 hover:bg-safetyYellow hover:text-charcoal transition-colors">Home 2</a>
+        </li>
+      </ul>
+    </li>
+
+    <!-- Normal Links -->
+    <li><a href="service.html" class="block rounded-md px-3 py-1.5 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">Services</a></li>
+    <li><a href="faq.html" class="block rounded-md px-3 py-1.5 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">FAQ</a></li>
+    <li><a href="blog.html" class="block rounded-md px-3 py-1.5 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">Blog</a></li>
+    <li><a href="aboutus.html" class="block rounded-md px-3 py-1.5 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">About</a></li>
+    <li><a href="contact.html" class="block rounded-md px-3 py-1.5 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">Contact</a></li>
+
+    <!-- Dashboard Dropdown -->
+    <li class="relative group">
+      <button class="flex items-center gap-1 rounded-md px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
+        <span>Dashboard</span>
+        <i class="fas fa-chevron-down text-[9px] group-hover:rotate-180 transition-transform"></i>
+      </button>
+      <ul class="invisible absolute left-0 mt-2 w-52 rounded-lg bg-white border border-gray-100 dark:bg-charcoal dark:border-white/10 p-1.5 opacity-0 shadow-xl transition-all group-hover:visible group-hover:opacity-100 z-50">
+        <li><a href="admin.html" class="block rounded-md px-3 py-1.5 hover:bg-safetyYellow hover:text-charcoal transition-colors">Admin Panel</a></li>
+        <li><a href="user.html" class="block rounded-md px-3 py-1.5 hover:bg-safetyYellow hover:text-charcoal transition-colors">User Dashboard</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <!-- Right Controls -->
+  <div class="ml-3 flex items-center gap-2 border-l border-gray-200 dark:border-white/10 pl-3">
+    <button id="themeToggleDesktop" class="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 dark:border-white/10 hover:bg-safetyYellow hover:text-charcoal transition-all">
+      <i class="fas fa-moon text-xs"></i>
+    </button>
+
+    <button id="rtlToggleDesktop" class="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 dark:border-white/10 hover:bg-safetyYellow hover:text-charcoal transition-all">
+      <i class="fas fa-exchange-alt text-xs"></i>
+    </button>
+
+    <a href="login.html" class="ml-1 inline-flex items-center gap-1.5 rounded-md bg-safetyYellow px-4 py-1.5 text-[13px] font-bold text-charcoal hover:bg-yellow-500 transition-transform active:scale-95 shadow-md shadow-safetyYellow/20">
+      <i class="fas fa-user-plus text-[10px]"></i>
+      <span>Register</span>
+    </a>
+  </div>
+</div>
+
+      <!-- Mobile Controls -->
+      <div class="flex items-center gap-3 lg:hidden">
+        <button id="themeToggleMobile" class="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 dark:border-white/10">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="hamburger" class="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-md bg-gray-100 dark:bg-white/5" aria-label="Toggle Menu">
+          <span id="line1" class="h-0.5 w-6 bg-current transition-all duration-300"></span>
+          <span id="line2" class="h-0.5 w-6 bg-current transition-all duration-300"></span>
+          <span id="line3" class="h-0.5 w-6 bg-current transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Drawer -->
+    <div id="mobileMenu" class="hidden border-t border-gray-100 bg-white dark:bg-charcoal dark:border-white/5 lg:hidden overflow-hidden transition-all duration-300">
+      <div class="flex flex-col gap-1 p-4">
+        
+        <details class="group">
+        <summary
+          class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-3 text-lg font-bold list-none hover:bg-gray-50 dark:hover:bg-white/5 transition-all">
+          <div class="flex items-center gap-4">
+            <i class="fas fa-home w-6 text-safetyYellow"></i>
+            <span>Home</span>
+          </div>
+          <i class="fas fa-chevron-down text-xs group-open:rotate-180 transition-transform"></i>
+        </summary>
+
+          <div class="mt-1 flex flex-col gap-1 pl-14 text-gray-500 dark:text-gray-400">
+            <a href="index.html" class="py-2 hover:text-safetyYellow">Home 1</a>
+            <a href="homepage2.html" class="py-2 hover:text-safetyYellow">Home 2</a>
+          </div>
+        </details>
+
+        <a href="service.html" class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+          <i class="fas fa-concierge-bell text-safetyYellow w-6"></i> Services
+        </a>
+        <a href="blog.html" class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+          <i class="fas fa-blog text-safetyYellow w-6"></i> Blog
+        </a>
+        <a href="aboutus.html" class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+          <i class="fas fa-info-circle text-safetyYellow w-6"></i> About Us
+        </a>
+        <a href="contact.html" class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+          <i class="fas fa-envelope text-safetyYellow w-6"></i> Contact
+        </a>
+
+        <details class="group">
+          <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5 list-none">
+            <div class="flex items-center gap-4">
+              <i class="fas fa-tachometer-alt text-safetyYellow w-6"></i> Dashboard
+            </div>
+            <i class="fas fa-chevron-down text-xs group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <div class="mt-1 flex flex-col gap-1 pl-14 text-gray-500 dark:text-gray-400">
+            <a href="admin.html" class="py-2 hover:text-safetyYellow">Admin Panel</a>
+            <a href="user.html" class="py-2 hover:text-safetyYellow">User Dashboard</a>
+          </div>
+        </details>
+
+        <div class="mt-4 pt-4 border-t border-gray-100 dark:border-white/10">
+          <button id="rtlToggleMobile" class="flex w-full items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+            <i class="fas fa-exchange-alt text-safetyYellow w-6"></i> Switch Direction (RTL)
+          </button>
+          <a href="login.html" class="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-safetyYellow py-4 text-center text-lg font-bold text-charcoal active:scale-95 transition-transform">
+            <i class="fas fa-user-plus"></i> Register
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="overflow-hidden">
+
+    <!-- Section 1: Hero Section (FAQ Specific) -->
+    <section class="relative bg-steelBlue py-20 lg:py-28 overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'><line x1=\'0\' y1=\'0\' x2=\'60\' y2=\'0\' stroke=\'%23F9A825\' stroke-width=\'1\' stroke-opacity=\'0.5\'/><line x1=\'0\' y1=\'0\' x2=\'0\' y2=\'60\' stroke=\'%23F9A825\' stroke-width=\'1\' stroke-opacity=\'0.5\'/></svg>');"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10 text-center">
+            <span class="inline-block px-4 py-1.5 bg-safetyYellow/20 text-safetyYellow rounded-full text-sm font-bold tracking-wide mb-6 border border-safetyYellow/30">TRANSPARENT PRICING</span>
+            <h1 class="text-4xl md:text-6xl font-black text-white mb-6">Investment & <span class="text-safetyYellow">Answers</span></h1>
+            <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
+                Straightforward pricing plans for every stage of construction, coupled with answers to your most pressing questions.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 2: Pricing Plans -->
+    <section class="py-24 bg-cementGray dark:bg-charcoal construction-grid">
+        <div class="mx-auto max-w-7xl px-4 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-black text-charcoal dark:text-white mb-4">Choose Your Plan</h2>
+                <p class="text-gray-600 dark:text-gray-400">Whether you need a consultation or full project management, we have a package for you.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Plan 1 -->
+                <div class="bg-white dark:bg-steelBlue rounded-2xl p-8 hover-lift tape-corner relative group border border-transparent hover:border-safetyYellow/30 transition-all">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold text-charcoal dark:text-white">Consultation</h3>
+                        <div class="mt-4 flex items-baseline gap-1">
+                            <span class="text-4xl font-black text-safetyYellow">$199</span>
+                            <span class="text-gray-500 dark:text-gray-400">/ session</span>
+                        </div>
+                        <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">Perfect for initial feasibility studies and design advice.</p>
+                    </div>
+                    <ul class="space-y-4 mb-8 text-sm">
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-safetyYellow"></i> <span>2-Hour Site Visit</span></li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-safetyYellow"></i> <span>Feasibility Report</span></li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-safetyYellow"></i> <span>Rough Cost Estimation</span></li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-safetyYellow"></i> <span>Regulatory Advice</span></li>
+                    </ul>
+                    <a href="#" class="block w-full py-3 px-6 text-center rounded-lg border-2 border-charcoal dark:border-white text-charcoal dark:text-white font-bold hover:bg-safetyYellow hover:border-safetyYellow hover:text-charcoal transition-all">Select Plan</a>
+                </div>
+
+                <!-- Plan 2 (Featured) -->
+                <div class="bg-charcoal text-white rounded-2xl p-8 hover-lift tape-corner relative transform md:-translate-y-4 border-2 border-safetyYellow shadow-2xl">
+                    <div class="absolute top-0 right-0 bg-safetyYellow text-charcoal text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold">Project Management</h3>
+                        <div class="mt-4 flex items-baseline gap-1">
+                            <span class="text-4xl font-black text-safetyYellow">10%</span>
+                            <span class="text-gray-400"> of project cost</span>
+                        </div>
+                        <p class="mt-4 text-sm text-gray-300">Comprehensive oversight for residential and commercial builds.</p>
+                    </div>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-300">
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-safetyYellow"></i> <span>Dedicated Project Manager</span></li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-safetyYellow"></i> <span>Timeline & Budget Control</span></li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-safetyYellow"></i> <span>Vendor Coordination</span></li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-safetyYellow"></i> <span>Daily Progress Logs</span></li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-safetyYellow"></i> <span>Quality Assurance Checks</span></li>
+                    </ul>
+                    <a href="#" class="block w-full py-3 px-6 text-center rounded-lg bg-safetyYellow text-charcoal font-bold hover:bg-white transition-all">Get Started</a>
+                </div>
+
+                <!-- Plan 3 -->
+                <div class="bg-white dark:bg-steelBlue rounded-2xl p-8 hover-lift tape-corner relative group border border-transparent hover:border-safetyYellow/30 transition-all">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold text-charcoal dark:text-white">Turnkey Solution</h3>
+                        <div class="mt-4 flex items-baseline gap-1">
+                            <span class="text-4xl font-black text-safetyYellow">Custom</span>
+                        </div>
+                        <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">Design-to-build service for large scale developments.</p>
+                    </div>
+                    <ul class="space-y-4 mb-8 text-sm">
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-safetyYellow"></i> <span>Architectural Design</span></li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-safetyYellow"></i> <span>Permit Acquisition</span></li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-safetyYellow"></i> <span>Full Construction</span></li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check-circle text-safetyYellow"></i> <span>Interior Finishing</span></li>
+                    </ul>
+                    <a href="#" class="block w-full py-3 px-6 text-center rounded-lg border-2 border-charcoal dark:border-white text-charcoal dark:text-white font-bold hover:bg-safetyYellow hover:border-safetyYellow hover:text-charcoal transition-all">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Value/Transparency Info -->
+    <section class="py-16 bg-white dark:bg-steelBlue border-y border-gray-100 dark:border-white/5">
+        <div class="mx-auto max-w-7xl px-4 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-black text-charcoal dark:text-white mb-6">No Hidden Fees. <br>Just Honest Building.</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6 text-lg">
+                        At Growwpark, we believe trust is the foundation of every structure. Our pricing model is open-book, meaning you see exactly where every dollar goes.
+                    </p>
+                    <div class="flex flex-col gap-4">
+                        <div class="flex gap-4">
+                            <div class="h-10 w-10 rounded bg-safetyYellow/10 flex items-center justify-center shrink-0">
+                                <i class="fas fa-file-contract text-safetyYellow"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-charcoal dark:text-white">Detailed BOQ</h4>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">We provide a Bill of Quantities before signing.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="h-10 w-10 rounded bg-safetyYellow/10 flex items-center justify-center shrink-0">
+                                <i class="fas fa-shield-alt text-safetyYellow"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-charcoal dark:text-white">Fixed Price Guarantee</h4>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Locked-in rates for materials and labor.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative h-64 md:h-80 rounded-2xl overflow-hidden shadow-xl tape-corner">
+                    <img src="https://images.unsplash.com/photo-1554200876-56c2f25224fa?q=80&w=2070&auto=format&fit=crop" alt="Meeting" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 text-white">
+                        <div class="font-bold text-xl">Client-First Approach</div>
+                        <div class="text-sm text-gray-300">Over 15 years of transparent dealing</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: FAQ Accordion -->
+    <section class="py-24 bg-gray-50 dark:bg-charcoal transition-colors duration-300">
+        <div class="mx-auto max-w-4xl px-4 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-safetyYellow font-bold tracking-widest text-sm uppercase">Support</span>
+                <h2 class="text-3xl md:text-5xl font-black text-charcoal dark:text-white mt-2">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <details class="group bg-white dark:bg-steelBlue rounded-xl shadow-sm overflow-hidden border border-gray-100 dark:border-white/5 transition-all duration-300 open:shadow-lg open:border-safetyYellow/50">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer text-lg font-bold text-charcoal dark:text-white select-none">
+                        <span>How do you handle unexpected costs?</span>
+                        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 dark:bg-charcoal text-safetyYellow transition-transform group-open:rotate-180">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-600 dark:text-gray-300 leading-relaxed border-t border-gray-100 dark:border-white/10 pt-4">
+                        <p>We build a contingency fund (typically 5-10%) into the initial budget to cover unforeseen issues. If a change is required, we submit a Change Order for your approval before proceeding, ensuring you remain in total control of the budget.</p>
+                    </div>
+                </details>
+
+                <!-- FAQ Item 2 -->
+                <details class="group bg-white dark:bg-steelBlue rounded-xl shadow-sm overflow-hidden border border-gray-100 dark:border-white/5 transition-all duration-300 open:shadow-lg open:border-safetyYellow/50">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer text-lg font-bold text-charcoal dark:text-white select-none">
+                        <span>What is the typical timeline for a commercial project?</span>
+                        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 dark:bg-charcoal text-safetyYellow transition-transform group-open:rotate-180">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-600 dark:text-gray-300 leading-relaxed border-t border-gray-100 dark:border-white/10 pt-4">
+                        <p>Timelines vary based on scope and size. A standard 5,000 sq ft office fit-out typically takes 12-16 weeks. Ground-up construction can take 12-18 months. During our initial consultation, we provide a detailed critical path schedule.</p>
+                    </div>
+                </details>
+
+                <!-- FAQ Item 3 -->
+                <details class="group bg-white dark:bg-steelBlue rounded-xl shadow-sm overflow-hidden border border-gray-100 dark:border-white/5 transition-all duration-300 open:shadow-lg open:border-safetyYellow/50">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer text-lg font-bold text-charcoal dark:text-white select-none">
+                        <span>Are you licensed and insured?</span>
+                        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 dark:bg-charcoal text-safetyYellow transition-transform group-open:rotate-180">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-600 dark:text-gray-300 leading-relaxed border-t border-gray-100 dark:border-white/10 pt-4">
+                        <p>Absolutely. Growwpark is fully licensed for general contracting in all states we operate in. We carry comprehensive liability insurance and workers' compensation coverage to protect both our team and your property.</p>
+                    </div>
+                </details>
+
+                <!-- FAQ Item 4 -->
+                <details class="group bg-white dark:bg-steelBlue rounded-xl shadow-sm overflow-hidden border border-gray-100 dark:border-white/5 transition-all duration-300 open:shadow-lg open:border-safetyYellow/50">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer text-lg font-bold text-charcoal dark:text-white select-none">
+                        <span>Can I live in my home during a renovation?</span>
+                        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 dark:bg-charcoal text-safetyYellow transition-transform group-open:rotate-180">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-600 dark:text-gray-300 leading-relaxed border-t border-gray-100 dark:border-white/10 pt-4">
+                        <p>For minor renovations (kitchen/bath), yes. We set up dust barriers and designated work zones to minimize disruption. For whole-house renovations or major structural work, we strongly recommend finding temporary accommodation for safety and speed.</p>
+                    </div>
+                </details>
+
+                <!-- FAQ Item 5 -->
+                <details class="group bg-white dark:bg-steelBlue rounded-xl shadow-sm overflow-hidden border border-gray-100 dark:border-white/5 transition-all duration-300 open:shadow-lg open:border-safetyYellow/50">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer text-lg font-bold text-charcoal dark:text-white select-none">
+                        <span>Do you offer design services?</span>
+                        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 dark:bg-charcoal text-safetyYellow transition-transform group-open:rotate-180">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-600 dark:text-gray-300 leading-relaxed border-t border-gray-100 dark:border-white/10 pt-4">
+                        <p>Yes, we are a full-service Design-Build firm. This means you have a single point of contact for both architectural design and construction execution, streamlining communication and reducing errors.</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: CTA Support -->
+    <section class="py-20 bg-safetyYellow text-charcoal">
+        <div class="mx-auto max-w-7xl px-4 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-5xl font-black mb-6">Still have questions?</h2>
+            <p class="text-xl md:text-2xl font-medium max-w-2xl mx-auto mb-10 opacity-90">
+                Can't find the answer you're looking for? Our support team is here to help you navigate your next project.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="contact.html" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-charcoal text-white font-bold rounded-lg hover:bg-gray-800 transition-all hover:scale-105 shadow-lg">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact Support</span>
+                </a>
+                <a href="tel:+15551234567" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-charcoal font-bold rounded-lg hover:bg-gray-100 transition-all hover:scale-105 shadow-lg">
+                    <i class="fas fa-phone"></i>
+                    <span>(555) 123-4567</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+  </main>
+
+  <!-- Footer (Identical to Index) -->
+  <footer class="bg-charcoal pt-20 pb-10 text-white">
+    <div class="mx-auto max-w-7xl px-4 lg:px-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-white/10 pb-16">
+        <!-- Company Info -->
+        <div>
+          <a href="#" class="flex items-center gap-3 mb-6">
+            <div class="h-12 w-12 rounded-full bg-safetyYellow flex items-center justify-center shrink-0">
+              <i class="fas fa-hard-hat text-lg text-charcoal"></i>
+            </div>
+            <div class="flex flex-col justify-center leading-none">
+              <span class="text-base font-bold tracking-wide">GROWW</span>
+              <span class="text-xs font-semibold text-safetyYellow tracking-widest">BUILDERS</span>
+            </div>
+          </a>
+          <p class="text-gray-400 mb-6">Building the future with precision, integrity, and innovation since 2008.</p>
+          <div class="flex gap-3">
+            <a href="#" class="h-10 w-10 rounded-full bg-steelBlue flex items-center justify-center hover:bg-safetyYellow hover:text-charcoal transition-all"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="h-10 w-10 rounded-full bg-steelBlue flex items-center justify-center hover:bg-safetyYellow hover:text-charcoal transition-all"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="h-10 w-10 rounded-full bg-steelBlue flex items-center justify-center hover:bg-safetyYellow hover:text-charcoal transition-all"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Quick Links</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="index.html" class="block hover:text-safetyYellow transition-colors">Home</a></li>
+            <li><a href="service.html" class="block hover:text-safetyYellow transition-colors">Services</a></li>
+            <li><a href="blog.html" class="block hover:text-safetyYellow transition-colors">Blog</a></li>
+            <li><a href="aboutus.html" class="block hover:text-safetyYellow transition-colors">About Us</a></li>
+            <li><a href="contact.html" class="block hover:text-safetyYellow transition-colors">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div>
+          <h4 class="text-lg font-bold mb-6">Contact Us</h4>
+          <div class="space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-full bg-safetyYellow/10 flex items-center justify-center"><i class="fas fa-map-marker-alt text-safetyYellow"></i></div>
+              <div class="text-gray-400">123 Construction Ave, Suite 100<br>New York, NY 10001</div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-full bg-safetyYellow/10 flex items-center justify-center"><i class="fas fa-phone text-safetyYellow"></i></div>
+              <div class="text-gray-400">+1 (555) 123-4567</div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-full bg-safetyYellow/10 flex items-center justify-center"><i class="fas fa-envelope text-safetyYellow"></i></div>
+              <div class="text-gray-400">info@siteworks.com</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div>
+          <h4 class="text-lg font-bold mb-6">Stay Updated</h4>
+          <p class="text-gray-400 mb-4">Subscribe to receive construction insights and project updates.</p>
+          <form class="space-y-4">
+            <input type="email" placeholder="Your email address" class="w-full px-4 py-3 rounded-lg bg-steelBlue border border-white/10 focus:border-safetyYellow focus:outline-none text-white">
+            <button type="submit" class="w-full bg-safetyYellow text-charcoal font-bold py-3 rounded-lg hover:bg-yellow-500 transition-colors">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 text-sm">
+        <div>© 2026 SiteWorks Construction Group. All rights reserved.</div>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-safetyYellow transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-safetyYellow transition-colors">Terms of Service</a>
+          <a href="#" class="hover:text-safetyYellow transition-colors">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const htmlEl = document.documentElement;
+    const bodyEl = document.body;
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const l1 = document.getElementById('line1');
+    const l2 = document.getElementById('line2');
+    const l3 = document.getElementById('line3');
+
+    // Menu Toggle Logic
+    hamburger.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.toggle('hidden');
+      if (!isHidden) {
+        l1.style.transform = 'translateY(8px) rotate(45deg)';
+        l2.style.opacity = '0';
+        l3.style.transform = 'translateY(-8px) rotate(-45deg)';
+      } else {
+        l1.style.transform = 'none';
+        l2.style.opacity = '1';
+        l3.style.transform = 'none';
+      }
+    });
+
+    // Theme Logic
+    const themeBtns = [document.getElementById('themeToggleDesktop'), document.getElementById('themeToggleMobile')];
+    function setTheme(isDark) {
+      if (isDark) {
+        htmlEl.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        themeBtns.forEach(btn => btn.innerHTML = '<i class="fas fa-sun"></i>');
+      } else {
+        htmlEl.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+        themeBtns.forEach(btn => btn.innerHTML = '<i class="fas fa-moon"></i>');
+      }
+    }
+
+    themeBtns.forEach(btn => btn.addEventListener('click', () => setTheme(!htmlEl.classList.contains('dark'))));
+    setTheme(localStorage.getItem('theme') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+    // RTL Logic
+    const rtlBtns = [document.getElementById('rtlToggleDesktop'), document.getElementById('rtlToggleMobile')];
+    rtlBtns.forEach(btn => btn.addEventListener('click', () => {
+      const currentDir = bodyEl.getAttribute('dir') || 'ltr';
+      bodyEl.setAttribute('dir', currentDir === 'ltr' ? 'rtl' : 'ltr');
+    }));
+
+    // Optional: Accordion "One Open at a Time" Logic
+    const detailsElements = document.querySelectorAll('details');
+    detailsElements.forEach((detail) => {
+        detail.addEventListener('toggle', () => {
+            if (detail.open) {
+                detailsElements.forEach((otherDetail) => {
+                    if (otherDetail !== detail && otherDetail.open) {
+                        otherDetail.open = false;
+                    }
+                });
+            }
+        });
+    });
+  </script>
+</body>
+</html>

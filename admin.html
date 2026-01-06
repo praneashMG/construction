@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Growwpark | Construction Admin</title>
+  <link rel="icon" type="image/jpeg" href="assets/growwpark_logo.jpg" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          screens: {
+            'xs': '475px',
+          },
+          colors: {
+            safetyYellow: '#F9A825',
+            charcoal: '#1F1F1F',
+            concrete: '#B0B0B0',
+            steelBlue: '#2A4365',
+            darkSurface: '#121212',
+            lightSurface: '#F3F4F6'
+          },
+          fontFamily: {
+            sans: ['Open Sans', 'sans-serif'],
+            heading: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    [dir="rtl"] .rtl-flip { transform: scaleX(-1); }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    /* Transitions for view switching */
+    .view-section {
+        display: none;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+    .view-section.active {
+        display: block;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Mobile specific adjustments */
+    @media (max-width: 640px) {
+      .touch-target {
+        min-height: 44px;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 dark:bg-black text-gray-800 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden" data-dir="ltr">
+
+
+  <!-- ================= APP CONTAINER ================= -->
+  <div id="appContainer">
+      <!-- Overlay for mobile sidebar -->
+      <div id="sidebarOverlay" class="fixed inset-0 z-40 bg-black/50 hidden lg:hidden backdrop-blur-sm transition-opacity touch-none" onclick="toggleSidebar()"></div>
+
+      <!-- ADMIN SIDEBAR (UNCHANGED) -->
+      <aside id="sidebar" class="fixed inset-y-0 start-0 z-50 w-72 bg-steelBlue text-white transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-out flex flex-col shadow-2xl rtl:translate-x-full lg:rtl:translate-x-0 h-[100dvh]">
+        <!-- Brand -->
+       <a href="index.html"
+   class="block h-16 md:h-20 border-b border-white/10 bg-black/10 shrink-0
+          hover:bg-black/20 transition-colors">
+
+  <div class="flex items-center h-full px-6 gap-3">
+    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-white text-steelBlue shadow-lg">
+      <i class="fas fa-hard-hat text-lg"></i>
+    </span>
+
+    <div class="leading-tight">
+      <span class="block text-lg font-bold tracking-tight text-white">Groww</span>
+      <span class="block text-[10px] font-bold text-safetyYellow uppercase tracking-widest">
+        BUILDERS
+      </span>
+    </div>
+  </div>
+
+</a>
+
+
+        <!-- Nav -->
+        <nav class="flex-1 overflow-y-auto no-scrollbar py-6 px-4 space-y-2">
+          <p class="px-4 text-xs font-bold text-blue-200 uppercase tracking-widest mb-2">Overview</p>
+
+          <button onclick="navigate('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 bg-white text-steelBlue rounded-lg font-bold transition-colors shadow-md nav-item touch-target">
+            <i class="fas fa-gauge-high w-5 text-center"></i> Dashboard
+          </button>
+
+          <button onclick="navigate('projects')" id="nav-projects" class="w-full flex items-center gap-3 px-4 py-3 text-blue-100 hover:bg-white/10 hover:text-white rounded-lg transition-colors nav-item touch-target">
+            <i class="fas fa-city w-5 text-center"></i> Projects
+            <span class="ms-auto text-[10px] bg-safetyYellow text-charcoal font-bold px-2 py-0.5 rounded-full" id="activeProjectCount">12</span>
+          </button>
+
+          <button onclick="navigate('clients')" id="nav-clients" class="w-full flex items-center gap-3 px-4 py-3 text-blue-100 hover:bg-white/10 hover:text-white rounded-lg transition-colors nav-item touch-target">
+            <i class="fas fa-users w-5 text-center"></i> Clients
+          </button>
+
+          <button onclick="navigate('staff')" id="nav-staff" class="w-full flex items-center gap-3 px-4 py-3 text-blue-100 hover:bg-white/10 hover:text-white rounded-lg transition-colors nav-item touch-target">
+            <i class="fas fa-hard-hat w-5 text-center"></i> Site Staff
+          </button>
+
+          <button onclick="navigate('finance')" id="nav-finance" class="w-full flex items-center gap-3 px-4 py-3 text-blue-100 hover:bg-white/10 hover:text-white rounded-lg transition-colors nav-item touch-target">
+            <i class="fas fa-file-invoice-dollar w-5 text-center"></i> Finance
+          </button>
+
+          <button onclick="navigate('settings')" id="nav-settings" class="w-full flex items-center gap-3 px-4 py-3 text-blue-100 hover:bg-white/10 hover:text-white rounded-lg transition-colors nav-item touch-target">
+            <i class="fas fa-gear w-5 text-center"></i> Settings
+          </button>
+        </nav>
+
+        <!-- Footer controls -->
+        <div class="p-4 border-t border-white/10 bg-black/10 shrink-0 pb-safe">
+        <div class="flex items-center justify-center gap-4 mb-6">
+          <button id="themeToggleSidebar"
+            class="w-11 h-11 rounded-xl bg-white/10 
+                   flex items-center justify-center
+                   hover:bg-safetyYellow hover:text-charcoal
+                   transition-all duration-200 shadow-sm">
+            <i class="fas fa-moon text-sm"></i>
+          </button>
+
+          <button onclick="navigate('dashboard')" title="Home"
+            class="w-11 h-11 rounded-xl bg-white/10 
+                   flex items-center justify-center
+                   hover:bg-safetyYellow hover:text-charcoal
+                   transition-all duration-200 shadow-sm">
+            <i class="fas fa-home text-sm"></i>
+          </button>
+
+          <button id="rtlToggleSidebar"
+            class="w-11 h-11 rounded-xl bg-white/10 
+                   flex items-center justify-center
+                   hover:bg-safetyYellow hover:text-charcoal
+                   transition-all duration-200 shadow-sm">
+            <i class="fas fa-exchange-alt rtl-flip text-sm"></i>
+          </button>
+        </div>
+
+         <a href="login.html"
+   class="w-full flex items-center justify-center gap-2 py-3 
+          bg-red-500/20 hover:bg-red-500 text-white 
+          rounded-lg font-bold transition-colors mb-4 touch-target">
+  <i class="fas fa-sign-out-alt"></i> Logout
+</a>
+
+
+          <div class="flex items-center gap-3 px-2">
+            <div class="w-10 h-10 rounded-full bg-white text-steelBlue flex items-center justify-center font-bold text-lg border-2 border-safetyYellow">
+              AD
+            </div>
+            <div class="overflow-hidden">
+              <p class="text-sm font-bold text-white truncate">Admin User</p>
+              <p class="text-xs text-blue-200 truncate">System Administrator</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <div class="lg:ps-72 min-h-screen flex flex-col transition-all duration-300">
+        <!-- Top bar -->
+        <header class="h-16 md:h-20 bg-white dark:bg-charcoal border-b border-gray-200 dark:border-white/5 px-4 md:px-6 flex items-center justify-between sticky top-0 z-30 shadow-sm md:shadow-none">
+          <div class="flex items-center gap-3 md:gap-4">
+            <button onclick="toggleSidebar()" class="lg:hidden p-2 -ml-2 text-charcoal dark:text-white hover:bg-gray-100 dark:hover:bg-white/10 rounded-lg touch-target">
+              <i class="fas fa-bars text-xl"></i>
+            </button>
+            <div>
+              <h1 id="pageTitle" class="text-lg md:text-2xl font-bold font-heading text-charcoal dark:text-white truncate max-w-[150px] xs:max-w-none">Dashboard</h1>
+              <p id="pageSubtitle" class="text-[10px] md:text-xs text-gray-500 dark:text-gray-400 mt-0.5 hidden xs:block">Monitor projects, teams, and finances</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 md:gap-4">
+            <button class="relative p-2 rounded-full bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 text-gray-500 dark:text-gray-300 touch-target">
+              <i class="fas fa-bell text-sm"></i>
+              <span class="absolute top-0 right-0 h-4 w-4 rounded-full bg-safetyYellow text-[10px] font-bold text-charcoal flex items-center justify-center shadow-sm">5</span>
+            </button>
+            <div class="hidden md:flex items-center gap-3 bg-gray-100 dark:bg-white/10 px-4 py-2 rounded-full">
+              <i class="fas fa-clock text-xs text-safetyYellow"></i>
+              <span class="text-xs font-semibold text-gray-600 dark:text-gray-300">Today: 4 site visits scheduled</span>
+            </div>
+          </div>
+        </header>
+
+        <main class="flex-1 p-4 md:p-6 lg:p-8 space-y-6 md:space-y-8 relative overflow-x-hidden">
+            
+            <!-- VIEW: DASHBOARD (UNCHANGED) -->
+            <div id="view-dashboard" class="view-section active">
+                 <!-- KPI CARDS -->
+                 <section class="mb-6 md:mb-8">
+                    <h2 class="text-xs md:text-sm font-bold tracking-widest text-gray-500 dark:text-gray-400 uppercase mb-4">Key metrics</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6">
+                      <!-- Card 1 -->
+                      <div class="bg-white dark:bg-zinc-800 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm p-5 flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                          <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Active projects</p>
+                          <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-safetyYellow/15 text-safetyYellow">
+                            <i class="fas fa-city text-xs"></i>
+                          </span>
+                        </div>
+                        <div class="flex items-end justify-between">
+                          <p class="text-2xl md:text-3xl font-bold text-charcoal dark:text-white" id="kpi-active-projects">18</p>
+                          <span class="text-xs font-semibold text-green-600 dark:text-green-400">+3 this month</span>
+                        </div>
+                        <div class="mt-1 h-1.5 w-full rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden">
+                          <div class="h-full bg-safetyYellow rounded-full" style="width: 68%"></div>
+                        </div>
+                      </div>
+                      
+                      <!-- Card 2 -->
+                      <div class="bg-white dark:bg-zinc-800 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm p-5 flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                          <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">On-time delivery</p>
+                          <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-green-500/10 text-green-400">
+                            <i class="fas fa-check-circle text-xs"></i>
+                          </span>
+                        </div>
+                        <div class="flex items-end justify-between">
+                          <p class="text-2xl md:text-3xl font-bold text-charcoal dark:text-white">92%</p>
+                          <span class="text-xs font-semibold text-green-600 dark:text-green-400">+4% vs last quarter</span>
+                        </div>
+                        <div class="mt-1 h-1.5 w-full rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden">
+                          <div class="h-full bg-green-500 rounded-full" style="width: 92%"></div>
+                        </div>
+                      </div>
+
+                        <!-- Card 3 -->
+                      <div class="bg-white dark:bg-zinc-800 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm p-5 flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                          <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Monthly revenue</p>
+                          <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-blue-500/10 text-blue-400">
+                            <i class="fas fa-dollar-sign text-xs"></i>
+                          </span>
+                        </div>
+                        <div class="flex items-end justify-between">
+                          <p class="text-2xl md:text-3xl font-bold text-charcoal dark:text-white">$4.8M</p>
+                          <span class="text-xs font-semibold text-safetyYellow">+18% vs last month</span>
+                        </div>
+                        <p class="text-[10px] md:text-[11px] text-gray-500 dark:text-gray-400 mt-1">Including change orders</p>
+                      </div>
+
+                        <!-- Card 4 -->
+                      <div class="bg-white dark:bg-zinc-800 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm p-5 flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                          <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Open issues</p>
+                          <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-red-500/10 text-red-400">
+                            <i class="fas fa-triangle-exclamation text-xs"></i>
+                          </span>
+                        </div>
+                        <div class="flex items-end justify-between">
+                          <p class="text-2xl md:text-3xl font-bold text-charcoal dark:text-white">27</p>
+                          <span class="text-xs font-semibold text-red-500">5 critical</span>
+                        </div>
+                        <p class="text-[10px] md:text-[11px] text-gray-500 dark:text-gray-400 mt-1">Escalate overdue safety actions</p>
+                      </div>
+                    </div>
+                  </section>
+        
+                  <!-- PROJECT TABLE + QUICK FILTERS -->
+                  <section class="grid grid-cols-1 xl:grid-cols-3 gap-6 md:gap-8 items-start">
+                    <!-- Table -->
+                    <div class="xl:col-span-2 bg-white dark:bg-zinc-800 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm overflow-hidden">
+                      <div class="px-4 md:px-6 py-4 border-b border-gray-100 dark:border-white/5 flex flex-col xs:flex-row items-start xs:items-center justify-between gap-3">
+                        <div>
+                          <h2 class="text-sm font-bold font-heading text-charcoal dark:text-white uppercase tracking-wide">Project portfolio</h2>
+                          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">High-value jobs currently in delivery</p>
+                        </div>
+                        <button onclick="openModal()" class="w-full xs:w-auto inline-flex items-center justify-center gap-2 text-xs font-semibold px-4 py-2 rounded-full bg-safetyYellow text-charcoal hover:bg-safetyYellow/90 touch-target">
+                          <i class="fas fa-plus text-[10px]"></i>
+                          New Project
+                        </button>
+                      </div>
+        
+                      <div class="overflow-x-auto w-full">
+                        <table class="min-w-full text-xs md:text-sm whitespace-nowrap">
+                          <thead class="bg-gray-50 dark:bg-white/5 text-gray-500 dark:text-gray-300 uppercase text-[11px]">
+                            <tr>
+                              <th class="px-4 md:px-6 py-3 text-left font-semibold">Project</th>
+                              <th class="px-4 md:px-6 py-3 text-left font-semibold">Client</th>
+                              <th class="px-4 md:px-6 py-3 text-left font-semibold">Progress</th>
+                              <th class="px-4 md:px-6 py-3 text-right font-semibold">Budget</th>
+                            </tr>
+                          </thead>
+                          <tbody id="projectTableBody" class="divide-y divide-gray-100 dark:divide-white/5">
+                            <!-- JS WILL POPULATE THIS -->
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+        
+                    <!-- Filters / Capacity -->
+                    <div class="space-y-6">
+                      <!-- Filters -->
+                      <div class="bg-white dark:bg-zinc-800 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm p-5">
+                        <h3 class="text-sm font-bold font-heading text-charcoal dark:text-white mb-4 uppercase tracking-wide">Quick filters</h3>
+                        <div class="flex flex-wrap gap-2" id="filterContainer">
+                          <button onclick="filterProjects('all')" class="filter-btn active px-3 py-1.5 text-xs rounded-full bg-safetyYellow text-charcoal font-semibold transition-colors touch-target">All</button>
+                          <button onclick="filterProjects('on-track')" class="filter-btn px-3 py-1.5 text-xs rounded-full bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-200 hover:bg-safetyYellow/20 transition-colors touch-target">On schedule</button>
+                          <button onclick="filterProjects('delayed')" class="filter-btn px-3 py-1.5 text-xs rounded-full bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-200 hover:bg-safetyYellow/20 transition-colors touch-target">Delayed</button>
+                          <button onclick="filterProjects('critical')" class="filter-btn px-3 py-1.5 text-xs rounded-full bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-200 hover:bg-safetyYellow/20 transition-colors touch-target">High risk</button>
+                        </div>
+                        <p class="mt-4 text-[11px] text-gray-500 dark:text-gray-400">Use filters to quickly focus on projects that need attention.</p>
+                      </div>
+        
+                      <!-- Capacity -->
+                      <div class="bg-gradient-to-br from-charcoal via-slate-900 to-black text-white rounded-2xl border border-white/10 shadow-lg p-5 relative overflow-hidden">
+                        <div class="absolute right-0 top-0 w-32 h-32 bg-safetyYellow/10 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3"></div>
+                        <div class="relative z-10 space-y-3">
+                          <h3 class="text-sm font-bold font-heading uppercase tracking-wide">Crew capacity</h3>
+                          <p class="text-xs text-gray-300">Field teams scheduled across all active sites this week.</p>
+                          <div class="flex items-center justify-between">
+                            <div>
+                              <p class="text-2xl font-bold">78%</p>
+                              <p class="text-[11px] text-gray-400">Utilization of available crews</p>
+                            </div>
+                            <div class="flex flex-col items-end gap-1 text-[11px] text-gray-300">
+                              <span><span class="inline-block h-2 w-2 rounded-full bg-green-400 mr-1"></span> 12 crews on site</span>
+                              <span><span class="inline-block h-2 w-2 rounded-full bg-yellow-400 mr-1"></span> 3 on standby</span>
+                              <span><span class="inline-block h-2 w-2 rounded-full bg-red-400 mr-1"></span> 1 overbooked</span>
+                            </div>
+                          </div>
+                          <div class="mt-3 h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
+                            <div class="h-full bg-safetyYellow rounded-full" style="width: 78%"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+            </div>
+
+            <!-- VIEW: PROJECTS (3 CLEAN SECTIONS) -->
+            <div id="view-projects" class="view-section">
+                
+                <!-- Section 1: Top Level Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-white dark:bg-zinc-800 p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">Total Projects</p>
+                            <h3 class="text-2xl font-bold text-charcoal dark:text-white mt-1">42</h3>
+                        </div>
+                        <div class="h-10 w-10 bg-blue-50 dark:bg-blue-900/20 text-blue-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-zinc-800 p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">Pending Approval</p>
+                            <h3 class="text-2xl font-bold text-charcoal dark:text-white mt-1">5</h3>
+                        </div>
+                        <div class="h-10 w-10 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-hourglass-half"></i>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-zinc-800 p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">Completed</p>
+                            <h3 class="text-2xl font-bold text-charcoal dark:text-white mt-1">128</h3>
+                        </div>
+                        <div class="h-10 w-10 bg-green-50 dark:bg-green-900/20 text-green-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-flag-checkered"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Recent Updates Timeline (Visual) -->
+                <div class="bg-white dark:bg-zinc-800 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm p-6 mb-6">
+                    <h3 class="text-sm font-bold text-charcoal dark:text-white mb-4">Latest Updates</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Update 1 -->
+                        <div class="flex items-start gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5">
+                            <div class="w-2 h-2 mt-2 rounded-full bg-green-500 shrink-0"></div>
+                            <div>
+                                <p class="text-sm font-bold text-charcoal dark:text-white">Milestone Reached</p>
+                                <p class="text-xs text-gray-500">Metro Station North foundation poured.</p>
+                                <p class="text-[10px] text-gray-400 mt-1">2 hours ago</p>
+                            </div>
+                        </div>
+                        <!-- Update 2 -->
+                        <div class="flex items-start gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5">
+                            <div class="w-2 h-2 mt-2 rounded-full bg-yellow-500 shrink-0"></div>
+                            <div>
+                                <p class="text-sm font-bold text-charcoal dark:text-white">Inspection Pending</p>
+                                <p class="text-xs text-gray-500">Harbor Logistics electrical review.</p>
+                                <p class="text-[10px] text-gray-400 mt-1">5 hours ago</p>
+                            </div>
+                        </div>
+                         <!-- Update 3 -->
+                         <div class="flex items-start gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5">
+                            <div class="w-2 h-2 mt-2 rounded-full bg-blue-500 shrink-0"></div>
+                            <div>
+                                <p class="text-sm font-bold text-charcoal dark:text-white">New Blueprint</p>
+                                <p class="text-xs text-gray-500">Uploaded for Riverside Tower.</p>
+                                <p class="text-[10px] text-gray-400 mt-1">Yesterday</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Detailed Project List -->
+                <div class="bg-white dark:bg-zinc-800 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm p-4 md:p-6 overflow-hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-charcoal dark:text-white">All Projects</h3>
+                        <div class="flex gap-2">
+                             <button class="p-2 bg-gray-100 dark:bg-white/10 rounded-lg hover:bg-gray-200 text-gray-600 dark:text-white"><i class="fas fa-filter"></i></button>
+                             <button class="p-2 bg-gray-100 dark:bg-white/10 rounded-lg hover:bg-gray-200 text-gray-600 dark:text-white"><i class="fas fa-download"></i></button>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-xs md:text-sm text-left whitespace-nowrap">
+                            <thead class="bg-gray-50 dark:bg-white/5 text-gray-500 dark:text-gray-300 uppercase font-semibold">
+                                <tr>
+                                    <th class="px-4 md:px-6 py-3">ID</th>
+                                    <th class="px-4 md:px-6 py-3">Project Name</th>
+                                    <th class="px-4 md:px-6 py-3">Client</th>
+                                    <th class="px-4 md:px-6 py-3">Status</th>
+                                    <th class="px-4 md:px-6 py-3 text-right">Budget</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 dark:divide-white/5">
+                                <tr class="hover:bg-gray-50 dark:hover:bg-white/5">
+                                    <td class="px-4 md:px-6 py-4 font-mono text-gray-500">#88219</td>
+                                    <td class="px-4 md:px-6 py-4 font-bold text-charcoal dark:text-white">Metro Station North</td>
+                                    <td class="px-4 md:px-6 py-4 text-gray-600 dark:text-gray-300">City Infrastructure</td>
+                                    <td class="px-4 md:px-6 py-4"><span class="px-2 py-1 rounded-full bg-green-100 text-green-700 text-[10px] font-bold uppercase">On Track</span></td>
+                                    <td class="px-4 md:px-6 py-4 text-right font-mono">$1.2M</td>
+                                </tr>
+                                 <tr class="hover:bg-gray-50 dark:hover:bg-white/5">
+                                    <td class="px-4 md:px-6 py-4 font-mono text-gray-500">#77402</td>
+                                    <td class="px-4 md:px-6 py-4 font-bold text-charcoal dark:text-white">Harbor Logistics Park</td>
+                                    <td class="px-4 md:px-6 py-4 text-gray-600 dark:text-gray-300">Oceanic Freight</td>
+                                    <td class="px-4 md:px-6 py-4"><span class="px-2 py-1 rounded-full bg-green-100 text-green-700 text-[10px] font-bold uppercase">On Track</span></td>
+                                    <td class="px-4 md:px-6 py-4 text-right font-mono">$3.9M</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-white/5">
+                                    <td class="px-4 md:px-6 py-4 font-mono text-gray-500">#69014</td>
+                                    <td class="px-4 md:px-6 py-4 font-bold text-charcoal dark:text-white">Riverside Tower</td>
+                                    <td class="px-4 md:px-6 py-4 text-gray-600 dark:text-gray-300">Nova Holdings</td>
+                                    <td class="px-4 md:px-6 py-4"><span class="px-2 py-1 rounded-full bg-yellow-100 text-yellow-700 text-[10px] font-bold uppercase">Delayed</span></td>
+                                    <td class="px-4 md:px-6 py-4 text-right font-mono">$2.4M</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-white/5">
+                                    <td class="px-4 md:px-6 py-4 font-mono text-gray-500">#55921</td>
+                                    <td class="px-4 md:px-6 py-4 font-bold text-charcoal dark:text-white">Oakwood Residential</td>
+                                    <td class="px-4 md:px-6 py-4 text-gray-600 dark:text-gray-300">Oakwood Estates</td>
+                                    <td class="px-4 md:px-6 py-4"><span class="px-2 py-1 rounded-full bg-red-100 text-red-700 text-[10px] font-bold uppercase">Critical</span></td>
+                                    <td class="px-4 md:px-6 py-4 text-right font-mono">$0.8M</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: CLIENTS (3 CLEAN SECTIONS) -->
+            <div id="view-clients" class="view-section">
+                
+                <!-- Section 1: Search & Action -->
+                <div class="bg-white dark:bg-zinc-800 p-6 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm mb-6">
+                    <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
+                        <div class="relative w-full md:w-96">
+                            <i class="fas fa-search absolute left-4 top-3.5 text-gray-400"></i>
+                            <input type="text" placeholder="Search clients..." class="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl focus:outline-none focus:border-safetyYellow dark:text-white">
+                        </div>
+                        <button class="w-full md:w-auto px-6 py-3 bg-steelBlue text-white font-bold rounded-xl hover:bg-opacity-90 shadow-md touch-target flex items-center justify-center gap-2">
+                            <i class="fas fa-plus"></i> Add Client
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Section 2: Top Clients Highlights -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <!-- Card 1 -->
+                    <div class="bg-white dark:bg-zinc-800 p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg">CI</div>
+                            <span class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded">VIP</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-charcoal dark:text-white">City Infrastructure</h3>
+                        <p class="text-xs text-gray-500 mb-4">Government</p>
+                        <div class="flex justify-between items-center border-t border-gray-100 dark:border-white/10 pt-3 text-xs">
+                            <span class="text-gray-500">3 Active Projects</span>
+                            <span class="font-bold text-charcoal dark:text-white">$12.5M</span>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="bg-white dark:bg-zinc-800 p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-lg">OF</div>
+                            <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-1 rounded">REGULAR</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-charcoal dark:text-white">Oceanic Freight</h3>
+                        <p class="text-xs text-gray-500 mb-4">Logistics</p>
+                        <div class="flex justify-between items-center border-t border-gray-100 dark:border-white/10 pt-3 text-xs">
+                            <span class="text-gray-500">1 Active Project</span>
+                            <span class="font-bold text-charcoal dark:text-white">$3.9M</span>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="bg-white dark:bg-zinc-800 p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-lg">NH</div>
+                            <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-1 rounded">REGULAR</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-charcoal dark:text-white">Nova Holdings</h3>
+                        <p class="text-xs text-gray-500 mb-4">Real Estate</p>
+                        <div class="flex justify-between items-center border-t border-gray-100 dark:border-white/10 pt-3 text-xs">
+                            <span class="text-gray-500">2 Active Projects</span>
+                            <span class="font-bold text-charcoal dark:text-white">$8.1M</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Full Directory -->
+                <div class="bg-white dark:bg-zinc-800 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-100 dark:border-white/5">
+                        <h3 class="font-bold text-charcoal dark:text-white">Client Directory</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm whitespace-nowrap">
+                            <thead class="bg-gray-50 dark:bg-white/5 text-gray-500 dark:text-gray-400 uppercase text-xs font-semibold">
+                                <tr>
+                                    <th class="px-6 py-4">Client Name</th>
+                                    <th class="px-6 py-4">Contact</th>
+                                    <th class="px-6 py-4 text-center">Projects</th>
+                                    <th class="px-6 py-4 text-right">Total Value</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 dark:divide-white/5">
+                                <tr class="hover:bg-gray-50 dark:hover:bg-white/5">
+                                    <td class="px-6 py-4 font-semibold text-charcoal dark:text-white">City Infrastructure Board</td>
+                                    <td class="px-6 py-4 text-gray-500">Sarah Jenkins</td>
+                                    <td class="px-6 py-4 text-center">3</td>
+                                    <td class="px-6 py-4 text-right font-mono">$12.5M</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-white/5">
+                                    <td class="px-6 py-4 font-semibold text-charcoal dark:text-white">Oceanic Freight Corp</td>
+                                    <td class="px-6 py-4 text-gray-500">Michael Chang</td>
+                                    <td class="px-6 py-4 text-center">1</td>
+                                    <td class="px-6 py-4 text-right font-mono">$3.9M</td>
+                                </tr>
+                                 <tr class="hover:bg-gray-50 dark:hover:bg-white/5">
+                                    <td class="px-6 py-4 font-semibold text-charcoal dark:text-white">Nova Holdings</td>
+                                    <td class="px-6 py-4 text-gray-500">Elena Rossi</td>
+                                    <td class="px-6 py-4 text-center">2</td>
+                                    <td class="px-6 py-4 text-right font-mono">$8.1M</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+             <!-- VIEW: STAFF (3 CLEAN SECTIONS) -->
+             <div id="view-staff" class="view-section">
+                <!-- Section 1: Overview Counters -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-steelBlue text-white p-5 rounded-2xl shadow-md">
+                        <p class="text-xs uppercase opacity-70 font-bold">Total Staff</p>
+                        <p class="text-3xl font-bold mt-1">48</p>
+                    </div>
+                    <div class="bg-green-600 text-white p-5 rounded-2xl shadow-md">
+                        <p class="text-xs uppercase opacity-70 font-bold">On Site</p>
+                        <p class="text-3xl font-bold mt-1">32</p>
+                    </div>
+                    <div class="bg-white dark:bg-zinc-800 p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm">
+                        <p class="text-xs text-gray-500 uppercase font-bold">On Leave</p>
+                        <p class="text-3xl font-bold text-charcoal dark:text-white mt-1">4</p>
+                    </div>
+                    <div class="bg-white dark:bg-zinc-800 p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm">
+                        <p class="text-xs text-gray-500 uppercase font-bold">Late/Absent</p>
+                        <p class="text-3xl font-bold text-red-500 mt-1">1</p>
+                    </div>
+                </div>
+
+                <!-- Section 2: Active Crews List -->
+                <div class="bg-white dark:bg-zinc-800 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm p-6 mb-6">
+                    <h3 class="font-bold text-charcoal dark:text-white mb-4">Active Crews Today</h3>
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="flex-1 p-4 bg-gray-50 dark:bg-white/5 rounded-xl border border-gray-100 dark:border-white/5">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs font-bold text-steelBlue dark:text-blue-300">Crew A - Morning</span>
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                            </div>
+                            <p class="font-bold text-sm text-charcoal dark:text-white">Metro Station North</p>
+                            <p class="text-xs text-gray-500 mt-1">12 Members • Supervisor: D. Miller</p>
+                        </div>
+                        <div class="flex-1 p-4 bg-gray-50 dark:bg-white/5 rounded-xl border border-gray-100 dark:border-white/5">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs font-bold text-steelBlue dark:text-blue-300">Crew B - Specialists</span>
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                            </div>
+                            <p class="font-bold text-sm text-charcoal dark:text-white">Harbor Logistics</p>
+                            <p class="text-xs text-gray-500 mt-1">8 Members • Supervisor: J. Smith</p>
+                        </div>
+                        <div class="flex-1 p-4 bg-gray-50 dark:bg-white/5 rounded-xl border border-gray-100 dark:border-white/5">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs font-bold text-steelBlue dark:text-blue-300">Crew C - Evening</span>
+                                <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
+                            </div>
+                            <p class="font-bold text-sm text-charcoal dark:text-white">Riverside Tower</p>
+                            <p class="text-xs text-gray-500 mt-1">Scheduled for 15:00 Start</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Staff Profiles Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Profile 1 -->
+                    <div class="bg-white dark:bg-zinc-800 p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm flex items-center gap-4">
+                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026024d" class="w-14 h-14 rounded-full border-2 border-white dark:border-zinc-700 shadow-sm">
+                        <div class="flex-1">
+                            <h4 class="font-bold text-charcoal dark:text-white">David Miller</h4>
+                            <p class="text-xs text-gray-500">Site Supervisor</p>
+                            <div class="flex gap-2 mt-2">
+                                <span class="text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded font-bold">ACTIVE</span>
+                                <span class="text-[10px] bg-gray-100 dark:bg-white/10 text-gray-500 dark:text-gray-300 px-2 py-0.5 rounded">OSHA 30</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Profile 2 -->
+                    <div class="bg-white dark:bg-zinc-800 p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-xl">JS</div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-charcoal dark:text-white">John Smith</h4>
+                            <p class="text-xs text-gray-500">Electrician</p>
+                            <div class="flex gap-2 mt-2">
+                                <span class="text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded font-bold">ACTIVE</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Profile 3 -->
+                    <div class="bg-white dark:bg-zinc-800 p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm flex items-center gap-4">
+                         <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" class="w-14 h-14 rounded-full border-2 border-white dark:border-zinc-700 shadow-sm">
+                        <div class="flex-1">
+                            <h4 class="font-bold text-charcoal dark:text-white">Amanda Cole</h4>
+                            <p class="text-xs text-gray-500">Project Manager</p>
+                            <div class="flex gap-2 mt-2">
+                                <span class="text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded font-bold">LEAVE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: FINANCE (3 CLEAN SECTIONS) -->
+            <div id="view-finance" class="view-section">
+                <!-- Section 1: Big KPI Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-gradient-to-br from-steelBlue to-blue-900 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
+                        <div class="relative z-10">
+                            <p class="text-xs uppercase opacity-70 font-bold mb-2">Total Invoiced (YTD)</p>
+                            <h3 class="text-3xl font-bold">$4,850,200</h3>
+                        </div>
+                        <i class="fas fa-chart-line absolute -bottom-4 -right-4 text-8xl text-white opacity-10"></i>
+                    </div>
+                    <div class="bg-white dark:bg-zinc-800 p-6 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm">
+                         <p class="text-xs uppercase text-gray-500 font-bold mb-2">Outstanding</p>
+                         <h3 class="text-3xl font-bold text-charcoal dark:text-white">$342,000</h3>
+                         <p class="text-xs text-red-500 font-semibold mt-1">3 invoices overdue</p>
+                    </div>
+                    <div class="bg-white dark:bg-zinc-800 p-6 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm">
+                         <p class="text-xs uppercase text-gray-500 font-bold mb-2">Expenses</p>
+                         <h3 class="text-3xl font-bold text-charcoal dark:text-white">$2,100,500</h3>
+                         <p class="text-xs text-green-500 font-semibold mt-1">4% Under Budget</p>
+                    </div>
+                </div>
+
+                <!-- Section 2: Expense Breakdown Bars -->
+                <div class="bg-white dark:bg-zinc-800 p-6 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm mb-6">
+                    <h3 class="font-bold text-charcoal dark:text-white mb-6">Budget Distribution</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between text-xs mb-2">
+                                <span class="font-semibold text-gray-600 dark:text-gray-300">Materials</span>
+                                <span class="font-bold text-charcoal dark:text-white">$1.2M / $1.5M</span>
+                            </div>
+                            <div class="h-3 w-full bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-blue-500 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs mb-2">
+                                <span class="font-semibold text-gray-600 dark:text-gray-300">Labor</span>
+                                <span class="font-bold text-charcoal dark:text-white">$800k / $900k</span>
+                            </div>
+                            <div class="h-3 w-full bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-safetyYellow rounded-full" style="width: 88%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Invoice Table -->
+                <div class="bg-white dark:bg-zinc-800 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-100 dark:border-white/5 flex justify-between items-center">
+                        <h3 class="font-bold text-charcoal dark:text-white">Recent Invoices</h3>
+                        <button class="text-xs text-blue-500 font-bold hover:underline">View All</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm whitespace-nowrap">
+                            <thead class="bg-gray-50 dark:bg-white/5 text-gray-500 uppercase text-xs">
+                                <tr>
+                                    <th class="px-6 py-4">Invoice #</th>
+                                    <th class="px-6 py-4">Client</th>
+                                    <th class="px-6 py-4">Date</th>
+                                    <th class="px-6 py-4">Amount</th>
+                                    <th class="px-6 py-4">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 dark:divide-white/5">
+                                <tr class="hover:bg-gray-50 dark:hover:bg-white/5">
+                                    <td class="px-6 py-4 font-mono text-gray-500">INV-2026-001</td>
+                                    <td class="px-6 py-4 font-bold text-charcoal dark:text-white">City Infrastructure</td>
+                                    <td class="px-6 py-4 text-gray-500">Oct 12</td>
+                                    <td class="px-6 py-4 font-mono">$125,000</td>
+                                    <td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-700 text-xs rounded font-bold">PAID</span></td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-white/5">
+                                    <td class="px-6 py-4 font-mono text-gray-500">INV-2026-002</td>
+                                    <td class="px-6 py-4 font-bold text-charcoal dark:text-white">Oceanic Freight</td>
+                                    <td class="px-6 py-4 text-gray-500">Oct 14</td>
+                                    <td class="px-6 py-4 font-mono">$45,200</td>
+                                    <td class="px-6 py-4"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs rounded font-bold">PENDING</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: SETTINGS (3 CLEAN SECTIONS) -->
+            <div id="view-settings" class="view-section">
+                <div class="max-w-3xl mx-auto space-y-6">
+                    
+                    <!-- Section 1: Profile Edit -->
+                    <div class="bg-white dark:bg-zinc-800 p-6 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm">
+                        <h3 class="font-bold text-lg text-charcoal dark:text-white mb-6">Profile Settings</h3>
+                        <div class="flex flex-col md:flex-row gap-6 items-start">
+                             <div class="w-20 h-20 rounded-full bg-steelBlue text-white flex items-center justify-center text-3xl font-bold shadow-lg shrink-0">AD</div>
+                             <div class="w-full space-y-4">
+                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                     <div>
+                                         <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Full Name</label>
+                                         <input type="text" value="Admin User" class="w-full p-3 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-black/20 focus:outline-none focus:border-safetyYellow dark:text-white">
+                                     </div>
+                                     <div>
+                                         <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Email</label>
+                                         <input type="email" value="admin@siteworks.com" class="w-full p-3 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-black/20 focus:outline-none focus:border-safetyYellow dark:text-white">
+                                     </div>
+                                 </div>
+                                 <button class="px-6 py-2 bg-steelBlue text-white text-sm font-bold rounded-lg hover:bg-opacity-90">Save Profile</button>
+                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Toggles -->
+                    <div class="bg-white dark:bg-zinc-800 p-6 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm">
+                        <h3 class="font-bold text-lg text-charcoal dark:text-white mb-4">Preferences</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-2">
+                                <div>
+                                    <p class="font-bold text-sm text-charcoal dark:text-white">Email Notifications</p>
+                                    <p class="text-xs text-gray-500">Daily digests of activity</p>
+                                </div>
+                                <div class="w-12 h-6 bg-safetyYellow rounded-full relative cursor-pointer"><div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></div></div>
+                            </div>
+                            <div class="flex items-center justify-between p-2 border-t border-gray-100 dark:border-white/5">
+                                <div>
+                                    <p class="font-bold text-sm text-charcoal dark:text-white">Dark Mode Default</p>
+                                    <p class="text-xs text-gray-500">Always start in dark mode</p>
+                                </div>
+                                <div class="w-12 h-6 bg-gray-200 dark:bg-gray-700 rounded-full relative cursor-pointer"><div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 3: Danger Zone -->
+                    <div class="bg-white dark:bg-zinc-800 p-6 rounded-2xl border border-gray-200 dark:border-white/5 shadow-sm">
+                        <h3 class="font-bold text-lg text-charcoal dark:text-white mb-4">Security</h3>
+<a href="login.html"
+   class="w-full py-4 rounded-xl border border-red-200 
+          text-red-500 font-bold text-center block
+          hover:bg-red-50 transition-colors">
+  Sign out of all devices
+</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+      </div>
+  </div>
+
+  <!-- ADD PROJECT MODAL -->
+  <div id="addProjectModal" class="fixed inset-0 z-[60] bg-black/70 hidden items-center justify-center backdrop-blur-sm p-4">
+    <div class="bg-white dark:bg-zinc-800 rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden transform transition-all scale-95 opacity-0" id="modalContent">
+        <div class="px-6 py-4 border-b border-gray-100 dark:border-white/10 flex justify-between items-center">
+            <h3 class="font-bold text-lg text-charcoal dark:text-white font-heading">Add New Project</h3>
+            <button onclick="closeModal()" class="text-gray-400 hover:text-red-500 transition-colors p-2 -mr-2 touch-target">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        <div class="p-6 space-y-4">
+            <div>
+                <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Project Name</label>
+                <input type="text" id="newProjectName" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-white/5 focus:outline-none focus:border-safetyYellow dark:text-white text-sm" placeholder="e.g. Skyline Apartments">
+            </div>
+            <div class="grid grid-cols-1 xs:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Client</label>
+                    <input type="text" id="newProjectClient" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-white/5 focus:outline-none focus:border-safetyYellow dark:text-white text-sm" placeholder="e.g. Acme Corp">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Category</label>
+                    <div class="relative">
+                        <select id="newProjectCategory" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-white/5 focus:outline-none focus:border-safetyYellow dark:text-white appearance-none text-sm">
+                            <option value="Residential">Residential</option>
+                            <option value="Commercial">Commercial</option>
+                            <option value="Industrial">Industrial</option>
+                            <option value="Transport">Transport</option>
+                        </select>
+                        <i class="fas fa-chevron-down absolute right-3 top-3 text-gray-400 text-xs pointer-events-none"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 xs:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Budget ($)</label>
+                    <input type="text" id="newProjectBudget" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-white/5 focus:outline-none focus:border-safetyYellow dark:text-white text-sm" placeholder="1.5M">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Initial Status</label>
+                     <div class="relative">
+                        <select id="newProjectStatus" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-white/5 focus:outline-none focus:border-safetyYellow dark:text-white appearance-none text-sm">
+                            <option value="on-track">On Track</option>
+                            <option value="delayed">Delayed</option>
+                            <option value="critical">Critical</option>
+                        </select>
+                        <i class="fas fa-chevron-down absolute right-3 top-3 text-gray-400 text-xs pointer-events-none"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="px-6 py-4 bg-gray-50 dark:bg-white/5 flex justify-end gap-3">
+            <button onclick="closeModal()" class="px-4 py-2.5 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white transition-colors touch-target">Cancel</button>
+            <button onclick="submitNewProject()" class="px-6 py-2.5 text-sm font-bold bg-safetyYellow text-charcoal rounded-lg hover:bg-yellow-600 transition-colors shadow-sm touch-target">Add Project</button>
+        </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    // --- Data State ---
+    const projectsData = [
+        { id: 88219, name: 'Metro Station North', type: 'Transport', client: 'City Infrastructure Board', progress: 75, status: 'on-track', budget: '$1.2M' },
+        { id: 77402, name: 'Harbor Logistics Park', type: 'Industrial', client: 'Oceanic Freight Corp', progress: 54, status: 'on-track', budget: '$3.9M' },
+        { id: 69014, name: 'Riverside Business Tower', type: 'Commercial', client: 'Nova Holdings', progress: 32, status: 'delayed', budget: '$2.4M' },
+        { id: 55921, name: 'Oakwood Residential', type: 'Residential', client: 'Oakwood Estates', progress: 12, status: 'critical', budget: '$0.8M' },
+        { id: 99100, name: 'Downtown Plaza Reno', type: 'Commercial', client: 'City Planning', progress: 88, status: 'on-track', budget: '$1.5M' },
+    ];
+
+    let currentFilter = 'all';
+
+    // --- DOM Elements ---
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const htmlEl = document.documentElement;
+    const bodyEl = document.body;
+    const projectTableBody = document.getElementById('projectTableBody');
+    const appContainer = document.getElementById('appContainer');
+    const loginScreen = document.getElementById('loginScreen');
+
+    // --- Initialization ---
+    document.addEventListener('DOMContentLoaded', () => {
+        renderProjects();
+        updateActiveCount();
+        checkLoginState();
+    });
+
+    // --- Navigation Logic ---
+    function navigate(viewName) {
+        // Hide all views
+        document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+        
+        // Show target view
+        document.getElementById(`view-${viewName}`).classList.add('active');
+        
+        // Update Sidebar Active State
+        document.querySelectorAll('.nav-item').forEach(el => {
+            el.classList.remove('bg-white', 'text-steelBlue', 'shadow-md');
+            el.classList.add('text-blue-100', 'hover:bg-white/10', 'hover:text-white');
+        });
+        
+        const activeNav = document.getElementById(`nav-${viewName}`);
+        if(activeNav) {
+            activeNav.classList.remove('text-blue-100', 'hover:bg-white/10', 'hover:text-white');
+            activeNav.classList.add('bg-white', 'text-steelBlue', 'shadow-md');
+        }
+
+        // Update Header Title
+        const titles = {
+            'dashboard': 'Dashboard',
+            'projects': 'Projects',
+            'clients': 'Clients',
+            'staff': 'Staff Management',
+            'finance': 'Finance',
+            'settings': 'Settings'
+        };
+        document.getElementById('pageTitle').textContent = titles[viewName] || 'Dashboard';
+        
+        // Mobile sidebar close
+        if (window.innerWidth < 1024) {
+            toggleSidebar();
+        }
+    }
+
+    // --- Render Projects Table ---
+    function renderProjects() {
+        projectTableBody.innerHTML = '';
+        
+        const filtered = projectsData.filter(p => {
+            if (currentFilter === 'all') return true;
+            if (currentFilter === 'on-track') return p.status === 'on-track';
+            if (currentFilter === 'delayed') return p.status === 'delayed';
+            if (currentFilter === 'critical') return p.status === 'critical';
+            return true;
+        });
+
+        filtered.forEach(p => {
+            let progressBarColor = 'bg-safetyYellow';
+            if (p.status === 'on-track') progressBarColor = 'bg-green-500';
+            if (p.status === 'delayed') progressBarColor = 'bg-yellow-500';
+            if (p.status === 'critical') progressBarColor = 'bg-red-500';
+
+            const row = `
+                <tr class="hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                  <td class="px-4 md:px-6 py-3">
+                    <p class="font-semibold text-charcoal dark:text-white text-xs md:text-sm">${p.name}</p>
+                    <p class="text-[11px] text-gray-500 dark:text-gray-400">ID #${p.id} · ${p.type}</p>
+                  </td>
+                  <td class="px-4 md:px-6 py-3">
+                    <p class="text-xs md:text-sm text-gray-700 dark:text-gray-200">${p.client}</p>
+                  </td>
+                  <td class="px-4 md:px-6 py-3">
+                    <div class="flex items-center gap-2">
+                      <div class="h-1.5 w-16 md:w-20 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                        <div class="h-full ${progressBarColor} rounded-full" style="width: ${p.progress}%"></div>
+                      </div>
+                      <span class="text-[11px] text-gray-600 dark:text-gray-300">${p.progress}%</span>
+                    </div>
+                  </td>
+                  <td class="px-4 md:px-6 py-3 text-right">
+                    <p class="font-semibold text-xs md:text-sm text-gray-800 dark:text-gray-100">${p.budget}</p>
+                  </td>
+                </tr>
+            `;
+            projectTableBody.innerHTML += row;
+        });
+    }
+
+    function filterProjects(filterType) {
+        currentFilter = filterType;
+        
+        // Update button styles
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.remove('bg-safetyYellow', 'text-charcoal');
+            btn.classList.add('bg-gray-100', 'dark:bg-white/10', 'text-gray-700', 'dark:text-gray-200');
+        });
+        
+        // Find the clicked button (event delegation would be cleaner but this works for simplicity)
+        const clickedBtn = Array.from(document.querySelectorAll('.filter-btn')).find(b => b.getAttribute('onclick').includes(filterType));
+        if(clickedBtn) {
+            clickedBtn.classList.remove('bg-gray-100', 'dark:bg-white/10', 'text-gray-700', 'dark:text-gray-200');
+            clickedBtn.classList.add('bg-safetyYellow', 'text-charcoal');
+        }
+
+        renderProjects();
+    }
+
+    function updateActiveCount() {
+        document.getElementById('activeProjectCount').textContent = projectsData.length;
+        document.getElementById('kpi-active-projects').textContent = projectsData.length;
+    }
+
+    // --- Modal Logic ---
+    const modal = document.getElementById('addProjectModal');
+    const modalContent = document.getElementById('modalContent');
+
+    function openModal() {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        setTimeout(() => {
+            modalContent.classList.remove('scale-95', 'opacity-0');
+            modalContent.classList.add('scale-100', 'opacity-100');
+        }, 10);
+    }
+
+    function closeModal() {
+        modalContent.classList.remove('scale-100', 'opacity-100');
+        modalContent.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            // Clear inputs
+            document.getElementById('newProjectName').value = '';
+            document.getElementById('newProjectClient').value = '';
+            document.getElementById('newProjectBudget').value = '';
+        }, 200);
+    }
+
+    function submitNewProject() {
+        const name = document.getElementById('newProjectName').value;
+        const client = document.getElementById('newProjectClient').value;
+        const category = document.getElementById('newProjectCategory').value;
+        const budget = document.getElementById('newProjectBudget').value;
+        const status = document.getElementById('newProjectStatus').value;
+
+        if (!name || !client) {
+            alert("Please fill in project name and client.");
+            return;
+        }
+
+        const newId = Math.floor(Math.random() * 90000) + 10000;
+        
+        projectsData.unshift({
+            id: newId,
+            name: name,
+            type: category,
+            client: client,
+            progress: 0,
+            status: status,
+            budget: budget ? (budget.includes('$') ? budget : '$' + budget) : '$0.0M'
+        });
+
+        renderProjects();
+        updateActiveCount();
+        closeModal();
+    }
+
+    // --- Sidebar Toggle ---
+    function toggleSidebar() {
+      const isClosed = 
+        sidebar.classList.contains('-translate-x-full') || 
+        (htmlEl.getAttribute('dir') === 'rtl' && 
+          sidebar.classList.contains('translate-x-full'));
+
+      if (isClosed) {
+        sidebar.classList.remove('-translate-x-full', 'rtl:translate-x-full');
+        overlay.classList.remove('hidden');
+      } else {
+        if (htmlEl.getAttribute('dir') === 'rtl')
+          sidebar.classList.add('rtl:translate-x-full');
+        else sidebar.classList.add('-translate-x-full');
+        overlay.classList.add('hidden');
+      }
+    }
+
+    // --- Theme Toggle ---
+    const themeBtn = document.getElementById('themeToggleSidebar');
+    function setTheme(isDark) {
+      if (isDark) {
+        htmlEl.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+      } else {
+        htmlEl.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+        themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+    }
+    themeBtn.addEventListener('click', () => 
+      setTheme(!htmlEl.classList.contains('dark'))
+    );
+
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) setTheme(true);
+    else setTheme(false);
+
+    // --- RTL Toggle ---
+    const rtlBtn = document.getElementById('rtlToggleSidebar');
+    rtlBtn.addEventListener('click', () => {
+      const currentDir = htmlEl.getAttribute('dir') || 'ltr';
+      const newDir = currentDir === 'ltr' ? 'rtl' : 'ltr';
+      htmlEl.setAttribute('dir', newDir);
+      bodyEl.setAttribute('dir', newDir);
+      sidebar.classList.add('-translate-x-full', 'rtl:translate-x-full');
+      overlay.classList.add('hidden');
+    });
+
+    // --- Authentication ---
+    function checkLoginState() {
+        const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+        if (isLoggedIn === 'true') {
+            appContainer.classList.remove('hidden');
+            loginScreen.classList.add('hidden');
+        } else {
+            // Default to showing app for preview if no session
+            appContainer.classList.remove('hidden');
+        }
+    }
+
+    function logout() {
+      sessionStorage.removeItem('isLoggedIn');
+      appContainer.classList.add('hidden');
+      loginScreen.classList.remove('hidden');
+      loginScreen.classList.add('flex');
+          window.location.href = "login.html";
+
+    }
+
+    function handleLogin(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('button');
+        const originalText = btn.innerText;
+        
+        btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Signing in...';
+        btn.disabled = true;
+
+        // Simulate API call
+        setTimeout(() => {
+            sessionStorage.setItem('isLoggedIn', 'true');
+            loginScreen.classList.add('hidden');
+            loginScreen.classList.remove('flex');
+            appContainer.classList.remove('hidden');
+            
+            // Reset button
+            btn.innerText = originalText;
+            btn.disabled = false;
+        }, 800);
+    }
+  </script>
+</body>
+</html>

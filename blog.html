@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Growwpark | Construction</title>
+  <link rel="icon" type="image/jpeg" href="assets/growwpark_logo.jpg" />  <meta name="description" content="SiteWorks Builders - Latest news, project insights, safety guides, and technology articles.">
+  <title>News & Insights - SiteWorks Builders</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            safetyYellow: '#F9A825',
+            charcoal: '#1F1F1F',
+            concrete: '#B0B0B0',
+            steelBlue: '#2A4365',
+            darkSurface: '#121212',
+            lightSurface: '#F3F4F6'
+          },
+          fontFamily: {
+            sans: ['Open Sans', 'sans-serif'],
+            heading: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* RTL adjustments */
+    [dir="rtl"] .rtl-flip { transform: scaleX(-1); }
+    /* Smooth mobile menu transition */
+    #mobileMenu {
+      transition: all 0.3s ease-in-out;
+    }
+    
+    /* Custom Animations */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+        animation: fadeInUp 0.8s ease forwards;
+        opacity: 0;
+    }
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+
+    /* Category Specific Colors using Tailwind utilities approach in CSS for dynamic classes */
+    .cat-safety { color: #dc3545; background-color: rgba(220, 53, 69, 0.1); }
+    .cat-tech { color: #17a2b8; background-color: rgba(23, 162, 184, 0.1); }
+    .cat-mgmt { color: #28a745; background-color: rgba(40, 167, 69, 0.1); }
+    
+    .dark .cat-safety { background-color: rgba(220, 53, 69, 0.2); }
+    .dark .cat-tech { background-color: rgba(23, 162, 184, 0.2); }
+    .dark .cat-mgmt { background-color: rgba(40, 167, 69, 0.2); }
+  </style>
+</head>
+
+<body class="bg-white text-gray-800 dark:bg-charcoal dark:text-gray-100 transition-colors duration-300" data-dir="ltr">
+
+  <!-- ============================================ -->
+  <!-- NAVBAR                                       -->
+  <!-- ============================================ -->
+  <nav id="navbar" class="sticky top-0 z-50 transition-colors duration-300 bg-white text-charcoal border-b border-gray-200 dark:bg-charcoal dark:text-white dark:border-white/10 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
+      
+      <!-- Logo Section -->
+      <a href="index.html" class="flex items-center gap-2 shrink-0 group">
+        <span class="flex h-10 w-10 items-center justify-center rounded-full bg-safetyYellow text-charcoal shadow-lg group-hover:scale-110 transition-transform">
+          <i class="fas fa-hard-hat text-lg"></i>
+        </span>
+        <div class="leading-tight">
+          <span class="block text-xl font-bold tracking-tight">Groww</span>
+          <span class="block text-xs font-medium text-safetyYellow uppercase tracking-widest">Builders</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center gap-2">
+        <ul class="flex items-center gap-1 text-sm font-semibold">
+          <li class="relative group">
+            <button class="flex items-center gap-1 rounded-md px-3 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
+              <span>Home</span>
+              <i class="fas fa-chevron-down text-[10px] group-hover:rotate-180 transition-transform"></i>
+            </button>
+            <ul class="invisible absolute start-0 mt-2 w-48 rounded-lg bg-white border border-gray-100 dark:bg-charcoal dark:border-white/10 p-2 opacity-0 shadow-2xl transition-all group-hover:visible group-hover:opacity-100 z-50">
+              <li><a href="index.html" class="block rounded-md px-4 py-2 hover:bg-safetyYellow hover:text-charcoal transition-colors">Home 1</a></li>
+              <li><a href="homepage2.html" class="block rounded-md px-4 py-2 hover:bg-safetyYellow hover:text-charcoal transition-colors">Home 2</a></li>
+            </ul>
+          </li>
+
+          <li><a href="service.html" class="block rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">Services</a></li>
+<li>
+  <a href="blog.html"
+     class="block rounded-md px-4 py-2
+            bg-safetyYellow text-charcoal
+            font-bold shadow-md
+            transition-colors">
+    Blog
+  </a>
+</li>
+          <li><a href="aboutus.html" class="block rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">About</a></li>
+          <li><a href="contact.html" class="block rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">Contact</a></li>
+          
+          <li class="relative group">
+            <button class="flex items-center gap-1 rounded-md px-3 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
+              <span>Dashboard</span>
+              <i class="fas fa-chevron-down text-[10px] group-hover:rotate-180 transition-transform"></i>
+            </button>
+            <ul class="invisible absolute start-0 mt-2 w-56 rounded-lg bg-white border border-gray-100 dark:bg-charcoal dark:border-white/10 p-2 opacity-0 shadow-2xl transition-all group-hover:visible group-hover:opacity-100 z-50">
+              <li><a href="admin.html" class="block rounded-md px-4 py-2 hover:bg-safetyYellow hover:text-charcoal transition-colors">Admin Panel</a></li>
+              <li><a href="user.html" class="block rounded-md px-4 py-2 hover:bg-safetyYellow hover:text-charcoal transition-colors">User Dashboard</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="ms-4 flex items-center gap-3 border-s border-gray-200 dark:border-white/10 ps-4">
+          <button id="themeToggleDesktop" class="flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 dark:border-white/10 hover:bg-safetyYellow hover:text-charcoal transition-all">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button id="rtlToggleDesktop" class="flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 dark:border-white/10 hover:bg-safetyYellow hover:text-charcoal transition-all">
+            <i class="fas fa-exchange-alt"></i>
+          </button>
+          
+          <a href="login.html" class="ms-2 inline-flex items-center gap-2 rounded-md bg-safetyYellow px-5 py-2 text-sm font-bold text-charcoal hover:bg-yellow-500 transition-transform active:scale-95 shadow-lg shadow-safetyYellow/20">
+            <i class="fas fa-user-plus text-xs"></i>
+            <span>Register</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Mobile Controls -->
+      <div class="flex items-center gap-3 lg:hidden">
+        <button id="themeToggleMobile" class="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 dark:border-white/10">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="hamburger" class="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-md bg-gray-100 dark:bg-white/5" aria-label="Toggle Menu">
+          <span id="line1" class="h-0.5 w-6 bg-current transition-all duration-300"></span>
+          <span id="line2" class="h-0.5 w-6 bg-current transition-all duration-300"></span>
+          <span id="line3" class="h-0.5 w-6 bg-current transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Drawer -->
+    <div id="mobileMenu" class="hidden border-t border-gray-100 bg-white dark:bg-charcoal dark:border-white/5 lg:hidden overflow-hidden transition-all duration-300">
+      <div class="flex flex-col gap-1 p-4">
+        
+        <details class="group">
+          <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5 list-none">
+            <div class="flex items-center gap-4">
+              <i class="fas fa-home text-safetyYellow w-6"></i> Home
+            </div>
+            <i class="fas fa-chevron-down text-xs group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <div class="mt-1 flex flex-col gap-1 ps-14 text-gray-500 dark:text-gray-400">
+            <a href="index.html" class="py-2 hover:text-safetyYellow">Home 1</a>
+            <a href="homepage2.html" class="py-2 hover:text-safetyYellow">Home 2</a>
+          </div>
+        </details>
+
+        <a href="service.html" class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+          <i class="fas fa-concierge-bell text-safetyYellow w-6"></i> Services
+        </a>
+        <a href="blog.html"
+   class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-bold
+          bg-safetyYellow text-charcoal shadow-md
+          hover:bg-yellow-500 transition-all">
+
+  <i class="fas fa-blog w-6 text-white"></i>
+  <span>Blog</span>
+</a>
+
+        <a href="aboutus.html" class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+          <i class="fas fa-info-circle text-safetyYellow w-6"></i> About Us
+        </a>
+        <a href="contact.html" class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+          <i class="fas fa-envelope text-safetyYellow w-6"></i> Contact
+        </a>
+
+        <details class="group">
+          <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5 list-none">
+            <div class="flex items-center gap-4">
+              <i class="fas fa-tachometer-alt text-safetyYellow w-6"></i> Dashboard
+            </div>
+            <i class="fas fa-chevron-down text-xs group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <div class="mt-1 flex flex-col gap-1 ps-14 text-gray-500 dark:text-gray-400">
+            <a href="admin.html" class="py-2 hover:text-safetyYellow">Admin Panel</a>
+            <a href="user.html" class="py-2 hover:text-safetyYellow">User Dashboard</a>
+          </div>
+        </details>
+
+        <div class="mt-4 pt-4 border-t border-gray-100 dark:border-white/10">
+          <button id="rtlToggleMobile" class="flex w-full items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+            <i class="fas fa-exchange-alt text-safetyYellow w-6"></i> Switch Direction (RTL)
+          </button>
+          <a href="login.html" class="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-safetyYellow py-4 text-center text-lg font-bold text-charcoal active:scale-95 transition-transform">
+            <i class="fas fa-user-plus"></i> Register
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================ -->
+  <!-- HERO SECTION                                 -->
+  <!-- ============================================ -->
+  <section class="relative h-[400px] flex items-center justify-center overflow-hidden border-b-8 border-safetyYellow">
+    <div class="absolute inset-0 z-0">
+      <img src="/assets/h1h1.avif" 
+           alt="Construction Site Plans" class="w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-b from-charcoal/90 via-charcoal/80 to-charcoal/90"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 max-w-7xl relative z-10 text-center fade-in">
+      <h1 class="text-4xl md:text-6xl font-bold text-safetyYellow mb-4 font-heading leading-tight drop-shadow-md">
+        News & Insights
+      </h1>
+      <p class="text-lg md:text-xl text-white max-w-3xl mx-auto leading-relaxed opacity-90 font-medium">
+        Stay updated with the latest in structural innovation, site safety, and project management best practices.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- BLOG CONTENT                                 -->
+  <!-- ============================================ -->
+  <section class="py-16 bg-gray-50 dark:bg-charcoal min-h-screen transition-colors duration-300">
+    <div class="container mx-auto px-6 max-w-7xl">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- SIDEBAR (Left on desktop) -->
+        <aside class="lg:col-span-4 space-y-8 fade-in">
+            <!-- Search -->
+            <div class="bg-white dark:bg-zinc-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-white/5">
+                <h3 class="text-xl font-bold text-charcoal dark:text-white mb-4 font-heading border-l-4 border-safetyYellow pl-3">Search</h3>
+                <div class="relative">
+                    <input type="text" id="searchBox" placeholder="Search articles..." 
+                           class="w-full pl-4 pr-10 py-3 rounded-lg bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 text-charcoal dark:text-white focus:outline-none focus:ring-2 focus:ring-safetyYellow focus:border-transparent transition-all">
+                    <i class="fas fa-search absolute right-3 top-3.5 text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="bg-white dark:bg-zinc-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-white/5">
+                <h3 class="text-xl font-bold text-charcoal dark:text-white mb-4 font-heading border-l-4 border-safetyYellow pl-3">Topics</h3>
+                <ul class="space-y-2">
+                    <li class="category-item active cursor-pointer p-3 rounded-lg bg-safetyYellow/10 text-charcoal dark:text-white font-semibold flex justify-between items-center hover:bg-safetyYellow hover:text-charcoal transition-colors group" data-category="all">
+                        <span>All Articles</span> 
+                        <span class="bg-white/50 px-2 py-0.5 rounded text-xs font-bold group-hover:bg-white/30">12</span>
+                    </li>
+                    <li class="category-item cursor-pointer p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-white/5 text-gray-600 dark:text-gray-300 flex justify-between items-center transition-colors" data-category="safety">
+                        <span><i class="fas fa-hard-hat text-red-500 mr-2"></i> Site Safety</span> 
+                        <span class="bg-gray-200 dark:bg-white/10 px-2 py-0.5 rounded text-xs">4</span>
+                    </li>
+                    <li class="category-item cursor-pointer p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-white/5 text-gray-600 dark:text-gray-300 flex justify-between items-center transition-colors" data-category="management">
+                        <span><i class="fas fa-tasks text-green-500 mr-2"></i> Project Mgmt</span> 
+                        <span class="bg-gray-200 dark:bg-white/10 px-2 py-0.5 rounded text-xs">4</span>
+                    </li>
+                    <li class="category-item cursor-pointer p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-white/5 text-gray-600 dark:text-gray-300 flex justify-between items-center transition-colors" data-category="technology">
+                        <span><i class="fas fa-microchip text-blue-400 mr-2"></i> </span> 
+                        <span class="bg-gray-200 dark:bg-white/10 px-2 py-0.5 rounded text-xs">4</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tags -->
+            <div class="bg-white dark:bg-zinc-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-white/5 lg:sticky lg:top-32">
+                <h3 class="text-xl font-bold text-charcoal dark:text-white mb-4 font-heading border-l-4 border-safetyYellow pl-3">Popular Tags</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-gray-100 dark:bg-white/10 hover:bg-safetyYellow hover:text-charcoal dark:hover:text-charcoal rounded-full text-xs font-semibold text-gray-600 dark:text-gray-300 cursor-pointer transition-colors">BIM</span>
+                    <span class="px-3 py-1 bg-gray-100 dark:bg-white/10 hover:bg-safetyYellow hover:text-charcoal dark:hover:text-charcoal rounded-full text-xs font-semibold text-gray-600 dark:text-gray-300 cursor-pointer transition-colors">Safety</span>
+                    <span class="px-3 py-1 bg-gray-100 dark:bg-white/10 hover:bg-safetyYellow hover:text-charcoal dark:hover:text-charcoal rounded-full text-xs font-semibold text-gray-600 dark:text-gray-300 cursor-pointer transition-colors">Pre-Con</span>
+                    <span class="px-3 py-1 bg-gray-100 dark:bg-white/10 hover:bg-safetyYellow hover:text-charcoal dark:hover:text-charcoal rounded-full text-xs font-semibold text-gray-600 dark:text-gray-300 cursor-pointer transition-colors">Civil</span>
+                    <span class="px-3 py-1 bg-gray-100 dark:bg-white/10 hover:bg-safetyYellow hover:text-charcoal dark:hover:text-charcoal rounded-full text-xs font-semibold text-gray-600 dark:text-gray-300 cursor-pointer transition-colors">Structural</span>
+                    <span class="px-3 py-1 bg-gray-100 dark:bg-white/10 hover:bg-safetyYellow hover:text-charcoal dark:hover:text-charcoal rounded-full text-xs font-semibold text-gray-600 dark:text-gray-300 cursor-pointer transition-colors">MEP</span>
+                    <span class="px-3 py-1 bg-gray-100 dark:bg-white/10 hover:bg-safetyYellow hover:text-charcoal dark:hover:text-charcoal rounded-full text-xs font-semibold text-gray-600 dark:text-gray-300 cursor-pointer transition-colors">Risk Mgmt</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT (Right) -->
+        <main class="lg:col-span-8 fade-in delay-100">
+            <!-- Filter Bar -->
+           <div class="inline-flex items-center px-4 py-2 mb-6 rounded-full 
+            bg-gray-100 dark:bg-black/30 
+            text-charcoal dark:text-white 
+            font-semibold text-sm whitespace-nowrap">
+  Showing <strong id="resultsCount" class="mx-1 text-safetyYellow">12</strong> articles
+</div>
+
+
+            <!-- Blog List -->
+            <div id="blogList" class="grid grid-cols-1 gap-8">
+                
+                <!-- Article 1 -->
+                <article class="blog-card group flex flex-col md:flex-row bg-white dark:bg-zinc-800 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-white/5 hover:border-safetyYellow dark:hover:border-safetyYellow" data-category="management">
+                    <div class="md:w-2/5 h-56 md:h-auto overflow-hidden relative">
+                        <img src="/assets/B1.webp" alt="Project Closeout" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute top-4 left-4 cat-mgmt px-3 py-1 rounded text-xs font-bold uppercase tracking-wider"></div>
+                    </div>
+                    <div class="p-6 md:w-3/5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center text-xs text-gray-500 dark:text-gray-400 mb-3 space-x-3">
+                                <span><i class="far fa-calendar-alt mr-1"></i> Nov 28, 2025</span>
+                                <span><i class="far fa-user mr-1"></i> Priya Sharma</span>
+                                <span><i class="far fa-clock mr-1"></i> 5 min read</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-charcoal dark:text-white mb-3 group-hover:text-safetyYellow transition-colors font-heading leading-tight">10 Steps to Flawless Project Closeout</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 blog-excerpt">Ensure client satisfaction and warranty success by following our structured ten-point checklist for project completion and handover.</p>
+                        </div>
+                        <a href="blog-details.html?post=closeout" class="read-more inline-flex items-center text-safetyYellow font-bold text-sm uppercase tracking-wider hover:text-charcoal dark:hover:text-white transition-colors">
+                            Read Article <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-1 rtl:rotate-180"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="blog-card group flex flex-col md:flex-row bg-white dark:bg-zinc-800 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-white/5 hover:border-safetyYellow dark:hover:border-safetyYellow" data-category="safety">
+                    <div class="md:w-2/5 h-56 md:h-auto overflow-hidden relative">
+                        <img src="/assets/B2.jpg" alt="Safety Audit" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute top-4 left-4 cat-safety px-3 py-1 rounded text-xs font-bold uppercase tracking-wider"></div>
+                    </div>
+                    <div class="p-6 md:w-3/5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center text-xs text-gray-500 dark:text-gray-400 mb-3 space-x-3">
+                                <span><i class="far fa-calendar-alt mr-1"></i> Nov 25, 2025</span>
+                                <span><i class="far fa-user mr-1"></i> Meena Soni</span>
+                                <span><i class="far fa-clock mr-1"></i> 4 min read</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-charcoal dark:text-white mb-3 group-hover:text-safetyYellow transition-colors font-heading leading-tight">5 Tech Strategies for Zero-Incident Site Safety Audits</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 blog-excerpt">Leveraging mobile apps, drones, and geo-fencing for proactive safety compliance and risk mitigation on site.</p>
+                        </div>
+                        <a href="blog-details.html?post=safety-tech" class="read-more inline-flex items-center text-safetyYellow font-bold text-sm uppercase tracking-wider hover:text-charcoal dark:hover:text-white transition-colors">
+                            Read Article <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-1 rtl:rotate-180"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="blog-card group flex flex-col md:flex-row bg-white dark:bg-zinc-800 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-white/5 hover:border-safetyYellow dark:hover:border-safetyYellow" data-category="technology">
+                    <div class="md:w-2/5 h-56 md:h-auto overflow-hidden relative">
+                        <img src="/assets/B3.webp" alt="4D BIM" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute top-4 left-4 cat-tech px-3 py-1 rounded text-xs font-bold uppercase tracking-wider"></div>
+                    </div>
+                    <div class="p-6 md:w-3/5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center text-xs text-gray-500 dark:text-gray-400 mb-3 space-x-3">
+                                <span><i class="far fa-calendar-alt mr-1"></i> Nov 20, 2025</span>
+                                <span><i class="far fa-user mr-1"></i> Rahul Verma</span>
+                                <span><i class="far fa-clock mr-1"></i> 7 min read</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-charcoal dark:text-white mb-3 group-hover:text-safetyYellow transition-colors font-heading leading-tight">Why 4D Modeling is Essential for Complex Civil Work</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 blog-excerpt">How integrating schedule data with BIM models enhances visualization, reduces spatial clashes, and optimizes phasing.</p>
+                        </div>
+                        <a href="blog-details.html?post=4d-bim-civil" class="read-more inline-flex items-center text-safetyYellow font-bold text-sm uppercase tracking-wider hover:text-charcoal dark:hover:text-white transition-colors">
+                            Read Article <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-1 rtl:rotate-180"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="blog-card group flex flex-col md:flex-row bg-white dark:bg-zinc-800 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-white/5 hover:border-safetyYellow dark:hover:border-safetyYellow" data-category="management">
+                    <div class="md:w-2/5 h-56 md:h-auto overflow-hidden relative">
+                        <img src="/assets/B4.webp" alt="Risk Management" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute top-4 left-4 cat-mgmt px-3 py-1 rounded text-xs font-bold uppercase tracking-wider"></div>
+                    </div>
+                    <div class="p-6 md:w-3/5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center text-xs text-gray-500 dark:text-gray-400 mb-3 space-x-3">
+                                <span><i class="far fa-calendar-alt mr-1"></i> Nov 18, 2025</span>
+                                <span><i class="far fa-user mr-1"></i> Anil Kapoor</span>
+                                <span><i class="far fa-clock mr-1"></i> 6 min read</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-charcoal dark:text-white mb-3 group-hover:text-safetyYellow transition-colors font-heading leading-tight">Mastering Risk Management in Structural Builds</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 blog-excerpt">Identifying and mitigating high-impact risks associated with complex structural steel erection and heavy lifts.</p>
+                        </div>
+                        <a href="blog-details.html?post=risk-mgmt" class="read-more inline-flex items-center text-safetyYellow font-bold text-sm uppercase tracking-wider hover:text-charcoal dark:hover:text-white transition-colors">
+                            Read Article <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-1 rtl:rotate-180"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 5 -->
+                <article class="blog-card group flex flex-col md:flex-row bg-white dark:bg-zinc-800 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-white/5 hover:border-safetyYellow dark:hover:border-safetyYellow" data-category="safety">
+                    <div class="md:w-2/5 h-56 md:h-auto overflow-hidden relative">
+                        <img src="/assets/TOOL.jpg" alt="Safety Brief" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute top-4 left-4 cat-safety px-3 py-1 rounded text-xs font-bold uppercase tracking-wider"></div>
+                    </div>
+                    <div class="p-6 md:w-3/5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center text-xs text-gray-500 dark:text-gray-400 mb-3 space-x-3">
+                                <span><i class="far fa-calendar-alt mr-1"></i> Nov 15, 2025</span>
+                                <span><i class="far fa-user mr-1"></i> Kavya Rao</span>
+                                <span><i class="far fa-clock mr-1"></i> 3 min read</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-charcoal dark:text-white mb-3 group-hover:text-safetyYellow transition-colors font-heading leading-tight">Toolbox Talks: Keeping Site Crews Engaged on Safety</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 blog-excerpt">Tips for site supervisors to deliver effective, concise, and engaging safety briefs that stick with the crew.</p>
+                        </div>
+                        <a href="blog-details.html?post=toolbox-talks" class="read-more inline-flex items-center text-safetyYellow font-bold text-sm uppercase tracking-wider hover:text-charcoal dark:hover:text-white transition-colors">
+                            Read Article <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-1 rtl:rotate-180"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 6 -->
+                <article class="blog-card group flex flex-col md:flex-row bg-white dark:bg-zinc-800 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-white/5 hover:border-safetyYellow dark:hover:border-safetyYellow" data-category="technology">
+                    <div class="md:w-2/5 h-56 md:h-auto overflow-hidden relative">
+                        <img src="/assets/gps.webp" alt="GPS Tracking" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute top-4 left-4 cat-tech px-3 py-1 rounded text-xs font-bold uppercase tracking-wider"></div>
+                    </div>
+                    <div class="p-6 md:w-3/5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center text-xs text-gray-500 dark:text-gray-400 mb-3 space-x-3">
+                                <span><i class="far fa-calendar-alt mr-1"></i> Nov 10, 2025</span>
+                                <span><i class="far fa-user mr-1"></i> Sanjay Nair</span>
+                                <span><i class="far fa-clock mr-1"></i> 5 min read</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-charcoal dark:text-white mb-3 group-hover:text-safetyYellow transition-colors font-heading leading-tight">The Power of Asset Tagging and GPS in Construction</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 blog-excerpt">Using digital asset management and real-time GPS tracking to optimize heavy equipment usage and maintenance scheduling.</p>
+                        </div>
+                        <a href="blog-details.html?post=asset-tagging" class="read-more inline-flex items-center text-safetyYellow font-bold text-sm uppercase tracking-wider hover:text-charcoal dark:hover:text-white transition-colors">
+                            Read Article <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-1 rtl:rotate-180"></i>
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center gap-2 mt-16">
+                <button class="w-10 h-10 rounded-lg bg-safetyYellow text-charcoal font-bold flex items-center justify-center hover:scale-105 transition-transform shadow-md">1</button>
+                <button class="w-10 h-10 rounded-lg bg-white dark:bg-zinc-800 text-gray-600 dark:text-white font-bold flex items-center justify-center hover:bg-gray-100 dark:hover:bg-zinc-700 border border-gray-200 dark:border-white/10 transition-colors">2</button>
+                <button class="w-10 h-10 rounded-lg bg-white dark:bg-zinc-800 text-gray-600 dark:text-white font-bold flex items-center justify-center hover:bg-gray-100 dark:hover:bg-zinc-700 border border-gray-200 dark:border-white/10 transition-colors">3</button>
+                <button class="w-10 h-10 rounded-lg bg-white dark:bg-zinc-800 text-gray-600 dark:text-white font-bold flex items-center justify-center hover:bg-gray-100 dark:hover:bg-zinc-700 border border-gray-200 dark:border-white/10 transition-colors"><i class="fas fa-arrow-right"></i></button>
+            </div>
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FOOTER                                       -->
+  <!-- ============================================ -->
+  <footer class="bg-[#1a1a1a] pt-24 pb-12 text-gray-300 font-sans border-t border-gray-800">
+    <div class="container mx-auto px-6 max-w-7xl">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 border-b border-gray-800 pb-16">
+        
+        <!-- Company Info -->
+        <div class="space-y-6">
+         <a href="#" class="flex items-center gap-3 mb-6">
+  <div class="h-12 w-12 rounded-full bg-safetyYellow flex items-center justify-center shrink-0">
+    <i class="fas fa-hard-hat text-lg text-charcoal"></i>
+  </div>
+
+  <div class="flex flex-col justify-center leading-none">
+    <span class="text-base font-bold tracking-wide">GROWW</span>
+    <span class="text-xs font-semibold text-safetyYellow tracking-widest">
+      BUILDERS
+    </span>
+  </div>
+</a>
+
+          <p class="text-gray-400 text-sm leading-relaxed">Building the future with precision, integrity, and innovation since 2008. We are committed to excellence in every project we undertake.</p>
+          <div class="flex gap-4">
+            <a href="#" class="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-safetyYellow hover:text-charcoal transition-all duration-300">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-safetyYellow hover:text-charcoal transition-all duration-300">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-safetyYellow hover:text-charcoal transition-all duration-300">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+       <div>
+  <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">
+    Quick Links
+  </h4>
+
+  <ul class="space-y-3 text-sm">
+    <li>
+      <a href="index.html"
+         class="block hover:text-safetyYellow transition-colors">
+        Home
+      </a>
+    </li>
+
+    <li>
+      <a href="service.html"
+         class="block hover:text-safetyYellow transition-colors">
+        Services
+      </a>
+    </li>
+
+    <li>
+      <a href="blog.html"
+         class="block hover:text-safetyYellow transition-colors">
+        Blog
+      </a>
+    </li>
+
+    <li>
+      <a href="aboutus.html"
+         class="block hover:text-safetyYellow transition-colors">
+        About Us
+      </a>
+    </li>
+
+    <li>
+      <a href="contact.html"
+         class="block hover:text-safetyYellow transition-colors">
+        Contact
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+        <!-- Contact Info -->
+        <div>
+          <h4 class="text-white font-bold mb-8 uppercase tracking-wider text-sm">Contact Us</h4>
+          <div class="space-y-6 text-sm">
+            <div class="flex items-start gap-4">
+              <i class="fas fa-map-marker-alt text-safetyYellow mt-1"></i>
+              <span>123 Construction Ave, Suite 100<br>New York, NY 10001</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <i class="fas fa-phone text-safetyYellow"></i>
+              <span>+1 (555) 123-4567</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <i class="fas fa-envelope text-safetyYellow"></i>
+              <span>info@siteworks.com</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div>
+          <h4 class="text-white font-bold mb-8 uppercase tracking-wider text-sm">Stay Updated</h4>
+          <p class="text-gray-400 mb-6 text-sm">Subscribe to receive construction insights and project updates.</p>
+          <form class="space-y-4">
+            <div class="relative">
+                <input type="email" placeholder="Your email address" 
+                    class="w-full px-4 py-3 rounded bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-safetyYellow focus:outline-none focus:ring-1 focus:ring-safetyYellow transition-all">
+            </div>
+            <button type="submit" class="w-full bg-safetyYellow text-charcoal font-bold py-3 rounded hover:bg-yellow-400 transition-colors uppercase tracking-wider text-sm">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+        <div>&copy; 2026 SiteWorks Construction Group. All rights reserved.</div>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+          <a href="#" class="hover:text-white transition-colors">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // --- Shared Logic (Nav, Theme, RTL) ---
+    const htmlEl = document.documentElement;
+    const bodyEl = document.body;
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const l1 = document.getElementById('line1');
+    const l2 = document.getElementById('line2');
+    const l3 = document.getElementById('line3');
+
+    // Menu Toggle Logic
+    if(hamburger) {
+        hamburger.addEventListener('click', () => {
+          const isHidden = mobileMenu.classList.toggle('hidden');
+          if (!isHidden) {
+            l1.style.transform = 'translateY(8px) rotate(45deg)';
+            l2.style.opacity = '0';
+            l3.style.transform = 'translateY(-8px) rotate(-45deg)';
+          } else {
+            l1.style.transform = 'none';
+            l2.style.opacity = '1';
+            l3.style.transform = 'none';
+          }
+        });
+    }
+
+    // Theme Logic
+    const themeBtns = [document.getElementById('themeToggleDesktop'), document.getElementById('themeToggleMobile')];
+    function setTheme(isDark) {
+      if (isDark) {
+        htmlEl.classList.add('dark');
+        try { localStorage.setItem('theme', 'dark'); } catch(e) {}
+        themeBtns.forEach(btn => btn ? btn.innerHTML = '<i class="fas fa-sun"></i>' : null);
+      } else {
+        htmlEl.classList.remove('dark');
+        try { localStorage.setItem('theme', 'light'); } catch(e) {}
+        themeBtns.forEach(btn => btn ? btn.innerHTML = '<i class="fas fa-moon"></i>' : null);
+      }
+    }
+
+    themeBtns.forEach(btn => {
+      if(btn) btn.addEventListener('click', () => setTheme(!htmlEl.classList.contains('dark')));
+    });
+
+    // Initialize Theme
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      setTheme(true);
+    } else {
+      setTheme(false);
+    }
+
+    // RTL Logic
+    const rtlBtns = [document.getElementById('rtlToggleDesktop'), document.getElementById('rtlToggleMobile')];
+    rtlBtns.forEach(btn => {
+      if(btn) {
+          btn.addEventListener('click', () => {
+          const currentDir = htmlEl.getAttribute('dir') || 'ltr';
+          const newDir = currentDir === 'ltr' ? 'rtl' : 'ltr';
+          htmlEl.setAttribute('dir', newDir);
+          bodyEl.setAttribute('dir', newDir);
+        });
+      }
+    });
+
+    // --- Blog Filtering Logic ---
+    const blogCards = Array.from(document.querySelectorAll('.blog-card'));
+    const categoryItems = document.querySelectorAll('.category-item');
+    const resultsCount = document.getElementById('resultsCount');
+    const searchBox = document.getElementById('searchBox');
+    
+    // Initial setup to ensure links work
+    blogCards.forEach((card) => {
+        const readMoreBtn = card.querySelector('.read-more');
+        // Add click listener to whole card for better UX
+        card.addEventListener('click', (e) => {
+            // Don't trigger if user clicked the specific button (let default link behavior handle it)
+            if(!e.target.closest('.read-more')) {
+                window.location.href = readMoreBtn.href;
+            }
+        });
+    });
+
+    const filterArticles = (filterCategory = 'all', searchTerm = '') => {
+        let visibleCount = 0;
+        const term = searchTerm.toLowerCase();
+        
+        blogCards.forEach(card => {
+            const cardCategory = card.getAttribute('data-category');
+            const title = card.querySelector('h3').textContent.toLowerCase();
+            const excerpt = card.querySelector('.blog-excerpt').textContent.toLowerCase();
+            
+            const matchesCategory = filterCategory === 'all' || cardCategory === filterCategory;
+            const matchesSearch = title.includes(term) || excerpt.includes(term);
+
+            if (matchesCategory && matchesSearch) {
+                card.style.display = 'flex';
+                visibleCount++;
+                // Re-add fade-in animation for filtered items
+                card.classList.remove('fade-in');
+                void card.offsetWidth; // trigger reflow
+                card.classList.add('fade-in');
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        resultsCount.textContent = visibleCount;
+    };
+
+    // Category click handler
+    categoryItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const category = item.getAttribute('data-category');
+            // Reset active state styles
+            categoryItems.forEach(cat => {
+                cat.classList.remove('active', 'bg-safetyYellow/10', 'font-semibold');
+                cat.classList.add('text-gray-600', 'dark:text-gray-300', 'hover:bg-gray-100', 'dark:hover:bg-white/5');
+                const badge = cat.querySelector('span:last-child');
+                if(badge) badge.className = 'bg-gray-200 dark:bg-white/10 px-2 py-0.5 rounded text-xs';
+            });
+            
+            // Set active state styles
+            item.classList.add('active', 'bg-safetyYellow/10', 'font-semibold');
+            item.classList.remove('text-gray-600', 'dark:text-gray-300', 'hover:bg-gray-100', 'dark:hover:bg-white/5');
+            const activeBadge = item.querySelector('span:last-child');
+            if(activeBadge) activeBadge.className = 'bg-white/50 px-2 py-0.5 rounded text-xs font-bold';
+
+            filterArticles(category, searchBox.value.toLowerCase());
+        });
+    });
+    
+    // Search input handler
+    searchBox.addEventListener('input', (e) => {
+        const activeCategory = document.querySelector('.category-item.active').getAttribute('data-category');
+        filterArticles(activeCategory, e.target.value.toLowerCase());
+    });
+
+  </script>
+</body>
+</html>

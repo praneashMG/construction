@@ -1,904 +1,789 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SiteWorks Builders - General Contracting, Civil, Commercial, and Industrial Services.">
-    <title>SiteWorks Builders - General Contracting & Construction</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        /*
-        * ----------------------------------------------------
-        * SiteWorks Builders CSS - Themed for Construction
-        * Primary Colors: Deep Blue (#1A374D), Safety Yellow (#FFC107), Light Gray (#F8F9FA), Dark Text (#343A40)
-        * ----------------------------------------------------
-        */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+  <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Growwpark | Construction</title>
+  <link rel="icon" type="image/jpeg" href="assets/growwpark_logo.jpg" />  <meta name="description" content="SiteWorks Builders - General Contracting, Civil, Commercial, and Industrial Services.">
+  <title>SiteWorks Builders - General Contracting Construction</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            safetyYellow: '#F9A825',
+            charcoal: '#1F1F1F',
+            concrete: '#B0B0B0',
+            steelBlue: '#2A4365',
+            darkSurface: '#121212',
+            lightSurface: '#F3F4F6'
+          },
+          fontFamily: {
+            sans: ['Open Sans', 'sans-serif'],
+            heading: ['Montserrat', 'sans-serif'],
+          }
         }
-
-        :root {
-            --primary-blue: #1A374D; 		/* Deep Blue */
-            --primary-yellow: #FFC107; 	/* Safety Yellow */
-            --text-dark: #343A40;
-            --text-body: #555;
-            --text-muted: #6c757d; /* From second doc */
-            --bg-white: #ffffff;
-            --bg-light: #F8F9FA; 		/* Light Gray/Beige */
-            --shadow-base: 0 8px 20px rgba(0, 0, 0, 0.1); /* From second doc */
-            --shadow-hover: 0 15px 35px rgba(26, 55, 77, 0.3); /* From second doc */
-            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother animation curve */
-            --overlay-dark: rgba(26, 55, 77, 0.85); /* From second doc */
-            --accent-border: #E0E4E7; /* From second doc */
-        }
-
-        body {
-            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-body);
-            overflow-x: hidden;
-            background-color: var(--bg-white);
-        }
-
-        /* UTILITIES */
-        .section {
-            padding: 5rem 2rem;
-            opacity: 0; /* Hidden by default for animation - From first doc */
-            transform: translateY(20px); /* From first doc */
-            transition: opacity 1s ease-out, transform 1s ease-out; /* From first doc */
-        }
-        
-        .section-alt { background: var(--bg-light); }
-        
-        /* Visibility for animation - From first doc */
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Overriding and consolidating section titles */
-        .section-title {
-            text-align: center; font-size: 3.5rem; margin-bottom: 0.5rem; /* Updated from first doc */
-            color: var(--primary-blue); font-weight: 900;
-        }
-        .section-subtitle {
-            text-align: center; color: var(--text-muted); font-size: 1.3rem; /* Updated from first doc */
-            margin-bottom: 3rem; max-width: 800px; margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* CSS Animation Keyframes */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translate3d(0, 100px, 0); }
-            to { opacity: 1; transform: translate3d(0, 0, 0); }
-        }
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translate3d(-100px, 0, 0); }
-            to { opacity: 1; transform: translate3d(0, 0, 0); }
-        }
-
-        /* ----------------------------------------------------
-        * NAVIGATION (From first doc)
-        * ----------------------------------------------------
-        */
-        nav {
-            background: var(--primary-blue); padding: 0; position: sticky;
-            top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: background 0.4s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(26, 55, 77, 0.95);
-        }
-        .navbar-container {
-            max-width: 1400px; margin: 0 auto; display: flex;
-            justify-content: space-between; align-items: center; padding: 0 3rem;
-            min-height: 80px;
-        }
-        .logo {
-            color: var(--primary-yellow); font-size: 1.8rem; font-weight: 900;
-            display: flex; align-items: center; gap: 0.5rem; text-decoration: none;
-            transition: var(--transition);
-        }
-        .logo i { font-size: 2rem; }
-
-        .nav-menu {
-            list-style: none; display: flex; align-items: center; gap: 2rem; margin: 0;
-        }
-        .nav-link {
-            color: white; text-decoration: none; padding: 1.2rem 0; display: block;
-            font-weight: 500; font-size: 1rem; transition: var(--transition);
-            position: relative;
-        }
-        .nav-link:hover { color: var(--primary-yellow); }
-        .nav-link::after {
-            content: ''; position: absolute; bottom: 20px; left: 0;
-            width: 0; height: 3px; background: var(--primary-yellow);
-            transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        .nav-link:hover::after { width: 100%; }
-
-        .nav-right { display: flex; align-items: center; gap: 1rem; }
-        .nav-btn {
-            background: transparent; border: 2px solid white; color: white;
-            padding: 0.6rem 1.5rem; border-radius: 5px; font-weight: 600;
-            text-decoration: none; transition: var(--transition);
-        }
-        .nav-btn:hover {
-            background: var(--primary-yellow); border-color: var(--primary-yellow);
-            color: var(--primary-blue); transform: scale(1.05); /* Added scale effect */
-            box-shadow: 0 4px 10px rgba(255, 193, 7, 0.5);
-        }
-
-        .hamburger {
-            display: none; flex-direction: column; cursor: pointer;
-            padding: 0.5rem; z-index: 1001;
-        }
-        .hamburger span {
-            width: 28px; height: 3px; background: white; margin: 4px 0;
-            border-radius: 3px; transition: var(--transition);
-        }
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-        /* Mobile Menu Close Button Styling (Top Corner) */
-        .close-menu {
-            background: none; border: none; color: var(--primary-yellow); /* Yellow X */
-            font-size: 2.5rem; cursor: pointer; padding: 0.5rem;
-            width: 50px; height: 50px; display: flex; align-items: center;
-            justify-content: center; transition: var(--transition);
-            position: absolute; top: 1rem; right: 1rem; /* Positioning in corner */
-            z-index: 1003; /* Above everything */
-            display: none;
-        }
-        .close-menu:hover { transform: rotate(90deg) scale(1.1); } /* More rotation */
-
-        /* Mobile Menu Header - Hidden on Desktop */
-        .mobile-menu-header { display: none; }
-
-        /* --- DROPDOWN STYLES (NEW) --- */
-        .has-dropdown {
-            position: relative; /* Essential for absolute positioning of dropdown */
-        }
-
-        .dropdown-menu {
-            list-style: none;
-            position: absolute;
-            top: 100%; /* Position below the parent link */
-            left: 0;
-            background: var(--primary-blue);
-            min-width: 180px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
-            z-index: 999;
-            padding: 0.5rem 0;
-        }
-        
-        .has-dropdown:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-item a {
-            color: white;
-            padding: 0.8rem 1.5rem; /* Padding for dropdown links */
-            display: block;
-            white-space: nowrap;
-            text-decoration: none;
-            transition: background 0.2s, color 0.2s;
-        }
-
-        .dropdown-item a:hover {
-            background: rgba(255, 193, 7, 0.1); /* Light yellow hover background */
-            color: var(--primary-yellow);
-        }
-        
-        /* Remove the yellow underline for the dropdown parent link */
-        .has-dropdown > .nav-link::after {
-            display: none;
-        }
-        /* Style for the chevron icon */
-        .dropdown-icon {
-            font-size: 0.7rem;
-            margin-left: 0.5rem;
-            transition: transform 0.3s;
-        }
-        .has-dropdown:hover .dropdown-icon {
-            transform: rotate(180deg);
-        }
-
-        /* ----------------------------------------------------
-        * HERO SECTION - Dark, Strong Header (From second doc)
-        * Overriding first document's placeholder hero
-        * ----------------------------------------------------
-        */
-        .hero {
-            background: linear-gradient(var(--overlay-dark), var(--primary-blue)),
-                        url('https://picsum.photos/1920/800?random=1&tag=services-crane') center/cover;
-            padding: 10rem 5%;
-            min-height: 50vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            border-bottom: 8px solid var(--primary-yellow);
-            /* Resetting animation states since this is the main content hero */
-            opacity: 1; 
-            transform: translateY(0);
-            transition: none;
-        }
-        .hero-content h1 { font-size: 4.5rem; margin-bottom: 1rem; color: white; font-weight: 900; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); }
-        .hero-content p { font-size: 1.4rem; color: var(--bg-light); max-width: 900px; margin: 0 auto; }
-
-
-        /* ----------------------------------------------------
-        * SERVICES GRID - Premium Card Design (From second doc)
-        * ----------------------------------------------------
-        */
-        .category-section { max-width: 1400px; margin: 0 auto; padding: 4rem 0; }
-        .category-header { text-align: center; margin-bottom: 3rem; }
-        
-        .category-badge { 
-            display: inline-block; padding: 0.6rem 1.8rem; border-radius: 50px; 
-            font-size: 0.95rem; font-weight: 700; margin-bottom: 1rem;
-            text-transform: uppercase;
-        }
-        /* Specific badge coloring */
-        .badge-core { background: var(--primary-yellow); color: var(--primary-blue); }
-        .badge-civil { background: var(--primary-blue); color: var(--primary-yellow); }
-        .badge-special { background: var(--primary-yellow); color: var(--primary-blue); } 
-        
-        .category-title { font-size: 2.8rem; color: var(--primary-blue); margin-bottom: 0.5rem; font-weight: 900; }
-
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 3rem;
-        }
-
-
-        /* Service Card - NEW PREMIUM LOOK */
-        .service-card {
-            background: var(--bg-white);
-            border-radius: 10px; 
-            box-shadow: var(--shadow-base);
-            transition: var(--transition);
-            border: 2px solid var(--accent-border); /* Subtle outer border */
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--primary-yellow); /* Yellow highlight on hover */
-        }
-        
-        .service-img {
-            height: 220px;
-            overflow: hidden;
-            background: var(--primary-blue);
-            position: relative;
-        }
-
-
-        .service-img img {
-            width: 100%; height: 100%; object-fit: cover;
-            opacity: 0.8;
-            filter: grayscale(10%);
-            transition: transform 0.5s, opacity 0.5s, filter 0.5s;
-        }
-
-
-        .service-card:hover .service-img img {
-            transform: scale(1.15); /* Stronger zoom effect */
-            opacity: 1;
-            filter: grayscale(0%);
-        }
-        
-        /* Yellow detail stripe below image */
-        .service-img::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 8px;
-            background: var(--primary-yellow);
-            transition: var(--transition);
-        }
-        
-        /* Yellow badge on hover moves to accent bar color */
-        .service-card:hover .service-badge {
-            background: var(--primary-blue);
-            color: white;
-        }
-
-
-        .service-badge {
-            position: absolute; top: 1rem; right: 1rem;
-            background: var(--primary-yellow); color: var(--primary-blue);
-            padding: 0.3rem 0.8rem; border-radius: 3px; font-weight: 700; z-index: 2;
-        }
-
-
-        .service-content {
-            padding: 2rem;
-        }
-
-
-        .service-content h3 {
-            color: var(--primary-blue);
-            margin-bottom: 0.5rem;
-            font-size: 1.6rem;
-            font-weight: 900;
-        }
-
-
-        .service-content p {
-            color: var(--text-body);
-            margin-bottom: 1.5rem;
-            font-size: 1rem;
-        }
-
-
-        .service-meta {
-            display: flex; justify-content: space-between; align-items: center;
-            border-top: 1px solid var(--accent-border); padding-top: 1.2rem;
-        }
-        
-        .view-details-btn {
-            background: var(--primary-blue); color: white;
-            padding: 0.8rem 1.5rem; border-radius: 5px; font-weight: 600;
-            text-decoration: none; transition: var(--transition);
-            text-transform: uppercase;
-        }
-        .view-details-btn:hover { 
-            background: var(--primary-yellow); 
-            color: var(--primary-blue); 
-            transform: scale(1.05); 
-            box-shadow: 0 5px 10px rgba(255, 193, 7, 0.3);
-        }
-        
-        .meta-focus {
-            font-size: 1rem;
-            font-weight: 700; 
-            color: var(--primary-yellow);
-        }
-
-        /* ----------------------------------------------------
-        * FOOTER (From first doc)
-        * ----------------------------------------------------
-        */
-        footer { background: var(--text-dark); color: white; padding: 5rem 2rem 2rem; }
-        .footer-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; max-width: 1400px; margin: 0 auto; }
-        .footer-logo { font-size: 2rem; font-weight: 900; margin-bottom: 1.5rem; color: var(--primary-yellow); }
-        /* Adjusted footer-logo color for consistency with second doc: footer-logo { color: white; } - Keeping original yellow from first doc */
-        .footer-about p { color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem; }
-        .social-links { display: flex; gap: 1rem; }
-        .social-link {
-            width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1);
-            border-radius: 5px; display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 1.2rem; text-decoration: none; transition: var(--transition);
-        }
-        .social-link:hover { background: var(--primary-yellow); color: var(--primary-blue); transform: scale(1.2); } /* Increased scale */
-        .footer-section h3 { font-size: 1.4rem; margin-bottom: 1.5rem; font-weight: 700; color: white; }
-        .footer-links { list-style: none; }
-        .footer-links li { margin-bottom: 0.8rem; }
-        .footer-links a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: var(--transition); }
-        .footer-links a:hover { color: var(--primary-yellow); padding-left: 5px; } /* Keeping original yellow from first doc for hover */
-        .contact-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: center; }
-        .contact-icon {
-            width: 45px; height: 45px; background: var(--primary-yellow);
-            border-radius: 5px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; flex-shrink: 0; color: var(--primary-blue);
-        }
-        .contact-text p { color: rgba(255, 255, 255, 0.9); margin: 0; }
-        .newsletter-form { display: flex; flex-direction: column; gap: 0.8rem; }
-        .newsletter-input { padding: 0.9rem 1.2rem; border: none; border-radius: 5px; background: rgba(255, 255, 255, 0.1); color: white; }
-        .newsletter-input::placeholder { color: rgba(255, 255, 255, 0.6); }
-        .newsletter-btn {
-            padding: 0.9rem 2rem; background: var(--primary-yellow); color: var(--primary-blue);
-            border: none; border-radius: 5px; font-weight: 700; cursor: pointer;
-            transition: var(--transition);
-        }
-        .newsletter-btn:hover { background: #e6b200; transform: translateY(-2px); }
-        .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 2rem; margin-top: 3rem; text-align: center; color: rgba(255, 255, 255, 0.7); }
-
-        /* ----------------------------------------------------
-        * RESPONSIVE DESIGN (Combined and Adjusted)
-        * ----------------------------------------------------
-        */
-        @media (max-width: 968px) {
-            .navbar-container { padding: 0 2rem; }
-            .hamburger { display: flex; }
-            .nav-menu.active .close-menu { 
-        display: flex; /* Show the X button */
+      }
+    };
+  </script>
+  <style>
+    /* RTL adjustments */
+    [dir="rtl"] .rtl-flip { transform: scaleX(-1); }
+    /* Smooth mobile menu transition */
+    #mobileMenu {
+      transition: all 0.3s ease-in-out;
     }
-            /* Mobile Menu Styling */
-            .nav-menu {
-                position: fixed; top: 0; left: -100%; width: 100%; height: 100vh;
-                background: var(--primary-blue); flex-direction: column;
-                justify-content: flex-start; padding-top: 5rem; /* Space for X button */
-                transition: left 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86); /* Smoother Slide */
-                gap: 0; overflow-y: auto; z-index: 1002;
-                box-shadow: 5px 0 15px rgba(0,0,0,0.3); display: flex;
-            }
-            .nav-menu.active { left: 0; }
+    
+    /* ===== GLOBAL STYLES & PRESERVATION ===== */
+    :root {
+        --primary-dark: #1F1F1F;
+        --accent-gold: #F9A825;
+        --text-light: #4B5563; /* Refined for better readability */
+        --transition-smooth: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
 
-            /* Hide Logo in Mobile Menu content (it's covered by X) */
-            .mobile-menu-header { display: none; } 
+    body {
+        font-family: 'Open Sans', sans-serif;
+    }
 
-            .nav-item { width: 100%; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-            .nav-link { justify-content: space-between; padding: 1rem 1.5rem; width: 100%; font-size: 1.05rem; color: white !important; }
-            .nav-link::after { display: none; }
-            .nav-right { width: 100%; background: transparent; flex-direction: column; padding: 1.5rem; gap: 1rem; margin-top: auto; display: flex !important; }
-            .nav-btn { width: 100%; text-align: center; display: block; }
-            
-            /* --- DROPDOWN MOBILE STYLES (NEW) --- */
-            .dropdown-menu {
-                position: static; /* Stack vertically in mobile */
-                opacity: 1;
-                visibility: visible;
-                transform: none;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.4s ease-out;
-                background: rgba(0, 0, 0, 0.2); /* Darker background for nested list */
-                padding: 0;
-                min-width: unset;
-                box-shadow: none;
-            }
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Montserrat', sans-serif;
+    }
 
-            /* This class is toggled by JS to expand the mobile dropdown */
-            .has-dropdown.active .dropdown-menu {
-                max-height: 200px; /* Adjust based on content height */
-                padding: 0.5rem 0;
-            }
-            
-            .dropdown-item {
-                border-bottom: none; /* Remove extra border */
-            }
+    /* Preserve Hero Styling specifically */
+/* Preserve Hero Styling specifically */
+    .hero {
+        height: 100vh;
+        min-height: 700px;
+        /* === LIGHT MODE DEFAULT === */
+        /* White/Light overlay so dark text is readable */
+        background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.95)),
+                    url('/assets/service\ home.avif') no-repeat center center/cover;
+        display: flex;
+        align-items: center;
+        color: #1F1F1F; /* Dark text for light mode */
+        position: relative;
+        overflow: hidden;
+        /* Add transition for smooth theme switching */
+        transition: background 0.3s ease, color 0.3s ease;
+    }
 
-            .dropdown-item a {
-                padding-left: 2.5rem; /* Indent sub-links */
-            }
-            
-            .has-dropdown:hover .dropdown-icon {
-                transform: none; /* Disable desktop rotation */
-            }
-            .has-dropdown.active .dropdown-icon {
-                transform: rotate(180deg); /* Rotate icon on mobile active */
-            }
-            
-            /* CONTENT adjustments from second doc */
-            .hero h1 { font-size: 3rem; }
-            .section-title { font-size: 2.5rem; }
-            .category-title { font-size: 2rem; }
-            .services-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    /* === DARK MODE OVERRIDE === */
+    /* Checks if the 'dark' class exists on the HTML tag */
+    .dark .hero {
+        /* Dark overlay so white text is readable */
+        background: linear-gradient(rgba(31, 31, 31, 0.85), rgba(31, 31, 31, 0.9)),
+                    url('/assets/service\ home.avif') no-repeat center center/cover;
+        color: white; /* White text for dark mode */
+    }
 
-            /* FOOTER MOBILE (From first doc) */
-            footer { padding: 3rem 1.5rem 2rem !important; }
-            .footer-container { grid-template-columns: 1fr !important; gap: 2rem !important; }
-            .footer-container { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; } /* Override from second doc for tablets */
-        }
-        
-        @media (max-width: 576px) {
-            .hero { padding: 6rem 1.5rem; }
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 1.1rem; }
-            .section { padding: 3rem 1.5rem; }
-            .service-card { margin: 0; }
-            .service-content { padding: 1.5rem; }
-            .service-content h3 { font-size: 1.4rem; }
-            /* Footer mobile override from second doc */
-            .footer-container { grid-template-columns: 1fr; }
-        }
+    .hero:before {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0; width: 100%; height: 150px;
+        /* Light mode fade to white */
+        background: linear-gradient(to top, white, transparent);
+        transition: background 0.3s ease;
+    }
 
-    </style>
+    .dark .hero:before {
+        /* Dark mode fade to charcoal */
+        background: linear-gradient(to top, #1F1F1F, transparent);
+    }
+    /* Custom Animations */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+        animation: fadeInUp 0.8s ease forwards;
+        opacity: 0; /* Initial state */
+    }
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+
+    /* Refined Card Hover Effects */
+    .pro-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .pro-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    .pro-card:hover .card-img-zoom {
+        transform: scale(1.05);
+    }
+  </style>
 </head>
-<body>
-    <nav id="navbar">
-        <div class="navbar-container">
-            <a href="index.html" class="logo"><i class="fas fa-hard-hat"></i> SiteWorks Builders</a>
 
-            <ul class="nav-menu" id="navMenu">
-                <button class="close-menu" id="closeMenu">✕</button>
+<!-- Body uses logical text alignment if needed, but flex containers need logical props -->
+<body class="bg-white text-gray-800 dark:bg-charcoal dark:text-gray-100 transition-colors duration-300">
 
-                <li class="nav-item has-dropdown">
-                    <a href="index.html" class="nav-link" id="homeLink">
-                        Home <i class="fas fa-chevron-down dropdown-icon"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-item"><a href="index.html">Home 1: Default</a></li>
-                        <li class="dropdown-item"><a href="homepage2.html">Home 2: Commercial</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item"><a href="Aboutus.html" class="nav-link">About Us</a></li>
-                <li class="nav-item"><a href="service.html" class="nav-link">Services</a></li>
-                <li class="nav-item"><a href="#projects" class="nav-link">Blog</a></li>
-                <li class="nav-item"><a href="#contact" class="nav-link">Contact Us</a></li>
-                <div class="nav-right">
-                    <a href="#quote" class="nav-btn">Get a Quote</a>
-                </div>
+  <!-- ============================================ -->
+  <!-- NAVBAR                                       -->
+  <!-- ============================================ -->
+  <nav id="navbar" class="sticky top-0 z-50 transition-colors duration-300 bg-white text-charcoal border-b border-gray-200 dark:bg-charcoal dark:text-white dark:border-white/10 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
+      
+      <!-- Logo Section -->
+      <a href="index.html" class="flex items-center gap-2 shrink-0 group">
+        <span class="flex h-10 w-10 items-center justify-center rounded-full bg-safetyYellow text-charcoal shadow-lg group-hover:scale-110 transition-transform">
+          <i class="fas fa-hard-hat text-lg"></i>
+        </span>
+        <div class="leading-tight">
+          <span class="block text-xl font-bold tracking-tight">Groww</span>
+          <span class="block text-xs font-medium text-safetyYellow uppercase tracking-widest">Builders</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center gap-2">
+        <ul class="flex items-center gap-1 text-sm font-semibold">
+          <li class="relative group">
+            <button class="flex items-center gap-1 rounded-md px-3 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
+              <span>Home</span>
+              <i class="fas fa-chevron-down text-[10px] group-hover:rotate-180 transition-transform"></i>
+            </button>
+            <!-- Changed left-0 to start-0 for RTL support -->
+            <ul class="invisible absolute start-0 mt-2 w-48 rounded-lg bg-white border border-gray-100 dark:bg-charcoal dark:border-white/10 p-2 opacity-0 shadow-2xl transition-all group-hover:visible group-hover:opacity-100 z-50">
+              <li><a href="index.html" class="block rounded-md px-4 py-2 hover:bg-safetyYellow hover:text-charcoal transition-colors">Home 1</a></li>
+              <li><a href="homepage2.html" class="block rounded-md px-4 py-2 hover:bg-safetyYellow hover:text-charcoal transition-colors">Home 2</a></li>
             </ul>
+          </li>
 
-            <div class="hamburger" id="hamburger">
-                <span></span><span></span><span></span>
-            </div>
+<li>
+  <a href="service.html"
+     class="block rounded-md px-4 py-2
+            bg-safetyYellow text-charcoal
+            font-bold shadow-md
+            transition-colors">
+    Services
+  </a>
+</li>
+
+          <li><a href="blog.html" class="block rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">Blog</a></li>
+          <li><a href="aboutus.html" class="block rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">About</a></li>
+          <li><a href="contact.html" class="block rounded-md px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">Contact</a></li>
+          
+          <li class="relative group">
+            <button class="flex items-center gap-1 rounded-md px-3 py-2 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
+              <span>Dashboard</span>
+              <i class="fas fa-chevron-down text-[10px] group-hover:rotate-180 transition-transform"></i>
+            </button>
+            <!-- Changed left-0 to start-0 for RTL support -->
+            <ul class="invisible absolute start-0 mt-2 w-56 rounded-lg bg-white border border-gray-100 dark:bg-charcoal dark:border-white/10 p-2 opacity-0 shadow-2xl transition-all group-hover:visible group-hover:opacity-100 z-50">
+              <li><a href="admin.html" class="block rounded-md px-4 py-2 hover:bg-safetyYellow hover:text-charcoal transition-colors">Admin Panel</a></li>
+              <li><a href="user.html" class="block rounded-md px-4 py-2 hover:bg-safetyYellow hover:text-charcoal transition-colors">User Dashboard</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- Changed ml-4/pl-4/border-l to ms-4/ps-4/border-s for RTL support -->
+        <div class="ms-4 flex items-center gap-3 border-s border-gray-200 dark:border-white/10 ps-4">
+          <button id="themeToggleDesktop" class="flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 dark:border-white/10 hover:bg-safetyYellow hover:text-charcoal transition-all">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button id="rtlToggleDesktop" class="flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 dark:border-white/10 hover:bg-safetyYellow hover:text-charcoal transition-all">
+            <i class="fas fa-exchange-alt"></i>
+          </button>
+          
+          <!-- Changed ml-2 to ms-2 -->
+          <a href="login.html" class="ms-2 inline-flex items-center gap-2 rounded-md bg-safetyYellow px-5 py-2 text-sm font-bold text-charcoal hover:bg-yellow-500 transition-transform active:scale-95 shadow-lg shadow-safetyYellow/20">
+            <i class="fas fa-user-plus text-xs"></i>
+            <span>Register</span>
+          </a>
         </div>
-    </nav>
-    
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Expertise Built From the Ground Up</h1>
-            <p>We provide comprehensive general contracting services, specialized divisions, and innovative solutions for projects of all sizes.</p>
-        </div>
-    </section>
+      </div>
 
-    <section class="section">
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-badge badge-core">🏗️ CORE SERVICES</span>
-                <h2 class="category-title">General Contracting & Construction</h2>
-                <p class="category-description">Our foundational services covering commercial, residential, and industrial construction.</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://picsum.photos/400/200?random=11&tag=commercial" alt="Commercial Construction">
-                        <span class="service-badge">Commercial</span>
-                    </div>
-                    <div class="service-content">
-                        <h3>Design-Build & Management</h3>
-                        <p>Complete project management from initial design conceptualization through final construction and commissioning.</p>
-                        <div class="service-meta">
-                            <span class="meta-focus">Key Focus</span>
-                            <a href="service-details.html?service=management" class="view-details-btn">View Details <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
+      <!-- Mobile Controls -->
+      <div class="flex items-center gap-3 lg:hidden">
+        <button id="themeToggleMobile" class="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 dark:border-white/10">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="hamburger" class="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-md bg-gray-100 dark:bg-white/5" aria-label="Toggle Menu">
+          <span id="line1" class="h-0.5 w-6 bg-current transition-all duration-300"></span>
+          <span id="line2" class="h-0.5 w-6 bg-current transition-all duration-300"></span>
+          <span id="line3" class="h-0.5 w-6 bg-current transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
 
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://picsum.photos/400/200?random=12&tag=industrial" alt="Industrial Facility">
-                        <span class="service-badge">Industrial</span>
-                    </div>
-                    <div class="service-content">
-                        <h3>Industrial Facilities</h3>
-                        <p>Specialized construction of warehouses, distribution centers, and manufacturing plants with high-spec requirements.</p>
-                        <div class="service-meta">
-                            <span class="meta-focus">High-Spec</span>
-                            <a href="service-details.html?service=industrial" class="view-details-btn">View Details <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://picsum.photos/400/200?random=13&tag=remodeling" alt="Renovation">
-                        <span class="service-badge">Renovation</span>
-                    </div>
-                    <div class="service-content">
-                        <h3>Major Renovations & Retrofitting</h3>
-                        <p>Transforming existing buildings with structural upgrades, modern interiors, and sustainable retrofits.</p>
-                        <div class="service-meta">
-                            <span class="meta-focus">Upgrade</span>
-                            <a href="service-details.html?service=renovation" class="view-details-btn">View Details <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section section-alt">
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-badge badge-civil">🚧 CIVIL & INFRASTRUCTURE</span>
-                <h2 class="category-title">Civil Engineering & Earthwork</h2>
-                <p class="category-description">Foundational site preparation, utilities, and large-scale public works projects.</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://picsum.photos/400/200?random=14&tag=road" alt="Road Construction">
-                        <span class="service-badge">Roadways</span>
-                    </div>
-                    <div class="service-content">
-                        <h3>Roadway Construction & Paving</h3>
-                        <p>Construction and maintenance of public and private access roads, paving, and traffic management systems.</p>
-                        <div class="service-meta">
-                            <span class="meta-focus">Safety First</span>
-                            <a href="service-details.html?service=roadways" class="view-details-btn">View Details <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://picsum.photos/400/200?random=15&tag=utility" alt="Utility Works">
-                        <span class="service-badge">Utilities</span>
-                    </div>
-                    <div class="service-content">
-                        <h3>Underground Utilities & Drainage</h3>
-                        <p>Installation of water, sewer, storm drainage systems, and complex underground utility infrastructure.</p>
-                        <div class="service-meta">
-                            <span class="meta-focus">Complex</span>
-                            <a href="service-details.html?service=utilities" class="view-details-btn">View Details <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://picsum.photos/400/200?random=16&tag=grading" alt="Earthwork Grading">
-                        <span class="service-badge">Earthwork</span>
-                    </div>
-                    <div class="service-content">
-                        <h3>Site Grading & Preparation</h3>
-                        <p>Large-scale site preparation, excavation, complex grading, and soil stabilization for foundations.</p>
-                        <div class="service-meta">
-                            <span class="meta-focus">Foundation</span>
-                            <a href="service-details.html?service=grading" class="view-details-btn">View Details <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-badge badge-special">💡 SPECIALIZED & TECH</span>
-                <h2 class="category-title">Technology & Specialized Trades</h2>
-                <p class="category-description">Integrating modern technology and specialized trade services for efficiency.</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://picsum.photos/400/200?random=17&tag=bim" alt="BIM Modeling">
-                        <span class="service-badge">Tech</span>
-                    </div>
-                    <div class="service-content">
-                        <h3>BIM & 4D Project Modeling</h3>
-                        <p>Advanced Building Information Modeling (BIM) and 4D scheduling for clash detection and visualization.</p>
-                        <div class="service-meta">
-                            <span class="meta-focus">Innovation</span>
-                            <a href="service-details.html?service=bim" class="view-details-btn">View Details <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://picsum.photos/400/200?random=18&tag=steel" alt="Structural Steel Framing">
-                        <span class="service-badge">Structure</span>
-                    </div>
-                    <div class="service-content">
-                        <h3>Structural Steel Fabrication</h3>
-                        <p>In-house capability for design, fabrication, and erection of complex structural steel frameworks.</p>
-                        <div class="service-meta">
-                            <span class="meta-focus">Quality</span>
-                            <a href="service-details.html?service=steel" class="view-details-btn">View Details <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://picsum.photos/400/200?random=19&tag=mep" alt="MEP Systems">
-                        <span class="service-badge">MEP</span>
-                    </div>
-                    <div class="service-content">
-                        <h3>MEP & HVAC Integration</h3>
-                        <p>Expert management and integration of Mechanical, Electrical, and Plumbing (MEP) and HVAC systems.</p>
-                        <div class="service-meta">
-                            <span class="meta-focus">Precision</span>
-                            <a href="service-details.html?service=mep" class="view-details-btn">View Details <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <footer id="contact">
-        <div class="footer-container">
-            <div class="footer-about">
-                <div class="footer-logo"><i class="fas fa-hard-hat"></i> SiteWorks</div>
-                <p>The foundation of your future. Delivering construction excellence across the region.</p>
-                <div class="social-links">
-                    <a href="#" class="social-link"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                 <ul class="footer-links">
-                    <li><a href="index.html">Home</a></li>                
-                    <li><a href="Aboutus.html">About</a></li>
-                    <li><a href="service.html">Services</a></li>
-                    <li><a href="sitemap.html">Blog</a></li>
-                    <li><a href="sitemap.html">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact Info</h3>
-                <div class="contact-item">
-                    <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
-                    <div class="contact-text"><p>(555) 123-SITE</p></div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                    <div class="contact-text"><p>info@siteworks.com</p></div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <div class="contact-text"><p>123 Main Street, Suite 200, Metropolis</p></div>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3>Stay Informed</h3>
-                <p>Sign up for our newsletter to get project updates and company news.</p>
-                <form class="newsletter-form">
-                    <input type="email" class="newsletter-input" placeholder="Your work email">
-                    <button class="newsletter-btn">Subscribe</button>
-                </form>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 SiteWorks Builders. Built with <i class="fas fa-heart" style="color: var(--primary-yellow);"></i> and Code.</p>
-        </div>
-    </footer>
-    
-    <script>
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('navMenu');
-        const closeMenu = document.getElementById('closeMenu');
-        const navbar = document.getElementById('navbar');
-        // Removed statNumbers and related logic as the stats section was removed from the content body.
-        const sections = document.querySelectorAll('.section');
-        const homeDropdown = document.querySelector('.has-dropdown'); 
-        const homeLink = document.getElementById('homeLink');
-        let statsAnimated = false; // Kept to avoid breaking the original script structure, though not used.
-
-        // --- Mobile Menu Toggle ---
-        function toggleMenu() {
-            const isActive = navMenu.classList.toggle('active');
-            hamburger.classList.toggle('active');
-            document.body.style.overflow = isActive ? 'hidden' : '';
-        }
-
-        hamburger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleMenu();
-        });
-
-        closeMenu.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleMenu();
-        });
-
-        // --- New: Mobile Dropdown Toggle ---
-        // Prevents the default action (page navigation) and toggles the mobile menu
-        if (homeDropdown) {
-            homeLink.addEventListener('click', (e) => {
-                if (window.innerWidth <= 968) {
-                    e.preventDefault(); // Stop navigation on mobile
-                    homeDropdown.classList.toggle('active');
-                } else {
-                    // For desktop, allow default behavior (like navigating to index.html)
-                    // For now, allowing default for desktop click on 'Home'
-                }
-            });
-        }
-
-
-        // Close menu when a link is clicked (updated to handle non-dropdown links)
-        navMenu.querySelectorAll('.nav-link, .nav-btn, .dropdown-item a').forEach(link => {
-            link.addEventListener('click', () => {
-                // If the clicked link is a dropdown link OR if we are on desktop
-                // we want to close the full menu (only needed if link causes navigation)
-                if (window.innerWidth <= 968 && !link.closest('.has-dropdown') ) {
-                    // Timeout allows link navigation before closing, unless it's the home link itself
-                    setTimeout(toggleMenu, 300); 
-                }
-                
-                // If it's a dropdown link inside the mobile menu, close the main menu
-                if (window.innerWidth <= 968 && link.closest('.dropdown-item')) {
-                     setTimeout(toggleMenu, 300); 
-                }
-            });
-        });
-
-        // --- Sticky Nav Bar Effect ---
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+    <!-- Mobile Menu Drawer -->
+    <div id="mobileMenu" class="hidden border-t border-gray-100 bg-white dark:bg-charcoal dark:border-white/5 lg:hidden overflow-hidden transition-all duration-300">
+      <div class="flex flex-col gap-1 p-4">
         
-        // --- Resize Handler (for mobile menu) ---
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 968 && navMenu.classList.contains('active')) {
-                toggleMenu(); // Closes menu when resizing to desktop
-            }
-            // Ensure mobile dropdown is closed/inactive when resizing to desktop
-            if (window.innerWidth > 968 && homeDropdown.classList.contains('active')) {
-                homeDropdown.classList.remove('active');
-            }
-        });
+        <details class="group">
+          <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5 list-none">
+            <div class="flex items-center gap-4">
+              <i class="fas fa-home text-safetyYellow w-6"></i> Home
+            </div>
+            <i class="fas fa-chevron-down text-xs group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <!-- Changed pl-14 to ps-14 -->
+          <div class="mt-1 flex flex-col gap-1 ps-14 text-gray-500 dark:text-gray-400">
+            <a href="index.html" class="py-2 hover:text-safetyYellow">Home 1</a>
+            <a href="homepage2.html" class="py-2 hover:text-safetyYellow">Home 2</a>
+          </div>
+        </details>
 
+        <a href="service.html"
+   class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-bold
+          bg-safetyYellow text-charcoal shadow-md
+          hover:bg-yellow-500 transition-all">
+  
+  <i class="fas fa-concierge-bell w-6 text-white"></i>
+  <span>Services</span>
+</a>
 
-        // --- Running Number Counter Animation --- (Kept but no longer used in the content)
-        function countUp(el) {
-            const target = parseInt(el.getAttribute('data-target'));
-            const prefix = el.getAttribute('data-prefix') || '';
-            const suffix = el.getAttribute('data-suffix') || '';
-            let start = 0;
-            const duration = 2000; // 2 seconds
-            const step = (target / duration) * 10;
-            const isFloat = target % 1 !== 0;
+        <a href="blog.html" class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+          <i class="fas fa-blog text-safetyYellow w-6"></i> Blog
+        </a>
+        <a href="aboutus.html" class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+          <i class="fas fa-info-circle text-safetyYellow w-6"></i> About Us
+        </a>
+        <a href="contact.html" class="flex items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+          <i class="fas fa-envelope text-safetyYellow w-6"></i> Contact
+        </a>
 
-            const timer = setInterval(() => {
-                start += step;
-                if (start >= target) {
-                    clearInterval(timer);
-                    start = target;
-                }
-                
-                let displayValue = Math.floor(start);
-                if (isFloat) {
-                    // Handle float targets if needed, but current targets are integers
-                    displayValue = start.toFixed(1);
-                }
-                
-                // Commented out as the element is removed:
-                // el.textContent = prefix + displayValue + suffix; 
-            }, 10);
-        }
+        <details class="group">
+          <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5 list-none">
+            <div class="flex items-center gap-4">
+              <i class="fas fa-tachometer-alt text-safetyYellow w-6"></i> Dashboard
+            </div>
+            <i class="fas fa-chevron-down text-xs group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <!-- Changed pl-14 to ps-14 -->
+          <div class="mt-1 flex flex-col gap-1 ps-14 text-gray-500 dark:text-gray-400">
+            <a href="admin.html" class="py-2 hover:text-safetyYellow">Admin Panel</a>
+            <a href="user.html" class="py-2 hover:text-safetyYellow">User Dashboard</a>
+          </div>
+        </details>
 
-        // --- Intersection Observer for Animations (FadeIn/Counting) ---
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.2
-        };
+        <div class="mt-4 pt-4 border-t border-gray-100 dark:border-white/10">
+          <button id="rtlToggleMobile" class="flex w-full items-center gap-4 rounded-lg px-4 py-3 text-lg font-medium hover:bg-gray-50 dark:hover:bg-white/5">
+            <i class="fas fa-exchange-alt text-safetyYellow w-6"></i> Switch Direction (RTL)
+          </button>
+          <a href="login.html" class="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-safetyYellow py-4 text-center text-lg font-bold text-charcoal active:scale-95 transition-transform">
+            <i class="fas fa-user-plus"></i> Register
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-        const sectionObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    // Stop observing the section once it's visible
-                    observer.unobserve(entry.target); 
-                }
-            });
-        }, observerOptions);
+  <!-- ============================================ -->
+  <!-- HERO SECTION (UNCHANGED)                     -->
+  <!-- ============================================ -->
+ <section class="hero" id="home">
+      <div class="container mx-auto px-4 max-w-7xl">
+          <div class="hero-content relative z-10 max-w-4xl fade-in">
+              <h1 class="text-4xl md:text-5xl lg:text-7xl font-black mb-6 leading-tight">
+                  Building Excellence From the Ground Up
+              </h1>
+              
+              <p class="text-xl md:text-2xl mb-10 max-w-2xl text-gray-600 dark:text-gray-200 transition-colors duration-300">
+                  SiteWorks Builders delivers comprehensive general contracting services, specialized divisions, and innovative construction solutions for projects of all sizes and complexities.
+              </p>
+              
+              <a href="#services" class="inline-block bg-safetyYellow text-charcoal font-bold py-4 px-8 rounded-lg uppercase tracking-wider hover:bg-yellow-500 transition-all transform hover:-translate-y-1 shadow-lg">
+                  Explore Our Services
+              </a>
 
-        sections.forEach(section => {
-            // The first document's hero logic is no longer relevant, but the section logic is.
-            if (!section.classList.contains('hero')) { 
-                sectionObserver.observe(section);
-            }
-        });
+              <div class="flex flex-wrap gap-8 mt-16 delay-100">
+                  <div class="stat-item">
+                      <span class="block text-4xl font-extrabold text-safetyYellow">25+</span>
+                      <span class="text-sm font-bold uppercase tracking-widest text-gray-600 dark:text-gray-300 transition-colors duration-300">Years Experience</span>
+                  </div>
+                  <div class="stat-item">
+                      <span class="block text-4xl font-extrabold text-safetyYellow">500+</span>
+                      <span class="text-sm font-bold uppercase tracking-widest text-gray-600 dark:text-gray-300 transition-colors duration-300">Projects Completed</span>
+                  </div>
+                  <div class="stat-item">
+                      <span class="block text-4xl font-extrabold text-safetyYellow">100%</span>
+                      <span class="text-sm font-bold uppercase tracking-widest text-gray-600 dark:text-gray-300 transition-colors duration-300">Safety Record</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- ============================================ -->
+  <!-- CORE SERVICES SECTION                        -->
+  <!-- ============================================ -->
+  <section id="services" class="py-24 bg-white dark:bg-charcoal transition-colors duration-300">
+    <div class="container mx-auto px-6 max-w-7xl">
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-20 fade-in">
+        <span class="text-safetyYellow font-bold tracking-[0.2em] text-sm uppercase block mb-3">What We Do</span>
+        <h2 class="text-4xl md:text-5xl font-bold text-charcoal dark:text-white mb-6 font-heading">Core Construction Services</h2>
+        <div class="h-1 w-20 bg-safetyYellow mx-auto mb-6"></div>
+        <p class="text-lg text-gray-600 dark:text-gray-400">Our foundational services covering commercial, residential, and industrial construction with a focus on quality, safety, and timely delivery.</p>
+      </div>
 
-        // Removed the statsObserver logic since the #stats element was removed.
+      <!-- Services Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         
-    </script>
+        <!-- Card 1 -->
+        <article class="group bg-white dark:bg-zinc-800 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-white/5 fade-in pro-card">
+          <div class="relative h-64 overflow-hidden">
+            <img src="/assets/s1.avif" 
+                 alt="Commercial Construction" 
+                 class="w-full h-full object-cover card-img-zoom transition-transform duration-700">
+            <!-- Changed right-4 to end-4 -->
+            <div class="absolute top-4 end-4 bg-white/90 dark:bg-charcoal/90 backdrop-blur-sm px-3 py-1 rounded text-xs font-bold text-charcoal dark:text-safetyYellow uppercase tracking-wider shadow-sm">
+              Commercial
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+          <div class="p-8 flex flex-col h-[calc(100%-16rem)]">
+            <h3 class="text-2xl font-bold text-charcoal dark:text-white mb-3 font-heading group-hover:text-safetyYellow transition-colors">Design-Build Management</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-6 flex-grow leading-relaxed">
+              Complete project management from initial design conceptualization through final construction. Integrated approach for efficient delivery.
+            </p>
+            <div class="pt-6 border-t border-gray-100 dark:border-white/10 flex items-center justify-between">
+              <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Efficiency Focus</span>
+              <a href="service-details.html?service=management" class="inline-flex items-center text-sm font-bold text-safetyYellow hover:text-yellow-600 transition-colors">
+                View Details <i class="fas fa-arrow-right ms-2 text-xs transition-transform group-hover:translate-x-1 rtl:rotate-180"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="group bg-white dark:bg-zinc-800 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-white/5 fade-in delay-100 pro-card">
+          <div class="relative h-64 overflow-hidden">
+            <img src="/assets/s2.avif" 
+                 alt="Industrial Facility" 
+                 class="w-full h-full object-cover card-img-zoom transition-transform duration-700">
+            <!-- Changed right-4 to end-4 -->
+            <div class="absolute top-4 end-4 bg-white/90 dark:bg-charcoal/90 backdrop-blur-sm px-3 py-1 rounded text-xs font-bold text-charcoal dark:text-safetyYellow uppercase tracking-wider shadow-sm">
+              Industrial
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+          <div class="p-8 flex flex-col h-[calc(100%-16rem)]">
+            <h3 class="text-2xl font-bold text-charcoal dark:text-white mb-3 font-heading group-hover:text-safetyYellow transition-colors">Industrial Facilities</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-6 flex-grow leading-relaxed">
+              Specialized construction of warehouses, distribution centers, and manufacturing plants handling complex requirements with precision.
+            </p>
+            <div class="pt-6 border-t border-gray-100 dark:border-white/10 flex items-center justify-between">
+              <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">High-Spec Focus</span>
+              <a href="service-details.html?service=industrial" class="inline-flex items-center text-sm font-bold text-safetyYellow hover:text-yellow-600 transition-colors">
+                View Details <i class="fas fa-arrow-right ms-2 text-xs transition-transform group-hover:translate-x-1 rtl:rotate-180"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="group bg-white dark:bg-zinc-800 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-white/5 fade-in delay-200 pro-card">
+          <div class="relative h-64 overflow-hidden">
+            <img src="/assets/s3.avif" 
+                 alt="Renovation" 
+                 class="w-full h-full object-cover card-img-zoom transition-transform duration-700">
+            <!-- Changed right-4 to end-4 -->
+            <div class="absolute top-4 end-4 bg-white/90 dark:bg-charcoal/90 backdrop-blur-sm px-3 py-1 rounded text-xs font-bold text-charcoal dark:text-safetyYellow uppercase tracking-wider shadow-sm">
+              Renovation
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+          <div class="p-8 flex flex-col h-[calc(100%-16rem)]">
+            <h3 class="text-2xl font-bold text-charcoal dark:text-white mb-3 font-heading group-hover:text-safetyYellow transition-colors">Major Renovations</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-6 flex-grow leading-relaxed">
+              Transforming existing buildings with structural upgrades, modern interiors, and sustainable retrofits while maintaining integrity.
+            </p>
+            <div class="pt-6 border-t border-gray-100 dark:border-white/10 flex items-center justify-between">
+              <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Revival Focus</span>
+              <a href="service-details.html?service=renovation" class="inline-flex items-center text-sm font-bold text-safetyYellow hover:text-yellow-600 transition-colors">
+                View Details <i class="fas fa-arrow-right ms-2 text-xs transition-transform group-hover:translate-x-1 rtl:rotate-180"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CIVIL INFRASTRUCTURE SECTION                 -->
+  <!-- ============================================ -->
+  <section class="py-24 bg-gray-50 dark:bg-[#1a1a1a] transition-colors duration-300">
+    <div class="container mx-auto px-6 max-w-7xl">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Section Text (Left Side on Desktop) -->
+        <div class="lg:col-span-4 lg:sticky lg:top-32 fade-in">
+          <span class="text-safetyYellow font-bold tracking-[0.2em] text-sm uppercase block mb-3">Infrastructure</span>
+          <h2 class="text-4xl font-bold text-charcoal dark:text-white mb-6 font-heading leading-tight">Civil Engineering & Earthwork</h2>
+          <div class="h-1 w-12 bg-safetyYellow mb-6"></div>
+          <p class="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+            Foundational site preparation, utilities, and large-scale public works projects that form the backbone of modern infrastructure. We build durable transportation networks that stand the test of time.
+          </p>
+          <a href="contact.html" class="inline-flex items-center justify-center px-6 py-3 border-2 border-charcoal dark:border-white text-charcoal dark:text-white font-bold rounded hover:bg-charcoal hover:text-white dark:hover:bg-white dark:hover:text-charcoal transition-colors uppercase tracking-wider text-sm">
+            Start a Project
+          </a>
+        </div>
+
+        <!-- Cards Grid (Right Side) -->
+        <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Card 1 -->
+          <div class="group relative overflow-hidden rounded-xl shadow-lg bg-white dark:bg-zinc-800 fade-in delay-100 md:col-span-2">
+            <div class="absolute inset-0">
+               <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80" alt="Roadways" class="w-full h-full object-cover opacity-20 group-hover:opacity-10 transition-opacity duration-500">
+               <div class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent dark:from-zinc-900 dark:via-zinc-900/90 rtl:bg-gradient-to-l"></div>
+            </div>
+            <div class="relative p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center gap-6">
+              <div class="flex-shrink-0 p-4 bg-safetyYellow/10 rounded-full text-safetyYellow">
+                <i class="fas fa-road text-3xl"></i>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-charcoal dark:text-white mb-2 font-heading">Roadway Construction</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">Construction and maintenance of public and private access roads, paving, and traffic management systems.</p>
+                <a href="service-details.html?service=roadways" class="text-safetyYellow font-bold text-sm hover:underline">Learn more</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="group bg-white dark:bg-zinc-800 rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border-t-4 border-safetyYellow fade-in delay-200">
+            <div class="mb-6 text-safetyYellow">
+              <i class="fas fa-water text-4xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-charcoal dark:text-white mb-3 font-heading">Underground Utilities</h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 leading-relaxed">
+              Installation of water, sewer, storm drainage systems, and complex underground utility infrastructure ensuring reliability.
+            </p>
+            <a href="service-details.html?service=utilities" class="text-charcoal dark:text-white font-bold text-sm border-b border-safetyYellow pb-1 hover:text-safetyYellow transition-colors">View Service</a>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="group bg-white dark:bg-zinc-800 rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border-t-4 border-safetyYellow fade-in delay-300">
+            <div class="mb-6 text-safetyYellow">
+              <i class="fas fa-mountain text-4xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-charcoal dark:text-white mb-3 font-heading">Site Grading</h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 leading-relaxed">
+              Large-scale site preparation, excavation, complex grading, and soil stabilization for foundations.
+            </p>
+            <a href="service-details.html?service=grading" class="text-charcoal dark:text-white font-bold text-sm border-b border-safetyYellow pb-1 hover:text-safetyYellow transition-colors">View Service</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- TECHNOLOGY SECTION                           -->
+  <!-- ============================================ -->
+  <section class="py-24 bg-white dark:bg-charcoal relative overflow-hidden transition-colors duration-300">
+    <!-- Decorative background element -->
+    <!-- Changed right-0 to end-0 -->
+    <div class="absolute top-0 end-0 w-1/3 h-full bg-gray-50 dark:bg-zinc-800/50 -skew-x-12 translate-x-1/2 z-0 rtl:-translate-x-1/2"></div>
+
+    <div class="container mx-auto px-6 max-w-7xl relative z-10">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 fade-in">
+        <div class="max-w-2xl">
+          <span class="text-safetyYellow font-bold tracking-[0.2em] text-sm uppercase block mb-3">Innovation</span>
+          <h2 class="text-4xl md:text-5xl font-bold text-charcoal dark:text-white font-heading leading-tight">Technology & <br>Specialized Trades</h2>
+        </div>
+        <!-- Changed text-right/text-left to text-end/text-start -->
+        <p class="max-w-md text-gray-500 dark:text-gray-400 text-end md:text-start">
+          Integrating modern technology and specialized trade services for enhanced efficiency and precision.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Tech Card 1 -->
+        <div class="group relative bg-white dark:bg-zinc-800 rounded-2xl p-2 shadow-sm hover:shadow-2xl transition-all duration-500 fade-in">
+          <div class="rounded-xl overflow-hidden h-64 relative mb-6">
+            <img src="/assets/4d.webp" alt="BIM" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-charcoal/20 group-hover:bg-charcoal/0 transition-colors"></div>
+            <!-- Changed bottom-4 left-4 to bottom-4 start-4 -->
+            <div class="absolute bottom-4 start-4 bg-white dark:bg-charcoal px-4 py-2 rounded-lg shadow-lg">
+               <i class="fas fa-laptop-code text-safetyYellow me-2"></i> <span class="font-bold text-sm">BIM / 4D</span>
+            </div>
+          </div>
+          <div class="px-4 pb-6">
+            <h3 class="text-xl font-bold mb-3 text-charcoal dark:text-white">BIM 4D Modeling</h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Advanced scheduling and clash detection visualization to minimize errors.</p>
+            <a href="service-details.html?service=bim" class="text-safetyYellow font-bold text-sm uppercase tracking-wider hover:text-charcoal dark:hover:text-white transition-colors">
+              Details <span class="inline-block rtl:rotate-180">&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Tech Card 2 -->
+        <div class="group relative bg-white dark:bg-zinc-800 rounded-2xl p-2 shadow-sm hover:shadow-2xl transition-all duration-500 fade-in delay-100">
+          <div class="rounded-xl overflow-hidden h-64 relative mb-6">
+            <img src="/assets/steel.jpg"alt="Steel" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-charcoal/20 group-hover:bg-charcoal/0 transition-colors"></div>
+            <div class="absolute bottom-4 start-4 bg-white dark:bg-charcoal px-4 py-2 rounded-lg shadow-lg">
+               <i class="fas fa-layer-group text-safetyYellow me-2"></i> <span class="font-bold text-sm">Structure</span>
+            </div>
+          </div>
+          <div class="px-4 pb-6">
+            <h3 class="text-xl font-bold mb-3 text-charcoal dark:text-white">Steel Fabrication</h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">In-house design, fabrication, and erection of complex structural steel frameworks.</p>
+            <a href="service-details.html?service=steel" class="text-safetyYellow font-bold text-sm uppercase tracking-wider hover:text-charcoal dark:hover:text-white transition-colors">
+              Details <span class="inline-block rtl:rotate-180">&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Tech Card 3 -->
+        <div class="group relative bg-white dark:bg-zinc-800 rounded-2xl p-2 shadow-sm hover:shadow-2xl transition-all duration-500 fade-in delay-200">
+          <div class="rounded-xl overflow-hidden h-64 relative mb-6">
+            <img src="/assets/dd.jpg" alt="MEP" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-charcoal/20 group-hover:bg-charcoal/0 transition-colors"></div>
+            <div class="absolute bottom-4 start-4 bg-white dark:bg-charcoal px-4 py-2 rounded-lg shadow-lg">
+               <i class="fas fa-bolt text-safetyYellow me-2"></i> <span class="font-bold text-sm">MEP Systems</span>
+            </div>
+          </div>
+          <div class="px-4 pb-6">
+            <h3 class="text-xl font-bold mb-3 text-charcoal dark:text-white">MEP Integration</h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Expert management of Mechanical, Electrical, and Plumbing systems for efficiency.</p>
+            <a href="service-details.html?service=mep" class="text-safetyYellow font-bold text-sm uppercase tracking-wider hover:text-charcoal dark:hover:text-white transition-colors">
+              Details <span class="inline-block rtl:rotate-180">&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FOOTER                                       -->
+  <!-- ============================================ -->
+  <footer class="bg-[#1a1a1a] pt-24 pb-12 text-gray-300 font-sans border-t border-gray-800">
+    <div class="container mx-auto px-6 max-w-7xl">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 border-b border-gray-800 pb-16">
+        
+        <!-- Company Info -->
+        <div class="space-y-6">
+         <a href="#" class="flex items-center gap-3 mb-6">
+  <div class="h-12 w-12 rounded-full bg-safetyYellow flex items-center justify-center shrink-0">
+    <i class="fas fa-hard-hat text-lg text-charcoal"></i>
+  </div>
+
+  <div class="flex flex-col justify-center leading-none">
+    <span class="text-base font-bold tracking-wide">GROWW</span>
+    <span class="text-xs font-semibold text-safetyYellow tracking-widest">
+      BUILDERS
+    </span>
+  </div>
+</a>
+
+          <p class="text-gray-400 text-sm leading-relaxed">Building the future with precision, integrity, and innovation since 2008. We are committed to excellence in every project we undertake.</p>
+          <div class="flex gap-4">
+            <a href="#" class="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-safetyYellow hover:text-charcoal transition-all duration-300">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-safetyYellow hover:text-charcoal transition-all duration-300">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-safetyYellow hover:text-charcoal transition-all duration-300">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+       <div>
+  <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">
+    Quick Links
+  </h4>
+
+  <ul class="space-y-3 text-sm">
+    <li>
+      <a href="index.html"
+         class="block hover:text-safetyYellow transition-colors">
+        Home
+      </a>
+    </li>
+
+    <li>
+      <a href="service.html"
+         class="block hover:text-safetyYellow transition-colors">
+        Services
+      </a>
+    </li>
+
+    <li>
+      <a href="blog.html"
+         class="block hover:text-safetyYellow transition-colors">
+        Blog
+      </a>
+    </li>
+
+    <li>
+      <a href="aboutus.html"
+         class="block hover:text-safetyYellow transition-colors">
+        About Us
+      </a>
+    </li>
+
+    <li>
+      <a href="contact.html"
+         class="block hover:text-safetyYellow transition-colors">
+        Contact
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+        <!-- Contact Info -->
+        <div>
+          <h4 class="text-white font-bold mb-8 uppercase tracking-wider text-sm">Contact Us</h4>
+          <div class="space-y-6 text-sm">
+            <div class="flex items-start gap-4">
+              <i class="fas fa-map-marker-alt text-safetyYellow mt-1"></i>
+              <span>123 Construction Ave, Suite 100<br>New York, NY 10001</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <i class="fas fa-phone text-safetyYellow"></i>
+              <span>+1 (555) 123-4567</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <i class="fas fa-envelope text-safetyYellow"></i>
+              <span>info@siteworks.com</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div>
+          <h4 class="text-white font-bold mb-8 uppercase tracking-wider text-sm">Stay Updated</h4>
+          <p class="text-gray-400 mb-6 text-sm">Subscribe to receive construction insights and project updates.</p>
+          <form class="space-y-4">
+            <div class="relative">
+                <input type="email" placeholder="Your email address" 
+                    class="w-full px-4 py-3 rounded bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-safetyYellow focus:outline-none focus:ring-1 focus:ring-safetyYellow transition-all">
+            </div>
+            <button type="submit" class="w-full bg-safetyYellow text-charcoal font-bold py-3 rounded hover:bg-yellow-400 transition-colors uppercase tracking-wider text-sm">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+        <div>&copy; 2026 SiteWorks Construction Group. All rights reserved.</div>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+          <a href="#" class="hover:text-white transition-colors">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const htmlEl = document.documentElement;
+    const bodyEl = document.body;
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const l1 = document.getElementById('line1');
+    const l2 = document.getElementById('line2');
+    const l3 = document.getElementById('line3');
+
+    // Menu Toggle Logic
+    hamburger.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.toggle('hidden');
+      if (!isHidden) {
+        l1.style.transform = 'translateY(8px) rotate(45deg)';
+        l2.style.opacity = '0';
+        l3.style.transform = 'translateY(-8px) rotate(-45deg)';
+      } else {
+        l1.style.transform = 'none';
+        l2.style.opacity = '1';
+        l3.style.transform = 'none';
+      }
+    });
+
+    // Theme Logic - Robust Implementation
+    const themeBtns = [document.getElementById('themeToggleDesktop'), document.getElementById('themeToggleMobile')];
+    
+    function setTheme(isDark) {
+      if (isDark) {
+        htmlEl.classList.add('dark');
+        try { localStorage.setItem('theme', 'dark'); } catch(e) {}
+        themeBtns.forEach(btn => btn.innerHTML = '<i class="fas fa-sun"></i>');
+      } else {
+        htmlEl.classList.remove('dark');
+        try { localStorage.setItem('theme', 'light'); } catch(e) {}
+        themeBtns.forEach(btn => btn.innerHTML = '<i class="fas fa-moon"></i>');
+      }
+    }
+
+    // Toggle Theme Click Event
+    themeBtns.forEach(btn => {
+      if(btn) {
+        btn.addEventListener('click', () => {
+          setTheme(!htmlEl.classList.contains('dark'));
+        });
+      }
+    });
+
+    // Initialize Theme
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      setTheme(true);
+    } else {
+      setTheme(false);
+    }
+
+    // RTL Logic - Robust Implementation
+    const rtlBtns = [document.getElementById('rtlToggleDesktop'), document.getElementById('rtlToggleMobile')];
+    
+    rtlBtns.forEach(btn => {
+      if(btn) {
+        btn.addEventListener('click', () => {
+            const currentDir = htmlEl.getAttribute('dir') || 'ltr';
+            const newDir = currentDir === 'ltr' ? 'rtl' : 'ltr';
+            htmlEl.setAttribute('dir', newDir);
+            
+            // Also update body attribute for backwards compatibility if needed
+            bodyEl.setAttribute('dir', newDir);
+        });
+      }
+    });
+
+    // Animation on scroll
+    const fadeElements = document.querySelectorAll('.fade-in');
+
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    fadeElements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        observer.observe(element);
+    });
+   
+  </script>
 </body>
 </html>
