@@ -145,6 +145,16 @@
       -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.2);
     }
+    
+    /* Animation */
+    .animate-fade-in {
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 
@@ -160,10 +170,12 @@
     </button>
   </div>
 
-  <main class="flex-grow flex items-center justify-center p-4 sm:p-6 lg:p-8">
+  <!-- Main Padding: p-4 for mobile ensures it doesn't touch edges -->
+  <main class="flex-grow flex items-center justify-center p-4 sm:p-8 lg:p-12 xl:p-16">
     
     <!-- Main Card Container -->
-    <div class="w-full max-w-[1100px] bg-white dark:bg-[#1F1F1F] rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row transition-colors duration-300 min-h-[600px]">
+    <!-- Removed min-h on mobile (default), added lg:min-h-[600px] for larger screens -->
+    <div class="w-full max-w-5xl bg-white dark:bg-[#1F1F1F] rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row transition-colors duration-300 lg:min-h-[600px]">
       
       <!-- LEFT SIDE: Visual/Brand (Hidden on Mobile, Visible on Desktop) -->
       <div class="hidden lg:flex lg:w-1/2 relative bg-gray-900 overflow-hidden flex-col justify-between p-12 text-white">
@@ -175,26 +187,21 @@
 
         <!-- Content relative z-10 -->
         <div class="relative z-10">
-       <div class="flex justify-center mb-8">
-  <a href="index.html" class="flex items-center gap-3 group">
-    
-    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-safetyYellow text-charcoal shadow-lg group-hover:scale-110 transition-transform">
-      <i class="fas fa-hard-hat text-lg"></i>
-    </span>
-
-    <div class="leading-tight text-left">
-      <span class="block text-xl font-bold tracking-tight text-white">
-        Groww
-      </span>
-      <span class="block text-xs font-medium text-safetyYellow uppercase tracking-widest">
-        Builders
-      </span>
-    </div>
-
-  </a>
-</div>
-
-
+          <div class="flex justify-center mb-8">
+            <a href="index.html" class="flex items-center gap-3 group">
+              <span class="flex h-10 w-10 items-center justify-center rounded-full bg-safetyYellow text-charcoal shadow-lg group-hover:scale-110 transition-transform">
+                <i class="fas fa-hard-hat text-lg"></i>
+              </span>
+              <div class="leading-tight">
+                <span class="block text-xl font-bold tracking-tight text-safetyYellow">
+                  Groww
+                </span>
+                <span class="block text-xs font-semibold text-safetyYellow uppercase tracking-widest">
+                  Builders
+                </span>
+              </div>
+            </a>
+          </div>
           
           <h2 class="text-4xl font-bold leading-tight mb-4">Build the future,<br>manage with precision.</h2>
           <p class="text-gray-300 text-lg max-w-sm">Streamline your construction projects, track inventory, and manage your workforce in one unified dashboard.</p>
@@ -222,44 +229,43 @@
       </div>
 
       <!-- RIGHT SIDE: Form Area -->
-      <div class="w-full lg:w-1/2 p-6 sm:p-10 lg:p-14 flex flex-col justify-center">
+      <!-- Reduced internal padding on mobile to p-5 to save space -->
+      <div class="w-full lg:w-1/2 p-5 sm:p-10 lg:p-14 flex flex-col justify-center">
         
         <!-- Mobile Header (Only visible on small screens) -->
-      <!-- Mobile Header (Only visible on small screens) -->
-<div class="lg:hidden flex items-center justify-center mb-8">
-  <a href="index.html" class="flex items-center gap-3 group">
-    
-    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-safetyYellow text-charcoal shadow-lg group-hover:scale-110 transition-transform">
-      <i class="fas fa-hard-hat text-lg"></i>
-    </span>
-
-    <div class="leading-tight text-left">
-      <span class="block text-lg font-bold tracking-tight text-steelBlue dark:text-white">
-        Groww
-      </span>
-      <span class="block text-[10px] font-medium text-safetyYellow uppercase tracking-widest">
-        Builders
-      </span>
-    </div>
-
-  </a>
+        <div class="lg:hidden flex items-center justify-center mb-6">
+          <a href="index.html" class="flex items-center gap-3 group">
+            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-safetyYellow text-charcoal shadow-lg group-hover:scale-110 transition-transform">
+              <i class="fas fa-hard-hat text-lg"></i>
+            </span>
+           <div class="leading-tight">
+  <span class="block text-xl font-bold tracking-tight text-safetyYellow">
+    Groww
+  </span>
+  <span class="block text-xs font-semibold text-safetyYellow uppercase tracking-widest">
+    Builders
+  </span>
 </div>
+          </a>
+        </div>
 
         <div class="max-w-md mx-auto w-full">
           <!-- Welcome Text -->
-          <div class="mb-8 text-center lg:text-left">
+          <!-- Reduced margin bottom to mb-4 -->
+          <div class="mb-4 text-center lg:text-left">
             <h1 id="formTitle" class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2">Welcome Back</h1>
             <p id="formSubtitle" class="text-gray-500 dark:text-gray-400 text-sm">Please enter your details to access your dashboard.</p>
           </div>
 
           <!-- Tabs -->
-          <div class="flex border-b-2 border-gray-100 dark:border-gray-800 mb-8">
+          <!-- Reduced margin bottom to mb-4 -->
+          <div class="flex border-b-2 border-gray-100 dark:border-gray-800 mb-4">
             <button onclick="switchTab('login')" id="loginTab" class="tab-btn active flex-1 pb-3 text-sm font-semibold transition-colors">Log In</button>
             <button onclick="switchTab('register')" id="registerTab" class="tab-btn flex-1 pb-3 text-sm font-semibold transition-colors">Sign Up</button>
           </div>
 
           <!-- Login Form -->
-<form id="loginForm" action="index.html" method="get" class="space-y-5 animate-fade-in">
+          <form id="loginForm" action="index.html" method="get" class="space-y-4 animate-fade-in">
             <div>
               <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 ml-1">Email</label>
               <div class="form-input-container">
@@ -294,7 +300,7 @@
 
           <!-- Register Form (Hidden) -->
           <form id="registerForm" class="space-y-4 hidden">
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 gap-3">
               <div>
                 <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 ml-1">First Name</label>
                 <div class="form-input-container">
@@ -350,7 +356,8 @@
           </form>
 
           <!-- Social Login -->
-          <div class="relative my-8">
+          <!-- Reduced margins to my-4 -->
+          <div class="relative my-4">
             <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-100 dark:border-gray-800"></div></div>
             <div class="relative flex justify-center text-[10px] uppercase font-bold tracking-widest text-gray-400">
               <span class="px-2 bg-white dark:bg-[#1F1F1F]">Or continue with</span>
@@ -510,10 +517,9 @@
       setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
-   document.getElementById('loginForm').addEventListener('submit', () => {
-  showToast('Logging securely into SiteWorks...');
-});
-
+    document.getElementById('loginForm').addEventListener('submit', () => {
+      showToast('Logging securely into SiteWorks...');
+    });
 
     document.getElementById('registerForm').addEventListener('submit', (e) => {
       e.preventDefault();
