@@ -290,48 +290,92 @@
           </article>
 
           <!-- SIDEBAR (Right) -->
-          <aside class="lg:col-span-4 space-y-8 fade-in delay-100">
-              <!-- Search Widget -->
-              <div class="bg-white dark:bg-zinc-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-white/5">
-                  <h3 class="text-xl font-bold text-charcoal dark:text-white mb-4 font-heading border-l-4 border-safetyYellow pl-3">Search Insights</h3>
-                  <div class="relative">
-                      <input type="text" placeholder="Find topics..." class="w-full pl-4 pr-10 py-3 rounded-lg bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 text-charcoal dark:text-white focus:outline-none focus:ring-2 focus:ring-safetyYellow transition-all">
-                      <i class="fas fa-search absolute right-3 top-3.5 text-gray-400"></i>
-                  </div>
-              </div>
+         <aside class="lg:col-span-4 fade-in delay-100 h-full">
+    
+    <div class="space-y-8 sticky top-24">
 
-              <!-- Recent Posts Widget -->
-              <div class="bg-white dark:bg-zinc-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-white/5 lg:sticky lg:top-32">
-                  <h3 class="text-xl font-bold text-charcoal dark:text-white mb-6 font-heading border-l-4 border-safetyYellow pl-3">Recent Posts</h3>
-                  <div class="space-y-6">
-                      <div class="flex gap-4 group cursor-pointer" onclick="window.location.href='blog-details.html?post=closeout'">
-                          <img src="/assets/B1.webp" class="w-20 h-20 object-cover rounded-lg border-2 border-transparent group-hover:border-safetyYellow transition-colors" alt="Thumbnail">
-                          <div>
-                              <h4 class="font-bold text-charcoal dark:text-white text-sm leading-tight mb-2 group-hover:text-safetyYellow transition-colors">10 Steps to Flawless Project Closeout</h4>
-                              <span class="text-xs text-gray-500 dark:text-gray-400">Nov 28, 2025</span>
-                          </div>
-                      </div>
-                      <div class="flex gap-4 group cursor-pointer" onclick="window.location.href='blog-details.html?post=safety-tech'">
-                          <img src="/assets/B2.jpg" class="w-20 h-20 object-cover rounded-lg border-2 border-transparent group-hover:border-safetyYellow transition-colors" alt="Thumbnail">
-                          <div>
-                              <h4 class="font-bold text-charcoal dark:text-white text-sm leading-tight mb-2 group-hover:text-safetyYellow transition-colors">5 Tech Strategies for Safety Audits</h4>
-                              <span class="text-xs text-gray-500 dark:text-gray-400">Nov 25, 2025</span>
-                          </div>
-                      </div>
-                      <div class="flex gap-4 group cursor-pointer" onclick="window.location.href='blog-details.html?post=4d-bim-civil'">
-                          <img src="/assets/4d.webp" class="w-20 h-20 object-cover rounded-lg border-2 border-transparent group-hover:border-safetyYellow transition-colors" alt="Thumbnail">
-                          <div>
-                              <h4 class="font-bold text-charcoal dark:text-white text-sm leading-tight mb-2 group-hover:text-safetyYellow transition-colors">Why 4D Modeling is Essential</h4>
-                              <span class="text-xs text-gray-500 dark:text-gray-400">Nov 20, 2025</span>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+        <div class="bg-white dark:bg-zinc-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-white/5">
+            <h3 class="text-xl font-bold text-charcoal dark:text-white mb-4 font-heading border-l-4 border-safetyYellow pl-3">Search Insights</h3>
+            <div class="relative">
+                <input type="text" placeholder="Find topics..." class="w-full pl-4 pr-10 py-3 rounded-lg bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 text-charcoal dark:text-white focus:outline-none focus:ring-2 focus:ring-safetyYellow transition-all">
+                <i class="fas fa-search absolute right-3 top-3.5 text-gray-400"></i>
+            </div>
+        </div>
 
-              <!-- Tags Widget -->
-       
-          </aside>
+        <div class="bg-white dark:bg-zinc-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-white/5">
+            <h3 class="text-xl font-bold text-charcoal dark:text-white mb-6 font-heading border-l-4 border-safetyYellow pl-3">Recent Posts</h3>
+            <div class="space-y-6">
+                <div class="flex gap-4 group cursor-pointer" onclick="window.location.href='blog-details.html?post=closeout'">
+                    <img src="/assets/B1.webp" class="w-20 h-20 object-cover rounded-lg border-2 border-transparent group-hover:border-safetyYellow transition-colors shrink-0" alt="Thumbnail">
+                    <div class="flex flex-col justify-center">
+                        <h4 class="font-bold text-charcoal dark:text-white text-sm leading-tight mb-2 group-hover:text-safetyYellow transition-colors line-clamp-2">10 Steps to Flawless Project Closeout</h4>
+                        <span class="text-xs text-gray-500 dark:text-gray-400"><i class="far fa-calendar-alt mr-1"></i> Nov 28, 2025</span>
+                    </div>
+                </div>
+                <div class="flex gap-4 group cursor-pointer" onclick="window.location.href='blog-details.html?post=safety-tech'">
+                    <img src="/assets/B2.jpg" class="w-20 h-20 object-cover rounded-lg border-2 border-transparent group-hover:border-safetyYellow transition-colors shrink-0" alt="Thumbnail">
+                    <div class="flex flex-col justify-center">
+                        <h4 class="font-bold text-charcoal dark:text-white text-sm leading-tight mb-2 group-hover:text-safetyYellow transition-colors line-clamp-2">5 Tech Strategies for Safety Audits</h4>
+                        <span class="text-xs text-gray-500 dark:text-gray-400"><i class="far fa-calendar-alt mr-1"></i> Nov 25, 2025</span>
+                    </div>
+                </div>
+                <div class="flex gap-4 group cursor-pointer" onclick="window.location.href='blog-details.html?post=4d-bim-civil'">
+                    <img src="/assets/B3.webp" class="w-20 h-20 object-cover rounded-lg border-2 border-transparent group-hover:border-safetyYellow transition-colors shrink-0" alt="Thumbnail">
+                    <div class="flex flex-col justify-center">
+                        <h4 class="font-bold text-charcoal dark:text-white text-sm leading-tight mb-2 group-hover:text-safetyYellow transition-colors line-clamp-2">Why 4D Modeling is Essential</h4>
+                        <span class="text-xs text-gray-500 dark:text-gray-400"><i class="far fa-calendar-alt mr-1"></i> Nov 20, 2025</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="bg-charcoal text-white p-6 rounded-xl shadow-lg relative overflow-hidden group border border-gray-800">
+            <div class="absolute -right-8 -top-8 w-32 h-32 bg-safetyYellow rounded-full opacity-10 group-hover:scale-150 transition-transform duration-700 ease-in-out"></div>
+            
+            <div class="relative z-10">
+                <i class="far fa-paper-plane text-2xl text-safetyYellow mb-3"></i>
+                <h3 class="text-xl font-bold mb-2 font-heading">Weekly Insights</h3>
+                <p class="text-sm text-gray-400 mb-4">Join 5,000+ builders getting our weekly safety & tech digests.</p>
+                <form class="space-y-3">
+                    <input type="email" placeholder="Email Address" class="w-full px-4 py-2.5 rounded-lg bg-white/10 border border-white/20 text-sm focus:border-safetyYellow focus:outline-none transition-colors">
+                    <button class="w-full bg-safetyYellow text-charcoal font-bold py-2.5 rounded-lg text-sm hover:bg-yellow-400 transition-colors shadow-lg shadow-yellow-500/20">
+                        Subscribe Now
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="bg-white dark:bg-zinc-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-white/5">
+            <h3 class="text-xl font-bold text-charcoal dark:text-white mb-4 font-heading border-l-4 border-safetyYellow pl-3">Explore Topics</h3>
+            <ul class="space-y-2">
+                <li class="cursor-pointer p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-gray-300 flex justify-between items-center transition-colors group">
+                    <span><i class="fas fa-hard-hat text-red-500 mr-2 w-5"></i> Site Safety</span> 
+                    <span class="text-xs bg-gray-100 dark:bg-white/10 px-2 py-0.5 rounded group-hover:bg-safetyYellow group-hover:text-charcoal transition-colors">4</span>
+                </li>
+                <li class="cursor-pointer p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-gray-300 flex justify-between items-center transition-colors group">
+                    <span><i class="fas fa-tasks text-green-500 mr-2 w-5"></i> Management</span> 
+                    <span class="text-xs bg-gray-100 dark:bg-white/10 px-2 py-0.5 rounded group-hover:bg-safetyYellow group-hover:text-charcoal transition-colors">8</span>
+                </li>
+                <li class="cursor-pointer p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-gray-300 flex justify-between items-center transition-colors group">
+                    <span><i class="fas fa-microchip text-blue-400 mr-2 w-5"></i> Technology</span> 
+                    <span class="text-xs bg-gray-100 dark:bg-white/10 px-2 py-0.5 rounded group-hover:bg-safetyYellow group-hover:text-charcoal transition-colors">12</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="bg-white dark:bg-zinc-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-white/5">
+            <h3 class="text-xl font-bold text-charcoal dark:text-white mb-4 font-heading border-l-4 border-safetyYellow pl-3">Hot Tags</h3>
+            <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-gray-100 dark:bg-white/10 hover:bg-safetyYellow hover:text-charcoal dark:hover:text-charcoal rounded-full text-xs font-semibold text-gray-600 dark:text-gray-300 cursor-pointer transition-colors">BIM</span>
+                <span class="px-3 py-1 bg-gray-100 dark:bg-white/10 hover:bg-safetyYellow hover:text-charcoal dark:hover:text-charcoal rounded-full text-xs font-semibold text-gray-600 dark:text-gray-300 cursor-pointer transition-colors">Safety</span>
+                <span class="px-3 py-1 bg-gray-100 dark:bg-white/10 hover:bg-safetyYellow hover:text-charcoal dark:hover:text-charcoal rounded-full text-xs font-semibold text-gray-600 dark:text-gray-300 cursor-pointer transition-colors">Pre-Con</span>
+                <span class="px-3 py-1 bg-gray-100 dark:bg-white/10 hover:bg-safetyYellow hover:text-charcoal dark:hover:text-charcoal rounded-full text-xs font-semibold text-gray-600 dark:text-gray-300 cursor-pointer transition-colors">Civil</span>
+                <span class="px-3 py-1 bg-gray-100 dark:bg-white/10 hover:bg-safetyYellow hover:text-charcoal dark:hover:text-charcoal rounded-full text-xs font-semibold text-gray-600 dark:text-gray-300 cursor-pointer transition-colors">MEP</span>
+            </div>
+        </div>
+
+    </div>
+</aside>
         </div>
       </div>
     </section>
